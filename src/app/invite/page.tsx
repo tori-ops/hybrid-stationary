@@ -46,7 +46,7 @@ function InvitePageContent() {
       {/* Content Sections */}
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Invite Card Section */}
-        <section className="mb-12">
+        <section className="mb-6">
           <InviteCard config={config} />
         </section>
 
