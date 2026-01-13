@@ -43,7 +43,7 @@ function InvitePageContent() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white via-white to-gray-50">
       {/* Content Sections */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
+      <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Invite Card Section */}
         <section className="mb-12">
           <InviteCard config={config} />
