@@ -65,21 +65,21 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
       const timestamp = new Date().getTime();
       const filename = `stationery/${userId}/${items[index].type}-${side}-${timestamp}-${file.name}`;
 
-      const { data, error } = await supabase.storage
-        .from('invitations')
+      const { error } = await supabase.storage
+        .from('invitation-images')
         .upload(filename, file, { upsert: true });
 
       if (error) throw error;
 
-      const { data: publicUrlData } = supabase.storage
-        .from('invitations')
-        .getPublicUrl(filename);
+      // Construct the public URL manually using Supabase project ID
+      const projectId = process.env.NEXT_PUBLIC_SUPABASE_URL?.split('.')[0].replace('https://', '') || '';
+      const publicUrl = `https://${projectId}.supabase.co/storage/v1/object/public/invitation-images/${filename}`;
 
       const updatedItems = [...items];
       if (side === 'front') {
-        updatedItems[index].front_image_url = publicUrlData.publicUrl;
+        updatedItems[index].front_image_url = publicUrl;
       } else {
-        updatedItems[index].back_image_url = publicUrlData.publicUrl;
+        updatedItems[index].back_image_url = publicUrl;
       }
 
       onItemsChange(updatedItems);
