@@ -135,15 +135,14 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       if (error) throw error;
 
-      // Get public URL
-      const { data } = supabase.storage
-        .from('invitation-images')
-        .getPublicUrl(filename);
+      // Construct the public URL manually using Supabase project ID
+      const projectId = process.env.NEXT_PUBLIC_SUPABASE_URL?.split('.')[0].replace('https://', '') || '';
+      const publicUrl = `https://${projectId}.supabase.co/storage/v1/object/public/invitation-images/${filename}`;
 
       // Update form data with the public URL
       setFormData((prev) => ({
         ...prev,
-        [imageField]: data.publicUrl,
+        [imageField]: publicUrl,
       }));
 
       setMessage({ type: 'success', text: 'Image uploaded successfully!' });
