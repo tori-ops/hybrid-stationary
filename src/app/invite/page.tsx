@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInvitation } from '@/hooks/useInvitation';
 import { invitationToConfig } from '@/lib/invitationConfig';
-import InviteCard from '@/components/InviteCard';
 import StationeryDisplay from '@/components/StationeryDisplay';
 import VenueInfo from '@/components/VenueInfo';
 import WeatherWidget from '@/components/WeatherWidget';
@@ -46,11 +45,6 @@ function InvitePageContent() {
     <main className="min-h-screen bg-gradient-to-b from-white via-white to-gray-50">
       {/* Content Sections */}
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
-        {/* Invite Card Section */}
-        <section className="mb-6">
-          <InviteCard config={config} />
-        </section>
-
         {/* Stationery Items Section - Conditional */}
         {invitation?.stationery_items && invitation.stationery_items.length > 0 && (
           <section className="mb-16 px-4">

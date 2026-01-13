@@ -12,12 +12,6 @@ interface StationeryDisplayProps {
   items: StationeryItem[];
 }
 
-const typeLabels = {
-  invite: 'Invitation',
-  rsvp: 'RSVP Card',
-  save_the_date: 'Save The Date'
-};
-
 export default function StationeryDisplay({ items }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
 
@@ -45,11 +39,6 @@ export default function StationeryDisplay({ items }: StationeryDisplayProps) {
 
         return (
           <div key={key} className="flex flex-col items-center justify-center">
-            {/* Card Title */}
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              {typeLabels[item.type]}
-            </h3>
-
             {/* Flip Card Container */}
             <div
               className="w-full max-w-2xl cursor-pointer perspective"
@@ -75,7 +64,7 @@ export default function StationeryDisplay({ items }: StationeryDisplayProps) {
                 >
                   <img
                     src={item.front_image_url}
-                    alt={`${typeLabels[item.type]} Front`}
+                    alt="Card Front"
                     className="w-full h-full object-cover"
                     style={{ display: 'block' }}
                   />
@@ -91,7 +80,7 @@ export default function StationeryDisplay({ items }: StationeryDisplayProps) {
                 >
                   <img
                     src={item.back_image_url}
-                    alt={`${typeLabels[item.type]} Back`}
+                    alt="Card Back"
                     className="w-full h-full object-cover"
                     style={{ display: 'block' }}
                   />
@@ -102,7 +91,7 @@ export default function StationeryDisplay({ items }: StationeryDisplayProps) {
             {/* Flip Button */}
             <button
               onClick={() => toggleFlip(key)}
-              className="mt-8 px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
+              className="mt-16 px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
               style={{
                 backgroundColor: '#274E13',
                 color: '#FF6B6B',
