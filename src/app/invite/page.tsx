@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useInvitation } from '@/hooks/useInvitation';
 import { invitationToConfig } from '@/lib/invitationConfig';
 import InviteCard from '@/components/InviteCard';
+import VenueInfo from '@/components/VenueInfo';
 import WeatherWidget from '@/components/WeatherWidget';
 import AreaFacts from '@/components/AreaFacts';
 import ContactSection from '@/components/ContactSection';
@@ -67,6 +68,11 @@ function InvitePageContent() {
             </a>
           </section>
         )}
+
+        {/* Venue Information Section */}
+        <section className="mb-12 flex justify-center">
+          <VenueInfo config={config} />
+        </section>
 
         {/* Weather Widget Section - Conditional */}
         {invitation?.show_weather !== false && (
