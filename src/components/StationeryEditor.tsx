@@ -50,8 +50,16 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
     };
     
     onItemsChange([...items, newItem]);
-    // Keep the section expanded when adding new items
-    setExpandedType(type);
+  };
+
+  const handleImageUpload = async (
+    index: number,
+    side: 'front' | 'back',
+    file: File
+  ) => {
+    if (!userId) return;
+
+    try {
       setLoading({ ...loading, [`${index}-${side}`]: true });
 
       const timestamp = new Date().getTime();
@@ -75,10 +83,6 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
       }
 
       onItemsChange(updatedItems);
-      // Keep the section expanded after upload
-      if (items[index]) {
-        setExpandedType(items[index].type);
-      }
     } catch (error) {
       console.error('Upload error:', error);
       alert('Failed to upload image');
