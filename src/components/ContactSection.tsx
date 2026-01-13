@@ -20,7 +20,7 @@ export default function ContactSection({ config }: { config?: any }) {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl">
-      <h2 className="text-3xl font-serif text-rose-900 mb-6 text-center">Questions?</h2>
+      <h2 className="text-3xl font-serif mb-6 text-center" style={{ color: secondaryColor }}>Questions?</h2>
 
       {/* Toggle Buttons */}
       <div className="flex gap-4 mb-8 justify-center">
@@ -99,7 +99,7 @@ export default function ContactSection({ config }: { config?: any }) {
         </div>
 
         {/* Additional Info */}
-        <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-rose-400">
+        <div className="bg-gray-50 rounded-lg p-4 border-l-4" style={{ borderColor: accentColor }}>
           <p className="text-sm text-gray-700">
             {contactType === 'planner'
               ? 'For planning questions, RSVP details, or logistics - reach out to the wedding planner. This helps keep the couple stress-free!'

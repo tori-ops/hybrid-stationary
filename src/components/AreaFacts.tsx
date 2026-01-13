@@ -11,7 +11,7 @@ export default function AreaFacts({ config }: { config?: any }) {
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
       <div className="mb-8">
-        <h2 className="text-3xl font-serif text-rose-900 mb-2">
+        <h2 className="text-3xl font-serif mb-2" style={{ color: secondaryColor }}>
           Discover {venue.city}
         </h2>
         <p className="text-gray-600">
@@ -38,8 +38,11 @@ export default function AreaFacts({ config }: { config?: any }) {
       </div>
 
       {/* Venue Details Card */}
-      <div className="mt-8 p-6 bg-gradient-to-r from-rose-100 to-blue-100 rounded-lg border-2 border-rose-300">
-        <h3 className="text-2xl font-serif text-rose-900 mb-4">Venue Information</h3>
+      <div className="mt-8 p-6 rounded-lg border-2" style={{
+        background: `linear-gradient(to right, ${secondaryColor}15, ${accentColor}15)`,
+        borderColor: accentColor
+      }}>
+        <h3 className="text-2xl font-serif mb-4" style={{ color: secondaryColor }}>Venue Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-600 uppercase tracking-wide mb-1">
@@ -65,7 +68,8 @@ export default function AreaFacts({ config }: { config?: any }) {
             </p>
             <a
               href={`tel:${venue.phone}`}
-              className="text-rose-600 hover:text-rose-700 font-semibold"
+              className="font-semibold"
+              style={{ color: accentColor }}
             >
               {venue.phone}
             </a>
@@ -78,7 +82,8 @@ export default function AreaFacts({ config }: { config?: any }) {
               href={venue.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-rose-600 hover:text-rose-700 font-semibold"
+              className="font-semibold"
+              style={{ color: accentColor }}
             >
               Visit Website →
             </a>
