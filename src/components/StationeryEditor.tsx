@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 
 interface StationeryItem {
@@ -24,6 +24,18 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
     { value: 'rsvp', label: 'RSVP Card' },
     { value: 'save_the_date', label: 'Save The Date' }
   ] as const;
+
+  // Auto-expand sections with existing items
+  useEffect(() => {
+    if (items.length > 0 && !expandedType) {
+      const firstTypeWithItems = stationeryTypes.find(t => 
+        items.some(item => item.type === t.value && (item.front_image_url || item.back_image_url))
+      );
+      if (firstTypeWithItems) {
+        setExpandedType(firstTypeWithItems.value);
+      }
+    }
+  }, [items.length]);
 
   const getItemsOfType = (type: string) => items.filter(item => item.type === type);
   const canAddMoreOfType = (type: string) => getItemsOfType(type).length < 2;

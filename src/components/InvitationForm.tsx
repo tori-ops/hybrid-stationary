@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import AreaFactsEditor from './AreaFactsEditor';
@@ -123,6 +123,35 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [activitiesList, setActivitiesList] = useState<any[]>(invitation?.activities_list || []);
   const [accommodationsList, setAccommodationsList] = useState<any[]>(invitation?.accommodations_list || []);
   const [stationeryItems, setStationeryItems] = useState<any[]>(invitation?.stationery_items || []);
+
+  // Auto-save on window close
+  useEffect(() => {
+    const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
+      // Save data to database
+      try {
+        const saveData = {
+          ...formData,
+          attractions_list: attractionsList,
+          dining_list: diningList,
+          activities_list: activitiesList,
+          accommodations_list: accommodationsList,
+          stationery_items: stationeryItems,
+        };
+
+        if (invitation?.id) {
+          await supabase
+            .from('invitations')
+            .update(saveData)
+            .eq('id', invitation.id);
+        }
+      } catch (error) {
+        console.error('Auto-save error:', error);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [formData, attractionsList, diningList, activitiesList, accommodationsList, stationeryItems, invitation?.id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
