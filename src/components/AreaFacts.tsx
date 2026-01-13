@@ -5,8 +5,8 @@ import { weddingConfig } from '@/config/weddingConfig';
 export default function AreaFacts({ config }: { config?: any }) {
   const areaFacts = config?.areaFacts || weddingConfig.areaFacts;
   const venue = config?.venue || weddingConfig.venue;
-  const secondaryColor = config?.secondary_color || '#274E13';
-  const accentColor = config?.accent_color || '#FF6B6B';
+  const secondaryColor = config?.colors?.secondary || '#274E13';
+  const accentColor = config?.colors?.accent || '#db2777';
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">

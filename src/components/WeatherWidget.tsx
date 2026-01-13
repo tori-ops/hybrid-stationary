@@ -18,7 +18,7 @@ export default function WeatherWidget({
   longitude,
   city,
   secondaryColor = '#274E13',
-  accentColor = '#FF6B6B',
+  accentColor = '#db2777',
 }: {
   latitude: number;
   longitude: number;

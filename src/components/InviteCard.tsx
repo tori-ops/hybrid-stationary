@@ -36,7 +36,7 @@ export default function InviteCard({ config }: { config?: any }) {
 
   const primaryColor = config?.colors?.primary || '#ec4899';
   const secondaryColor = config?.colors?.secondary || '#274E13';
-  const accentColor = config?.colors?.accent || '#FF6B6B';
+  const accentColor = config?.colors?.accent || '#db2777';
 
   // Check if images are provided
   const hasFrontImage = config?.images?.front;

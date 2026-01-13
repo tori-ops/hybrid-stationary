@@ -75,8 +75,8 @@ function InvitePageContent() {
               latitude={weatherLocation.latitude}
               longitude={weatherLocation.longitude}
               city={weatherLocation.city}
-              secondaryColor={invitation?.secondary_color || '#274E13'}
-              accentColor={invitation?.accent_color || '#FF6B6B'}
+              secondaryColor={(config as any).colors?.secondary}
+              accentColor={(config as any).colors?.accent}
             />
           </section>
         )}
