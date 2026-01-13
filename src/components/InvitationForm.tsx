@@ -42,6 +42,10 @@ interface Invitation {
   area_facts_dining?: string;
   area_facts_activities?: string;
   area_facts_accommodations?: string;
+  attractions_list?: any[];
+  dining_list?: any[];
+  activities_list?: any[];
+  accommodations_list?: any[];
   show_weather: boolean;
   show_area_facts: boolean;
   show_dining: boolean;
@@ -111,11 +115,11 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  // Area facts list states
-  const [attractionsList, setAttractionsList] = useState<any[]>([]);
-  const [diningList, setDiningList] = useState<any[]>([]);
-  const [activitiesList, setActivitiesList] = useState<any[]>([]);
-  const [accommodationsList, setAccommodationsList] = useState<any[]>([]);
+  // Area facts list states - initialize from database
+  const [attractionsList, setAttractionsList] = useState<any[]>(invitation?.attractions_list || []);
+  const [diningList, setDiningList] = useState<any[]>(invitation?.dining_list || []);
+  const [activitiesList, setActivitiesList] = useState<any[]>(invitation?.activities_list || []);
+  const [accommodationsList, setAccommodationsList] = useState<any[]>(invitation?.accommodations_list || []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
