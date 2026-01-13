@@ -50,8 +50,8 @@ function InvitePageContent() {
           <section className="mb-16 px-4">
             <StationeryDisplay 
               items={invitation.stationery_items}
-              secondaryColor={invitation.secondary_color}
-              accentColor={invitation.accent_color}
+              secondaryColor={invitation.secondary_color || '#274E13'}
+              accentColor={invitation.accent_color || '#FF6B6B'}
             />
           </section>
         )}
