@@ -21,7 +21,7 @@ function InvitePageContent() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-blue-50 flex items-center justify-center">
+      <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-600 text-lg">Loading invitation...</p>
         </div>
@@ -31,7 +31,7 @@ function InvitePageContent() {
 
   if (error) {
     return (
-      <main className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-blue-50 flex items-center justify-center">
+      <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-600 text-lg">Error: {error}</p>
           <p className="text-gray-600 mt-2">Using default invitation</p>

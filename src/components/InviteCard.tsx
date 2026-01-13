@@ -35,6 +35,8 @@ export default function InviteCard({ config }: { config?: any }) {
   };
 
   const primaryColor = config?.colors?.primary || '#ec4899';
+  const secondaryColor = config?.colors?.secondary || '#274E13';
+  const accentColor = config?.colors?.accent || '#FF6B6B';
 
   // Check if images are provided
   const hasFrontImage = config?.images?.front;
@@ -44,7 +46,9 @@ export default function InviteCard({ config }: { config?: any }) {
   // If images exist, show them with flip interaction
   if (hasImages) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-rose-50 to-blue-50 p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4" style={{
+        background: `linear-gradient(to bottom right, ${secondaryColor}10, ${accentColor}10)`
+      }}>
         {/* Flip Card Container with Images */}
         <div
           className="w-full max-w-3xl cursor-pointer perspective"
@@ -98,7 +102,11 @@ export default function InviteCard({ config }: { config?: any }) {
         <div className="mt-8 text-center">
           <button
             onClick={() => setIsFlipped(!isFlipped)}
-            className="px-6 py-3 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors font-semibold"
+            className="px-6 py-3 rounded-lg hover:opacity-90 transition-colors font-semibold"
+            style={{
+              backgroundColor: secondaryColor,
+              color: accentColor
+            }}
           >
             {isFlipped ? 'See Front' : 'See Back'}
           </button>
@@ -115,9 +123,11 @@ export default function InviteCard({ config }: { config?: any }) {
   // Default generated card (shown when no images)
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-rose-50 to-blue-50 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4" style={{
+      background: `linear-gradient(to bottom right, ${secondaryColor}10, ${accentColor}10)`
+    }}>
       <div className="mb-8">
-        <h1 className="text-4xl font-serif text-rose-900 mb-2">Your Wedding Invitation</h1>
+        <h1 className="text-4xl font-serif mb-2" style={{ color: secondaryColor }}>Your Wedding Invitation</h1>
         <p className="text-gray-600 text-center">Click the card below to reveal both sides</p>
       </div>
 
@@ -138,9 +148,10 @@ export default function InviteCard({ config }: { config?: any }) {
         >
           {/* Front of Card */}
           <div
-            className="absolute w-full h-full bg-white rounded-lg shadow-2xl p-8 flex flex-col justify-center items-center text-center border-4 border-rose-200"
+            className="absolute w-full h-full bg-white rounded-lg shadow-2xl p-8 flex flex-col justify-center items-center text-center border-4"
             style={{
               backfaceVisibility: 'hidden',
+              borderColor: accentColor
             }}
           >
             <div className="space-y-4">
@@ -150,10 +161,10 @@ export default function InviteCard({ config }: { config?: any }) {
               <p className="text-sm tracking-widest text-gray-600 uppercase">
                 {inviteText.front.subtitle}
               </p>
-              <div className="py-6 border-y border-rose-300">
-                <h2 className="text-3xl font-serif text-rose-900">{couple.brideName}</h2>
+              <div className="py-6 border-y" style={{ borderColor: accentColor }}>
+                <h2 className="text-3xl font-serif" style={{ color: secondaryColor }}>{couple.brideName}</h2>
                 <p className="text-sm text-gray-600 my-2">and</p>
-                <h2 className="text-3xl font-serif text-rose-900">{couple.groomName}</h2>
+                <h2 className="text-3xl font-serif" style={{ color: secondaryColor }}>{couple.groomName}</h2>
               </div>
               <p className="text-xs text-gray-600 italic">Together with their parents</p>
               <p className="text-sm text-gray-600">
@@ -165,20 +176,22 @@ export default function InviteCard({ config }: { config?: any }) {
 
           {/* Back of Card */}
           <div
-            className="absolute w-full h-full bg-gradient-to-br from-rose-50 to-white rounded-lg shadow-2xl p-8 flex flex-col justify-center items-center text-center border-4 border-rose-200"
+            className="absolute w-full h-full rounded-lg shadow-2xl p-8 flex flex-col justify-center items-center text-center border-4"
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
+              background: `linear-gradient(to bottom right, ${secondaryColor}15, white)`,
+              borderColor: accentColor
             }}
           >
             <div className="space-y-4 text-sm">
               <div>
-                <p className="font-serif text-2xl text-rose-900 mb-2">{couple.date}</p>
+                <p className="font-serif text-2xl mb-2" style={{ color: secondaryColor }}>{couple.date}</p>
                 <p className="text-gray-700">{couple.time} {couple.timezone}</p>
               </div>
 
-              <div className="border-t border-b border-rose-300 py-4 my-4">
-                <p className="font-semibold text-rose-900">{venue.name}</p>
+              <div className="border-t border-b py-4 my-4" style={{ borderColor: accentColor }}>
+                <p className="font-semibold" style={{ color: secondaryColor }}>{venue.name}</p>
                 <p className="text-gray-600 text-xs">{venue.address}</p>
                 <p className="text-gray-600 text-xs">{venue.city}</p>
               </div>
@@ -199,7 +212,11 @@ export default function InviteCard({ config }: { config?: any }) {
       <div className="mt-8 text-center">
         <button
           onClick={() => setIsFlipped(!isFlipped)}
-          className="px-6 py-3 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors font-semibold"
+          className="px-6 py-3 rounded-lg hover:opacity-90 transition-colors font-semibold"
+          style={{
+            backgroundColor: secondaryColor,
+            color: accentColor
+          }}
         >
           {isFlipped ? 'See Front' : 'See Back'}
         </button>
