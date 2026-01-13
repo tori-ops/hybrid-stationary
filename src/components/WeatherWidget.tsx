@@ -99,20 +99,20 @@ export default function WeatherWidget({
   return (
     <div className="w-full">
       <div className="rounded-lg shadow-lg p-6 mb-6" style={{
-        background: `linear-gradient(to right, ${secondaryColor}, ${secondaryColor}dd)`,
+        background: `linear-gradient(to left, ${secondaryColor}, ${secondaryColor}dd)`,
         color: accentColor
       }}>
-        <h3 className="text-2xl font-serif mb-2">{city} Weather Forecast</h3>
-        <p style={{ color: accentColor, opacity: 0.9 }}>10-Day Outlook</p>
+        <h3 className="text-2xl font-serif mb-2" style={{ color: accentColor }}>{city} Weather Forecast</h3>
+        <p style={{ color: accentColor, opacity: 0.9 }}>7-Day Outlook</p>
       </div>
 
       <div className="grid grid-cols-5 gap-3">
-        {dailyData.time.slice(0, 10).map((date, index) => (
+        {dailyData.time.slice(0, 7).map((date, index) => (
           <div
             key={date}
             className="bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow"
           >
-            <p className="text-sm font-semibold text-gray-700 mb-2">
+            <p className="text-sm font-semibold mb-2" style={{ color: accentColor }}>
               {new Date(date).toLocaleDateString('en-US', {
                 weekday: 'short',
                 month: 'short',
@@ -124,20 +124,20 @@ export default function WeatherWidget({
               {getWeatherIcon(dailyData.weathercode[index])}
             </div>
 
-            <p className="text-xs text-gray-600 mb-3">
+            <p className="text-xs mb-3" style={{ color: accentColor }}>
               {getWeatherDescription(dailyData.weathercode[index])}
             </p>
 
             <div className="border-t pt-3">
               <div className="flex justify-center gap-2 text-sm">
-                <span className="font-semibold text-red-600">
+                <span className="font-semibold" style={{ color: accentColor }}>
                   {Math.round(dailyData.temperature_2m_max[index])}°F
                 </span>
                 <span style={{ color: accentColor }}>
                   {Math.round(dailyData.temperature_2m_min[index])}°F
                 </span>
               </div>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs mt-1" style={{ color: accentColor }}>
                 Wind: {Math.round(dailyData.windspeed_10m_max[index])} mph
               </p>
               {dailyData.precipitation_sum[index] > 0 && (

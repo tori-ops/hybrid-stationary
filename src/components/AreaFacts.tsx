@@ -11,7 +11,7 @@ export default function AreaFacts({ config }: { config?: any }) {
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
       <div className="mb-8">
-        <h2 className="text-3xl font-serif mb-2" style={{ color: secondaryColor }}>
+        <h2 className="text-3xl font-serif mb-2" style={{ color: accentColor }}>
           Discover {venue.city}
         </h2>
         <p className="text-gray-600">
@@ -42,7 +42,7 @@ export default function AreaFacts({ config }: { config?: any }) {
         background: `linear-gradient(to right, ${secondaryColor}15, ${accentColor}15)`,
         borderColor: accentColor
       }}>
-        <h3 className="text-2xl font-serif mb-4" style={{ color: secondaryColor }}>Venue Information</h3>
+        <h3 className="text-2xl font-serif mb-4" style={{ color: accentColor }}>Venue Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-600 uppercase tracking-wide mb-1">
