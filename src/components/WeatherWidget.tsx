@@ -17,10 +17,14 @@ export default function WeatherWidget({
   latitude,
   longitude,
   city,
+  secondaryColor = '#274E13',
+  accentColor = '#FF6B6B',
 }: {
   latitude: number;
   longitude: number;
   city: string;
+  secondaryColor?: string;
+  accentColor?: string;
 }) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -94,9 +98,12 @@ export default function WeatherWidget({
 
   return (
     <div className="w-full">
-      <div className="bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg shadow-lg p-6 text-white mb-6">
+      <div className="rounded-lg shadow-lg p-6 mb-6" style={{
+        background: `linear-gradient(to right, ${secondaryColor}, ${secondaryColor}dd)`,
+        color: accentColor
+      }}>
         <h3 className="text-2xl font-serif mb-2">{city} Weather Forecast</h3>
-        <p className="text-blue-100">10-Day Outlook</p>
+        <p style={{ color: accentColor, opacity: 0.9 }}>10-Day Outlook</p>
       </div>
 
       <div className="grid grid-cols-5 gap-3">

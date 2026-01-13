@@ -5,6 +5,8 @@ import { weddingConfig } from '@/config/weddingConfig';
 export default function AreaFacts({ config }: { config?: any }) {
   const areaFacts = config?.areaFacts || weddingConfig.areaFacts;
   const venue = config?.venue || weddingConfig.venue;
+  const secondaryColor = config?.secondary_color || '#274E13';
+  const accentColor = config?.accent_color || '#FF6B6B';
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
@@ -21,9 +23,13 @@ export default function AreaFacts({ config }: { config?: any }) {
         {areaFacts?.map((fact: any, index: number) => (
           <div
             key={index}
-            className="p-6 bg-gradient-to-br from-rose-50 to-blue-50 rounded-lg border border-rose-100 hover:shadow-md transition-shadow"
+            className="p-6 rounded-lg border hover:shadow-md transition-shadow"
+            style={{
+              background: `linear-gradient(to bottom right, ${secondaryColor}15, ${accentColor}15)`,
+              borderColor: accentColor
+            }}
           >
-            <h3 className="text-xl font-serif text-rose-900 mb-3">
+            <h3 className="text-xl font-serif mb-3" style={{ color: secondaryColor }}>
               {fact.title}
             </h3>
             <p className="text-gray-700">{fact.description}</p>
