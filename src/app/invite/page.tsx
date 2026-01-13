@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useInvitation } from '@/hooks/useInvitation';
 import { invitationToConfig } from '@/lib/invitationConfig';
 import InviteCard from '@/components/InviteCard';
+import StationeryDisplay from '@/components/StationeryDisplay';
 import VenueInfo from '@/components/VenueInfo';
 import WeatherWidget from '@/components/WeatherWidget';
 import AreaFacts from '@/components/AreaFacts';
@@ -49,6 +50,13 @@ function InvitePageContent() {
         <section className="mb-6">
           <InviteCard config={config} />
         </section>
+
+        {/* Stationery Items Section - Conditional */}
+        {invitation?.stationery_items && invitation.stationery_items.length > 0 && (
+          <section className="mb-16 px-4">
+            <StationeryDisplay items={invitation.stationery_items} />
+          </section>
+        )}
 
         {/* Venue Information Section */}
         <section className="mb-12 flex justify-center">
