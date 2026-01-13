@@ -18,6 +18,7 @@ interface StationeryEditorProps {
 export default function StationeryEditor({ items, onItemsChange, userId }: StationeryEditorProps) {
   const [expandedType, setExpandedType] = useState<string | null>(null);
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
+  const [initialized, setInitialized] = useState(false);
 
   const stationeryTypes = [
     { value: 'invite', label: 'Invitation' },
@@ -25,17 +26,18 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
     { value: 'save_the_date', label: 'Save The Date' }
   ] as const;
 
-  // Auto-expand sections with existing items
+  // Auto-expand sections with existing items - only on initial load
   useEffect(() => {
-    if (items.length > 0 && !expandedType) {
+    if (!initialized && items.length > 0) {
       const firstTypeWithItems = stationeryTypes.find(t => 
         items.some(item => item.type === t.value && (item.front_image_url || item.back_image_url))
       );
       if (firstTypeWithItems) {
         setExpandedType(firstTypeWithItems.value);
       }
+      setInitialized(true);
     }
-  }, [items.length]);
+  }, []);
 
   const getItemsOfType = (type: string) => items.filter(item => item.type === type);
   const canAddMoreOfType = (type: string) => getItemsOfType(type).length < 2;
