@@ -60,6 +60,8 @@ export function invitationToConfig(invitation: Invitation | null) {
     images: {
       logo: invitation.logo_url,
       background: invitation.background_image_url,
+      front: invitation.invitation_front_image_url,
+      back: invitation.invitation_back_image_url,
     },
     
     // Section visibility

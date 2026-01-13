@@ -36,6 +36,86 @@ export default function InviteCard({ config }: { config?: any }) {
 
   const primaryColor = config?.colors?.primary || '#ec4899';
 
+  // Check if images are provided
+  const hasFrontImage = config?.images?.front;
+  const hasBackImage = config?.images?.back;
+  const hasImages = hasFrontImage && hasBackImage;
+
+  // If images exist, show them with flip interaction
+  if (hasImages) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-rose-50 to-blue-50 p-4">
+        <div className="mb-8">
+          <h1 className="text-4xl font-serif text-rose-900 mb-2">Your Wedding Invitation</h1>
+          <p className="text-gray-600 text-center">Click the card below to reveal both sides</p>
+        </div>
+
+        {/* Flip Card Container with Images */}
+        <div
+          className="h-96 w-full max-w-2xl cursor-pointer perspective"
+          onClick={() => setIsFlipped(!isFlipped)}
+          style={{
+            perspective: '1000px',
+          }}
+        >
+          <div
+            className="relative w-full h-full transition-transform duration-500"
+            style={{
+              transformStyle: 'preserve-3d',
+              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            }}
+          >
+            {/* Front Image */}
+            <div
+              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
+              style={{
+                backfaceVisibility: 'hidden',
+              }}
+            >
+              <img 
+                src={hasFrontImage} 
+                alt="Invitation Front" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Back Image */}
+            <div
+              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
+              style={{
+                backfaceVisibility: 'hidden',
+                transform: 'rotateY(180deg)',
+              }}
+            >
+              <img 
+                src={hasBackImage} 
+                alt="Invitation Back" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Flip Instructions */}
+        <div className="mt-8 text-center">
+          <button
+            onClick={() => setIsFlipped(!isFlipped)}
+            className="px-6 py-3 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors font-semibold"
+          >
+            {isFlipped ? 'See Front' : 'See Back'}
+          </button>
+          <p className="text-gray-600 text-sm mt-4">
+            {isFlipped
+              ? 'Back of invitation'
+              : 'Front of invitation'}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Default generated card (shown when no images)
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-rose-50 to-blue-50 p-4">
       <div className="mb-8">

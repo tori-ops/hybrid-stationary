@@ -18,6 +18,9 @@ export interface Invitation {
   groom_name: string | null;
   wedding_date: string | null;
   wedding_time: string | null;
+  ceremony_time: string | null;
+  reception_time: string | null;
+  be_out_by_time: string | null;
   timezone: string | null;
   venue_name: string | null;
   venue_address: string | null;
@@ -41,6 +44,8 @@ export interface Invitation {
   font_family: string | null;
   logo_url: string | null;
   background_image_url: string | null;
+  invitation_front_image_url: string | null;
+  invitation_back_image_url: string | null;
   area_facts: any[] | null;
   invite_text: any | null;
   show_weather: boolean;
