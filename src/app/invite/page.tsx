@@ -48,7 +48,11 @@ function InvitePageContent() {
         {/* Stationery Items Section - Conditional */}
         {invitation?.stationery_items && invitation.stationery_items.length > 0 && (
           <section className="mb-16 px-4">
-            <StationeryDisplay items={invitation.stationery_items} />
+            <StationeryDisplay 
+              items={invitation.stationery_items}
+              secondaryColor={invitation.secondary_color}
+              accentColor={invitation.accent_color}
+            />
           </section>
         )}
 

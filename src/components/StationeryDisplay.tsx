@@ -10,9 +10,11 @@ interface StationeryItem {
 
 interface StationeryDisplayProps {
   items: StationeryItem[];
+  secondaryColor?: string;
+  accentColor?: string;
 }
 
-export default function StationeryDisplay({ items }: StationeryDisplayProps) {
+export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B' }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
 
   if (!items || items.length === 0) {
@@ -93,9 +95,9 @@ export default function StationeryDisplay({ items }: StationeryDisplayProps) {
               onClick={() => toggleFlip(key)}
               className="mt-16 px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
               style={{
-                backgroundColor: '#274E13',
-                color: '#FF6B6B',
-                borderColor: '#FF6B6B'
+                backgroundColor: secondaryColor,
+                color: accentColor,
+                borderColor: accentColor
               }}
             >
               {isFlipped ? 'See Front' : 'See Back'}
