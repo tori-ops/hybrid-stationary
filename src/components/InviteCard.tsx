@@ -46,9 +46,7 @@ export default function InviteCard({ config }: { config?: any }) {
   // If images exist, show them with flip interaction
   if (hasImages) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4" style={{
-        background: `linear-gradient(to bottom right, ${secondaryColor}10, ${accentColor}10)`
-      }}>
+      <div className="flex flex-col items-center justify-center p-4">
         {/* Flip Card Container with Images */}
         <div
           className="w-full max-w-3xl cursor-pointer perspective"
