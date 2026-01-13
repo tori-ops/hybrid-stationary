@@ -37,6 +37,10 @@ interface Invitation {
   font_family: string;
   invitation_front_image_url?: string;
   invitation_back_image_url?: string;
+  area_facts_attraction?: string;
+  area_facts_dining?: string;
+  area_facts_activities?: string;
+  area_facts_accommodations?: string;
   show_weather: boolean;
   show_area_facts: boolean;
   show_dining: boolean;
@@ -87,6 +91,10 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       font_family: 'Georgia',
       invitation_front_image_url: '',
       invitation_back_image_url: '',
+      area_facts_attraction: 'Beautiful scenic overlook with hiking trails',
+      area_facts_dining: 'Award-winning restaurants and farm-to-table options',
+      area_facts_activities: 'Wine tastings, kayaking, and historic sites',
+      area_facts_accommodations: 'Boutique hotels and charming bed & breakfasts',
       show_weather: true,
       show_area_facts: true,
       show_dining: true,
@@ -102,8 +110,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target as HTMLInputElement;
 
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
@@ -202,6 +210,17 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
   return (
     <form onSubmit={handleSave} className="space-y-8">
+      <style>{`
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        textarea,
+        select {
+          color: #000 !important;
+        }
+      `}</style>
       {message && (
         <div
           className={`p-4 rounded-lg ${
@@ -564,6 +583,67 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Area Facts */}
+      <section className="bg-white rounded-lg p-6 shadow">
+        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+          Area Facts & Attractions
+        </h2>
+        <div className="grid grid-cols-1 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Local Attraction
+            </label>
+            <textarea
+              name="area_facts_attraction"
+              value={formData.area_facts_attraction || ''}
+              onChange={handleChange}
+              rows={2}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Dining Scene
+            </label>
+            <textarea
+              name="area_facts_dining"
+              value={formData.area_facts_dining || ''}
+              onChange={handleChange}
+              rows={2}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Local Activities
+            </label>
+            <textarea
+              name="area_facts_activities"
+              value={formData.area_facts_activities || ''}
+              onChange={handleChange}
+              rows={2}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Accommodations
+            </label>
+            <textarea
+              name="area_facts_accommodations"
+              value={formData.area_facts_accommodations || ''}
+              onChange={handleChange}
+              rows={2}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
             />
           </div>
         </div>

@@ -47,6 +47,10 @@ export interface Invitation {
   invitation_front_image_url: string | null;
   invitation_back_image_url: string | null;
   area_facts: any[] | null;
+  area_facts_attraction: string | null;
+  area_facts_dining: string | null;
+  area_facts_activities: string | null;
+  area_facts_accommodations: string | null;
   invite_text: any | null;
   show_weather: boolean;
   show_area_facts: boolean;

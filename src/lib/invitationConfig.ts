@@ -27,7 +27,24 @@ export function invitationToConfig(invitation: Invitation | null) {
       phone: invitation.venue_phone || weddingConfig.venue.phone,
       website: invitation.venue_website || weddingConfig.venue.website,
     },
-    areaFacts: invitation.area_facts || weddingConfig.areaFacts,
+    areaFacts: invitation.area_facts || [
+      {
+        title: 'Local Attraction',
+        description: invitation.area_facts_attraction || weddingConfig.areaFacts[0]?.description,
+      },
+      {
+        title: 'Dining Scene',
+        description: invitation.area_facts_dining || weddingConfig.areaFacts[1]?.description,
+      },
+      {
+        title: 'Local Activities',
+        description: invitation.area_facts_activities || weddingConfig.areaFacts[2]?.description,
+      },
+      {
+        title: 'Accommodations',
+        description: invitation.area_facts_accommodations || weddingConfig.areaFacts[3]?.description,
+      },
+    ],
     contacts: {
       planner: {
         name: invitation.planner_name || weddingConfig.contacts.planner.name,
