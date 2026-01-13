@@ -1,0 +1,147 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
+interface WeatherData {
+  daily: {
+    time: string[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    weathercode: number[];
+    precipitation_sum: number[];
+    windspeed_10m_max: number[];
+  };
+}
+
+export default function WeatherWidget({
+  latitude,
+  longitude,
+  city,
+}: {
+  latitude: number;
+  longitude: number;
+  city: string;
+}) {
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        // Using Open-Meteo API (free, no API key needed)
+        const response = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum,windspeed_10m_max&temperature_unit=fahrenheit&timezone=auto`
+        );
+
+        if (!response.ok) throw new Error('Failed to fetch weather');
+
+        const data = await response.json();
+        setWeather(data);
+      } catch (err) {
+        setError('Unable to load weather data');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeather();
+  }, [latitude, longitude]);
+
+  const getWeatherDescription = (code: number): string => {
+    // WMO Weather interpretation codes
+    if (code === 0) return 'Clear';
+    if (code === 1 || code === 2) return 'Cloudy';
+    if (code === 3) return 'Overcast';
+    if (code === 45 || code === 48) return 'Foggy';
+    if (code === 51 || code === 53 || code === 55) return 'Drizzle';
+    if (code === 61 || code === 63 || code === 65) return 'Rain';
+    if (code === 71 || code === 73 || code === 75) return 'Snow';
+    return 'Mixed';
+  };
+
+  const getWeatherIcon = (code: number): string => {
+    if (code === 0) return '☀️';
+    if (code === 1 || code === 2) return '⛅';
+    if (code === 3) return '☁️';
+    if (code === 45 || code === 48) return '🌫️';
+    if (code === 51 || code === 53 || code === 55) return '🌧️';
+    if (code === 61 || code === 63 || code === 65) return '🌧️';
+    if (code === 71 || code === 73 || code === 75) return '❄️';
+    return '🌤️';
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6 max-w-md">
+        <p className="text-gray-600 text-center">Loading weather...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6 max-w-md">
+        <p className="text-red-600 text-center">{error}</p>
+      </div>
+    );
+  }
+
+  if (!weather) return null;
+
+  const dailyData = weather.daily;
+
+  return (
+    <div className="w-full">
+      <div className="bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg shadow-lg p-6 text-white mb-6">
+        <h3 className="text-2xl font-serif mb-2">{city} Weather Forecast</h3>
+        <p className="text-blue-100">10-Day Outlook</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+        {dailyData.time.slice(0, 10).map((date, index) => (
+          <div
+            key={date}
+            className="bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow"
+          >
+            <p className="text-sm font-semibold text-gray-700 mb-2">
+              {new Date(date).toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </p>
+
+            <div className="text-3xl my-2">
+              {getWeatherIcon(dailyData.weathercode[index])}
+            </div>
+
+            <p className="text-xs text-gray-600 mb-3">
+              {getWeatherDescription(dailyData.weathercode[index])}
+            </p>
+
+            <div className="border-t pt-3">
+              <div className="flex justify-center gap-2 text-sm">
+                <span className="font-semibold text-red-600">
+                  {Math.round(dailyData.temperature_2m_max[index])}°F
+                </span>
+                <span className="text-blue-600">
+                  {Math.round(dailyData.temperature_2m_min[index])}°F
+                </span>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                Wind: {Math.round(dailyData.windspeed_10m_max[index])} mph
+              </p>
+              {dailyData.precipitation_sum[index] > 0 && (
+                <p className="text-xs text-blue-600 mt-1">
+                  💧 {dailyData.precipitation_sum[index].toFixed(1)}"
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
