@@ -67,7 +67,7 @@ export default function ContactSection({ config }: { config?: any }) {
               href={`mailto:${selectedContact.email}`}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg hover:shadow-lg transition-all"
               style={{
-                background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
+                background: `linear-gradient(to right, ${secondaryColor}, ${secondaryColor}dd)`,
                 color: accentColor
               }}
             >
@@ -85,7 +85,7 @@ export default function ContactSection({ config }: { config?: any }) {
               href={`tel:${selectedContact.phone}`}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg hover:shadow-lg transition-all"
               style={{
-                background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
+                background: `linear-gradient(to right, ${secondaryColor}, ${secondaryColor}dd)`,
                 color: accentColor
               }}
             >
