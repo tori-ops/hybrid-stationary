@@ -67,30 +67,36 @@ export default function InviteCard({ config }: { config?: any }) {
           >
             {/* Front Image */}
             <div
-              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
+              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden bg-gray-100"
               style={{
                 backfaceVisibility: 'hidden',
+                maxHeight: '100%',
+                maxWidth: '100%',
               }}
             >
               <img 
                 src={hasFrontImage} 
                 alt="Invitation Front" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
+                style={{ display: 'block' }}
               />
             </div>
 
             {/* Back Image */}
             <div
-              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
+              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden bg-gray-100"
               style={{
                 backfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)',
+                maxHeight: '100%',
+                maxWidth: '100%',
               }}
             >
               <img 
                 src={hasBackImage} 
                 alt="Invitation Back" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
+                style={{ display: 'block' }}
               />
             </div>
           </div>
