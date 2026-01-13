@@ -98,7 +98,7 @@ function InvitePageContent() {
         {/* Footer */}
         <footer className="mt-20 py-8 border-t border-gray-300 text-center">
           <p className="text-gray-600 text-sm mb-2">
-            Created with care by Missing Piece Planning
+            Created with care by The Missing Piece Planning
           </p>
           <p className="text-gray-500 text-xs">
             © {new Date().getFullYear()} All rights reserved
