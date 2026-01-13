@@ -12,6 +12,11 @@ export default function ContactSection({ config }: { config?: any }) {
   const planner = contacts.planner;
   const couple = contacts.couple;
   const selectedContact = contactType === 'planner' ? planner : couple;
+  
+  // Get colors from config with fallbacks
+  const primaryColor = config?.colors?.primary || '#ec4899';
+  const secondaryColor = config?.colors?.secondary || '#3b82f6';
+  const accentColor = config?.colors?.accent || '#db2777';
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl">
@@ -21,21 +26,31 @@ export default function ContactSection({ config }: { config?: any }) {
       <div className="flex gap-4 mb-8 justify-center">
         <button
           onClick={() => setContactType('planner')}
-          className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+          className={`px-6 py-3 rounded-lg font-semibold transition-all border-2 ${
             contactType === 'planner'
-              ? 'bg-rose-600 text-white shadow-md'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              ? 'shadow-md'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300 border-gray-200'
           }`}
+          style={contactType === 'planner' ? {
+            backgroundColor: primaryColor,
+            color: accentColor,
+            borderColor: accentColor
+          } : {}}
         >
           Contact Planner
         </button>
         <button
           onClick={() => setContactType('couple')}
-          className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+          className={`px-6 py-3 rounded-lg font-semibold transition-all border-2 ${
             contactType === 'couple'
-              ? 'bg-blue-600 text-white shadow-md'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              ? 'shadow-md'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300 border-gray-200'
           }`}
+          style={contactType === 'couple' ? {
+            backgroundColor: primaryColor,
+            color: accentColor,
+            borderColor: accentColor
+          } : {}}
         >
           Contact Couple
         </button>
@@ -50,12 +65,16 @@ export default function ContactSection({ config }: { config?: any }) {
           <div className="mb-4">
             <a
               href={`mailto:${selectedContact.email}`}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg hover:shadow-lg transition-all"
+              style={{
+                background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
+                color: accentColor
+              }}
             >
               <span>✉️</span>
               <div className="text-left">
-                <p className="text-xs text-blue-100">Email</p>
-                <p className="font-semibold">{selectedContact.email}</p>
+                <p className="text-xs" style={{ color: accentColor }}>Email</p>
+                <p className="font-semibold" style={{ color: accentColor }}>{selectedContact.email}</p>
               </div>
             </a>
           </div>
@@ -64,12 +83,16 @@ export default function ContactSection({ config }: { config?: any }) {
           <div>
             <a
               href={`tel:${selectedContact.phone}`}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:shadow-lg transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg hover:shadow-lg transition-all"
+              style={{
+                background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
+                color: accentColor
+              }}
             >
               <span>📱</span>
               <div className="text-left">
-                <p className="text-xs text-green-100">Phone</p>
-                <p className="font-semibold">{selectedContact.phone}</p>
+                <p className="text-xs" style={{ color: accentColor }}>Phone</p>
+                <p className="font-semibold" style={{ color: accentColor }}>{selectedContact.phone}</p>
               </div>
             </a>
           </div>

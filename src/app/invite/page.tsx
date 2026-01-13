@@ -56,8 +56,12 @@ function InvitePageContent() {
               href={invitation.rsvp_link}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3 rounded-lg font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: invitation.primary_color || '#ec4899' }}
+              className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
+              style={{
+                backgroundColor: invitation.primary_color || '#ec4899',
+                color: invitation.accent_color || '#db2777',
+                borderColor: invitation.accent_color || '#db2777'
+              }}
             >
               RSVP Now
             </a>
