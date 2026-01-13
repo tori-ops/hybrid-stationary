@@ -133,7 +133,7 @@ export default function WeatherWidget({
                 <span className="font-semibold text-red-600">
                   {Math.round(dailyData.temperature_2m_max[index])}°F
                 </span>
-                <span className="text-blue-600">
+                <span style={{ color: accentColor }}>
                   {Math.round(dailyData.temperature_2m_min[index])}°F
                 </span>
               </div>
@@ -141,7 +141,7 @@ export default function WeatherWidget({
                 Wind: {Math.round(dailyData.windspeed_10m_max[index])} mph
               </p>
               {dailyData.precipitation_sum[index] > 0 && (
-                <p className="text-xs text-blue-600 mt-1">
+                <p className="text-xs mt-1" style={{ color: accentColor }}>
                   💧 {dailyData.precipitation_sum[index].toFixed(1)}"
                 </p>
               )}

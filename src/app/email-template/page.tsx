@@ -299,7 +299,7 @@ Making Your Special Day Unforgettable
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-serif text-rose-900 mb-8">Email Template</h1>
+        <h1 className="text-4xl font-serif mb-8" style={{ color: '#274E13' }}>Email Template</h1>
 
         {/* Status Messages */}
         {sendStatus && (
@@ -336,7 +336,8 @@ Making Your Special Day Unforgettable
                 a.download = 'wedding-invite-email.html';
                 a.click();
               }}
-              className="mt-4 px-6 py-3 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors w-full"
+              className="mt-4 px-6 py-3 rounded-lg transition-colors w-full"
+              style={{ backgroundColor: '#274E13', color: '#FF6B6B' }}
             >
               Download HTML Template
             </button>
@@ -365,8 +366,8 @@ Making Your Special Day Unforgettable
         </div>
 
         {/* Instructions */}
-        <div className="mt-12 bg-blue-50 rounded-lg p-8 border-l-4 border-blue-400">
-          <h3 className="text-xl font-semibold text-blue-900 mb-4">How to Use These Templates</h3>
+        <div className="mt-12 rounded-lg p-8 border-l-4" style={{ background: 'rgba(255, 107, 107, 0.05)', borderColor: '#FF6B6B' }}>
+          <h3 className="text-xl font-semibold mb-4" style={{ color: '#FF6B6B' }}>How to Use These Templates</h3>
           <ol className="space-y-3 text-gray-700">
             <li>
               <strong>1. Download the templates</strong> using the buttons above
@@ -385,7 +386,7 @@ Making Your Special Day Unforgettable
             </li>
           </ol>
 
-          <div className="mt-6 p-4 bg-white rounded border border-blue-200">
+          <div className="mt-6 p-4 bg-white rounded border" style={{ borderColor: '#FF6B6B' }}>
             <p className="text-sm text-gray-600">
               <strong>Pro Tip:</strong> For personalized emails with guest names, use mail merge features in 
               your email service. This allows you to automatically insert each guest's name and customize the greeting.

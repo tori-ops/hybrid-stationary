@@ -25,11 +25,11 @@ export default function AreaFacts({ config }: { config?: any }) {
             key={index}
             className="p-6 rounded-lg border hover:shadow-md transition-shadow"
             style={{
-              background: `linear-gradient(to bottom right, ${secondaryColor}15, ${accentColor}15)`,
+              background: `linear-gradient(to bottom right, ${secondaryColor}08, ${accentColor}08)`,
               borderColor: accentColor
             }}
           >
-            <h3 className="text-xl font-serif mb-3" style={{ color: secondaryColor }}>
+            <h3 className="text-xl font-serif mb-3" style={{ color: accentColor }}>
               {fact.title}
             </h3>
             <p className="text-gray-700">{fact.description}</p>
