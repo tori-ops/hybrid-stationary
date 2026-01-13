@@ -11,6 +11,7 @@ export default function AreaFacts({ config }: { config?: any }) {
   const venue = config?.venue || weddingConfig.venue;
   const secondaryColor = config?.colors?.secondary || '#274E13';
   const accentColor = config?.colors?.accent || '#db2777';
+  const backgroundImageUrl = config?.backgroundImageUrl;
 
   const attractionsList = config?.attractionsList || [];
   const diningList = config?.diningList || [];
@@ -133,7 +134,15 @@ export default function AreaFacts({ config }: { config?: any }) {
 
       {/* Modal for Business Listings */}
       {isModalOpen && selectedCategory && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          style={{
+            backgroundImage: backgroundImageUrl ? `url('${backgroundImageUrl}')` : 'none',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
           <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
               <h2 className="text-2xl font-serif" style={{ color: accentColor }}>

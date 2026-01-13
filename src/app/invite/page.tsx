@@ -104,7 +104,7 @@ function InvitePageContent() {
         {/* Area Facts Section - Conditional */}
         {invitation?.show_area_facts !== false && (
           <section className="mb-16 flex justify-center">
-            <AreaFacts config={config} />
+            <AreaFacts config={{...config, backgroundImageUrl: invitation?.background_image_url}} />
           </section>
         )}
 
