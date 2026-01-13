@@ -10,7 +10,10 @@ interface Invitation {
   bride_name: string;
   groom_name: string;
   wedding_date: string;
-  wedding_time: string;
+  wedding_time?: string; // deprecated, replaced by ceremony_time
+  ceremony_time?: string;
+  reception_time?: string;
+  be_out_by_time?: string;
   timezone: string;
   venue_name: string;
   venue_address: string;
@@ -32,6 +35,8 @@ interface Invitation {
   secondary_color: string;
   accent_color: string;
   font_family: string;
+  invitation_front_image_url?: string;
+  invitation_back_image_url?: string;
   show_weather: boolean;
   show_area_facts: boolean;
   show_dining: boolean;
@@ -56,7 +61,9 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       bride_name: '',
       groom_name: '',
       wedding_date: '',
-      wedding_time: '18:00',
+      ceremony_time: '15:00',
+      reception_time: '17:00',
+      be_out_by_time: '22:00',
       timezone: 'America/New_York',
       venue_name: '',
       venue_address: '',
@@ -78,6 +85,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       secondary_color: '#274E13',
       accent_color: '#FF6B6B',
       font_family: 'Georgia',
+      invitation_front_image_url: '',
+      invitation_back_image_url: '',
       show_weather: true,
       show_area_facts: true,
       show_dining: true,
@@ -107,6 +116,43 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         ...prev,
         [name]: value,
       }));
+    }
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageField: 'invitation_front_image_url' | 'invitation_back_image_url') => {
+    const file = e.target.files?.[0];
+    if (!file || !user?.id) return;
+
+    try {
+      // Generate unique filename
+      const timestamp = new Date().getTime();
+      const filename = `${user.id}/${imageField}-${timestamp}-${file.name}`;
+      
+      // Upload to Supabase Storage
+      const { error } = await supabase.storage
+        .from('invitation-images')
+        .upload(filename, file, { upsert: false });
+
+      if (error) throw error;
+
+      // Get public URL
+      const { data } = supabase.storage
+        .from('invitation-images')
+        .getPublicUrl(filename);
+
+      // Update form data with the public URL
+      setFormData((prev) => ({
+        ...prev,
+        [imageField]: data.publicUrl,
+      }));
+
+      setMessage({ type: 'success', text: 'Image uploaded successfully!' });
+      setTimeout(() => setMessage(null), 3000);
+    } catch (err) {
+      setMessage({
+        type: 'error',
+        text: err instanceof Error ? err.message : 'Failed to upload image',
+      });
     }
   };
 
@@ -285,12 +331,38 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div>
             <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Wedding Time
+              Ceremony Time
             </label>
             <input
               type="time"
-              name="wedding_time"
-              value={formData.wedding_time}
+              name="ceremony_time"
+              value={formData.ceremony_time}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Reception Time
+            </label>
+            <input
+              type="time"
+              name="reception_time"
+              value={formData.reception_time}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Be Out By Time
+            </label>
+            <input
+              type="time"
+              name="be_out_by_time"
+              value={formData.be_out_by_time}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
@@ -494,6 +566,59 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Invitation Images */}
+      <section className="bg-white rounded-lg p-6 shadow">
+        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+          Invitation Images
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Front Card Image
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e, 'invitation_front_image_url')}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+            {formData.invitation_front_image_url && (
+              <div className="mt-2">
+                <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
+                <img 
+                  src={formData.invitation_front_image_url} 
+                  alt="Front preview" 
+                  className="w-full h-48 object-cover rounded-lg border border-gray-300"
+                />
+              </div>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Back Card Image
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e, 'invitation_back_image_url')}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+            {formData.invitation_back_image_url && (
+              <div className="mt-2">
+                <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
+                <img 
+                  src={formData.invitation_back_image_url} 
+                  alt="Back preview" 
+                  className="w-full h-48 object-cover rounded-lg border border-gray-300"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
