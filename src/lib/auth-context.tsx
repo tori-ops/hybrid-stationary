@@ -16,6 +16,17 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Use production URL for email redirects
+const getRedirectUrl = (path: string) => {
+  if (typeof window === 'undefined') {
+    return `https://mp-hybrid-stationary.vercel.app${path}`;
+  }
+  
+  const origin = window.location.origin;
+  // Always use production URL for email links (they'll be clicked from email clients)
+  return `https://mp-hybrid-stationary.vercel.app${path}`;
+};
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -46,7 +57,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: getRedirectUrl('/auth/callback'),
         },
       });
 
@@ -78,7 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const resetPassword = async (email: string) => {
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/reset-password`,
+        redirectTo: getRedirectUrl('/auth/reset-password'),
       });
 
       if (error) return { error: error.message };
