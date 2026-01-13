@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { weddingConfig } from '@/config/weddingConfig';
 
 export default function EmailTemplatePage() {
   const { couple } = weddingConfig;
   const inviteUrl = `${typeof window !== 'undefined' ? window.location.origin : 'https://yourdomain.com'}/invite`;
+  const [sending, setSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const htmlTemplate = `
 <!DOCTYPE html>
@@ -216,10 +219,101 @@ Missing Piece Planning
 Making Your Special Day Unforgettable
 `;
 
+  const handleSendTest = async () => {
+    setSending(true);
+    setSendStatus(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'tori@missingpieceplanning.com',
+          subject: 'Test Email - Hybrid Stationary System',
+          isTest: true,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSendStatus({
+          type: 'success',
+          message: 'Test email sent successfully! Check your inbox.',
+        });
+      } else {
+        setSendStatus({
+          type: 'error',
+          message: data.message || 'Failed to send test email',
+        });
+      }
+    } catch (error) {
+      setSendStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'An error occurred',
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const handleSendInvitation = async (recipientEmail: string) => {
+    setSending(true);
+    setSendStatus(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: recipientEmail,
+          subject: `You're Invited to ${couple.brideName} & ${couple.groomName}'s Wedding!`,
+          htmlContent: htmlTemplate,
+          textContent: textTemplate,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSendStatus({
+          type: 'success',
+          message: `Invitation sent to ${recipientEmail}!`,
+        });
+      } else {
+        setSendStatus({
+          type: 'error',
+          message: data.message || 'Failed to send invitation',
+        });
+      }
+    } catch (error) {
+      setSendStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'An error occurred',
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-serif text-rose-900 mb-8">Email Template</h1>
+
+        {/* Status Messages */}
+        {sendStatus && (
+          <div
+            className={`mb-8 p-4 rounded-lg border-l-4 ${
+              sendStatus.type === 'success'
+                ? 'bg-green-50 border-green-400 text-green-800'
+                : 'bg-red-50 border-red-400 text-red-800'
+            }`}
+          >
+            <p className="font-semibold">{sendStatus.type === 'success' ? '✓ Success' : '✗ Error'}</p>
+            <p>{sendStatus.message}</p>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* HTML Preview */}
