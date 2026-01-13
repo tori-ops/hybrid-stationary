@@ -50,6 +50,11 @@ function InvitePageContent() {
           <InviteCard config={config} />
         </section>
 
+        {/* Venue Information Section */}
+        <section className="mb-12 flex justify-center">
+          <VenueInfo config={config} />
+        </section>
+
         {/* RSVP Button */}
         {invitation?.rsvp_link && (
           <section className="mb-12 flex justify-center">
@@ -68,11 +73,6 @@ function InvitePageContent() {
             </a>
           </section>
         )}
-
-        {/* Venue Information Section */}
-        <section className="mb-12 flex justify-center">
-          <VenueInfo config={config} />
-        </section>
 
         {/* Weather Widget Section - Conditional */}
         {invitation?.show_weather !== false && (

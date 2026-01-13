@@ -100,10 +100,11 @@ export default function InviteCard({ config }: { config?: any }) {
         <div className="mt-8 text-center">
           <button
             onClick={() => setIsFlipped(!isFlipped)}
-            className="px-6 py-3 rounded-lg hover:opacity-90 transition-colors font-semibold"
+            className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
             style={{
-              backgroundColor: secondaryColor,
-              color: accentColor
+              backgroundColor: config?.colors?.primary || '#ec4899',
+              color: config?.colors?.accent || '#db2777',
+              borderColor: config?.colors?.accent || '#db2777'
             }}
           >
             {isFlipped ? 'See Front' : 'See Back'}
