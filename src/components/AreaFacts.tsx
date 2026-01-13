@@ -1,8 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { weddingConfig } from '@/config/weddingConfig';
 
 export default function AreaFacts({ config }: { config?: any }) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const areaFacts = config?.areaFacts || weddingConfig.areaFacts;
   const venue = config?.venue || weddingConfig.venue;
   const secondaryColor = config?.colors?.secondary || '#274E13';
@@ -78,73 +82,110 @@ export default function AreaFacts({ config }: { config?: any }) {
         </p>
       </div>
 
-      {/* Legacy Text Descriptions */}
+      {/* Legacy Text Descriptions - Clickable Cards */}
       {areaFacts && areaFacts.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {areaFacts?.map((fact: any, index: number) => (
-            <div
-              key={index}
-              className="p-6 rounded-lg border hover:shadow-md transition-shadow"
-              style={{
-                background: `linear-gradient(to bottom right, ${secondaryColor}08, ${accentColor}08)`,
-                borderColor: accentColor
-              }}
-            >
-              <h3 className="text-xl font-serif mb-3" style={{ color: accentColor }}>
-                {fact.title}
-              </h3>
-              <p className="text-gray-700">{fact.description}</p>
-            </div>
-          ))}
+          {areaFacts?.map((fact: any, index: number) => {
+            const categoryMap: { [key: number]: string } = {
+              0: 'attractions',
+              1: 'dining',
+              2: 'activities',
+              3: 'accommodations',
+            };
+            const category = categoryMap[index];
+            const hasBusinesses =
+              (category === 'attractions' && attractionsList.length > 0) ||
+              (category === 'dining' && diningList.length > 0) ||
+              (category === 'activities' && activitiesList.length > 0) ||
+              (category === 'accommodations' && accommodationsList.length > 0);
+
+            return (
+              <div
+                key={index}
+                onClick={() => {
+                  if (hasBusinesses) {
+                    setSelectedCategory(category);
+                    setIsModalOpen(true);
+                  }
+                }}
+                className={`p-6 rounded-lg border transition-shadow ${
+                  hasBusinesses ? 'cursor-pointer hover:shadow-lg' : ''
+                }`}
+                style={{
+                  background: `linear-gradient(to bottom right, ${secondaryColor}08, ${accentColor}08)`,
+                  borderColor: accentColor,
+                }}
+              >
+                <h3 className="text-xl font-serif mb-3" style={{ color: accentColor }}>
+                  {fact.title}
+                </h3>
+                <p className="text-gray-700">{fact.description}</p>
+                {hasBusinesses && (
+                  <p className="text-sm mt-3" style={{ color: accentColor }}>
+                    Click to view details →
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
-      {/* Structured Business Listings */}
-      {(attractionsList.length > 0 || diningList.length > 0 || activitiesList.length > 0 || accommodationsList.length > 0) && (
-        <div className="space-y-8 mb-8">
-          {attractionsList.length > 0 && (
-            <div>
-              <h3 className="text-2xl font-serif mb-4" style={{ color: accentColor }}>
-                Local Attractions
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {attractionsList.map((item: BusinessItem) => renderBusinessCard(item))}
-              </div>
+      {/* Modal for Business Listings */}
+      {isModalOpen && selectedCategory && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+              <h2 className="text-2xl font-serif" style={{ color: accentColor }}>
+                {selectedCategory === 'attractions'
+                  ? 'Local Attractions'
+                  : selectedCategory === 'dining'
+                  ? 'Dining Scene'
+                  : selectedCategory === 'activities'
+                  ? 'Local Activities'
+                  : 'Accommodations'}
+              </h2>
+              <button
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setSelectedCategory(null);
+                }}
+                className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+              >
+                ✕
+              </button>
             </div>
-          )}
 
-          {diningList.length > 0 && (
-            <div>
-              <h3 className="text-2xl font-serif mb-4" style={{ color: accentColor }}>
-                Dining Scene
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {diningList.map((item: BusinessItem) => renderBusinessCard(item))}
-              </div>
-            </div>
-          )}
+            <div className="p-6 space-y-4">
+              {selectedCategory === 'attractions' &&
+                (attractionsList.length > 0 ? (
+                  attractionsList.map((item: BusinessItem) => renderBusinessCard(item))
+                ) : (
+                  <p className="text-gray-500">No attractions added yet.</p>
+                ))}
 
-          {activitiesList.length > 0 && (
-            <div>
-              <h3 className="text-2xl font-serif mb-4" style={{ color: accentColor }}>
-                Local Activities
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {activitiesList.map((item: BusinessItem) => renderBusinessCard(item))}
-              </div>
-            </div>
-          )}
+              {selectedCategory === 'dining' &&
+                (diningList.length > 0 ? (
+                  diningList.map((item: BusinessItem) => renderBusinessCard(item))
+                ) : (
+                  <p className="text-gray-500">No restaurants added yet.</p>
+                ))}
 
-          {accommodationsList.length > 0 && (
-            <div>
-              <h3 className="text-2xl font-serif mb-4" style={{ color: accentColor }}>
-                Accommodations
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {accommodationsList.map((item: BusinessItem) => renderBusinessCard(item))}
-              </div>
+              {selectedCategory === 'activities' &&
+                (activitiesList.length > 0 ? (
+                  activitiesList.map((item: BusinessItem) => renderBusinessCard(item))
+                ) : (
+                  <p className="text-gray-500">No activities added yet.</p>
+                ))}
+
+              {selectedCategory === 'accommodations' &&
+                (accommodationsList.length > 0 ? (
+                  accommodationsList.map((item: BusinessItem) => renderBusinessCard(item))
+                ) : (
+                  <p className="text-gray-500">No accommodations added yet.</p>
+                ))}
             </div>
-          )}
+          </div>
         </div>
       )}
 
