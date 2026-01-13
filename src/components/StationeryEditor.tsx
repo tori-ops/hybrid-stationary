@@ -38,7 +38,7 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
   }, []);
 
   const getItemsOfType = (type: string) => items.filter(item => item.type === type);
-  const canAddMoreOfType = (type: string) => getItemsOfType(type).length < 2;
+  const canAddMoreOfType = (type: string) => getItemsOfType(type).length < 1;
 
   const handleAddStationery = (type: 'invite' | 'rsvp' | 'save_the_date') => {
     if (!canAddMoreOfType(type)) return;
@@ -115,7 +115,7 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                   >
                     {expandedType === value ? '▼' : '▶'} {label}
                   </button>
-                  <span className="text-sm text-gray-500">({itemCount}/2)</span>
+                  <span className="text-sm text-gray-500">({itemCount}/1)</span>
                 </div>
                 <button
                   onClick={() => handleAddStationery(value)}
