@@ -142,7 +142,7 @@ export default function AreaFacts({ config }: { config?: any }) {
                   : selectedCategory === 'dining'
                   ? 'Dining Scene'
                   : selectedCategory === 'activities'
-                  ? 'Local Activities'
+                  ? 'Local Shopping'
                   : 'Accommodations'}
               </h2>
               <button

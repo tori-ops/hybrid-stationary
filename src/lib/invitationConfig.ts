@@ -37,7 +37,7 @@ export function invitationToConfig(invitation: Invitation | null) {
         description: invitation.area_facts_dining || weddingConfig.areaFacts[1]?.description,
       },
       {
-        title: 'Local Activities',
+        title: 'Local Shopping',
         description: invitation.area_facts_activities || weddingConfig.areaFacts[2]?.description,
       },
       {

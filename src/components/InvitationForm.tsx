@@ -627,7 +627,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           />
           <AreaFactsEditor
             type="activities"
-            title="Local Activities"
+            title="Local Shopping"
             items={activitiesList}
             onItemsChange={setActivitiesList}
             venueLatitude={formData.venue_latitude}
