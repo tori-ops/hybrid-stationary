@@ -45,11 +45,6 @@ export default function InviteCard({ config }: { config?: any }) {
   if (hasImages) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-rose-50 to-blue-50 p-4">
-        <div className="mb-8">
-          <h1 className="text-4xl font-serif text-rose-900 mb-2">Your Wedding Invitation</h1>
-          <p className="text-gray-600 text-center">Click the card below to reveal both sides</p>
-        </div>
-
         {/* Flip Card Container with Images */}
         <div
           className="w-full max-w-3xl cursor-pointer perspective"

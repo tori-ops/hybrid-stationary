@@ -41,29 +41,32 @@ function InvitePageContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-blue-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-rose-600 to-rose-700 text-white py-8 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-serif mb-2">
-            {couple.brideName} & {couple.groomName}
-          </h1>
-          <p className="text-rose-100 text-lg">
-            You are cordially invited to celebrate their wedding
-          </p>
-        </div>
-      </div>
-
+    <main className="min-h-screen bg-gradient-to-b from-white via-white to-gray-50">
       {/* Content Sections */}
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Invite Card Section */}
-        <section className="mb-16">
+        <section className="mb-12">
           <InviteCard config={config} />
         </section>
 
+        {/* RSVP Button */}
+        {invitation?.rsvp_link && (
+          <section className="mb-12 flex justify-center">
+            <a
+              href={invitation.rsvp_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 rounded-lg font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: invitation.primary_color || '#ec4899' }}
+            >
+              RSVP Now
+            </a>
+          </section>
+        )}
+
         {/* Weather Widget Section - Conditional */}
         {invitation?.show_weather !== false && (
-          <section className="mb-16 px-4">
+          <section className="mb-12 px-4">
             <WeatherWidget
               latitude={weatherLocation.latitude}
               longitude={weatherLocation.longitude}

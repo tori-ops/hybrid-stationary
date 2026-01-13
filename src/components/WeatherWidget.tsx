@@ -99,7 +99,7 @@ export default function WeatherWidget({
         <p className="text-blue-100">10-Day Outlook</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-5 gap-3">
         {dailyData.time.slice(0, 10).map((date, index) => (
           <div
             key={date}
