@@ -52,10 +52,11 @@ export default function InviteCard({ config }: { config?: any }) {
 
         {/* Flip Card Container with Images */}
         <div
-          className="h-96 w-full max-w-2xl cursor-pointer perspective"
+          className="w-full max-w-3xl cursor-pointer perspective"
           onClick={() => setIsFlipped(!isFlipped)}
           style={{
             perspective: '1000px',
+            aspectRatio: '3 / 4',
           }}
         >
           <div
@@ -67,35 +68,31 @@ export default function InviteCard({ config }: { config?: any }) {
           >
             {/* Front Image */}
             <div
-              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden bg-gray-100"
+              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
               style={{
                 backfaceVisibility: 'hidden',
-                maxHeight: '100%',
-                maxWidth: '100%',
               }}
             >
               <img 
                 src={hasFrontImage} 
                 alt="Invitation Front" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
                 style={{ display: 'block' }}
               />
             </div>
 
             {/* Back Image */}
             <div
-              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden bg-gray-100"
+              className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
               style={{
                 backfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)',
-                maxHeight: '100%',
-                maxWidth: '100%',
               }}
             >
               <img 
                 src={hasBackImage} 
                 alt="Invitation Back" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
                 style={{ display: 'block' }}
               />
             </div>
