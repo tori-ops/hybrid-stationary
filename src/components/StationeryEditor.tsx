@@ -50,6 +50,7 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
     };
     
     onItemsChange([...items, newItem]);
+    setExpandedType(type);
   };
 
   const handleImageUpload = async (
@@ -83,6 +84,7 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
       }
 
       onItemsChange(updatedItems);
+      setExpandedType(items[index].type);
     } catch (error) {
       console.error('Upload error:', error);
       alert('Failed to upload image');
@@ -231,3 +233,4 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
     </div>
   );
 }
+
