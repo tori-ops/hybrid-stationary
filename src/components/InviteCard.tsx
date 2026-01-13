@@ -97,7 +97,7 @@ export default function InviteCard({ config }: { config?: any }) {
         </div>
 
         {/* Flip Instructions */}
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           <button
             onClick={() => setIsFlipped(!isFlipped)}
             className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
@@ -109,11 +109,6 @@ export default function InviteCard({ config }: { config?: any }) {
           >
             {isFlipped ? 'See Front' : 'See Back'}
           </button>
-          <p className="text-gray-600 text-sm mt-4">
-            {isFlipped
-              ? 'Back of invitation'
-              : 'Front of invitation'}
-          </p>
         </div>
       </div>
     );
