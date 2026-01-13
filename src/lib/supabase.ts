@@ -56,6 +56,7 @@ export interface Invitation {
   activities_list: any[] | null;
   accommodations_list: any[] | null;
   invite_text: any | null;
+  stationery_items: any[] | null;
   show_weather: boolean;
   show_area_facts: boolean;
   show_dining: boolean;

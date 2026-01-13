@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import AreaFactsEditor from './AreaFactsEditor';
+import StationeryEditor from './StationeryEditor';
 
 interface Invitation {
   id?: string;
@@ -46,6 +47,7 @@ interface Invitation {
   dining_list?: any[];
   activities_list?: any[];
   accommodations_list?: any[];
+  stationery_items?: any[];
   show_weather: boolean;
   show_area_facts: boolean;
   show_dining: boolean;
@@ -120,6 +122,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [diningList, setDiningList] = useState<any[]>(invitation?.dining_list || []);
   const [activitiesList, setActivitiesList] = useState<any[]>(invitation?.activities_list || []);
   const [accommodationsList, setAccommodationsList] = useState<any[]>(invitation?.accommodations_list || []);
+  const [stationeryItems, setStationeryItems] = useState<any[]>(invitation?.stationery_items || []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
@@ -186,6 +189,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         dining_list: diningList,
         activities_list: activitiesList,
         accommodations_list: accommodationsList,
+        stationery_items: stationeryItems,
       };
 
       if (invitation?.id) {
@@ -612,6 +616,51 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
           Area Facts & Attractions
         </h2>
+        
+        {/* Toggles for each category */}
+        <div className="grid grid-cols-2 gap-4 mb-6 pb-6 border-b">
+          <label className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              name="show_attractions"
+              checked={formData.show_attractions}
+              onChange={handleChange}
+              className="w-4 h-4 rounded"
+            />
+            <span className="text-sm font-medium text-gray-700">Show Attractions</span>
+          </label>
+          <label className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              name="show_dining"
+              checked={formData.show_dining}
+              onChange={handleChange}
+              className="w-4 h-4 rounded"
+            />
+            <span className="text-sm font-medium text-gray-700">Show Dining</span>
+          </label>
+          <label className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              name="show_activities"
+              checked={formData.show_activities}
+              onChange={handleChange}
+              className="w-4 h-4 rounded"
+            />
+            <span className="text-sm font-medium text-gray-700">Show Shopping</span>
+          </label>
+          <label className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              name="show_accommodations"
+              checked={formData.show_accommodations}
+              onChange={handleChange}
+              className="w-4 h-4 rounded"
+            />
+            <span className="text-sm font-medium text-gray-700">Show Accommodations</span>
+          </label>
+        </div>
+
         <div className="space-y-4">
           <AreaFactsEditor
             type="attractions"
@@ -648,57 +697,16 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         </div>
       </section>
 
-      {/* Invitation Images */}
+      {/* Stationery Items */}
       <section className="bg-white rounded-lg p-6 shadow">
         <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Invitation Images
+          Stationery Images
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Front Card Image
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload(e, 'invitation_front_image_url')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
-            />
-            {formData.invitation_front_image_url && (
-              <div className="mt-2">
-                <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
-                <img 
-                  src={formData.invitation_front_image_url} 
-                  alt="Front preview" 
-                  className="w-full h-48 object-cover rounded-lg border border-gray-300"
-                />
-              </div>
-            )}
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Back Card Image
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload(e, 'invitation_back_image_url')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
-            />
-            {formData.invitation_back_image_url && (
-              <div className="mt-2">
-                <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
-                <img 
-                  src={formData.invitation_back_image_url} 
-                  alt="Back preview" 
-                  className="w-full h-48 object-cover rounded-lg border border-gray-300"
-                />
-              </div>
-            )}
-          </div>
-        </div>
+        <StationeryEditor
+          items={stationeryItems}
+          onItemsChange={setStationeryItems}
+          userId={user?.id}
+        />
       </section>
 
       {/* Styling */}
