@@ -102,7 +102,7 @@ export default function InviteCard({ config }: { config?: any }) {
             onClick={() => setIsFlipped(!isFlipped)}
             className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
             style={{
-              backgroundColor: config?.colors?.primary || '#ec4899',
+              backgroundColor: config?.colors?.secondary || '#274E13',
               color: config?.colors?.accent || '#db2777',
               borderColor: config?.colors?.accent || '#db2777'
             }}

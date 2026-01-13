@@ -32,7 +32,7 @@ export default function ContactSection({ config }: { config?: any }) {
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300 border-gray-200'
           }`}
           style={contactType === 'planner' ? {
-            backgroundColor: primaryColor,
+            backgroundColor: secondaryColor,
             color: accentColor,
             borderColor: accentColor
           } : {}}
@@ -47,7 +47,7 @@ export default function ContactSection({ config }: { config?: any }) {
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300 border-gray-200'
           }`}
           style={contactType === 'couple' ? {
-            backgroundColor: primaryColor,
+            backgroundColor: secondaryColor,
             color: accentColor,
             borderColor: accentColor
           } : {}}
