@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signUp = async (email: string, password: string) => {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -62,6 +62,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (error) return { error: error.message };
+
+      // Create planner record for new user
+      if (data.user?.id) {
+        const { error: plannerError } = await supabase
+          .from('planners')
+          .insert([
+            {
+              id: data.user.id,
+              email: email,
+              created_at: new Date().toISOString(),
+            },
+          ]);
+
+        if (plannerError) {
+          console.error('Error creating planner record:', plannerError);
+          // Don't fail signup if planner creation fails, but log it
+        }
+      }
+
       return {};
     } catch (err) {
       return { error: err instanceof Error ? err.message : 'An error occurred' };
