@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
+import AreaFactsEditor from './AreaFactsEditor';
 
 interface Invitation {
   id?: string;
@@ -110,6 +111,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
+  // Area facts list states
+  const [attractionsList, setAttractionsList] = useState<any[]>([]);
+  const [diningList, setDiningList] = useState<any[]>([]);
+  const [activitiesList, setActivitiesList] = useState<any[]>([]);
+  const [accommodationsList, setAccommodationsList] = useState<any[]>([]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
 
@@ -169,11 +176,19 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     setMessage(null);
 
     try {
+      const saveData = {
+        ...formData,
+        attractions_list: attractionsList,
+        dining_list: diningList,
+        activities_list: activitiesList,
+        accommodations_list: accommodationsList,
+      };
+
       if (invitation?.id) {
         // Update existing
         const { error } = await supabase
           .from('invitations')
-          .update(formData)
+          .update(saveData)
           .eq('id', invitation.id);
 
         if (error) throw error;
@@ -184,7 +199,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           .from('invitations')
           .insert([
             {
-              ...formData,
+              ...saveData,
               planner_id: user?.id,
               planner_email: user?.email,
             },
@@ -593,59 +608,39 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
           Area Facts & Attractions
         </h2>
-        <div className="grid grid-cols-1 gap-4">
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Local Attraction
-            </label>
-            <textarea
-              name="area_facts_attraction"
-              value={formData.area_facts_attraction || ''}
-              onChange={handleChange}
-              rows={2}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Dining Scene
-            </label>
-            <textarea
-              name="area_facts_dining"
-              value={formData.area_facts_dining || ''}
-              onChange={handleChange}
-              rows={2}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Local Activities
-            </label>
-            <textarea
-              name="area_facts_activities"
-              value={formData.area_facts_activities || ''}
-              onChange={handleChange}
-              rows={2}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Accommodations
-            </label>
-            <textarea
-              name="area_facts_accommodations"
-              value={formData.area_facts_accommodations || ''}
-              onChange={handleChange}
-              rows={2}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': '#274E13', color: '#000' } as React.CSSProperties}
-            />
-          </div>
+        <div className="space-y-4">
+          <AreaFactsEditor
+            type="attractions"
+            title="Local Attractions"
+            items={attractionsList}
+            onItemsChange={setAttractionsList}
+            venueLatitude={formData.venue_latitude}
+            venueLongitude={formData.venue_longitude}
+          />
+          <AreaFactsEditor
+            type="dining"
+            title="Dining Scene"
+            items={diningList}
+            onItemsChange={setDiningList}
+            venueLatitude={formData.venue_latitude}
+            venueLongitude={formData.venue_longitude}
+          />
+          <AreaFactsEditor
+            type="activities"
+            title="Local Activities"
+            items={activitiesList}
+            onItemsChange={setActivitiesList}
+            venueLatitude={formData.venue_latitude}
+            venueLongitude={formData.venue_longitude}
+          />
+          <AreaFactsEditor
+            type="accommodations"
+            title="Accommodations"
+            items={accommodationsList}
+            onItemsChange={setAccommodationsList}
+            venueLatitude={formData.venue_latitude}
+            venueLongitude={formData.venue_longitude}
+          />
         </div>
       </section>
 

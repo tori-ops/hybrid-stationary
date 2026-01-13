@@ -45,6 +45,10 @@ export function invitationToConfig(invitation: Invitation | null) {
         description: invitation.area_facts_accommodations || weddingConfig.areaFacts[3]?.description,
       },
     ],
+    attractionsList: invitation.attractions_list || [],
+    diningList: invitation.dining_list || [],
+    activitiesList: invitation.activities_list || [],
+    accommodationsList: invitation.accommodations_list || [],
     contacts: {
       planner: {
         name: invitation.planner_name || weddingConfig.contacts.planner.name,

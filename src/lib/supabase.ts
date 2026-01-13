@@ -51,6 +51,10 @@ export interface Invitation {
   area_facts_dining: string | null;
   area_facts_activities: string | null;
   area_facts_accommodations: string | null;
+  attractions_list: any[] | null;
+  dining_list: any[] | null;
+  activities_list: any[] | null;
+  accommodations_list: any[] | null;
   invite_text: any | null;
   show_weather: boolean;
   show_area_facts: boolean;
