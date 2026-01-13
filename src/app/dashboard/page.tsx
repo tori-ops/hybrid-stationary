@@ -54,6 +54,7 @@ export default function DashboardPage() {
   const [selectedInvite, setSelectedInvite] = useState<Invitation | null>(null);
   const [loading, setLoading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   // Redirect if not logged in
   useEffect(() => {
@@ -103,7 +104,11 @@ export default function DashboardPage() {
   return (
     <main className="min-h-screen flex" style={{ backgroundColor: '#f5f5f5' }}>
       {/* Sidebar */}
-      <Sidebar selectedInviteId={selectedInviteId} onSelectInvite={setSelectedInviteId} />
+      <Sidebar 
+        selectedInviteId={selectedInviteId} 
+        onSelectInvite={setSelectedInviteId}
+        refreshTrigger={refreshTrigger}
+      />
 
       {/* Main Content */}
       <div className="flex-1 p-8 overflow-y-auto">
@@ -122,8 +127,7 @@ export default function DashboardPage() {
                 invitation={null}
                 onSave={() => {
                   setSelectedInviteId(null);
-                  // Refresh sidebar
-                  router.refresh();
+                  setRefreshTrigger(prev => prev + 1);
                 }}
               />
             </>

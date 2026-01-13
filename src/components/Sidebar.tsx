@@ -16,25 +16,26 @@ interface Invitation {
 interface SidebarProps {
   selectedInviteId: string | null;
   onSelectInvite: (id: string | null) => void;
+  refreshTrigger?: number;
 }
 
-export default function Sidebar({ selectedInviteId, onSelectInvite }: SidebarProps) {
+export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigger }: SidebarProps) {
   const { user, signOut } = useAuth();
   const [invitations, setInvitations] = useState<Invitation[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user?.email) {
+    if (user?.id) {
       loadInvitations();
     }
-  }, [user?.email]);
+  }, [user?.id, refreshTrigger]);
 
   const loadInvitations = async () => {
     try {
       const { data, error } = await supabase
         .from('invitations')
         .select('id, event_slug, bride_name, groom_name, wedding_date')
-        .eq('planner_email', user?.email)
+        .eq('planner_id', user?.id)
         .order('created_at', { ascending: false });
 
       if (!error && data) {
