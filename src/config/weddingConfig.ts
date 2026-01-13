@@ -17,20 +17,20 @@ export const weddingConfig = {
   },
   areaFacts: [
     {
-      title: "Local Attraction",
-      description: "Beautiful scenic overlook with hiking trails",
+      title: "Local Attractions",
+      description: "Popular spots to explore in the area",
     },
     {
       title: "Dining Scene",
-      description: "Award-winning restaurants and farm-to-table options",
+      description: "Favorite restaurants worth checking out",
     },
     {
-      title: "Activities",
-      description: "Wine tastings, kayaking, and historic sites",
+      title: "Local Shopping",
+      description: "Unique shops and local retailers nearby",
     },
     {
       title: "Accommodations",
-      description: "Boutique hotels and charming bed & breakfasts",
+      description: "Great places to stay during your visit",
     },
   ],
   contacts: {
