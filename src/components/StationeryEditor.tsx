@@ -158,15 +158,15 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                                 Front Image
                               </label>
                               {item.front_image_url ? (
-                                <div className="mb-2">
+                                <div className="mb-2 bg-gray-50 rounded border border-gray-300 flex items-center justify-center" style={{ minHeight: '300px' }}>
                                   <img
                                     src={item.front_image_url}
                                     alt={`${label} front`}
-                                    className="w-full h-48 object-cover rounded border border-gray-300"
+                                    className="max-w-full max-h-96 object-contain"
                                   />
                                 </div>
                               ) : (
-                                <div className="w-full h-48 bg-gray-200 rounded border border-gray-300 flex items-center justify-center mb-2">
+                                <div className="w-full bg-gray-200 rounded border border-gray-300 flex items-center justify-center mb-2" style={{ minHeight: '300px' }}>
                                   <span className="text-gray-500 text-sm">No image</span>
                                 </div>
                               )}
@@ -191,15 +191,15 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                                 Back Image
                               </label>
                               {item.back_image_url ? (
-                                <div className="mb-2">
+                                <div className="mb-2 bg-gray-50 rounded border border-gray-300 flex items-center justify-center" style={{ minHeight: '300px' }}>
                                   <img
                                     src={item.back_image_url}
                                     alt={`${label} back`}
-                                    className="w-full h-48 object-cover rounded border border-gray-300"
+                                    className="max-w-full max-h-96 object-contain"
                                   />
                                 </div>
                               ) : (
-                                <div className="w-full h-48 bg-gray-200 rounded border border-gray-300 flex items-center justify-center mb-2">
+                                <div className="w-full bg-gray-200 rounded border border-gray-300 flex items-center justify-center mb-2" style={{ minHeight: '300px' }}>
                                   <span className="text-gray-500 text-sm">No image</span>
                                 </div>
                               )}
