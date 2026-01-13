@@ -39,6 +39,8 @@ interface Invitation {
   font_family: string;
   invitation_front_image_url?: string;
   invitation_back_image_url?: string;
+  logo_url?: string;
+  background_image_url?: string;
   area_facts_attraction?: string;
   area_facts_dining?: string;
   area_facts_activities?: string;
@@ -98,6 +100,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       font_family: 'Georgia',
       invitation_front_image_url: '',
       invitation_back_image_url: '',
+      logo_url: '',
+      background_image_url: '',
       area_facts_attraction: 'Beautiful scenic overlook with hiking trails',
       area_facts_dining: 'Award-winning restaurants and farm-to-table options',
       area_facts_activities: 'Wine tastings, kayaking, and historic sites',
@@ -610,7 +614,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
           Planner Information
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-6 border-b">
           <div>
             <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
               Planner Name
@@ -636,6 +640,54 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
+          </div>
+        </div>
+
+        {/* Branding Uploads */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Logo (Bottom of Invitation)
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e, 'logo_url')}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+            {formData.logo_url && (
+              <div className="mt-2">
+                <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
+                <img 
+                  src={formData.logo_url} 
+                  alt="Logo preview" 
+                  className="h-20 object-contain rounded-lg border border-gray-300"
+                />
+              </div>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Background Image (Behind All Content)
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e, 'background_image_url')}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+            {formData.background_image_url && (
+              <div className="mt-2">
+                <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
+                <img 
+                  src={formData.background_image_url} 
+                  alt="Background preview" 
+                  className="w-full h-24 object-cover rounded-lg border border-gray-300"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>

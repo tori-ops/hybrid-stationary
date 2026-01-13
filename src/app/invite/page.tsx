@@ -42,7 +42,15 @@ function InvitePageContent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-white to-gray-50">
+    <main 
+      className="min-h-screen bg-gray-50"
+      style={{
+        backgroundImage: invitation?.background_image_url ? `url('${invitation.background_image_url}')` : 'none',
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
       {/* Content Sections */}
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Stationery Items Section - Conditional */}
@@ -112,9 +120,18 @@ function InvitePageContent() {
           <p className="text-gray-600 text-sm mb-2">
             Created with care by The Missing Piece Planning
           </p>
-          <p className="text-gray-500 text-xs">
+          <p className="text-gray-500 text-xs mb-4">
             © {new Date().getFullYear()} All rights reserved
           </p>
+          {invitation?.logo_url && (
+            <div className="flex justify-center">
+              <img 
+                src={invitation.logo_url} 
+                alt="Logo" 
+                className="h-16 object-contain"
+              />
+            </div>
+          )}
         </footer>
       </div>
     </main>
