@@ -28,12 +28,10 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
 
   // Auto-expand sections with existing items - only on initial load
   useEffect(() => {
-    if (!initialized && items.length > 0) {
-      const firstTypeWithItems = stationeryTypes.find(t => 
-        items.some(item => item.type === t.value && (item.front_image_url || item.back_image_url))
-      );
-      if (firstTypeWithItems) {
-        setExpandedType(firstTypeWithItems.value);
+    if (!initialized && items && items.length > 0) {
+      const firstType = items[0]?.type;
+      if (firstType) {
+        setExpandedType(firstType);
       }
       setInitialized(true);
     }
