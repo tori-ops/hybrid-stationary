@@ -132,6 +132,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           .insert([
             {
               ...formData,
+              planner_id: user?.id,
               planner_email: user?.email,
             },
           ]);
