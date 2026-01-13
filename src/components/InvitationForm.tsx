@@ -174,7 +174,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageField: 'invitation_front_image_url' | 'invitation_back_image_url') => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageField: 'invitation_front_image_url' | 'invitation_back_image_url' | 'logo_url' | 'background_image_url') => {
     const file = e.target.files?.[0];
     if (!file || !user?.id) return;
 
