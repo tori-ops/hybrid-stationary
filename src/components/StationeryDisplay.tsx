@@ -81,7 +81,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const backgroundImage = backgroundImages[item.type];
           // Calculate background size based on card dimensions
           const cardSize = cardSizes[key];
-const backgroundSize = cardSize ? Math.max(cardSize.width, cardSize.height) * 0.9 : 1400;
+const backgroundSize = cardSize ? Math.max(cardSize.width, cardSize.height) * 1.4 : 1400;
 
           return (
             <div key={key} className="flex flex-col items-center justify-center relative">              
