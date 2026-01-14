@@ -51,6 +51,8 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const dims = dimensions[key];
         const aspectRatio = dims ? (dims.width / dims.height) : (3 / 4);
         const backgroundImage = backgroundImages[item.type];
+        // Calculate background position based on card aspect ratio
+        const backgroundTopPercent = ((-1 / aspectRatio) * 40) + 40;
 
         // Only show if both front and back images exist
         if (!item.front_image_url || !item.back_image_url) {
@@ -65,7 +67,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                 className="absolute pointer-events-none"
                 style={{
                   zIndex: 1,
-                  top: '35%',
+                  top: `${backgroundTopPercent}%`,
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
                   width: '1600px',
