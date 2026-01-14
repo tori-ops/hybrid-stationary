@@ -139,7 +139,7 @@ function InvitePageContent() {
                     <img 
                       src={invitation.timeline_image_url}
                       alt="Timeline decoration"
-                      className="w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 object-cover"
+                      className="w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 object-cover object-center"
                     />
                   </div>
                 </div>
