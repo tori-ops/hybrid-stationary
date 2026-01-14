@@ -59,6 +59,27 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
 
         return (
           <div key={key} className="flex flex-col items-center justify-center">
+            {/* Background Image Container - no clipping */}
+            {backgroundImage && (
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  zIndex: 1,
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '900px',
+                  maxWidth: '90vw'
+                }}
+              >
+                <img
+                  src={backgroundImage}
+                  alt="Stationery background"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            )}
+
             {/* Flip Card Container */}
             <div
               className="w-full cursor-pointer perspective relative"
@@ -71,23 +92,6 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                 zIndex: 2
               }}
             >
-              {/* Background Image - behind stationery, doesn't flip */}
-              {backgroundImage && (
-                <img
-                  src={backgroundImage}
-                  alt="Stationery background"
-                  className="absolute inset-0 w-full h-full object-cover rounded-lg pointer-events-none"
-                  style={{
-                    zIndex: 1,
-                    top: '-150px',
-                    left: '-150px',
-                    right: '-150px',
-                    bottom: '-150px',
-                    width: 'calc(100% + 300px)',
-                    height: 'calc(100% + 300px)'
-                  }}
-                />
-              )}
               <div
                 className="relative w-full h-full transition-transform duration-500"
                 style={{
