@@ -74,7 +74,23 @@ function InvitePageContent() {
       const data = await response.json();
       console.log('Approval response data:', data);
 
-      if (response.ok) {
+      if (response.ok && invitation?.id) {
+        // Send published confirmation email to couple
+        try {
+          console.log('Sending published confirmation email...');
+          const emailResponse = await fetch('/api/send-published-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ invitationId: invitation.id }),
+          });
+
+          const emailData = await emailResponse.json();
+          console.log('Published email response:', emailData);
+        } catch (emailError) {
+          console.error('Error sending published email:', emailError);
+          // Don't fail the approval if email fails, but log it
+        }
+
         // Show success message and remove proof mode
         setShowApprovalModal(false);
         window.location.href = `/invite?event=${eventSlug}`;
