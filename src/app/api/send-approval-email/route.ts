@@ -4,16 +4,38 @@ import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 
 // Initialize email transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
+let transporter: any = null;
+
+try {
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPassword = process.env.GMAIL_APP_PASSWORD;
+
+  if (!gmailUser || !gmailPassword) {
+    console.warn('Gmail credentials not configured');
+    transporter = null;
+  } else {
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: gmailUser,
+        pass: gmailPassword,
+      },
+    });
+  }
+} catch (error) {
+  console.error('Failed to initialize email transporter:', error);
+  transporter = null;
+}
 
 export async function POST(request: NextRequest) {
   try {
+    if (!transporter) {
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
+    }
+
     const { invitationId } = await request.json();
 
     if (!invitationId) {
@@ -31,9 +53,18 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (fetchError || !invitation) {
+      console.error('Invitation fetch error:', fetchError);
       return NextResponse.json(
         { error: 'Invitation not found' },
         { status: 404 }
+      );
+    }
+
+    const coupleEmail = invitation.couple_contact_email;
+    if (!coupleEmail) {
+      return NextResponse.json(
+        { error: 'Couple email not configured' },
+        { status: 400 }
       );
     }
 
@@ -51,6 +82,7 @@ export async function POST(request: NextRequest) {
       .eq('id', invitationId);
 
     if (updateError) {
+      console.error('Update error:', updateError);
       return NextResponse.json(
         { error: 'Failed to update invitation' },
         { status: 500 }
@@ -87,20 +119,17 @@ Tori & Dean
 The Missing Piece Planning
 The search for your perfect day ends here.`;
 
-    const coupleEmail = invitation.couple_contact_email;
-    if (!coupleEmail) {
-      return NextResponse.json(
-        { error: 'Couple email not configured' },
-        { status: 400 }
-      );
+    try {
+      await transporter.sendMail({
+        from: process.env.GMAIL_USER,
+        to: coupleEmail,
+        subject: 'Your Wedding Details Are Ready for Review',
+        text: emailContent,
+      });
+    } catch (emailError) {
+      console.error('Email sending error:', emailError);
+      throw emailError;
     }
-
-    await transporter.sendMail({
-      from: process.env.GMAIL_USER,
-      to: coupleEmail,
-      subject: 'Your Wedding Details Are Ready for Review',
-      text: emailContent,
-    });
 
     return NextResponse.json({
       success: true,
@@ -109,8 +138,9 @@ The search for your perfect day ends here.`;
     });
   } catch (error) {
     console.error('Error sending approval email:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to send approval email';
     return NextResponse.json(
-      { error: 'Failed to send approval email' },
+      { error: errorMessage },
       { status: 500 }
     );
   }
