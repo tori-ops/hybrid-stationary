@@ -95,8 +95,9 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const backgroundImage = backgroundImages[item.type];
           // Calculate background size based on card dimensions
           const cardSize = cardSizes[key];
-            // Responsive background size: 850px on desktop, 700px on mobile
-            const backgroundSize = isSmallScreen ? 700 : 850;
+            // Responsive background size: 850px width on desktop, 700px mobile; 950px tall on desktop, 850px mobile
+            const backgroundWidth = isSmallScreen ? 700 : 850;
+            const backgroundHeight = isSmallScreen ? 850 : 950;
           return (
             <div key={key} className="flex flex-col items-center justify-center relative">              
             {/* Background Image Container - presents the stationery */}
@@ -108,8 +109,8 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  width: `${backgroundSize}px`,
-                  height: `${backgroundSize}px`,
+                    width: `${backgroundWidth}px`,
+                    height: `${backgroundHeight}px`,
                   maxWidth: 'none'
                 }}
               >
