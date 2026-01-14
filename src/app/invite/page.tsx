@@ -108,12 +108,12 @@ function InvitePageContent() {
         {/* Stationery Items Section - Conditional */}
         {invitation?.stationery_items && invitation.stationery_items.length > 0 && (
           <section className="mt-16 mb-40 px-4">
-            {/* Approve Button - Show only in proof mode */}
+            {/* Approve Button - Show only in proof mode - Fixed at top with high z-index */}
             {isProofMode && (
-              <div className="flex justify-center mb-6">
+              <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50">
                 <button
                   onClick={handleApproveClick}
-                  className="px-8 py-3 rounded-lg font-semibold transition-all hover:opacity-90 border-2 whitespace-nowrap bg-green-600 text-white border-green-600 hover:bg-green-700"
+                  className="px-8 py-3 rounded-lg font-semibold transition-all hover:opacity-90 border-2 whitespace-nowrap bg-green-600 text-white border-green-600 hover:bg-green-700 shadow-lg"
                 >
                   Approve & Publish
                 </button>
