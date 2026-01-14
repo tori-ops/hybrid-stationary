@@ -7,8 +7,6 @@ interface StationeryItem {
   type: 'invite' | 'rsvp' | 'save_the_date';
   front_image_url: string;
   back_image_url: string;
-  view_mode?: 'flip' | 'fold';
-  flap_image_url?: string;
 }
 
 interface StationeryEditorProps {
