@@ -41,6 +41,7 @@ interface Invitation {
   invitation_back_image_url?: string;
   logo_url?: string;
   background_image_url?: string;
+  timeline_image_url?: string;
   area_facts_attraction?: string;
   area_facts_dining?: string;
   area_facts_activities?: string;
@@ -102,6 +103,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       invitation_back_image_url: '',
       logo_url: '',
       background_image_url: '',
+      timeline_image_url: '',
       area_facts_attraction: 'Popular spots to explore in the area',
       area_facts_dining: 'Favorite restaurants worth checking out',
       area_facts_activities: 'Unique shops and local retailers nearby',
@@ -174,7 +176,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageField: 'invitation_front_image_url' | 'invitation_back_image_url' | 'logo_url' | 'background_image_url') => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageField: 'invitation_front_image_url' | 'invitation_back_image_url' | 'logo_url' | 'background_image_url' | 'timeline_image_url') => {
     const file = e.target.files?.[0];
     if (!file || !user?.id) return;
 
@@ -685,6 +687,29 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                   src={formData.background_image_url} 
                   alt="Background preview" 
                   className="w-full h-24 object-cover rounded-lg border border-gray-300"
+                />
+              </div>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              Timeline Image (Right Side of Timeline Card)
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e, 'timeline_image_url')}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+            {formData.timeline_image_url && (
+              <div className="mt-2">
+                <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
+                <img 
+                  src={formData.timeline_image_url} 
+                  alt="Timeline image preview" 
+                  className="h-24 w-24 rounded-full border-4 object-cover"
+                  style={{ borderColor: '#FF6B6B' }}
                 />
               </div>
             )}

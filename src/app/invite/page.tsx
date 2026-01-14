@@ -102,36 +102,58 @@ function InvitePageContent() {
         )}
 
         {/* Event Timeline Section */}
-        <section className="mb-12 flex justify-center">
+        <section className="mb-12 flex justify-center relative">
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
             <h2 className="text-3xl font-serif mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
               Event Timeline
             </h2>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                  4:30 PM
+            <div className="flex gap-8 items-start">
+              {/* Timeline content on left */}
+              <div className="flex-1 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                    4:30 PM
+                  </div>
+                  <div className="text-base text-gray-700">Ceremony</div>
                 </div>
-                <div className="text-base text-gray-700">Ceremony</div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                  5:15 PM
+                <div className="flex items-center gap-4">
+                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                    5:15 PM
+                  </div>
+                  <div className="text-base text-gray-700">Cocktail Hour</div>
                 </div>
-                <div className="text-base text-gray-700">Cocktail Hour</div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                  6:00 PM
+                <div className="flex items-center gap-4">
+                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                    6:00 PM
+                  </div>
+                  <div className="text-base text-gray-700">Dinner</div>
                 </div>
-                <div className="text-base text-gray-700">Dinner</div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                  10:00 PM
+                <div className="flex items-center gap-4">
+                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                    10:00 PM
+                  </div>
+                  <div className="text-base text-gray-700">End of Event</div>
                 </div>
-                <div className="text-base text-gray-700">End of Event</div>
               </div>
+              
+              {/* Timeline image on right in circle */}
+              {invitation?.timeline_image_url && (
+                <div className="flex-shrink-0">
+                  <div 
+                    className="w-40 h-40 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0"
+                    style={{ 
+                      backgroundColor: invitation?.accent_color || '#FF6B6B',
+                      boxShadow: '0 0 0 6px ' + (invitation?.accent_color || '#FF6B6B')
+                    }}
+                  >
+                    <img 
+                      src={invitation.timeline_image_url}
+                      alt="Timeline decoration"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>

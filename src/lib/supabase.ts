@@ -44,6 +44,7 @@ export interface Invitation {
   font_family: string | null;
   logo_url: string | null;
   background_image_url: string | null;
+  timeline_image_url: string | null;
   invitation_front_image_url: string | null;
   invitation_back_image_url: string | null;
   area_facts: any[] | null;
