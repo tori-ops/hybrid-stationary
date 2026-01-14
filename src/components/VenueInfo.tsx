@@ -11,47 +11,47 @@ export default function VenueInfo({ config }: { config?: any }) {
         background: `linear-gradient(to right, ${secondaryColor}15, ${accentColor}15)`,
         borderColor: accentColor
       }}>
-        <h3 className="text-2xl font-serif mb-4" style={{ color: accentColor }}>Venue Information</h3>
+        <h3 className="text-xl md:text-2xl font-serif mb-4" style={{ color: accentColor }}>Venue Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <p className="text-sm text-gray-600 uppercase tracking-wide mb-1">
+            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
               Venue
             </p>
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="text-sm md:text-base font-semibold text-gray-800">
               {venue.name}
             </p>
           </div>
           <div>
-            <p className="text-sm text-gray-600 uppercase tracking-wide mb-1">
+            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
               Address
             </p>
-            <p className="text-gray-800">
+            <p className="text-sm md:text-base text-gray-800">
               {venue.address}
               <br />
               {venue.city}
             </p>
           </div>
           <div>
-            <p className="text-sm text-gray-600 uppercase tracking-wide mb-1">
+            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
               Phone
             </p>
             <a
               href={`tel:${venue.phone}`}
-              className="font-semibold"
+              className="font-semibold text-sm md:text-base"
               style={{ color: accentColor }}
             >
               {venue.phone}
             </a>
           </div>
           <div>
-            <p className="text-sm text-gray-600 uppercase tracking-wide mb-1">
+            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
               Website
             </p>
             <a
               href={venue.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold"
+              className="font-semibold text-sm md:text-base"
               style={{ color: accentColor }}
             >
               Visit Website →
