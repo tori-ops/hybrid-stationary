@@ -65,8 +65,8 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                   top: `${backgroundTopPercent}%`,
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  width: '1600px',
-                  height: '1600px',
+                  width: 'clamp(800px, 150vw, 2000px)',
+                  height: 'clamp(800px, 150vw, 2000px)',
                   maxWidth: 'none'
                 }}
               >
@@ -84,7 +84,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
               onClick={() => toggleFlip(key)}
               style={{
                 perspective: '1000px',
-                maxWidth: '800px',
+                maxWidth: '700px',
                 aspectRatio: aspectRatio.toString(),
                 margin: '0 auto',
                 zIndex: 2
