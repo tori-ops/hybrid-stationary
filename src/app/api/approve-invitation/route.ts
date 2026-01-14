@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,6 +12,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Create a Supabase client with service role key for admin access (bypasses RLS)
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+      process.env.SUPABASE_SERVICE_ROLE_KEY || '',
+      {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false,
+        },
+      }
+    );
+
+    console.log('Looking up approval token:', approvalToken.substring(0, 20) + '...');
+
     // Find invitation by approval token
     const { data: invitation, error: fetchError } = await supabase
       .from('invitations')
@@ -19,7 +33,11 @@ export async function POST(request: NextRequest) {
       .eq('approval_token', approvalToken)
       .single();
 
+    console.log('Fetch error:', fetchError);
+    console.log('Invitation found:', !!invitation);
+
     if (fetchError || !invitation) {
+      console.error('Token lookup failed:', fetchError?.message || 'No invitation found');
       return NextResponse.json(
         { error: 'Invalid or expired approval token' },
         { status: 404 }
@@ -37,6 +55,7 @@ export async function POST(request: NextRequest) {
       .eq('id', invitation.id);
 
     if (updateError) {
+      console.error('Update error:', updateError);
       return NextResponse.json(
         { error: 'Failed to approve invitation' },
         { status: 500 }
