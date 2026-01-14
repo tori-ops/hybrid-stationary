@@ -103,7 +103,7 @@ function InvitePageContent() {
 
         {/* Event Timeline Section */}
         <section className="mb-12 flex justify-center relative">
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full flex flex-col">
             <div className="flex gap-8 items-start">
               {/* Left column: Heading and Timeline content */}
               <div className="flex-1">
