@@ -41,7 +41,7 @@ export function invitationToConfig(invitation: Invitation | null) {
         description: invitation.area_facts_activities || weddingConfig.areaFacts[2]?.description,
       },
       {
-        title: 'Accommodations',
+        title: 'Overnight Stays',
         description: invitation.area_facts_accommodations || weddingConfig.areaFacts[3]?.description,
       },
     ],

@@ -29,7 +29,7 @@ export const weddingConfig = {
       description: "Unique shops and local retailers nearby",
     },
     {
-      title: "Accommodations",
+      title: "Overnight Stays",
       description: "Great places to stay during your visit",
     },
   ],
