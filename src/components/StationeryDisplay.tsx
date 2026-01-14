@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface StationeryItem {
   type: 'invite' | 'rsvp' | 'save_the_date';
@@ -23,10 +23,38 @@ interface ImageDimensions {
 export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B', backgroundImages = {} }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
   const [dimensions, setDimensions] = useState<{ [key: string]: ImageDimensions }>({});
+  const [cardSizes, setCardSizes] = useState<{ [key: string]: { width: number; height: number } }>({});
+  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   if (!items || items.length === 0) {
     return null;
   }
+
+  useEffect(() => {
+    const resizeObservers = new Map<string, ResizeObserver>();
+
+    items.forEach((item, idx) => {
+      const key = `${item.type}-${idx}`;
+      const element = cardRefs.current[key];
+      
+      if (element) {
+        const observer = new ResizeObserver(() => {
+          const rect = element.getBoundingClientRect();
+          setCardSizes((prev) => ({
+            ...prev,
+            [key]: { width: rect.width, height: rect.height }
+          }));
+        });
+
+        observer.observe(element);
+        resizeObservers.set(key, observer);
+      }
+    });
+
+    return () => {
+      resizeObservers.forEach((observer) => observer.disconnect());
+    };
+  }, [items]);
 
   const toggleFlip = (key: string) => {
     setFlipped(prev => ({
@@ -51,22 +79,23 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const dims = dimensions[key];
         const aspectRatio = dims ? (dims.width / dims.height) : (3 / 4);
         const backgroundImage = backgroundImages[item.type];
-        // Calculate background position based on card aspect ratio
-          const backgroundTopPercent = 20;
+          // Calculate background size based on card dimensions
+          const cardSize = cardSizes[key];
+          const backgroundSize = cardSize ? Math.max(cardSize.width, cardSize.height) * 2 : 1400;
 
-        return (
-          <div key={key} className="flex flex-col items-center justify-center">
+          return (
+            <div key={key} className="flex flex-col items-center justify-center relative">
             {/* Background Image Container - presents the stationery */}
             {backgroundImage && (
               <div
                 className="absolute pointer-events-none"
                 style={{
                   zIndex: 1,
-                  top: `${backgroundTopPercent}%`,
+                  top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  width: 'clamp(800px, 150vw, 2000px)',
-                  height: 'clamp(800px, 150vw, 2000px)',
+                  width: `${backgroundSize}px`,
+                  height: `${backgroundSize}px`,
                   maxWidth: 'none'
                 }}
               >
@@ -80,6 +109,9 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
 
             {/* Flip Card Container */}
             <div
+              ref={(el) => {
+                if (el) cardRefs.current[key] = el;
+              }}
               className="w-full cursor-pointer perspective relative"
               onClick={() => toggleFlip(key)}
               style={{
