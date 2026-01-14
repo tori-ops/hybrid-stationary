@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
 interface StationeryItem {
@@ -16,7 +16,10 @@ interface StationeryEditorProps {
 }
 
 export default function StationeryEditor({ items, onItemsChange, userId }: StationeryEditorProps) {
-  const [expandedType, setExpandedType] = useState<string | null>(null);
+  const [expandedType, setExpandedType] = useState<string | null>(() => {
+    // Initialize with first item's type if items exist
+    return items && items.length > 0 ? items[0].type : null;
+  });
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
   const [initialized, setInitialized] = useState(false);
 
@@ -25,17 +28,6 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
     { value: 'rsvp', label: 'RSVP Card' },
     { value: 'save_the_date', label: 'Save The Date' }
   ] as const;
-
-  // Auto-expand sections with existing items - only on initial load
-  useEffect(() => {
-    if (!initialized && items && items.length > 0) {
-      const firstType = items[0]?.type;
-      if (firstType) {
-        setExpandedType(firstType);
-      }
-      setInitialized(true);
-    }
-  }, []);
 
   const getItemsOfType = (type: string) => items.filter(item => item.type === type);
   const canAddMoreOfType = (type: string) => getItemsOfType(type).length < 1;
