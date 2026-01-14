@@ -99,8 +99,8 @@ export default function WeatherWidget({
   return (
     <div className="w-full">
       <div className="rounded-lg shadow-lg p-6 mb-6" style={{
-        background: `linear-gradient(135deg, white, rgba(255, 107, 107, 0.05))`,
-        borderLeft: `4px solid ${accentColor}`
+        background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`,
+        borderLeft: `4px solid ${secondaryColor}`
       }}>
         <h3 className="text-2xl font-serif mb-2" style={{ color: accentColor }}>{city} Weather Forecast</h3>
         <p style={{ color: accentColor, opacity: 0.9 }}>7-Day Outlook</p>
