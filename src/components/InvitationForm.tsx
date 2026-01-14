@@ -32,6 +32,7 @@ interface Invitation {
   couple_contact_email: string;
   couple_contact_phone: string;
   rsvp_link: string;
+  couples_website?: string;
   rsvp_deadline: string;
   primary_color: string;
   secondary_color: string;
@@ -98,6 +99,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       couple_contact_email: '',
       couple_contact_phone: '',
       rsvp_link: '',
+      couples_website: '',
       rsvp_deadline: '',
       primary_color: '#D0CEB5',
       secondary_color: '#274E13',
@@ -515,6 +517,20 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+                Couples Website
+              </label>
+              <input
+                type="url"
+                name="couples_website"
+                value={formData.couples_website}
+                onChange={handleChange}
+                placeholder="https://..."
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+              />
+            </div>
         </div>
       </section>
 
@@ -1155,3 +1171,4 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     </form>
   );
 }
+

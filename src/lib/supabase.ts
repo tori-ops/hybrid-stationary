@@ -37,6 +37,7 @@ export interface Invitation {
   couple_contact_email: string | null;
   couple_contact_phone: string | null;
   rsvp_link: string | null;
+  couples_website: string | null;
   rsvp_deadline: string | null;
   primary_color: string | null;
   secondary_color: string | null;
