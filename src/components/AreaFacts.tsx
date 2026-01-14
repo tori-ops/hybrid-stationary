@@ -117,10 +117,10 @@ export default function AreaFacts({ config }: { config?: any }) {
                   borderColor: accentColor,
                 }}
               >
-                <h3 className="text-xl font-serif mb-3" style={{ color: accentColor }}>
+                <h3 className="text-xl md:text-2xl font-serif mb-3" style={{ color: accentColor }}>
                   {fact.title}
                 </h3>
-                <p className="text-gray-700">{fact.description}</p>
+                <p className="text-sm md:text-base text-gray-700">{fact.description}</p>
                 {hasBusinesses && (
                   <p className="text-sm mt-3" style={{ color: accentColor }}>
                     Click to view details →
