@@ -75,7 +75,7 @@ export default function AreaFacts({ config }: { config?: any }) {
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
       <div className="mb-8">
-        <h2 className="text-3xl font-serif mb-2" style={{ color: accentColor }}>
+        <h2 className="text-xl md:text-2xl font-serif mb-2" style={{ color: accentColor }}>
           Discover {venue.city}
         </h2>
         <p className="text-gray-600">
