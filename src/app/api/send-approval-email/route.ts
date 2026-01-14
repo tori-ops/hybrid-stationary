@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Build approval link
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mp-hybrid-stationary.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mp-hybrid-stationery.vercel.app';
     const approvalLink = `${baseUrl}/invite?event=${invitation.event_slug}&proof=${approvalToken}`;
 
     // Email content
