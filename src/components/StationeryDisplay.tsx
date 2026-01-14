@@ -24,11 +24,25 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
   const [dimensions, setDimensions] = useState<{ [key: string]: ImageDimensions }>({});
   const [cardSizes, setCardSizes] = useState<{ [key: string]: { width: number; height: number } }>({});
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   if (!items || items.length === 0) {
     return null;
   }
+
+  useEffect(() => {
+    // Set initial screen size
+    setIsSmallScreen(window.innerWidth < 768);
+
+    // Handle window resize
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const resizeObservers = new Map<string, ResizeObserver>();
@@ -82,7 +96,6 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
           // Calculate background size based on card dimensions
           const cardSize = cardSizes[key];
           // Responsive background size: 800px on desktop, 650px on mobile
-          const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 768;
           const backgroundSize = isSmallScreen ? 650 : 800;
 
           return (
