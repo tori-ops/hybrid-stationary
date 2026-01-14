@@ -55,7 +55,7 @@ function InvitePageContent() {
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Stationery Items Section - Conditional */}
         {invitation?.stationery_items && invitation.stationery_items.length > 0 && (
-          <section className="mb-16 px-4">
+          <section className="mb-40 px-4">
             <StationeryDisplay 
               items={invitation.stationery_items}
               secondaryColor={invitation.secondary_color || '#274E13'}
