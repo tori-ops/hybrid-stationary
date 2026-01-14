@@ -6,7 +6,7 @@ export default function VenueInfo({ config }: { config?: any }) {
   const secondaryColor = config?.colors?.secondary || '#274E13';
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
+    <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl relative" style={{ zIndex: 10 }}>
       <div className="p-6 rounded-lg border-2" style={{
         background: `linear-gradient(to right, ${secondaryColor}15, ${accentColor}15)`,
         borderColor: accentColor
