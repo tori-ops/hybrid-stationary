@@ -693,7 +693,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div>
             <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-              Timeline Image (Right Side of Timeline Card)
+              Timeline Balance Photo
             </label>
             <input
               type="file"
