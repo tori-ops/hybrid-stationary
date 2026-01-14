@@ -109,7 +109,7 @@ function InvitePageContent() {
             background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`,
             borderLeft: `4px solid ${invitation?.secondary_color || '#274E13'}`
           }}>
-            <div className="flex flex-row gap-4 md:gap-8 items-start flex-1">
+            <div className="flex flex-row gap-4 md:gap-8 items-center flex-1">
               {/* Left column: Heading and Timeline content */}
               <div className="flex-1 w-full">
                 <h2 className="text-2xl md:text-3xl font-serif mb-4 md:mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
@@ -134,8 +134,8 @@ function InvitePageContent() {
               
               {/* Timeline image on right in circle - aligned to top */}
               {invitation?.timeline_image_url && (
-                <div className="flex-shrink-0 ml-auto -mt-0 md:-mt-1">
-                  <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-72 md:h-72 rounded-full overflow-hidden flex-shrink-0">
+                <div className="flex-shrink-0 ml-auto">
+                  <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 rounded-full overflow-hidden flex-shrink-0">
                     <img 
                       src={invitation.timeline_image_url}
                       alt="Timeline decoration"
