@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Starburst from './Starburst';
 
 interface StationeryItem {
   type: 'invite' | 'rsvp' | 'save_the_date';
@@ -12,6 +13,7 @@ interface StationeryDisplayProps {
   items: StationeryItem[];
   secondaryColor?: string;
   accentColor?: string;
+  starburstColors?: { [key: string]: string | null };
 }
 
 interface ImageDimensions {
@@ -19,7 +21,7 @@ interface ImageDimensions {
   height: number;
 }
 
-export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B' }: StationeryDisplayProps) {
+export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B', starburstColors = {} }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
   const [dimensions, setDimensions] = useState<{ [key: string]: ImageDimensions }>({});
 
@@ -49,6 +51,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const isFlipped = flipped[key] || false;
         const dims = dimensions[key];
         const aspectRatio = dims ? (dims.width / dims.height) : (3 / 4);
+        const starburstColor = starburstColors[item.type];
 
         // Only show if both front and back images exist
         if (!item.front_image_url || !item.back_image_url) {
@@ -59,7 +62,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
           <div key={key} className="flex flex-col items-center justify-center">
             {/* Flip Card Container */}
             <div
-              className="w-full cursor-pointer perspective"
+              className="w-full cursor-pointer perspective relative"
               onClick={() => toggleFlip(key)}
               style={{
                 perspective: '1000px',
@@ -68,11 +71,18 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                 margin: '0 auto'
               }}
             >
+              {/* Starburst Background - stays fixed, doesn't flip */}
+              {starburstColor && (
+                <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+                  <Starburst color={starburstColor} size={600} />
+                </div>
+              )}
               <div
                 className="relative w-full h-full transition-transform duration-500"
                 style={{
                   transformStyle: 'preserve-3d',
                   transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                  zIndex: 1
                 }}
               >
                 {/* Front Image */}

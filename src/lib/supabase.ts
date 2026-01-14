@@ -48,6 +48,9 @@ export interface Invitation {
   timeline_events: any[] | null;
   invitation_front_image_url: string | null;
   invitation_back_image_url: string | null;
+  invitation_starburst_color: string | null;
+  rsvp_starburst_color: string | null;
+  save_the_date_starburst_color: string | null;
   area_facts: any[] | null;
   area_facts_attraction: string | null;
   area_facts_dining: string | null;
