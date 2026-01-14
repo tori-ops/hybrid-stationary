@@ -68,12 +68,13 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                 perspective: '1000px',
                 maxWidth: '800px',
                 aspectRatio: aspectRatio.toString(),
-                margin: '0 auto'
+                margin: '0 auto',
+                zIndex: 2
               }}
             >
-              {/* Starburst Background - stays fixed, doesn't flip */}
+              {/* Starburst Background - stays fixed, behind stationery but above page background */}
               {starburstColor && (
-                <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+                <div className="absolute inset-0 pointer-events-none -z-10" style={{ zIndex: 1 }}>
                   <Starburst color={starburstColor} size={600} />
                 </div>
               )}
@@ -82,7 +83,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                 style={{
                   transformStyle: 'preserve-3d',
                   transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-                  zIndex: 1
+                  zIndex: 2
                 }}
               >
                 {/* Front Image */}
