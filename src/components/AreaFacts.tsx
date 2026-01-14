@@ -85,7 +85,7 @@ export default function AreaFacts({ config }: { config?: any }) {
 
       {/* Legacy Text Descriptions - Clickable Cards */}
       {areaFacts && areaFacts.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-2 gap-6 mb-8">
           {areaFacts?.map((fact: any, index: number) => {
             const categoryMap: { [key: number]: string } = {
               0: 'attractions',
