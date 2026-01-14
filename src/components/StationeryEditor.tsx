@@ -157,11 +157,11 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                                 Front Image
                               </label>
                               {item.front_image_url ? (
-                                <div className="mb-2 bg-gray-50 rounded border border-gray-300 flex items-center justify-center" style={{ minHeight: '300px' }}>
+                                <div className="mb-2 bg-gray-50 rounded border border-gray-300 flex items-center justify-center overflow-hidden" style={{ aspectRatio: 'auto' }}>
                                   <img
                                     src={item.front_image_url}
                                     alt={`${label} front`}
-                                    className="max-w-full max-h-96 object-contain"
+                                    className="w-full h-full object-contain"
                                   />
                                 </div>
                               ) : (
@@ -193,11 +193,11 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                                 Back Image
                               </label>
                               {item.back_image_url ? (
-                                <div className="mb-2 bg-gray-50 rounded border border-gray-300 flex items-center justify-center" style={{ minHeight: '300px' }}>
+                                <div className="mb-2 bg-gray-50 rounded border border-gray-300 flex items-center justify-center overflow-hidden" style={{ aspectRatio: 'auto' }}>
                                   <img
                                     src={item.back_image_url}
                                     alt={`${label} back`}
-                                    className="max-w-full max-h-96 object-contain"
+                                    className="w-full h-full object-contain"
                                   />
                                 </div>
                               ) : (
