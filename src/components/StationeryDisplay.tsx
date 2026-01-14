@@ -59,23 +59,24 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
 
         return (
           <div key={key} className="flex flex-col items-center justify-center">
-            {/* Background Image Container - no clipping */}
+            {/* Background Image Container - presents the stationery */}
             {backgroundImage && (
               <div
                 className="absolute pointer-events-none"
                 style={{
                   zIndex: 1,
-                  top: '50%',
+                  top: '35%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  width: '900px',
-                  maxWidth: '90vw'
+                  width: '1600px',
+                  height: '1600px',
+                  maxWidth: 'none'
                 }}
               >
                 <img
                   src={backgroundImage}
                   alt="Stationery background"
-                  className="w-full h-auto object-contain"
+                  className="w-full h-full object-cover rounded-3xl"
                 />
               </div>
             )}
