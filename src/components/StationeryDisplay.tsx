@@ -79,12 +79,12 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                   className="absolute inset-0 w-full h-full object-cover rounded-lg pointer-events-none"
                   style={{
                     zIndex: 1,
-                    top: '-50px',
-                    left: '-50px',
-                    right: '-50px',
-                    bottom: '-50px',
-                    width: 'calc(100% + 100px)',
-                    height: 'calc(100% + 100px)'
+                    top: '-150px',
+                    left: '-150px',
+                    right: '-150px',
+                    bottom: '-150px',
+                    width: 'calc(100% + 300px)',
+                    height: 'calc(100% + 300px)'
                   }}
                 />
               )}
