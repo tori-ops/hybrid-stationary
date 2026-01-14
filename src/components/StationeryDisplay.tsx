@@ -52,12 +52,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const aspectRatio = dims ? (dims.width / dims.height) : (3 / 4);
         const backgroundImage = backgroundImages[item.type];
         // Calculate background position based on card aspect ratio
-        const backgroundTopPercent = ((-1 / aspectRatio) * 40) + 40;
-
-        // Only show if both front and back images exist
-        if (!item.front_image_url || !item.back_image_url) {
-          return null;
-        }
+          const backgroundTopPercent = 55;
 
         return (
           <div key={key} className="flex flex-col items-center justify-center">
