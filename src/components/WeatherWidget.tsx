@@ -97,22 +97,22 @@ export default function WeatherWidget({
   const dailyData = weather.daily;
 
   return (
-    <div className="w-full">
-      <div className="rounded-lg shadow-lg p-6 mb-6" style={{
+    <div className="w-full px-4">
+      <div className="rounded-lg shadow-lg p-4 md:p-6 mb-6" style={{
         background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`,
         borderLeft: `4px solid ${secondaryColor}`
       }}>
-        <h3 className="text-2xl font-serif mb-2" style={{ color: accentColor }}>{city} Weather Forecast</h3>
+        <h3 className="text-xl md:text-2xl font-serif mb-2" style={{ color: accentColor }}>{city} Weather Forecast</h3>
         <p style={{ color: accentColor, opacity: 0.9 }}>7-Day Outlook</p>
       </div>
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-3">
         {dailyData.time.slice(0, 7).map((date, index) => (
           <div
             key={date}
-            className="bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow"
+            className="bg-white rounded-lg shadow-md p-2 md:p-4 text-center hover:shadow-lg transition-shadow"
           >
-            <p className="text-sm font-semibold mb-2" style={{ color: accentColor }}>
+            <p className="text-xs md:text-sm font-semibold mb-2" style={{ color: accentColor }}>
               {new Date(date).toLocaleDateString('en-US', {
                 weekday: 'short',
                 month: 'short',
@@ -120,16 +120,16 @@ export default function WeatherWidget({
               })}
             </p>
 
-            <div className="text-3xl my-2">
+            <div className="text-2xl md:text-3xl my-2">
               {getWeatherIcon(dailyData.weathercode[index])}
             </div>
 
-            <p className="text-xs mb-3" style={{ color: accentColor }}>
+            <p className="text-xs md:text-sm mb-3" style={{ color: accentColor }}>
               {getWeatherDescription(dailyData.weathercode[index])}
             </p>
 
             <div className="border-t pt-3">
-              <div className="flex justify-center gap-2 text-sm">
+              <div className="flex justify-center gap-2 text-xs md:text-base">
                 <span className="font-semibold" style={{ color: accentColor }}>
                   {Math.round(dailyData.temperature_2m_max[index])}°F
                 </span>

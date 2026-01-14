@@ -104,15 +104,15 @@ function InvitePageContent() {
         )}
 
         {/* Event Timeline Section */}
-        <section className="mb-12 flex justify-center relative">
-          <div className="rounded-lg shadow-lg p-8 max-w-4xl w-full flex flex-col" style={{
+        <section className="mb-12 flex justify-center relative px-4">
+          <div className="rounded-lg shadow-lg p-4 md:p-8 max-w-4xl w-full flex flex-col" style={{
             background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`,
             borderLeft: `4px solid ${invitation?.secondary_color || '#274E13'}`
           }}>
-            <div className="flex gap-8 items-start">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start">
               {/* Left column: Heading and Timeline content */}
-              <div className="flex-1">
-                <h2 className="text-3xl font-serif mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+              <div className="flex-1 w-full">
+                <h2 className="text-2xl md:text-3xl font-serif mb-4 md:mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
                   Event Timeline
                 </h2>
                 <div className="space-y-4">
@@ -122,11 +122,11 @@ function InvitePageContent() {
                     { time: '6:00 PM', name: 'Dinner' },
                     { time: '10:00 PM', name: 'End of Event' },
                   ]).map((event: any, index: number) => (
-                    <div key={index} className="flex items-center gap-4">
-                      <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                    <div key={index} className="flex items-center gap-2 md:gap-4">
+                      <div className="w-20 md:w-24 font-semibold text-sm md:text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
                         {event.time}
                       </div>
-                      <div className="text-base text-gray-700">{event.name}</div>
+                      <div className="text-sm md:text-base text-gray-700">{event.name}</div>
                     </div>
                   ))}
                 </div>
@@ -134,12 +134,12 @@ function InvitePageContent() {
               
               {/* Timeline image on right in circle - aligned to top */}
               {invitation?.timeline_image_url && (
-                <div className="flex-shrink-0 -mt-1">
-                  <div className="w-72 h-72 rounded-full overflow-hidden">
+                <div className="flex-shrink-0 w-full md:w-auto flex justify-center md:justify-start -mt-0 md:-mt-1">
+                  <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72 rounded-full overflow-hidden flex-shrink-0">
                     <img 
                       src={invitation.timeline_image_url}
                       alt="Timeline decoration"
-                      className="w-96 h-96 object-cover"
+                      className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-cover"
                     />
                   </div>
                 </div>
