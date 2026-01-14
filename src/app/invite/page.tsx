@@ -11,6 +11,7 @@ import AreaFacts from '@/components/AreaFacts';
 import ContactSection from '@/components/ContactSection';
 import ProofWatermark from '@/components/ProofWatermark';
 import ApprovalModal from '@/components/ApprovalModal';
+import EditConfirmModal from '@/components/EditConfirmModal';
 import EditRequestModal from '@/components/EditRequestModal';
 import { weddingConfig } from '@/config/weddingConfig';
 
@@ -342,7 +343,7 @@ function InvitePageContent() {
       />
 
       {/* Edit Confirmation Modal */}
-      <ApprovalModal
+      <EditConfirmModal
         isOpen={showEditConfirmModal}
         onConfirm={handleEditConfirm}
         onCancel={() => setShowEditConfirmModal(false)}
