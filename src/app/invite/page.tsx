@@ -105,7 +105,10 @@ function InvitePageContent() {
 
         {/* Event Timeline Section */}
         <section className="mb-12 flex justify-center relative">
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full flex flex-col">
+          <div className="rounded-lg shadow-lg p-8 max-w-4xl w-full flex flex-col" style={{
+            background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`,
+            borderLeft: `4px solid ${invitation?.secondary_color || '#274E13'}`
+          }}>
             <div className="flex gap-8 items-start">
               {/* Left column: Heading and Timeline content */}
               <div className="flex-1">
