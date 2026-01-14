@@ -11,6 +11,7 @@ import AreaFacts from '@/components/AreaFacts';
 import ContactSection from '@/components/ContactSection';
 import ProofWatermark from '@/components/ProofWatermark';
 import ApprovalModal from '@/components/ApprovalModal';
+import EditRequestModal from '@/components/EditRequestModal';
 import { weddingConfig } from '@/config/weddingConfig';
 
 function InvitePageContent() {
@@ -21,6 +22,9 @@ function InvitePageContent() {
   
   const [showApprovalModal, setShowApprovalModal] = useState(false);
   const [isApproving, setIsApproving] = useState(false);
+  const [showEditConfirmModal, setShowEditConfirmModal] = useState(false);
+  const [showEditCommentsModal, setShowEditCommentsModal] = useState(false);
+  const [isSubmittingEdits, setIsSubmittingEdits] = useState(false);
   
   const isProofMode = !!approvalToken;
 
@@ -106,6 +110,48 @@ function InvitePageContent() {
     }
   };
 
+  const handleEditClick = () => {
+    setShowEditConfirmModal(true);
+  };
+
+  const handleEditConfirm = async () => {
+    setShowEditConfirmModal(false);
+    setShowEditCommentsModal(true);
+  };
+
+  const handleEditCommentsSubmit = async (comments: string) => {
+    setIsSubmittingEdits(true);
+    try {
+      console.log('Submitting edit request with comments');
+      const response = await fetch('/api/send-edit-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          invitationId: invitation?.id,
+          editComments: comments,
+        }),
+      });
+
+      const data = await response.json();
+      console.log('Edit request response:', data);
+
+      if (response.ok) {
+        setShowEditCommentsModal(false);
+        alert('Thank you! Your edit requests have been sent to our team. We\'ll review and update your page shortly.');
+        // Optionally redirect back to public view
+        window.location.href = `/invite?event=${eventSlug}`;
+      } else {
+        console.error('Edit request failed:', data.error);
+        alert('Failed to send edit request: ' + (data.error || 'Unknown error'));
+      }
+    } catch (error) {
+      console.error('Error submitting edit request:', error);
+      alert('An error occurred while submitting your edits: ' + (error instanceof Error ? error.message : 'Unknown error'));
+    } finally {
+      setIsSubmittingEdits(false);
+    }
+  };
+
   return (
     <main
       className="min-h-screen bg-gray-50 overflow-x-hidden"
@@ -124,14 +170,20 @@ function InvitePageContent() {
         {/* Stationery Items Section - Conditional */}
         {invitation?.stationery_items && invitation.stationery_items.length > 0 && (
           <section className="mt-16 mb-40 px-4">
-            {/* Approve Button - Show only in proof mode - Fixed at top with high z-index */}
+            {/* Buttons - Show only in proof mode - Fixed at top with high z-index */}
             {isProofMode && (
-              <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50">
+              <div className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 flex gap-4">
                 <button
                   onClick={handleApproveClick}
                   className="px-8 py-3 rounded-lg font-semibold transition-all hover:opacity-90 border-2 whitespace-nowrap bg-green-600 text-white border-green-600 hover:bg-green-700 shadow-lg"
                 >
                   Approve & Publish
+                </button>
+                <button
+                  onClick={handleEditClick}
+                  className="px-8 py-3 rounded-lg font-semibold transition-all hover:opacity-90 border-2 whitespace-nowrap bg-blue-600 text-white border-blue-600 hover:bg-blue-700 shadow-lg"
+                >
+                  Edit & Update
                 </button>
               </div>
             )}
@@ -287,6 +339,22 @@ function InvitePageContent() {
         onConfirm={handleApprovalConfirm}
         onCancel={() => setShowApprovalModal(false)}
         isLoading={isApproving}
+      />
+
+      {/* Edit Confirmation Modal */}
+      <ApprovalModal
+        isOpen={showEditConfirmModal}
+        onConfirm={handleEditConfirm}
+        onCancel={() => setShowEditConfirmModal(false)}
+        isLoading={false}
+      />
+
+      {/* Edit Comments Modal */}
+      <EditRequestModal
+        isOpen={showEditCommentsModal}
+        onSubmit={handleEditCommentsSubmit}
+        onCancel={() => setShowEditCommentsModal(false)}
+        isLoading={isSubmittingEdits}
       />
     </main>
   );
