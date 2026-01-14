@@ -72,6 +72,10 @@ export interface Invitation {
   show_contact_section: boolean;
   show_venue_info: boolean;
   is_published: boolean;
+  approval_status: string | null;
+  approval_token: string | null;
+  approval_requested_at: string | null;
+  approval_approved_at: string | null;
   created_at: string;
   updated_at: string;
 }

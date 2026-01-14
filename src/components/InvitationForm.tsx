@@ -65,6 +65,10 @@ interface Invitation {
   show_contact_section: boolean;
   show_venue_info: boolean;
   is_published: boolean;
+  approval_status?: string;
+  approval_token?: string;
+  approval_requested_at?: string;
+  approval_approved_at?: string;
 }
 
 interface InvitationFormProps {
@@ -136,6 +140,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   );
 
   const [saving, setSaving] = useState(false);
+  const [sendingApproval, setSendingApproval] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Area facts list states - initialize from database
@@ -288,6 +293,52 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       });
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleSendForApproval = async () => {
+    if (!invitation?.id) {
+      setMessage({
+        type: 'error',
+        text: 'Please save the invitation first before sending for approval',
+      });
+      return;
+    }
+
+    if (!invitation.couple_contact_email) {
+      setMessage({
+        type: 'error',
+        text: 'Please add the couple contact email before sending for approval',
+      });
+      return;
+    }
+
+    setSendingApproval(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch('/api/send-approval-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ invitationId: invitation.id }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to send approval email');
+      }
+
+      setMessage({
+        type: 'success',
+        text: 'Approval email sent successfully to the couple!',
+      });
+    } catch (error) {
+      setMessage({
+        type: 'error',
+        text: error instanceof Error ? error.message : 'Failed to send approval email',
+      });
+    } finally {
+      setSendingApproval(false);
     }
   };
 
@@ -1147,7 +1198,31 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Save Button */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
+        {/* Status Indicator */}
+        {invitation?.approval_status && (
+          <div className="flex items-center px-4 py-3 rounded-lg bg-gray-100 border border-gray-300">
+            <span className="text-sm font-semibold text-gray-700">
+              Status:{' '}
+              <span
+                style={{
+                  color:
+                    invitation.approval_status === 'published'
+                      ? '#16a34a'
+                      : invitation.approval_status === 'approved'
+                      ? '#3b82f6'
+                      : invitation.approval_status === 'sent_for_approval'
+                      ? '#f59e0b'
+                      : '#6b7280',
+                }}
+              >
+                {invitation.approval_status.charAt(0).toUpperCase() +
+                  invitation.approval_status.slice(1).replace(/_/g, ' ')}
+              </span>
+            </span>
+          </div>
+        )}
+
         <button
           type="submit"
           disabled={saving}
@@ -1156,16 +1231,29 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         >
           {saving ? 'Saving...' : invitation?.id ? 'Update Invitation' : 'Create Invitation'}
         </button>
+
         {invitation?.id && (
-          <a
-            href={`/invite?event=${formData.event_slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-3 rounded-lg font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: '#666' }}
-          >
-            View Public Link
-          </a>
+          <>
+            <button
+              type="button"
+              onClick={handleSendForApproval}
+              disabled={sendingApproval || invitation.approval_status === 'published'}
+              className="px-8 py-3 rounded-lg font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+              style={{ backgroundColor: '#f59e0b' }}
+            >
+              {sendingApproval ? 'Sending...' : 'Send for Approval'}
+            </button>
+
+            <a
+              href={`/invite?event=${formData.event_slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 rounded-lg font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: '#666' }}
+            >
+              View Public Link
+            </a>
+          </>
         )}
       </div>
     </form>

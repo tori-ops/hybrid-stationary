@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInvitation } from '@/hooks/useInvitation';
 import { invitationToConfig } from '@/lib/invitationConfig';
@@ -9,12 +9,20 @@ import VenueInfo from '@/components/VenueInfo';
 import WeatherWidget from '@/components/WeatherWidget';
 import AreaFacts from '@/components/AreaFacts';
 import ContactSection from '@/components/ContactSection';
+import ProofWatermark from '@/components/ProofWatermark';
+import ApprovalModal from '@/components/ApprovalModal';
 import { weddingConfig } from '@/config/weddingConfig';
 
 function InvitePageContent() {
   const searchParams = useSearchParams();
   const eventSlug = searchParams?.get('event') || 'default';
+  const approvalToken = searchParams?.get('proof');
   const { invitation, loading, error } = useInvitation(eventSlug === 'default' ? undefined : eventSlug);
+  
+  const [showApprovalModal, setShowApprovalModal] = useState(false);
+  const [isApproving, setIsApproving] = useState(false);
+  
+  const isProofMode = !!approvalToken;
   
   // Convert invitation data to config format, fall back to default
   const config = invitationToConfig(invitation);
@@ -41,6 +49,34 @@ function InvitePageContent() {
     );
   }
 
+  const handleApproveClick = () => {
+    setShowApprovalModal(true);
+  };
+
+  const handleApprovalConfirm = async () => {
+    setIsApproving(true);
+    try {
+      const response = await fetch('/api/approve-invitation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ approvalToken }),
+      });
+
+      if (response.ok) {
+        // Show success message and remove proof mode
+        setShowApprovalModal(false);
+        window.location.href = `/invite/${eventSlug}`;
+      } else {
+        alert('Failed to approve invitation. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error approving invitation:', error);
+      alert('An error occurred while approving the invitation.');
+    } finally {
+      setIsApproving(false);
+    }
+  };
+
   return (
     <main
       className="min-h-screen bg-gray-50 overflow-x-hidden"
@@ -53,9 +89,23 @@ function InvitePageContent() {
     >
       {/* Content Sections */}
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
+        {/* Proof Watermark - Show in proof mode */}
+        {isProofMode && <ProofWatermark />}
+
         {/* Stationery Items Section - Conditional */}
         {invitation?.stationery_items && invitation.stationery_items.length > 0 && (
           <section className="mt-16 mb-40 px-4">
+            {/* Approve Button - Show only in proof mode */}
+            {isProofMode && (
+              <div className="flex justify-center mb-6">
+                <button
+                  onClick={handleApproveClick}
+                  className="px-8 py-3 rounded-lg font-semibold transition-all hover:opacity-90 border-2 whitespace-nowrap bg-green-600 text-white border-green-600 hover:bg-green-700"
+                >
+                  Approve & Publish
+                </button>
+              </div>
+            )}
             <StationeryDisplay 
               items={invitation.stationery_items}
               secondaryColor={invitation.secondary_color || '#274E13'}
@@ -201,6 +251,14 @@ function InvitePageContent() {
           )}
         </footer>
       </div>
+
+      {/* Approval Modal */}
+      <ApprovalModal
+        isOpen={showApprovalModal}
+        onConfirm={handleApprovalConfirm}
+        onCancel={() => setShowApprovalModal(false)}
+        isLoading={isApproving}
+      />
     </main>
   );
 }
