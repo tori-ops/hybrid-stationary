@@ -43,11 +43,11 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
           <div key={key} className="flex flex-col items-center justify-center">
             {/* Flip Card Container */}
             <div
-              className="w-full max-w-2xl cursor-pointer perspective"
+              className="w-full max-w-4xl cursor-pointer perspective"
               onClick={() => toggleFlip(key)}
               style={{
                 perspective: '1000px',
-                aspectRatio: '3 / 4',
+                aspectRatio: 'auto',
               }}
             >
               <div
@@ -59,7 +59,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
               >
                 {/* Front Image */}
                 <div
-                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
+                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden flex items-center justify-center bg-white"
                   style={{
                     backfaceVisibility: 'hidden',
                   }}
@@ -67,14 +67,14 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                   <img
                     src={item.front_image_url}
                     alt="Card Front"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                     style={{ display: 'block' }}
                   />
                 </div>
 
                 {/* Back Image */}
                 <div
-                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
+                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden flex items-center justify-center bg-white"
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(180deg)',
@@ -83,7 +83,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                   <img
                     src={item.back_image_url}
                     alt="Card Back"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                     style={{ display: 'block' }}
                   />
                 </div>
