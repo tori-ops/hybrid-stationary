@@ -20,7 +20,7 @@ export default function ContactSection({ config }: { config?: any }) {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl">
-      <h2 className="text-3xl font-serif mb-6 text-center" style={{ color: accentColor }}>Questions?</h2>
+      <h2 className="text-xl md:text-2xl font-serif mb-6 text-center" style={{ color: accentColor }}>Questions?</h2>
 
       {/* Toggle Buttons */}
       <div className="flex gap-4 mb-8 justify-center">
@@ -59,7 +59,7 @@ export default function ContactSection({ config }: { config?: any }) {
       {/* Contact Information */}
       <div className="space-y-6">
         <div className="text-center">
-          <p className="text-lg font-semibold text-gray-800 mb-4">{selectedContact.name}</p>
+          <p className="text-sm md:text-base font-semibold text-gray-800 mb-4">{selectedContact.name}</p>
 
           {/* Email Option */}
           <div className="mb-4">
@@ -73,8 +73,8 @@ export default function ContactSection({ config }: { config?: any }) {
             >
               <span>✉️</span>
               <div className="text-left">
-                <p className="text-xs" style={{ color: accentColor }}>Email</p>
-                <p className="font-semibold" style={{ color: accentColor }}>{selectedContact.email}</p>
+                <p className="text-xs md:text-sm" style={{ color: accentColor }}>Email</p>
+                <p className="font-semibold text-sm md:text-base" style={{ color: accentColor }}>{selectedContact.email}</p>
               </div>
             </a>
           </div>
@@ -91,8 +91,8 @@ export default function ContactSection({ config }: { config?: any }) {
             >
               <span>📱</span>
               <div className="text-left">
-                <p className="text-xs" style={{ color: accentColor }}>Phone</p>
-                <p className="font-semibold" style={{ color: accentColor }}>{selectedContact.phone}</p>
+                <p className="text-xs md:text-sm" style={{ color: accentColor }}>Phone</p>
+                <p className="font-semibold text-sm md:text-base" style={{ color: accentColor }}>{selectedContact.phone}</p>
               </div>
             </a>
           </div>
