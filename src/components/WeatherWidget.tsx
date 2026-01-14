@@ -106,7 +106,7 @@ export default function WeatherWidget({
         <p style={{ color: accentColor, opacity: 0.9 }}>7-Day Outlook</p>
       </div>
 
-      <div className="grid grid-cols-5 gap-3">
+      <div className="grid grid-cols-4 gap-3">
         {dailyData.time.slice(0, 7).map((date, index) => (
           <div
             key={date}

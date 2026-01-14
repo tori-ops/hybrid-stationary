@@ -90,14 +90,16 @@ function InvitePageContent() {
 
         {/* Weather Widget Section - Conditional */}
         {invitation?.show_weather !== false && (
-          <section className="mb-12 px-4">
-            <WeatherWidget
+          <section className="mb-12 flex justify-center">
+            <div className="max-w-4xl w-full">
+              <WeatherWidget
               latitude={weatherLocation.latitude}
               longitude={weatherLocation.longitude}
               city={weatherLocation.city}
               secondaryColor={(config as any).colors?.secondary}
               accentColor={(config as any).colors?.accent}
-            />
+              />
+            </div>
           </section>
         )}
 
