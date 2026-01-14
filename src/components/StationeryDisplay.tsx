@@ -116,7 +116,7 @@ const backgroundSize = cardSize ? Math.max(cardSize.width, cardSize.height) * 1.
               onClick={() => toggleFlip(key)}
               style={{
                 perspective: '1000px',
-                maxWidth: '600px',
+                maxWidth: '500px',
                 aspectRatio: aspectRatio.toString(),
                 margin: '0 auto',
                 zIndex: 2
