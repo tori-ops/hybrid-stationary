@@ -104,45 +104,47 @@ function InvitePageContent() {
         {/* Event Timeline Section */}
         <section className="mb-12 flex justify-center relative">
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
-            <h2 className="text-3xl font-serif mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-              Event Timeline
-            </h2>
             <div className="flex gap-8 items-start">
-              {/* Timeline content on left */}
-              <div className="flex-1 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                    4:30 PM
+              {/* Left column: Heading and Timeline content */}
+              <div className="flex-1">
+                <h2 className="text-3xl font-serif mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                  Event Timeline
+                </h2>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                      4:30 PM
+                    </div>
+                    <div className="text-base text-gray-700">Ceremony</div>
                   </div>
-                  <div className="text-base text-gray-700">Ceremony</div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                    5:15 PM
+                  <div className="flex items-center gap-4">
+                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                      5:15 PM
+                    </div>
+                    <div className="text-base text-gray-700">Cocktail Hour</div>
                   </div>
-                  <div className="text-base text-gray-700">Cocktail Hour</div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                    6:00 PM
+                  <div className="flex items-center gap-4">
+                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                      6:00 PM
+                    </div>
+                    <div className="text-base text-gray-700">Dinner</div>
                   </div>
-                  <div className="text-base text-gray-700">Dinner</div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                    10:00 PM
+                  <div className="flex items-center gap-4">
+                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                      10:00 PM
+                    </div>
+                    <div className="text-base text-gray-700">End of Event</div>
                   </div>
-                  <div className="text-base text-gray-700">End of Event</div>
                 </div>
               </div>
               
-              {/* Timeline image on right in circle */}
+              {/* Timeline image on right in circle - aligned to top */}
               {invitation?.timeline_image_url && (
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 -mt-1">
                   <img 
                     src={invitation.timeline_image_url}
                     alt="Timeline decoration"
-                    className="w-80 h-80 rounded-full object-contain"
+                    className="w-80 h-80 rounded-full object-cover"
                   />
                 </div>
               )}
