@@ -135,7 +135,7 @@ function InvitePageContent() {
               {/* Timeline image on right in circle - aligned to top */}
               {invitation?.timeline_image_url && (
                 <div className="flex-shrink-0 ml-auto">
-                  <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-80 md:h-80 rounded-full overflow-hidden flex-shrink-0">
+                  <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-88 md:h-88 rounded-full overflow-hidden flex-shrink-0">
                     <img 
                       src={invitation.timeline_image_url}
                       alt="Timeline decoration"
