@@ -14,8 +14,14 @@ interface StationeryDisplayProps {
   accentColor?: string;
 }
 
+interface ImageDimensions {
+  width: number;
+  height: number;
+}
+
 export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B' }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
+  const [dimensions, setDimensions] = useState<{ [key: string]: ImageDimensions }>({});
 
   if (!items || items.length === 0) {
     return null;
@@ -28,11 +34,21 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
     }));
   };
 
+  const handleImageLoad = (key: string, event: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = event.currentTarget;
+    setDimensions(prev => ({
+      ...prev,
+      [key]: { width: img.naturalWidth, height: img.naturalHeight }
+    }));
+  };
+
   return (
     <div className="w-full space-y-8">
       {items.map((item, idx) => {
         const key = `${item.type}-${idx}`;
         const isFlipped = flipped[key] || false;
+        const dims = dimensions[key];
+        const aspectRatio = dims ? (dims.width / dims.height) : (3 / 4);
 
         // Only show if both front and back images exist
         if (!item.front_image_url || !item.back_image_url) {
@@ -43,11 +59,13 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
           <div key={key} className="flex flex-col items-center justify-center">
             {/* Flip Card Container */}
             <div
-              className="w-full max-w-4xl cursor-pointer perspective"
+              className="w-full cursor-pointer perspective"
               onClick={() => toggleFlip(key)}
               style={{
                 perspective: '1000px',
-                aspectRatio: 'auto',
+                maxWidth: '800px',
+                aspectRatio: aspectRatio.toString(),
+                margin: '0 auto'
               }}
             >
               <div
@@ -59,7 +77,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
               >
                 {/* Front Image */}
                 <div
-                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden flex items-center justify-center bg-white"
+                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
                   style={{
                     backfaceVisibility: 'hidden',
                   }}
@@ -67,14 +85,15 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                   <img
                     src={item.front_image_url}
                     alt="Card Front"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     style={{ display: 'block' }}
+                    onLoad={(e) => handleImageLoad(key, e)}
                   />
                 </div>
 
                 {/* Back Image */}
                 <div
-                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden flex items-center justify-center bg-white"
+                  className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(180deg)',
@@ -83,8 +102,9 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                   <img
                     src={item.back_image_url}
                     alt="Card Back"
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                     style={{ display: 'block' }}
+                    onLoad={(e) => handleImageLoad(`${key}-back`, e)}
                   />
                 </div>
               </div>
