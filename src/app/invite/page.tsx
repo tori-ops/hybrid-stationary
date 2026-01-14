@@ -102,35 +102,35 @@ function InvitePageContent() {
         )}
 
         {/* Event Timeline Section */}
-        <section className="mb-12 px-4">
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-lg font-serif text-center mb-6" style={{ color: invitation?.secondary_color || '#274E13' }}>
+        <section className="mb-12 flex justify-center">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
+            <h2 className="text-3xl font-serif mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
               Event Timeline
-            </h3>
+            </h2>
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
                   4:30 PM
                 </div>
-                <div className="text-sm text-gray-700">Ceremony</div>
+                <div className="text-base text-gray-700">Ceremony</div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
                   5:15 PM
                 </div>
-                <div className="text-sm text-gray-700">Cocktail Hour</div>
+                <div className="text-base text-gray-700">Cocktail Hour</div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
                   6:00 PM
                 </div>
-                <div className="text-sm text-gray-700">Dinner</div>
+                <div className="text-base text-gray-700">Dinner</div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
                   10:00 PM
                 </div>
-                <div className="text-sm text-gray-700">End of Event</div>
+                <div className="text-base text-gray-700">End of Event</div>
               </div>
             </div>
           </div>
