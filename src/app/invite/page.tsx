@@ -76,37 +76,37 @@ function InvitePageContent() {
 
         {/* RSVP & Couples Website Buttons */}
         <section className="mb-12 flex justify-center gap-4">
-          {invitation?.rsvp_link && (
-            <a
-              href={invitation.rsvp_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
-              style={{
-                backgroundColor: invitation.secondary_color || '#274E13',
-                color: invitation.accent_color || '#db2777',
-                borderColor: invitation.accent_color || '#db2777'
-              }}
-            >
-              RSVP Now
-            </a>
-          )}
-          {invitation?.couples_website && (
-            <a
-              href={invitation.couples_website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
-              style={{
-                backgroundColor: invitation.secondary_color || '#274E13',
-                color: invitation.accent_color || '#db2777',
-                borderColor: invitation.accent_color || '#db2777'
-              }}
-            >
-              Visit the Couples Website!
-            </a>
-          )}
-        </section>
+            {invitation?.couples_website && (
+              <a
+                href={invitation.couples_website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
+                style={{
+                  backgroundColor: invitation.secondary_color || '#274E13',
+                  color: invitation.accent_color || '#db2777',
+                  borderColor: invitation.accent_color || '#db2777'
+                }}
+              >
+                Visit the Couples Website!
+              </a>
+            )}
+            {invitation?.rsvp_link && (
+              <a
+                href={invitation.rsvp_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
+                style={{
+                  backgroundColor: invitation.secondary_color || '#274E13',
+                  color: invitation.accent_color || '#db2777',
+                  borderColor: invitation.accent_color || '#db2777'
+                }}
+              >
+                RSVP Now
+              </a>
+            )}
+          </section>
 
         {/* Weather Widget Section - Conditional */}
         {invitation?.show_weather !== false && (
