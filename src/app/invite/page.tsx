@@ -101,6 +101,41 @@ function InvitePageContent() {
           </section>
         )}
 
+        {/* Event Timeline Section */}
+        <section className="mb-12 px-4">
+          <div className="max-w-2xl mx-auto">
+            <h3 className="text-lg font-serif text-center mb-6" style={{ color: invitation?.secondary_color || '#274E13' }}>
+              Event Timeline
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                  4:30 PM
+                </div>
+                <div className="text-sm text-gray-700">Ceremony</div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                  5:15 PM
+                </div>
+                <div className="text-sm text-gray-700">Cocktail Hour</div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                  6:00 PM
+                </div>
+                <div className="text-sm text-gray-700">Dinner</div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-20 font-semibold text-sm" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                  10:00 PM
+                </div>
+                <div className="text-sm text-gray-700">End of Event</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Area Facts Section - Conditional */}
         {invitation?.show_area_facts !== false && (
           <section className="mb-16 flex justify-center">
