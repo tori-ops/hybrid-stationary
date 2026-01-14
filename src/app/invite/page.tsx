@@ -139,19 +139,11 @@ function InvitePageContent() {
               {/* Timeline image on right in circle */}
               {invitation?.timeline_image_url && (
                 <div className="flex-shrink-0">
-                  <div 
-                    className="w-40 h-40 rounded-full overflow-hidden flex items-center justify-center flex-shrink-0"
-                    style={{ 
-                      backgroundColor: invitation?.accent_color || '#FF6B6B',
-                      boxShadow: '0 0 0 6px ' + (invitation?.accent_color || '#FF6B6B')
-                    }}
-                  >
-                    <img 
-                      src={invitation.timeline_image_url}
-                      alt="Timeline decoration"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <img 
+                    src={invitation.timeline_image_url}
+                    alt="Timeline decoration"
+                    className="w-40 h-40 rounded-full object-contain"
+                  />
                 </div>
               )}
             </div>
