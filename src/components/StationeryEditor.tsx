@@ -104,7 +104,12 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-3">
                   <button
-                    onClick={() => setExpandedType(expandedType === value ? null : value)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setExpandedType(expandedType === value ? null : value);
+                    }}
+                    type="button"
                     className="text-lg font-semibold text-gray-700 hover:text-gray-900"
                   >
                     {expandedType === value ? '▼' : '▶'} {label}
@@ -168,8 +173,11 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                                 type="file"
                                 accept="image/*"
                                 onChange={(e) => {
+                                  e.preventDefault();
                                   const file = e.target.files?.[0];
-                                  if (file) handleImageUpload(itemIndex, 'front', file);
+                                  if (file) {
+                                    handleImageUpload(itemIndex, 'front', file);
+                                  }
                                 }}
                                 disabled={loading[`${itemIndex}-front`]}
                                 className="w-full text-sm"
@@ -201,8 +209,11 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                                 type="file"
                                 accept="image/*"
                                 onChange={(e) => {
+                                  e.preventDefault();
                                   const file = e.target.files?.[0];
-                                  if (file) handleImageUpload(itemIndex, 'back', file);
+                                  if (file) {
+                                    handleImageUpload(itemIndex, 'back', file);
+                                  }
                                 }}
                                 disabled={loading[`${itemIndex}-back`]}
                                 className="w-full text-sm"
