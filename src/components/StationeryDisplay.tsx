@@ -81,10 +81,21 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const backgroundImage = backgroundImages[item.type];
           // Calculate background size based on card dimensions
           const cardSize = cardSizes[key];
-          const backgroundSize = cardSize ? Math.max(cardSize.width, cardSize.height) * 2 : 1400;
+          const backgroundSize = cardSize ? Math.max(cardSize.width, cardSize.height) * 1.3 : 1400;
 
           return (
-            <div key={key} className="flex flex-col items-center justify-center relative">
+            <div key={key} className="flex flex-col items-center justify-center relative">              {/* Flip Button */}
+              <button
+                onClick={() => toggleFlip(key)}
+                className="mb-8 px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
+                style={{
+                  backgroundColor: secondaryColor,
+                  color: accentColor,
+                  borderColor: accentColor
+                }}
+              >
+                {isFlipped ? 'See Front' : 'See Back'}
+              </button>
             {/* Background Image Container - presents the stationery */}
             {backgroundImage && (
               <div
@@ -165,18 +176,6 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
               </div>
             </div>
 
-            {/* Flip Button */}
-            <button
-              onClick={() => toggleFlip(key)}
-              className="mt-16 px-8 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2"
-              style={{
-                backgroundColor: secondaryColor,
-                color: accentColor,
-                borderColor: accentColor
-              }}
-            >
-              {isFlipped ? 'See Front' : 'See Back'}
-            </button>
           </div>
         );
       })}
