@@ -39,9 +39,9 @@ interface Invitation {
   font_family: string;
   invitation_front_image_url?: string;
   invitation_back_image_url?: string;
-  invitation_starburst_color?: string;
-  rsvp_starburst_color?: string;
-  save_the_date_starburst_color?: string;
+  invitation_background_image_url?: string;
+  rsvp_background_image_url?: string;
+  save_the_date_background_image_url?: string;
   logo_url?: string;
   background_image_url?: string;
   timeline_image_url?: string;
@@ -105,9 +105,9 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       font_family: 'Georgia',
       invitation_front_image_url: '',
       invitation_back_image_url: '',
-      invitation_starburst_color: '',
-      rsvp_starburst_color: '',
-      save_the_date_starburst_color: '',
+      invitation_background_image_url: '',
+      rsvp_background_image_url: '',
+      save_the_date_background_image_url: '',
       logo_url: '',
       background_image_url: '',
       timeline_image_url: '',
@@ -198,7 +198,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageField: 'invitation_front_image_url' | 'invitation_back_image_url' | 'logo_url' | 'background_image_url' | 'timeline_image_url') => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, imageField: 'invitation_front_image_url' | 'invitation_back_image_url' | 'invitation_background_image_url' | 'rsvp_background_image_url' | 'save_the_date_background_image_url' | 'logo_url' | 'background_image_url' | 'timeline_image_url') => {
     const file = e.target.files?.[0];
     if (!file || !user?.id) return;
 
@@ -903,79 +903,100 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           userId={user?.id}
         />
 
-        {/* Starburst Color Pickers */}
+        {/* Background Image Uploads */}
         <div className="mt-8 pt-6 border-t border-gray-200">
           <h3 className="text-lg font-semibold mb-4" style={{ color: '#274E13' }}>
-            Starburst Effects (Optional)
+            Stationery Background Images (Optional)
           </h3>
           <p className="text-sm text-gray-600 mb-4">
-            Add a decorative starburst behind each stationery piece to make it stand out
+            Add background images behind each stationery piece. Image will extend beyond edges to create a frame effect.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Invitation Starburst */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Invitation Background */}
             <div>
               <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-                Invitation Starburst
+                Invitation Background
               </label>
-              <div className="flex gap-2">
-                <input
-                  type="color"
-                  value={formData.invitation_starburst_color || '#FF6B6B'}
-                  onChange={(e) => handleChange({ target: { name: 'invitation_starburst_color', value: e.target.value } } as any)}
-                  className="w-12 h-12 border border-gray-300 rounded-lg cursor-pointer"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleChange({ target: { name: 'invitation_starburst_color', value: '' } } as any)}
-                  className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 rounded-lg transition"
-                >
-                  Clear
-                </button>
-              </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    handleImageUpload(e, 'invitation_background_image_url');
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              />
+              {formData.invitation_background_image_url && (
+                <div className="mt-2 flex gap-2">
+                  <img src={formData.invitation_background_image_url} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                  <button
+                    type="button"
+                    onClick={() => handleChange({ target: { name: 'invitation_background_image_url', value: '' } } as any)}
+                    className="px-3 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+              )}
             </div>
 
-            {/* RSVP Starburst */}
+            {/* RSVP Background */}
             <div>
               <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-                RSVP Starburst
+                RSVP Background
               </label>
-              <div className="flex gap-2">
-                <input
-                  type="color"
-                  value={formData.rsvp_starburst_color || '#FF6B6B'}
-                  onChange={(e) => handleChange({ target: { name: 'rsvp_starburst_color', value: e.target.value } } as any)}
-                  className="w-12 h-12 border border-gray-300 rounded-lg cursor-pointer"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleChange({ target: { name: 'rsvp_starburst_color', value: '' } } as any)}
-                  className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 rounded-lg transition"
-                >
-                  Clear
-                </button>
-              </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    handleImageUpload(e, 'rsvp_background_image_url');
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              />
+              {formData.rsvp_background_image_url && (
+                <div className="mt-2 flex gap-2">
+                  <img src={formData.rsvp_background_image_url} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                  <button
+                    type="button"
+                    onClick={() => handleChange({ target: { name: 'rsvp_background_image_url', value: '' } } as any)}
+                    className="px-3 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+              )}
             </div>
 
-            {/* Save the Date Starburst */}
+            {/* Save the Date Background */}
             <div>
               <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
-                Save the Date Starburst
+                Save the Date Background
               </label>
-              <div className="flex gap-2">
-                <input
-                  type="color"
-                  value={formData.save_the_date_starburst_color || '#FF6B6B'}
-                  onChange={(e) => handleChange({ target: { name: 'save_the_date_starburst_color', value: e.target.value } } as any)}
-                  className="w-12 h-12 border border-gray-300 rounded-lg cursor-pointer"
-                />
-                <button
-                  type="button"
-                  onClick={() => handleChange({ target: { name: 'save_the_date_starburst_color', value: '' } } as any)}
-                  className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 rounded-lg transition"
-                >
-                  Clear
-                </button>
-              </div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    handleImageUpload(e, 'save_the_date_background_image_url');
+                  }
+                }}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              />
+              {formData.save_the_date_background_image_url && (
+                <div className="mt-2 flex gap-2">
+                  <img src={formData.save_the_date_background_image_url} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                  <button
+                    type="button"
+                    onClick={() => handleChange({ target: { name: 'save_the_date_background_image_url', value: '' } } as any)}
+                    className="px-3 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

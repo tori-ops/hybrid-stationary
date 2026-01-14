@@ -60,10 +60,10 @@ function InvitePageContent() {
               items={invitation.stationery_items}
               secondaryColor={invitation.secondary_color || '#274E13'}
               accentColor={invitation.accent_color || '#FF6B6B'}
-              starburstColors={{
-                'invite': invitation.invitation_starburst_color || null,
-                'rsvp': invitation.rsvp_starburst_color || null,
-                'save_the_date': invitation.save_the_date_starburst_color || null
+              backgroundImages={{
+                'invite': invitation.invitation_background_image_url || null,
+                'rsvp': invitation.rsvp_background_image_url || null,
+                'save_the_date': invitation.save_the_date_background_image_url || null
               }}
             />
           </section>

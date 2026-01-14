@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Starburst from './Starburst';
 
 interface StationeryItem {
   type: 'invite' | 'rsvp' | 'save_the_date';
@@ -13,7 +12,7 @@ interface StationeryDisplayProps {
   items: StationeryItem[];
   secondaryColor?: string;
   accentColor?: string;
-  starburstColors?: { [key: string]: string | null };
+  backgroundImages?: { [key: string]: string | null };
 }
 
 interface ImageDimensions {
@@ -21,7 +20,7 @@ interface ImageDimensions {
   height: number;
 }
 
-export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B', starburstColors = {} }: StationeryDisplayProps) {
+export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B', backgroundImages = {} }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
   const [dimensions, setDimensions] = useState<{ [key: string]: ImageDimensions }>({});
 
@@ -51,7 +50,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
         const isFlipped = flipped[key] || false;
         const dims = dimensions[key];
         const aspectRatio = dims ? (dims.width / dims.height) : (3 / 4);
-        const starburstColor = starburstColors[item.type];
+        const backgroundImage = backgroundImages[item.type];
 
         // Only show if both front and back images exist
         if (!item.front_image_url || !item.back_image_url) {
@@ -72,11 +71,22 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
                 zIndex: 2
               }}
             >
-              {/* Starburst Background - stays fixed, behind stationery but above page background */}
-              {starburstColor && (
-                <div className="absolute inset-0 pointer-events-none -z-10" style={{ zIndex: 1 }}>
-                  <Starburst color={starburstColor} size={600} />
-                </div>
+              {/* Background Image - behind stationery, doesn't flip */}
+              {backgroundImage && (
+                <img
+                  src={backgroundImage}
+                  alt="Stationery background"
+                  className="absolute inset-0 w-full h-full object-cover rounded-lg pointer-events-none"
+                  style={{
+                    zIndex: 1,
+                    top: '-50px',
+                    left: '-50px',
+                    right: '-50px',
+                    bottom: '-50px',
+                    width: 'calc(100% + 100px)',
+                    height: 'calc(100% + 100px)'
+                  }}
+                />
               )}
               <div
                 className="relative w-full h-full transition-transform duration-500"
