@@ -112,7 +112,7 @@ const backgroundSize = cardSize ? Math.max(cardSize.width, cardSize.height) * 1.
               ref={(el) => {
                 if (el) cardRefs.current[key] = el;
               }}
-              className="cursor-pointer perspective relative mx-auto"
+              className="w-full cursor-pointer perspective relative"
               onClick={() => toggleFlip(key)}
               style={{
                 perspective: '1000px',
