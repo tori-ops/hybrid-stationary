@@ -23,6 +23,13 @@ function InvitePageContent() {
   const [isApproving, setIsApproving] = useState(false);
   
   const isProofMode = !!approvalToken;
+
+  // Debug logging
+  console.log('InvitePageContent loaded');
+  console.log('Event Slug:', eventSlug);
+  console.log('Approval Token:', approvalToken);
+  console.log('Is Proof Mode:', isProofMode);
+  console.log('Invitation loaded:', !!invitation);
   
   // Convert invitation data to config format, fall back to default
   const config = invitationToConfig(invitation);
@@ -56,22 +63,28 @@ function InvitePageContent() {
   const handleApprovalConfirm = async () => {
     setIsApproving(true);
     try {
+      console.log('Submitting approval with token:', approvalToken);
       const response = await fetch('/api/approve-invitation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ approvalToken }),
       });
 
+      console.log('Approval response status:', response.status);
+      const data = await response.json();
+      console.log('Approval response data:', data);
+
       if (response.ok) {
         // Show success message and remove proof mode
         setShowApprovalModal(false);
-        window.location.href = `/invite/${eventSlug}`;
+        window.location.href = `/invite?event=${eventSlug}`;
       } else {
-        alert('Failed to approve invitation. Please try again.');
+        console.error('Approval failed:', data.error);
+        alert('Failed to approve invitation: ' + (data.error || 'Unknown error'));
       }
     } catch (error) {
       console.error('Error approving invitation:', error);
-      alert('An error occurred while approving the invitation.');
+      alert('An error occurred while approving the invitation: ' + (error instanceof Error ? error.message : 'Unknown error'));
     } finally {
       setIsApproving(false);
     }
