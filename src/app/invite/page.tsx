@@ -113,30 +113,19 @@ function InvitePageContent() {
                   Event Timeline
                 </h2>
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                      4:30 PM
+                  {(invitation?.timeline_events || [
+                    { time: '4:30 PM', name: 'Ceremony' },
+                    { time: '5:15 PM', name: 'Cocktail Hour' },
+                    { time: '6:00 PM', name: 'Dinner' },
+                    { time: '10:00 PM', name: 'End of Event' },
+                  ]).map((event: any, index: number) => (
+                    <div key={index} className="flex items-center gap-4">
+                      <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                        {event.time}
+                      </div>
+                      <div className="text-base text-gray-700">{event.name}</div>
                     </div>
-                    <div className="text-base text-gray-700">Ceremony</div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                      5:15 PM
-                    </div>
-                    <div className="text-base text-gray-700">Cocktail Hour</div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                      6:00 PM
-                    </div>
-                    <div className="text-base text-gray-700">Dinner</div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 font-semibold text-base" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                      10:00 PM
-                    </div>
-                    <div className="text-base text-gray-700">End of Event</div>
-                  </div>
+                  ))}
                 </div>
               </div>
               

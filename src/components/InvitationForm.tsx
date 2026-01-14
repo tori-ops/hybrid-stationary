@@ -42,6 +42,7 @@ interface Invitation {
   logo_url?: string;
   background_image_url?: string;
   timeline_image_url?: string;
+  timeline_events?: any[];
   area_facts_attraction?: string;
   area_facts_dining?: string;
   area_facts_activities?: string;
@@ -104,6 +105,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       logo_url: '',
       background_image_url: '',
       timeline_image_url: '',
+      timeline_events: [
+        { time: '4:30 PM', name: 'Ceremony' },
+        { time: '5:15 PM', name: 'Cocktail Hour' },
+        { time: '6:00 PM', name: 'Dinner' },
+        { time: '10:00 PM', name: 'End of Event' },
+      ],
       area_facts_attraction: 'Popular spots to explore in the area',
       area_facts_dining: 'Favorite restaurants worth checking out',
       area_facts_activities: 'Unique shops and local retailers nearby',
@@ -129,6 +136,14 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [activitiesList, setActivitiesList] = useState<any[]>(invitation?.activities_list || []);
   const [accommodationsList, setAccommodationsList] = useState<any[]>(invitation?.accommodations_list || []);
   const [stationeryItems, setStationeryItems] = useState<any[]>(invitation?.stationery_items || []);
+  const [timelineEvents, setTimelineEvents] = useState<any[]>(
+    invitation?.timeline_events || [
+      { time: '4:30 PM', name: 'Ceremony' },
+      { time: '5:15 PM', name: 'Cocktail Hour' },
+      { time: '6:00 PM', name: 'Dinner' },
+      { time: '10:00 PM', name: 'End of Event' },
+    ]
+  );
 
   // Auto-save on window close
   useEffect(() => {
@@ -157,7 +172,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, [formData, attractionsList, diningList, activitiesList, accommodationsList, stationeryItems, invitation?.id]);
+  }, [formData, attractionsList, diningList, activitiesList, accommodationsList, stationeryItems, timelineEvents, invitation?.id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
@@ -225,6 +240,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         activities_list: activitiesList,
         accommodations_list: accommodationsList,
         stationery_items: stationeryItems,
+        timeline_events: timelineEvents,
       };
 
       if (invitation?.id) {
@@ -800,6 +816,72 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             venueLatitude={formData.venue_latitude}
             venueLongitude={formData.venue_longitude}
           />
+        </div>
+      </section>
+
+      {/* Timeline Events */}
+      <section className="bg-white rounded-lg p-6 shadow">
+        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+          Event Timeline
+        </h2>
+        <div className="space-y-4">
+          {timelineEvents.map((event, index) => (
+            <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div>
+                <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+                  Time
+                </label>
+                <input
+                  type="text"
+                  value={event.time}
+                  onChange={(e) => {
+                    const updated = [...timelineEvents];
+                    updated[index].time = e.target.value;
+                    setTimelineEvents(updated);
+                  }}
+                  placeholder="4:30 PM"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                  style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+                  Event Name
+                </label>
+                <input
+                  type="text"
+                  value={event.name}
+                  onChange={(e) => {
+                    const updated = [...timelineEvents];
+                    updated[index].name = e.target.value;
+                    setTimelineEvents(updated);
+                  }}
+                  placeholder="Ceremony"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                  style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setTimelineEvents(timelineEvents.filter((_, i) => i !== index));
+                }}
+                className="md:col-span-2 px-4 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 text-sm font-medium"
+              >
+                Remove Event
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() => {
+              setTimelineEvents([...timelineEvents, { time: '', name: '' }]);
+            }}
+            className="w-full px-4 py-2 border-2 border-dashed rounded-lg text-center font-medium"
+            style={{ borderColor: '#274E13', color: '#274E13' }}
+          >
+            + Add Event
+          </button>
         </div>
       </section>
 
