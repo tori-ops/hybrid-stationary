@@ -23,6 +23,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
   const { user, signOut } = useAuth();
   const [invitations, setInvitations] = useState<Invitation[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (user?.id) {
@@ -48,75 +49,107 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
     }
   };
 
+  const handleSelectInvite = (id: string | null) => {
+    onSelectInvite(id);
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <div
-      className="w-64 min-h-screen flex flex-col shadow-lg fixed left-0 top-0 bottom-0 hidden lg:flex"
-      style={{ backgroundColor: '#D0CEB5' }}
-    >
-      {/* Header */}
-      <div className="p-4 border-b" style={{ borderColor: '#274E13' }}>
-        <h1 className="text-lg font-serif font-bold" style={{ color: '#274E13' }}>
-          My Invitations
-        </h1>
-        <p className="text-xs mt-1" style={{ color: '#274E13' }}>
-          {user?.email}
-        </p>
-      </div>
-
-      {/* Create New Button */}
-      <div className="p-3">
+    <>
+      {/* Mobile Hamburger Menu */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 p-4 z-50" style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
         <button
-          onClick={() => onSelectInvite(null)}
-          className="w-full py-2 px-3 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-90"
-          style={{ backgroundColor: '#274E13' }}
-        >
-          + Create New
-        </button>
-      </div>
-
-      {/* Client List */}
-      <div className="flex-1 overflow-y-auto px-3 py-2">
-        {loading ? (
-          <p className="text-xs text-gray-600 p-2">Loading...</p>
-        ) : invitations.length === 0 ? (
-          <p className="text-xs text-gray-600 p-2">No invitations yet. Create one to get started!</p>
-        ) : (
-          <div className="space-y-1">
-            {invitations.map((invite) => (
-              <button
-                key={invite.id}
-                onClick={() => onSelectInvite(invite.id)}
-                className={`w-full text-left p-2 rounded-lg transition-colors text-sm ${
-                  selectedInviteId === invite.id
-                    ? 'bg-white'
-                    : 'hover:bg-white hover:bg-opacity-50'
-                }`}
-              >
-                <p className="font-semibold text-xs" style={{ color: '#274E13' }}>
-                  {invite.bride_name} & {invite.groom_name}
-                </p>
-                <p className="text-xs text-gray-600 mt-0.5">
-                  {new Date(invite.wedding_date + 'T00:00:00').toLocaleDateString()}
-                </p>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Logout */}
-      <div className="p-3 border-t" style={{ borderColor: '#274E13' }}>
-        <button
-          onClick={() => {
-            signOut();
-            window.location.href = '/';
-          }}
-          className="w-full py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="p-2 rounded-lg transition-opacity hover:opacity-75"
           style={{ color: '#274E13' }}
         >
-          Logout
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
         </button>
       </div>
-    </div>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={() => setMobileMenuOpen(false)}
+          style={{ top: '56px' }}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`w-64 min-h-screen flex flex-col shadow-lg fixed left-0 top-0 bottom-0 z-40 transition-transform duration-300 lg:transition-none lg:z-auto lg:static lg:translate-x-0 ${
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+        style={{ backgroundColor: '#D0CEB5', marginTop: 'env(safe-area-inset-top)' }}
+      >
+        {/* Header */}
+        <div className="p-4 border-b mt-12 lg:mt-0" style={{ borderColor: '#274E13' }}>
+          <h1 className="text-lg font-serif font-bold" style={{ color: '#274E13' }}>
+            My Invitations
+          </h1>
+          <p className="text-xs mt-1" style={{ color: '#274E13' }}>
+            {user?.email}
+          </p>
+        </div>
+
+        {/* Create New Button */}
+        <div className="p-3">
+          <button
+            onClick={() => handleSelectInvite(null)}
+            className="w-full py-2 px-3 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-90"
+            style={{ backgroundColor: '#274E13' }}
+          >
+            + Create New
+          </button>
+        </div>
+
+        {/* Client List */}
+        <div className="flex-1 overflow-y-auto px-3 py-2">
+          {loading ? (
+            <p className="text-xs text-gray-600 p-2">Loading...</p>
+          ) : invitations.length === 0 ? (
+            <p className="text-xs text-gray-600 p-2">No invitations yet. Create one to get started!</p>
+          ) : (
+            <div className="space-y-1">
+              {invitations.map((invite) => (
+                <button
+                  key={invite.id}
+                  onClick={() => handleSelectInvite(invite.id)}
+                  className={`w-full text-left p-2 rounded-lg transition-colors text-sm ${
+                    selectedInviteId === invite.id
+                      ? 'bg-white'
+                      : 'hover:bg-white hover:bg-opacity-50'
+                  }`}
+                >
+                  <p className="font-semibold text-xs" style={{ color: '#274E13' }}>
+                    {invite.bride_name} & {invite.groom_name}
+                  </p>
+                  <p className="text-xs text-gray-600 mt-0.5">
+                    {new Date(invite.wedding_date + 'T00:00:00').toLocaleDateString()}
+                  </p>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Logout */}
+        <div className="p-3 border-t" style={{ borderColor: '#274E13' }}>
+          <button
+            onClick={() => {
+              signOut();
+              window.location.href = '/';
+            }}
+            className="w-full py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
+            style={{ color: '#274E13' }}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </>
   );
 }

@@ -111,7 +111,7 @@ export default function DashboardPage() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 lg:ml-64 p-4 lg:p-6 overflow-y-auto">
+      <div className="flex-1 lg:ml-64 p-4 lg:p-6 overflow-y-auto pt-16 lg:pt-6">
         <div className="max-w-5xl mx-auto">
           {loading ? (
             <p className="text-sm text-gray-600">Loading invitation...</p>
