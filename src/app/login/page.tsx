@@ -50,6 +50,16 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#D0CEB5' }}>
+      <style>{`
+        input[type="email"],
+        input[type="password"] {
+          color: #000 !important;
+          font-size: 0.75rem !important;
+        }
+        input::placeholder {
+          color: #999 !important;
+        }
+      `}</style>
       <div className="w-full max-w-md">
         {/* Logo/Title */}
         <div className="text-center mb-8">
@@ -85,7 +95,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                     style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
                     placeholder="your@email.com"
                   />
@@ -100,7 +110,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                     style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
                     placeholder="••••••••"
                   />
@@ -159,7 +169,7 @@ export default function LoginPage() {
                     value={resetEmail}
                     onChange={(e) => setResetEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                     style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
                     placeholder="your@email.com"
                   />

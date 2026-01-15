@@ -350,9 +350,17 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         input[type="tel"],
         input[type="date"],
         input[type="time"],
+        input[type="number"],
+        input[type="url"],
+        input[type="password"],
         textarea,
         select {
           color: #000 !important;
+          font-size: 0.75rem !important;
+        }
+        input::placeholder,
+        textarea::placeholder {
+          color: #999 !important;
         }
       `}</style>
       {message && (
@@ -383,7 +391,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.bride_name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -397,7 +405,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.groom_name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -410,7 +418,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="couple_contact_name"
               value={formData.couple_contact_name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -423,7 +431,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="couple_contact_email"
               value={formData.couple_contact_email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -436,7 +444,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="couple_contact_phone"
               value={formData.couple_contact_phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -460,7 +468,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               required
               placeholder="bride-groom-2024"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
             <p className="text-xs text-gray-500 mt-1">
@@ -477,7 +485,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.wedding_date}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -490,7 +498,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="ceremony_time"
               value={formData.ceremony_time}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -503,7 +511,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="reception_time"
               value={formData.reception_time}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -516,7 +524,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="be_out_by_time"
               value={formData.be_out_by_time}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -528,7 +536,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="timezone"
               value={formData.timezone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             >
               <option>America/New_York</option>
@@ -550,7 +558,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="rsvp_deadline"
               value={formData.rsvp_deadline}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -564,7 +572,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.rsvp_link}
               onChange={handleChange}
               placeholder="https://..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -578,7 +586,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 value={formData.couples_website}
                 onChange={handleChange}
                 placeholder="https://..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                 style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
               />
             </div>
@@ -606,7 +614,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                     setTimelineEvents(updated);
                   }}
                   placeholder="4:30 PM"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                   style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
                 />
               </div>
@@ -623,7 +631,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                     setTimelineEvents(updated);
                   }}
                   placeholder="Ceremony"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                   style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
                 />
               </div>
@@ -667,7 +675,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.venue_name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -680,7 +688,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_address"
               value={formData.venue_address}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -693,7 +701,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_city"
               value={formData.venue_city}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -706,7 +714,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_state"
               value={formData.venue_state}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -719,7 +727,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_phone"
               value={formData.venue_phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -732,7 +740,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_website"
               value={formData.venue_website}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -746,7 +754,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.venue_latitude}
               onChange={handleChange}
               step="0.000001"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -760,7 +768,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.venue_longitude}
               onChange={handleChange}
               step="0.000001"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -782,7 +790,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="planner_name"
               value={formData.planner_name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -795,7 +803,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="planner_phone"
               value={formData.planner_phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
           </div>
@@ -811,7 +819,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, 'logo_url')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
             {formData.logo_url && (
@@ -833,7 +841,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, 'background_image_url')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
             {formData.background_image_url && (
@@ -855,7 +863,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               type="file"
               accept="image/*"
               onChange={(e) => handleImageUpload(e, 'timeline_image_url')}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
             {formData.timeline_image_url && (
@@ -1119,7 +1127,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="font_family"
               value={formData.font_family}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             >
               <option>Georgia</option>
