@@ -897,7 +897,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-xs font-medium text-gray-700">Show Attractions</span>
+            <span className="text-xxs font-normal text-gray-700">Show Attractions</span>
           </label>
           <label className="flex items-center gap-3">
             <input
@@ -907,7 +907,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-xs font-medium text-gray-700">Show Dining</span>
+            <span className="text-xxs font-normal text-gray-700">Show Dining</span>
           </label>
           <label className="flex items-center gap-3">
             <input
@@ -917,7 +917,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-xs font-medium text-gray-700">Show Shopping</span>
+            <span className="text-xxs font-normal text-gray-700">Show Shopping</span>
           </label>
           <label className="flex items-center gap-3">
             <input
@@ -927,7 +927,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-xs font-medium text-gray-700">Show Accommodations</span>
+            <span className="text-xxs font-normal text-gray-700">Show Accommodations</span>
           </label>
         </div>
 
