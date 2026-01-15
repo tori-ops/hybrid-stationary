@@ -92,7 +92,6 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
   return (
     <div className="space-y-4">
       <div className="bg-white rounded-lg border border-gray-200 p-4">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Stationery Items</h3>
         
         {stationeryTypes.map(({ value, label }) => {
           const typeItems = getItemsOfType(value);
@@ -110,7 +109,7 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                       setExpandedType(expandedType === value ? null : value);
                     }}
                     type="button"
-                    className="text-lg font-semibold text-gray-700 hover:text-gray-900"
+                    className="text-xxs font-normal text-gray-700 hover:text-gray-900"
                   >
                     {expandedType === value ? '▼' : '▶'} {label}
                   </button>
@@ -236,4 +235,6 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
     </div>
   );
 }
+
+
 
