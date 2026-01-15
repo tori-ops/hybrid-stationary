@@ -175,7 +175,7 @@ export default function AreaFactsEditor({
         <button
           type="button"
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 text-lg font-semibold"
+          className="flex items-center gap-2 text-xxs font-normal"
           style={{ color: '#274E13' }}
         >
           <span>{isExpanded ? '▼' : '▶'}</span>
