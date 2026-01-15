@@ -111,16 +111,16 @@ export default function DashboardPage() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 p-8 overflow-y-auto">
-        <div className="max-w-6xl mx-auto">
+      <div className="flex-1 ml-64 p-6 overflow-y-auto">
+        <div className="max-w-5xl mx-auto">
           {loading ? (
-            <p className="text-lg text-gray-600">Loading invitation...</p>
+            <p className="text-sm text-gray-600">Loading invitation...</p>
           ) : !selectedInvite ? (
             <>
-              <h1 className="text-4xl font-serif mb-2" style={{ color: '#274E13' }}>
+              <h1 className="text-3xl font-serif mb-2" style={{ color: '#274E13' }}>
                 Create New Invitation
               </h1>
-              <p className="text-gray-600 mb-8">
+              <p className="text-sm text-gray-600 mb-6">
                 Customize a new hybrid invitation for your client
               </p>
               <InvitationForm
@@ -133,18 +133,18 @@ export default function DashboardPage() {
             </>
           ) : (
             <>
-              <div className="flex justify-between items-center mb-8">
+              <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h1 className="text-4xl font-serif mb-2" style={{ color: '#274E13' }}>
+                  <h1 className="text-3xl font-serif mb-1" style={{ color: '#274E13' }}>
                     {selectedInvite.bride_name} & {selectedInvite.groom_name}
                   </h1>
-                  <p className="text-gray-600">
+                  <p className="text-sm text-gray-600">
                     {new Date(selectedInvite.wedding_date).toLocaleDateString()}
                   </p>
                 </div>
                 <button
                   onClick={() => setShowPreview(!showPreview)}
-                  className="px-6 py-2 rounded-lg font-semibold text-white transition-opacity hover:opacity-90"
+                  className="px-4 py-2 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-90"
                   style={{ backgroundColor: '#274E13' }}
                 >
                   {showPreview ? 'Edit' : 'Preview'}
