@@ -369,12 +369,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Couple Information */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Couple Information
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Bride's Name
             </label>
             <input
@@ -388,7 +388,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Groom's Name
             </label>
             <input
@@ -402,7 +402,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Couple Contact Name
             </label>
             <input
@@ -415,7 +415,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Couple Email
             </label>
             <input
@@ -428,7 +428,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Couple Phone
             </label>
             <input
@@ -445,12 +445,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Wedding Details */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Wedding Details
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Event Slug (URL)
             </label>
             <input
@@ -468,7 +468,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Wedding Date
             </label>
             <input
@@ -482,7 +482,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Ceremony Time
             </label>
             <input
@@ -495,7 +495,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Reception Time
             </label>
             <input
@@ -508,7 +508,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Be Out By Time
             </label>
             <input
@@ -521,7 +521,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Timezone
             </label>
             <select
@@ -542,7 +542,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               RSVP Deadline
             </label>
             <input
@@ -555,7 +555,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               RSVP Link
             </label>
             <input
@@ -569,7 +569,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
                 Couples Website
               </label>
               <input
@@ -587,14 +587,14 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Timeline Events */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Event Timeline
         </h2>
         <div className="space-y-4">
           {timelineEvents.map((event, index) => (
             <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
                   Time
                 </label>
                 <input
@@ -611,7 +611,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
                   Event Name
                 </label>
                 <input
@@ -653,12 +653,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Venue Information */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Venue Information
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Venue Name
             </label>
             <input
@@ -672,7 +672,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Address
             </label>
             <input
@@ -685,7 +685,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               City
             </label>
             <input
@@ -698,7 +698,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               State/Province
             </label>
             <input
@@ -711,7 +711,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Phone
             </label>
             <input
@@ -724,7 +724,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Website
             </label>
             <input
@@ -737,7 +737,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Latitude
             </label>
             <input
@@ -751,7 +751,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Longitude
             </label>
             <input
@@ -769,12 +769,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Planner Information */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Planner Information
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-6 border-b">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Planner Name
             </label>
             <input
@@ -787,7 +787,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Planner Phone
             </label>
             <input
@@ -804,7 +804,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         {/* Branding Uploads */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Logo (Bottom of Invitation)
             </label>
             <input
@@ -826,7 +826,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Background Image (Behind All Content)
             </label>
             <input
@@ -848,7 +848,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Timeline Balance Photo
             </label>
             <input
@@ -875,7 +875,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Area Facts */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Area Facts & Attractions
         </h2>
         
@@ -889,7 +889,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-sm font-medium text-gray-700">Show Attractions</span>
+            <span className="text-xs font-medium text-gray-700">Show Attractions</span>
           </label>
           <label className="flex items-center gap-3">
             <input
@@ -899,7 +899,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-sm font-medium text-gray-700">Show Dining</span>
+            <span className="text-xs font-medium text-gray-700">Show Dining</span>
           </label>
           <label className="flex items-center gap-3">
             <input
@@ -909,7 +909,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-sm font-medium text-gray-700">Show Shopping</span>
+            <span className="text-xs font-medium text-gray-700">Show Shopping</span>
           </label>
           <label className="flex items-center gap-3">
             <input
@@ -919,7 +919,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-sm font-medium text-gray-700">Show Accommodations</span>
+            <span className="text-xs font-medium text-gray-700">Show Accommodations</span>
           </label>
         </div>
 
@@ -961,7 +961,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Stationery Items */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Stationery Images
         </h2>
         <StationeryEditor
@@ -972,16 +972,16 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
         {/* Background Image Uploads */}
         <div className="mt-8 pt-6 border-t border-gray-200">
-          <h3 className="text-lg font-semibold mb-4" style={{ color: '#274E13' }}>
+          <h3 className="text-base font-semibold mb-4" style={{ color: '#274E13' }}>
             Stationery Background Images (Optional)
           </h3>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-xs text-gray-600 mb-4">
             Add background images behind each stationery piece. Image will extend beyond edges to create a frame effect.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Invitation Background */}
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
                 Invitation Background
               </label>
               <input
@@ -1010,7 +1010,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
             {/* RSVP Background */}
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
                 RSVP Background
               </label>
               <input
@@ -1039,7 +1039,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
             {/* Save the Date Background */}
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
                 Save the Date Background
               </label>
               <input
@@ -1071,12 +1071,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Styling */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Styling
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Primary Color
             </label>
             <input
@@ -1088,7 +1088,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Secondary Color
             </label>
             <input
@@ -1100,7 +1100,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Accent Color
             </label>
             <input
@@ -1112,7 +1112,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: '#274E13' }}>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Font Family
             </label>
             <select
@@ -1134,7 +1134,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Section Visibility */}
       <section className="bg-white rounded-lg p-6 shadow">
-        <h2 className="text-2xl font-serif mb-4" style={{ color: '#274E13' }}>
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Section Visibility
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1202,7 +1202,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         {/* Status Indicator */}
         {invitation?.approval_status && (
           <div className="flex items-center px-4 py-3 rounded-lg bg-gray-100 border border-gray-300">
-            <span className="text-sm font-semibold text-gray-700">
+            <span className="text-xs font-semibold text-gray-700">
               Status:{' '}
               <span
                 style={{
