@@ -96,7 +96,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
                   {invite.bride_name} & {invite.groom_name}
                 </p>
                 <p className="text-xs text-gray-600 mt-1">
-                  {new Date(invite.wedding_date).toLocaleDateString()}
+                  {new Date(invite.wedding_date + 'T00:00:00').toLocaleDateString()}
                 </p>
               </button>
             ))}
