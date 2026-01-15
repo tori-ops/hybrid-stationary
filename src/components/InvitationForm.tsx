@@ -343,7 +343,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   };
 
   return (
-    <form onSubmit={handleSave} className="space-y-8">
+    <form onSubmit={handleSave} className="space-y-4 lg:space-y-8">
       <style>{`
         input[type="text"],
         input[type="email"],
@@ -376,11 +376,11 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       )}
 
       {/* Couple Information */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Couple Information
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Bride's Name
@@ -452,11 +452,11 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Wedding Details */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Wedding Details
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Event Slug (URL)
@@ -594,7 +594,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Timeline Events */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Event Timeline
         </h2>
@@ -660,11 +660,11 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Venue Information */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Venue Information
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div className="md:col-span-2">
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Venue Name
@@ -776,7 +776,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Planner Information */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Planner Information
         </h2>
@@ -810,7 +810,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         </div>
 
         {/* Branding Uploads */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Logo (Bottom of Invitation)
@@ -882,13 +882,13 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Area Facts */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Area Facts & Attractions
         </h2>
         
         {/* Toggles for each category */}
-        <div className="grid grid-cols-2 gap-4 mb-6 pb-6 border-b">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mb-6 pb-6 border-b">
           <label className="flex items-center gap-3">
             <input
               type="checkbox"
@@ -968,7 +968,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Stationery Items */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Stationery Images
         </h2>
@@ -1078,11 +1078,11 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Styling */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Styling
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Primary Color
@@ -1141,11 +1141,11 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Section Visibility */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Section Visibility
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <label className="flex items-center">
             <input
               type="checkbox"
@@ -1190,7 +1190,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Publish */}
-      <section className="bg-white rounded-lg p-6 shadow">
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <label className="flex items-center">
           <input
             type="checkbox"

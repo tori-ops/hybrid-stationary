@@ -50,7 +50,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
 
   return (
     <div
-      className="w-64 min-h-screen flex flex-col shadow-lg fixed left-0 top-0 bottom-0"
+      className="w-64 min-h-screen flex flex-col shadow-lg fixed left-0 top-0 bottom-0 hidden lg:flex"
       style={{ backgroundColor: '#D0CEB5' }}
     >
       {/* Header */}

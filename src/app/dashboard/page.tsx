@@ -102,7 +102,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="min-h-screen flex" style={{ backgroundColor: '#f5f5f5' }}>
+    <main className="min-h-screen flex flex-col lg:flex-row" style={{ backgroundColor: '#f5f5f5' }}>
       {/* Sidebar */}
       <Sidebar 
         selectedInviteId={selectedInviteId} 
@@ -111,16 +111,16 @@ export default function DashboardPage() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 ml-64 p-6 overflow-y-auto">
+      <div className="flex-1 lg:ml-64 p-4 lg:p-6 overflow-y-auto">
         <div className="max-w-5xl mx-auto">
           {loading ? (
             <p className="text-sm text-gray-600">Loading invitation...</p>
           ) : !selectedInvite ? (
             <>
-              <h1 className="text-3xl font-serif mb-2" style={{ color: '#274E13' }}>
+              <h1 className="text-2xl lg:text-3xl font-serif mb-2" style={{ color: '#274E13' }}>
                 Create New Invitation
               </h1>
-              <p className="text-sm text-gray-600 mb-6">
+              <p className="text-xs lg:text-sm text-gray-600 mb-6">
                 Customize a new hybrid invitation for your client
               </p>
               <InvitationForm
@@ -133,18 +133,18 @@ export default function DashboardPage() {
             </>
           ) : (
             <>
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mb-6">
                 <div>
-                  <h1 className="text-3xl font-serif mb-1" style={{ color: '#274E13' }}>
+                  <h1 className="text-2xl lg:text-3xl font-serif mb-1" style={{ color: '#274E13' }}>
                     {selectedInvite.bride_name} & {selectedInvite.groom_name}
                   </h1>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs lg:text-sm text-gray-600">
                     {new Date(selectedInvite.wedding_date).toLocaleDateString()}
                   </p>
                 </div>
                 <button
                   onClick={() => setShowPreview(!showPreview)}
-                  className="px-4 py-2 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-90"
+                  className="px-4 py-2 rounded-lg font-semibold text-xs lg:text-sm text-white transition-opacity hover:opacity-90 w-full lg:w-auto"
                   style={{ backgroundColor: '#274E13' }}
                 >
                   {showPreview ? 'Edit' : 'Preview'}
