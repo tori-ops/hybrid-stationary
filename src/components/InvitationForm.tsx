@@ -598,11 +598,11 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
           Event Timeline
         </h2>
-        <div className="space-y-4">
+        <div className="space-y-2">
           {timelineEvents.map((event, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
               <div>
-                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                <label className="block text-xs font-medium mb-1" style={{ color: '#274E13' }}>
                   Time
                 </label>
                 <input
@@ -619,7 +619,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                <label className="block text-xs font-medium mb-1" style={{ color: '#274E13' }}>
                   Event Name
                 </label>
                 <input
@@ -640,7 +640,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 onClick={() => {
                   setTimelineEvents(timelineEvents.filter((_, i) => i !== index));
                 }}
-                className="md:col-span-2 px-4 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 text-sm font-medium"
+                className="md:col-span-2 px-4 py-1 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 text-xs font-medium"
               >
                 Remove Event
               </button>
