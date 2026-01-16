@@ -545,7 +545,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
-              <label className="flex items-center mt-2">
+              <label className="block text-xs font-medium mt-2" style={{ color: '#274E13' }}>
                 <input
                   type="checkbox"
                   name="show_rsvp_deadline"
@@ -553,7 +553,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                   onChange={handleChange}
                   className="mr-3"
                 />
-                <span style={{ color: '#274E13' }}>Show on Viewer</span>
+                Reveal to Guests
               </label>
           </div>
           <div>
@@ -1272,6 +1272,7 @@ Show Contact Section</span>
     </form>
   );
 }
+
 
 
 
