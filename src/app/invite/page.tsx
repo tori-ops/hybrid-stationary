@@ -210,6 +210,11 @@ justify-center">
                 rsvpDeadline={invitation.rsvp_deadline}
                 accentColor={invitation.accent_color || '#db2777'}
                 secondaryColor={invitation.secondary_color || '#274E13'}
+                onRsvpClick={() => {
+                  if (invitation.rsvp_link) {
+                    window.open(invitation.rsvp_link, '_blank');
+                  }
+                }}
               />
             </section>
           )}
