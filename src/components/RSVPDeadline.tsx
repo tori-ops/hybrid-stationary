@@ -12,7 +12,7 @@ export default function RSVPDeadline({ rsvpDeadline, accentColor = '#db2777', se
   });
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl relative" style={{ zIndex: 10 }}>
+    <div className="rounded-lg shadow-lg p-8 max-w-4xl relative" style={{ zIndex: 10, background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`, borderLeft: `4px solid ${secondaryColor}` }}>
       <button
         onClick={onRsvpClick}
         className="w-full p-6 rounded-lg border-2 text-left transition-opacity hover:opacity-90 cursor-pointer"
@@ -29,3 +29,5 @@ export default function RSVPDeadline({ rsvpDeadline, accentColor = '#db2777', se
     </div>
   );
 }
+
+
