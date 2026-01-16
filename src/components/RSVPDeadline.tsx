@@ -17,11 +17,8 @@ export default function RSVPDeadline({ rsvpDeadline, accentColor = '#db2777', se
         background: `linear-gradient(to right, ${secondaryColor}15, ${accentColor}15)`,
         borderColor: accentColor
       }}>
-        <h3 className="text-xl md:text-2xl font-serif mb-4" style={{ color: accentColor }}>
-          RSVP Deadline
-        </h3>
-        <p className="text-sm md:text-base text-gray-700 font-medium">
-          Kindly RSVP no later than <span style={{ color: accentColor }} className="font-semibold">{formattedDate}</span>
+        <p className="text-sm md:text-base text-gray-700">
+          Kindly RSVP no later than <span style={{ color: accentColor }} className="font-bold">{formattedDate}</span>
         </p>
       </div>
     </div>
