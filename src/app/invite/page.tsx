@@ -6,6 +6,7 @@ import { useInvitation } from '@/hooks/useInvitation';
 import { invitationToConfig } from '@/lib/invitationConfig';
 import StationeryDisplay from '@/components/StationeryDisplay';
 import VenueInfo from '@/components/VenueInfo';
+import RSVPDeadline from '@/components/RSVPDeadline';
 import WeatherWidget from '@/components/WeatherWidget';
 import AreaFacts from '@/components/AreaFacts';
 import ContactSection from '@/components/ContactSection';
@@ -368,3 +369,4 @@ export default function InvitePage() {
     </Suspense>
   );
 }
+

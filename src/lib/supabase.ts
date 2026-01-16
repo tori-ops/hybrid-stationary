@@ -71,6 +71,7 @@ export interface Invitation {
   show_attractions: boolean;
   show_contact_section: boolean;
   show_venue_info: boolean;
+  show_rsvp_deadline: boolean;
   is_published: boolean;
   approval_status: string | null;
   approval_token: string | null;

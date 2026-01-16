@@ -64,6 +64,7 @@ interface Invitation {
   show_attractions: boolean;
   show_contact_section: boolean;
   show_venue_info: boolean;
+  show_rsvp_deadline: boolean;
   is_published: boolean;
   approval_status?: string;
   approval_token?: string;
@@ -135,6 +136,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       show_attractions: true,
       show_contact_section: true,
       show_venue_info: true,
+      show_rsvp_deadline: true,
       is_published: false,
     }
   );
@@ -1267,5 +1269,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     </form>
   );
 }
+
+
+
 
 
