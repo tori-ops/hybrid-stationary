@@ -927,7 +927,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="w-4 h-4 rounded"
             />
-            <span className="text-xs font-medium text-gray-700">Show Accommodations</span>
+            <span className="text-xs font-medium text-gray-700">Show Overnight Stays</span>
           </label>
         </div>
 
@@ -1267,4 +1267,5 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     </form>
   );
 }
+
 

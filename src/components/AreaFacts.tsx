@@ -94,6 +94,10 @@ export default function AreaFacts({ config }: { config?: any }) {
               3: 'accommodations',
             };
             const category = categoryMap[index];
+            // Skip accommodations card if not enabled
+            if (category === "accommodations" && !config?.sections?.accommodations) {
+              return null;
+            }
             const hasBusinesses =
               (category === 'attractions' && attractionsList.length > 0) ||
               (category === 'dining' && diningList.length > 0) ||
@@ -200,3 +204,4 @@ export default function AreaFacts({ config }: { config?: any }) {
     </div>
   );
 }
+
