@@ -1176,7 +1176,18 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onChange={handleChange}
               className="mr-3"
             />
-            <span style={{ color: '#274E13' }}>Show Contact Section</span>
+            <span style={{ color: '#274E13' }}>            <label className="flex items-center">
+              <input
+                type="checkbox"
+                name="show_rsvp_deadline"
+                checked={formData.show_rsvp_deadline}
+                onChange={handleChange}
+                className="mr-3"
+              />
+              <span style={{ color: '#274E13'
+}}>Show RSVP Deadline</span>
+            </label>
+Show Contact Section</span>
           </label>
           <label className="flex items-center">
             <input
@@ -1269,6 +1280,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     </form>
   );
 }
+
+
 
 
 

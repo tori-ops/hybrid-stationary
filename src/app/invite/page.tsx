@@ -202,7 +202,19 @@ function InvitePageContent() {
           </section>
         )}
 
-        {/* Venue Information Section */}
+        {/* RSVP Deadline Section - Conditional */}
+          {invitation?.show_rsvp_deadline !== false && invitation?.rsvp_deadline && (
+            <section className="mb-12 flex
+justify-center">
+              <RSVPDeadline
+                rsvpDeadline={invitation.rsvp_deadline}
+                accentColor={invitation.accent_color || '#db2777'}
+                secondaryColor={invitation.secondary_color || '#274E13'}
+              />
+            </section>
+          )}
+
+          {/* Venue Information Section */}
         <section className="mb-12 flex justify-center">
           <VenueInfo config={config} />
         </section>
@@ -369,4 +381,7 @@ export default function InvitePage() {
     </Suspense>
   );
 }
+
+
+
 
