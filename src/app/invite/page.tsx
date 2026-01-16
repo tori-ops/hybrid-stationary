@@ -219,14 +219,9 @@ justify-center">
             </section>
           )}
 
-          {/* Venue Information Section */}
-        <section className="mb-12 flex justify-center">
-          <VenueInfo config={config} />
-        </section>
-
-        {/* RSVP & Couples Website Buttons */}
-        <section className="mb-12 flex justify-center gap-4 flex-wrap">
-            {invitation?.couples_website && (
+          {/* Visit the Couples Website Button */}
+          {invitation?.couples_website && (
+            <section className="mb-12 flex justify-center">
               <a
                 href={invitation.couples_website}
                 target="_blank"
@@ -240,9 +235,13 @@ justify-center">
               >
                 Visit the Couples Website!
               </a>
-            )}
+            </section>
+          )}
 
-          </section>
+          {/* Venue Information Section */}
+        <section className="mb-12 flex justify-center">
+          <VenueInfo config={config} />
+        </section>
 
         {/* Weather Widget Section - Conditional */}
         {invitation?.show_weather !== false && (
@@ -372,6 +371,8 @@ export default function InvitePage() {
     </Suspense>
   );
 }
+
+
 
 
 
