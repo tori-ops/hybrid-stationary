@@ -25,6 +25,7 @@ export default function RSVPDeadline({ rsvpDeadline, accentColor = '#db2777', se
           Kindly RSVP no later than <span style={{ color: accentColor }} className="font-bold">{formattedDate}</span>
         </p>
       </button>
+      <p className="text-center text-xs text-black mt-2">Click here</p>
     </div>
   );
 }

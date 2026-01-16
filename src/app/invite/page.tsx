@@ -241,21 +241,7 @@ justify-center">
                 Visit the Couples Website!
               </a>
             )}
-            {invitation?.rsvp_link && (
-              <a
-                href={invitation.rsvp_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded-lg font-semibold transition-opacity hover:opacity-90 border-2 whitespace-nowrap text-sm sm:text-base"
-                style={{
-                  backgroundColor: invitation.secondary_color || '#274E13',
-                  color: invitation.accent_color || '#db2777',
-                  borderColor: invitation.accent_color || '#db2777'
-                }}
-              >
-                RSVP Now
-              </a>
-            )}
+
           </section>
 
         {/* Weather Widget Section - Conditional */}
