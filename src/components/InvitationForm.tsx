@@ -346,6 +346,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
   return (
     <form onSubmit={handleSave} className="space-y-4 lg:space-y-8">
+        <p className="text-xs text-gray-600 mb-4">* Required fields</p>
       <style>{`
         input[type="text"],
         input[type="email"],
@@ -481,7 +482,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Event Slug (URL)
+              Event Slug (URL) *
             </label>
             <input
               type="text"
@@ -499,7 +500,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Wedding Date
+              Wedding Date *
             </label>
             <input
               type="date"
@@ -661,7 +662,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div className="md:col-span-2">
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Venue Name
+              Venue Name *
             </label>
             <input
               type="text"
@@ -1272,6 +1273,7 @@ Show Contact Section</span>
     </form>
   );
 }
+
 
 
 
