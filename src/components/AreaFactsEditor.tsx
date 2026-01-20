@@ -214,13 +214,26 @@ export default function AreaFactsEditor({
                   <label className="text-xs font-medium block mb-1" style={{ color: '#274E13' }}>
                     Phone
                   </label>
-                  <input
-                    type="tel"
-                    value={item.phone}
-                    onChange={(e) => handleItemChange(item.id, 'phone', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                    style={{ color: '#000' }}
-                  />
+                  <div className="flex gap-2 items-center">
+                    <input
+                      type="tel"
+                      value={item.phone}
+                      onChange={(e) => handleItemChange(item.id, 'phone', e.target.value)}
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm"
+                      style={{ color: '#000' }}
+                      placeholder="(555) 123-4567"
+                    />
+                    {item.phone && (
+                      <a
+                        href={`tel:${item.phone.replace(/\D/g, '')}`}
+                        className="px-2 py-2 text-white rounded text-xs font-semibold whitespace-nowrap"
+                        style={{ backgroundColor: '#274E13' }}
+                        title="Click to call"
+                      >
+                        📞 Call
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -228,30 +241,46 @@ export default function AreaFactsEditor({
                 <label className="text-xs font-medium block mb-1" style={{ color: '#274E13' }}>
                   Address
                 </label>
-                <input
-                  ref={(el) => {
-                    if (el) addressInputRefs.current[item.id] = el;
-                  }}
-                  type="text"
-                  value={item.address}
-                  onChange={(e) => handleAddressInput(item.id, e.target.value, index)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
-                  style={{ color: '#000' }}
-                  placeholder="Start typing address..."
-                />
-                {activeAddressIndex === index && addressSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded mt-1 z-10 max-h-48 overflow-y-auto">
-                    {addressSuggestions.map((suggestion) => (
-                      <div
-                        key={suggestion.place_id}
-                        onClick={() => handleSelectSuggestion(item.id, suggestion, index)}
-                        className="px-3 py-2 cursor-pointer hover:bg-gray-100 text-sm border-b border-gray-200"
-                      >
-                        {suggestion.description}
+                <div className="flex gap-2 items-start">
+                  <div className="flex-1 relative">
+                    <input
+                      ref={(el) => {
+                        if (el) addressInputRefs.current[item.id] = el;
+                      }}
+                      type="text"
+                      value={item.address}
+                      onChange={(e) => handleAddressInput(item.id, e.target.value, index)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                      style={{ color: '#000' }}
+                      placeholder="Start typing address..."
+                    />
+                    {activeAddressIndex === index && addressSuggestions.length > 0 && (
+                      <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded mt-1 z-10 max-h-48 overflow-y-auto">
+                        {addressSuggestions.map((suggestion) => (
+                          <div
+                            key={suggestion.place_id}
+                            onClick={() => handleSelectSuggestion(item.id, suggestion, index)}
+                            className="px-3 py-2 cursor-pointer hover:bg-gray-100 text-sm border-b border-gray-200"
+                          >
+                            {suggestion.description}
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    )}
                   </div>
-                )}
+                  {item.address && (
+                    <a
+                      href={`https://maps.google.com/?q=${encodeURIComponent(item.address)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-2 text-white rounded text-xs font-semibold whitespace-nowrap"
+                      style={{ backgroundColor: '#274E13' }}
+                      title="Open in Google Maps"
+                    >
+                      🗺️ Maps
+                    </a>
+                  )}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
