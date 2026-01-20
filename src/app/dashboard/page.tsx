@@ -70,6 +70,7 @@ export default function DashboardPage() {
       loadInvitation();
     } else {
       setSelectedInvite(null);
+      setLoading(false);
     }
   }, [selectedInviteId]);
 
