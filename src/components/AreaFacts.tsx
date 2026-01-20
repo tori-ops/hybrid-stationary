@@ -55,10 +55,20 @@ export default function AreaFacts({ config }: { config?: any }) {
           )}
         </div>
       </div>
-      <p className="text-sm text-gray-600 mb-1">{item.address}</p>
       <p className="text-sm text-gray-600 mb-1">
-        <a href={`tel:${item.phone}`} style={{ color: accentColor }} className="font-semibold">
-          {item.phone}
+        <a 
+          href={`https://maps.google.com/?q=${encodeURIComponent(item.address)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: accentColor }} 
+          className="font-semibold hover:underline"
+        >
+          📍 {item.address}
+        </a>
+      </p>
+      <p className="text-sm text-gray-600 mb-1">
+        <a href={`tel:${item.phone}`} style={{ color: accentColor }} className="font-semibold hover:underline">
+          📞 {item.phone}
         </a>
       </p>
       {item.distance && (
