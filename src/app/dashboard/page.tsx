@@ -66,9 +66,11 @@ export default function DashboardPage() {
 
   // Load selected invitation
   useEffect(() => {
+    console.log('Dashboard useEffect - selectedInviteId:', selectedInviteId);
     if (selectedInviteId) {
       loadInvitation();
     } else {
+      console.log('selectedInviteId is null/falsy, setting selectedInvite to null and loading to false');
       setSelectedInvite(null);
       setLoading(false);
     }
@@ -128,6 +130,7 @@ export default function DashboardPage() {
               <InvitationForm
                 invitation={null}
                 onSave={() => {
+                  console.log('Form saved, resetting state');
                   setSelectedInviteId(null);
                   setRefreshTrigger(prev => prev + 1);
                 }}
