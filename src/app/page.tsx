@@ -42,7 +42,7 @@ export default function Home() {
           {/* Title */}
           <div className="text-center mb-12">
             <h1 className="text-5xl md:text-6xl font-serif mb-6" style={{ color: '#274E13' }}>
-              Hybrid Wedding Invitation System
+              Digital Invitation & Guest Info Suite
             </h1>
             <p className="text-xl md:text-2xl max-w-2xl mx-auto" style={{ color: '#274E13' }}>
               Bridging the gap between elegant print and digital innovation. Send beautiful physical invitations paired with an interactive digital experience.
@@ -117,26 +117,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Features Section */}
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-serif mb-2" style={{ color: '#274E13' }}>
-                Interactive Cards
-              </h3>
-              <p className="text-gray-700">3D flip cards with elegant design</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-serif mb-2" style={{ color: '#274E13' }}>
-                Live Weather
-              </h3>
-              <p className="text-gray-700">10-day forecast for your venue</p>
-            </div>
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-serif mb-2" style={{ color: '#274E13' }}>
-                Full Customization
-              </h3>
-              <p className="text-gray-700">Colors, fonts, and content control</p>
-            </div>
+          {/* Footer */}
+          <div className="mt-20 text-center border-t pt-8" style={{ borderColor: '#274E13', color: '#274E13' }}>
+            <p className="text-sm">
+              Created by The Missing Piece Planning and Events
+            </p>
           </div>
         </div>
       </div>
