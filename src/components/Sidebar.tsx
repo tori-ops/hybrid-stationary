@@ -69,11 +69,11 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             </svg>
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-serif font-bold truncate leading-tight" style={{ color: '#274E13' }}>
+            <h1 className="text-base font-serif font-bold truncate leading-tight" style={{ color: '#274E13' }}>
               Digital Invitation & Guest Info Suite
             </h1>
-            <p className="text-xs truncate leading-tight\" style={{ color: '#666' }}>
-              Created and Coordinated by The Missing Piece Planning and Events
+            <p className="text-xs truncate leading-tight" style={{ color: '#666' }}>
+              Designed by The Missing Piece Planning and Events
             </p>
           </div>
           <div className="flex-shrink-0 ml-2">
