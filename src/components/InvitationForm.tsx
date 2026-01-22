@@ -162,6 +162,20 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [saving, setSaving] = useState(false);
   const [sendingApproval, setSendingApproval] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    coupleInfo: true,
+    weddingDetails: true,
+    eventTimeline: true,
+    venueInfo: true,
+    areaFacts: true,
+    displaySettings: true,
+    colorSettings: true,
+    contactInfo: true,
+    couplesFAQ: true,
+    stationery: true,
+    sectionVisibility: true,
+    publish: true,
+  });
 
   // Area facts list states - initialize from database
   const [attractionsList, setAttractionsList] = useState<any[]>(invitation?.attractions_list || []);
@@ -366,6 +380,13 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     }
   };
 
+  const toggleSection = (sectionKey: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey]
+    }));
+  };
+
   return (
     <form onSubmit={handleSave} className="space-y-4 lg:space-y-8">
         <p className="text-xs text-gray-600 mb-4">* Required fields</p>
@@ -412,96 +433,107 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Couple Information */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Couple Information
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
-          <div>
-            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Bride's Name
-            </label>
-            <input
-              type="text"
-              name="bride_name"
-              value={formData.bride_name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
-              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
-            />
-          
-            <label className="flex items-center mt-2">
+        <button
+          type="button"
+          onClick={() => toggleSection('coupleInfo')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Couple Information
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.coupleInfo ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.coupleInfo && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mt-4">
+            <div>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                Bride's Name
+              </label>
               <input
-                type="checkbox"
-                name="show_rsvp_deadline"
-                checked={formData.show_rsvp_deadline}
+                type="text"
+                name="bride_name"
+                value={formData.bride_name}
                 onChange={handleChange}
-                className="mr-3"
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+                style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
               />
-              <span style={{ color: '#274E13' }}>Show on Viewer</span>
-            </label></div>
-          <div>
-            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Groom's Name
-            </label>
-            <input
-              type="text"
-              name="groom_name"
-              value={formData.groom_name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
-              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
-            />
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                Groom's Name
+              </label>
+              <input
+                type="text"
+                name="groom_name"
+                value={formData.groom_name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+                style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                Couple Contact Name
+              </label>
+              <input
+                type="text"
+                name="couple_contact_name"
+                value={formData.couple_contact_name}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+                style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                Couple Email
+              </label>
+              <input
+                type="email"
+                name="couple_contact_email"
+                value={formData.couple_contact_email}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+                style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                Couple Phone
+              </label>
+              <input
+                type="tel"
+                name="couple_contact_phone"
+                value={formData.couple_contact_phone}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+                style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+              />
+            </div>
           </div>
-          <div>
-            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Couple Contact Name
-            </label>
-            <input
-              type="text"
-              name="couple_contact_name"
-              value={formData.couple_contact_name}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
-              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Couple Email
-            </label>
-            <input
-              type="email"
-              name="couple_contact_email"
-              value={formData.couple_contact_email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
-              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Couple Phone
-            </label>
-            <input
-              type="tel"
-              name="couple_contact_phone"
-              value={formData.couple_contact_phone}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
-              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
-            />
-          </div>
-        </div>
+        )}
       </section>
 
       {/* Wedding Details */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Wedding Details
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
+        <button
+          type="button"
+          onClick={() => toggleSection('weddingDetails')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Wedding Details
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.weddingDetails ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.weddingDetails && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mt-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Event Slug (URL) *
@@ -608,14 +640,25 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               />
             </div>
         </div>
+        )}
       </section>
 
       {/* Timeline Events */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Event Timeline
-        </h2>
-        <div className="space-y-2">
+        <button
+          type="button"
+          onClick={() => toggleSection('eventTimeline')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Event Timeline
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.eventTimeline ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.eventTimeline && (
+        <div className="space-y-2 mt-4">
           {timelineEvents.map((event, index) => (
             <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200">
               <div>
@@ -674,13 +717,24 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             + Add Event
           </button>
         </div>
+        )}
       </section>
 
       {/* Venue Information */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Venue Information
-        </h2>
+        <button
+          type="button"
+          onClick={() => toggleSection('venueInfo')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Venue Information
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.venueInfo ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.venueInfo && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div className="md:col-span-2">
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
@@ -790,6 +844,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             />
           </div>
         </div>
+        )}
       </section>
 
       {/* Guest Info At a Glance */}
