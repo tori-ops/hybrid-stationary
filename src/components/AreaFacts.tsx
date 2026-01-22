@@ -83,7 +83,7 @@ export default function AreaFacts({ config }: { config?: any }) {
   );
 
   return (
-    <div className="rounded-lg shadow-lg p-8 max-w-4xl" style={{ background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`, borderLeft: `4px solid ${secondaryColor}` }}>
+    <div className="rounded-lg shadow-lg p-4 md:p-8 max-w-4xl" style={{ background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`, borderLeft: `4px solid ${secondaryColor}` }}>
       <div className="mb-8">
         <h2 className="text-base md:text-lg font-serif mb-2" style={{ color: accentColor }}>
           Discover {venue.city}

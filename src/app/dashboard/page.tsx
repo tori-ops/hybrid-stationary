@@ -142,7 +142,7 @@ export default function DashboardPage() {
               <img 
                 src="/logo.png" 
                 alt="The Missing Piece Logo" 
-                className="h-28 w-auto object-contain"
+                className="h-16 md:h-28 w-auto object-contain"
               />
             </div>
           </div>

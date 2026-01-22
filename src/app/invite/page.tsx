@@ -359,7 +359,7 @@ justify-center">
               <img 
                 src={invitation.logo_url} 
                 alt="Logo" 
-                className="h-16 object-contain"
+                className="h-10 md:h-16 object-contain"
               />
             </div>
           )}

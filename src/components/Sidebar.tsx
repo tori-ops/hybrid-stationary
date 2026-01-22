@@ -81,7 +81,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             <img 
               src="/logo.png" 
               alt="Logo" 
-              className="h-12 w-auto object-contain"
+              className="h-8 md:h-12 w-auto object-contain"
             />
           </div>
         </div>
