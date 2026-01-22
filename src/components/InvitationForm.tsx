@@ -488,6 +488,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 name="couple_contact_name"
                 value={formData.couple_contact_name}
                 onChange={handleChange}
+                required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                 style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
               />
@@ -501,6 +502,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 name="couple_contact_email"
                 value={formData.couple_contact_email}
                 onChange={handleChange}
+                required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                 style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
               />
@@ -514,6 +516,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 name="couple_contact_phone"
                 value={formData.couple_contact_phone}
                 onChange={handleChange}
+                required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
                 style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
               />
@@ -806,6 +809,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_address"
               value={formData.venue_address}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
@@ -819,6 +823,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_city"
               value={formData.venue_city}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
@@ -832,6 +837,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_state"
               value={formData.venue_state}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
@@ -858,6 +864,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="venue_website"
               value={formData.venue_website}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
@@ -1177,6 +1184,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="planner_name"
               value={formData.planner_name}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
@@ -1190,6 +1198,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               name="planner_phone"
               value={formData.planner_phone}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
