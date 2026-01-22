@@ -73,7 +73,7 @@ export default function GuestInfoAtAGlance({
           Guest Info At a Glance
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {displayItems.map((item, index) => (
             <div key={index} className="flex flex-col">
               <p className="text-xs font-semibold mb-1" style={{ color: '#000' }}>
