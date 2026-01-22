@@ -126,7 +126,7 @@ export default function DashboardPage() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 p-4 lg:p-6 overflow-y-auto pt-20 lg:pt-0 lg:mt-0">
+      <div className="flex-1 p-4 lg:p-6 overflow-y-auto pt-36 lg:pt-0 lg:mt-0">
         {/* Page Header - Hidden on mobile since it's in the nav bar */}
         <div className="hidden lg:block bg-white rounded-lg shadow p-6 mb-6">
           <div className="flex items-start justify-between gap-6">
