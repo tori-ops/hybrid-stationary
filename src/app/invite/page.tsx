@@ -286,7 +286,7 @@ justify-center">
               {/* Left column: Heading and Timeline content */}
               <div className="flex-1 w-full">
                 <h2 className="text-xl md:text-2xl font-serif mb-4 md:mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
-                  Event Timeline
+                  'Day-of' Itinerary
                 </h2>
                 <div className="space-y-4">
                   {(invitation?.timeline_events || [

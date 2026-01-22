@@ -677,7 +677,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               {expandedSections.eventTimeline ? '−' : '+'}
             </span>
             <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
-              Event Timeline
+              'Day-of' Itinerary
             </h2>
           </button>
           <button
