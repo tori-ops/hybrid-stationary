@@ -71,7 +71,7 @@ export default function GuestInfoAtAGlance({
             <p className="text-xs font-semibold mb-1" style={{ color: '#000' }}>
               {item.label}
             </p>
-            <p className="text-sm text-gray-700">{item.value}</p>
+            <p className="text-base text-gray-700">{item.value}</p>
           </div>
         ))}
       </div>
