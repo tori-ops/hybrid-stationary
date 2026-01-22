@@ -118,6 +118,7 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen flex flex-col lg:flex-row" style={{ backgroundColor: '#f5f5f5' }}>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       {/* Sidebar */}
       <Sidebar 
         selectedInviteId={selectedInviteId} 

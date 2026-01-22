@@ -36,6 +36,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center px-4 pt-8" style={{ backgroundColor: '#D0CEB5' }}>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <style>{`
         input[type="email"],
         input[type="password"] {
