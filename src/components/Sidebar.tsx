@@ -24,6 +24,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
   const [invitations, setInvitations] = useState<Invitation[]>([]);
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
   useEffect(() => {
     if (user?.id) {
@@ -153,20 +154,87 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
           )}
         </div>
 
-        {/* Logout */}
+        {/* Logout & About */}
         <div className="p-3 border-t" style={{ borderColor: '#274E13' }}>
-          <button
-            onClick={async () => {
-              await signOut();
-              window.location.href = '/';
-            }}
-            className="w-full py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
-            style={{ color: '#274E13' }}
-          >
-            Logout
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowAboutModal(true)}
+              className="flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
+              style={{ color: '#274E13' }}
+            >
+              About
+            </button>
+            <button
+              onClick={async () => {
+                await signOut();
+                window.location.href = '/';
+              }}
+              className="flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
+              style={{ color: '#274E13' }}
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* About Modal */}
+      {showAboutModal && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowAboutModal(false)}
+        >
+          <div
+            className="bg-white rounded-lg shadow-lg max-w-sm w-full p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-serif font-bold" style={{ color: '#274E13' }}>
+                About
+              </h2>
+              <button
+                onClick={() => setShowAboutModal(false)}
+                className="text-gray-500 hover:text-gray-700 text-2xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-gray-600">Version</p>
+                <p className="text-lg font-semibold" style={{ color: '#274E13' }}>1.0.0</p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-600">Created by</p>
+                <p className="text-lg font-semibold" style={{ color: '#274E13' }}>
+                  The Missing Piece Planning and Events, LLC
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-600 mb-2">Contact</p>
+                <a
+                  href="mailto:tori@missingpieceplanning.com"
+                  className="inline-block py-2 px-4 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: '#274E13' }}
+                >
+                  Email Us
+                </a>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowAboutModal(false)}
+              className="w-full mt-6 py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
+              style={{ color: '#274E13', borderColor: '#274E13', border: '2px solid' }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
