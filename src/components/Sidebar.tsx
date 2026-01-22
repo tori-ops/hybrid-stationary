@@ -80,7 +80,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
 
       {/* Sidebar */}
       <div
-        className={`w-64 min-h-screen flex flex-col shadow-lg fixed left-0 top-0 bottom-0 z-40 transition-transform duration-300 lg:transition-none lg:z-auto lg:static lg:translate-x-0 ${
+        className={`w-64 min-h-screen flex flex-col shadow-lg fixed left-0 top-0 bottom-0 z-40 transition-transform duration-300 lg:transition-none lg:z-auto lg:fixed lg:translate-x-0 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
         style={{ backgroundColor: '#D0CEB5', marginTop: 'env(safe-area-inset-top)' }}
