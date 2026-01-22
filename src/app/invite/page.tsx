@@ -46,7 +46,6 @@ function InvitePageContent() {
   if (loading) {
     return (
       <main className="min-h-screen bg-white flex items-center justify-center">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <div className="text-center">
           <p className="text-gray-600 text-lg">Loading invitation...</p>
         </div>
