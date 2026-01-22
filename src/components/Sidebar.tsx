@@ -34,21 +34,29 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
   useEffect(() => {
     if (user?.id) {
       loadInvitations();
-      checkIfAdmin();
+      checkIfAdmin(user.id);
     }
   }, [user?.id, refreshTrigger]);
 
-  const checkIfAdmin = async () => {
+  const checkIfAdmin = async (userId: string) => {
     try {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('planners')
         .select('is_admin')
-        .eq('id', user?.id)
+        .eq('id', userId)
         .single();
 
+      if (error) {
+        console.error('Error checking admin status:', error);
+        setIsAdmin(false);
+        return;
+      }
+
       setIsAdmin(data?.is_admin || false);
+      console.log('Admin status for', userId, ':', data?.is_admin);
     } catch (err) {
       console.error('Failed to check admin status:', err);
+      setIsAdmin(false);
     }
   };
 
