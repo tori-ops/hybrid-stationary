@@ -321,13 +321,6 @@ justify-center">
           </div>
         </section>
 
-        {/* Area Facts Section - Conditional */}
-        {invitation?.show_area_facts !== false && (
-          <section className="mb-16 flex justify-center">
-            <AreaFacts config={{...config, backgroundImageUrl: invitation?.background_image_url}} />
-          </section>
-        )}
-
         {/* Couples FAQ Section - Conditional */}
         {invitation?.show_faq !== false && invitation?.faq_items && invitation.faq_items.length > 0 && (
           <section className="mb-16 flex justify-center">
@@ -336,6 +329,13 @@ justify-center">
               secondaryColor={invitation?.secondary_color || '#274E13'}
               accentColor={invitation?.accent_color || '#db2777'}
             />
+          </section>
+        )}
+
+        {/* Area Facts Section - Conditional */}
+        {invitation?.show_area_facts !== false && (
+          <section className="mb-16 flex justify-center">
+            <AreaFacts config={{...config, backgroundImageUrl: invitation?.background_image_url}} />
           </section>
         )}
 
