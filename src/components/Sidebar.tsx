@@ -57,8 +57,8 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
   return (
     <>
       {/* Mobile Hamburger Menu with Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 p-4 z-50" style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
-        <div className="flex items-center justify-between gap-3">
+      <div className="lg:hidden fixed top-0 left-0 right-0 p-3 z-50" style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
+        <div className="flex items-center justify-between gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg transition-opacity hover:opacity-75 flex-shrink-0"
@@ -69,12 +69,19 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             </svg>
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-base font-serif font-bold truncate" style={{ color: '#274E13' }}>
+            <h1 className="text-sm font-serif font-bold truncate leading-tight" style={{ color: '#274E13' }}>
               Digital Invitation & Guest Info Suite
             </h1>
-            <p className="text-xs truncate" style={{ color: '#666' }}>
-              The Missing Piece Planning and Events
+            <p className="text-xs truncate leading-tight\" style={{ color: '#666' }}>
+              Created and Coordinated by The Missing Piece Planning and Events
             </p>
+          </div>
+          <div className="flex-shrink-0 ml-2">
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="h-12 w-auto object-contain"
+            />
           </div>
         </div>
       </div>
