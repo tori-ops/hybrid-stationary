@@ -690,7 +690,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               border: `2px solid #274E13`
             }}
           >
-            {formData.show_event_timeline ? 'Make Hidden' : 'Make Visible'}
+            {formData.show_event_timeline ? 'Exclude' : 'Include'}
           </button>
         </div>
         {expandedSections.eventTimeline && (
@@ -781,7 +781,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               border: `2px solid #274E13`
             }}
           >
-            {formData.show_venue_info ? 'Make Hidden' : 'Make Visible'}
+            {formData.show_venue_info ? 'Exclude' : 'Include'}
           </button>
         </div>
         {expandedSections.venueInfo && (
@@ -926,7 +926,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               border: `2px solid #274E13`
             }}
           >
-            {formData.show_guest_info ? 'Make Hidden' : 'Make Visible'}
+            {formData.show_guest_info ? 'Exclude' : 'Include'}
           </button>
         </div>
         {expandedSections.guestInfo && (
@@ -1084,7 +1084,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               border: `2px solid #274E13`
             }}
           >
-            {formData.show_faq ? 'Make Hidden' : 'Make Visible'}
+            {formData.show_faq ? 'Exclude' : 'Include'}
           </button>
         </div>
         {expandedSections.couplesFAQ && (
@@ -1169,7 +1169,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               border: `2px solid #274E13`
             }}
           >
-            {formData.show_planner_info ? 'Make Hidden' : 'Make Visible'}
+            {formData.show_planner_info ? 'Exclude' : 'Include'}
           </button>
         </div>
         {expandedSections.plannerInfo && (
@@ -1304,7 +1304,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               border: `2px solid #274E13`
             }}
           >
-            {formData.show_area_facts ? 'Make Hidden' : 'Make Visible'}
+            {formData.show_area_facts ? 'Exclude' : 'Include'}
           </button>
         </div>
         {expandedSections.areaFacts && (
