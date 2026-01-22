@@ -40,20 +40,13 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
 
   const checkIfAdmin = async (userId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('planners')
         .select('is_admin')
         .eq('id', userId)
         .single();
 
-      if (error) {
-        console.error('Error checking admin status:', error);
-        setIsAdmin(false);
-        return;
-      }
-
-      setIsAdmin(data?.is_admin || false);
-      console.log('Admin status for', userId, ':', data?.is_admin);
+      setIsAdmin(data?.is_admin === true);
     } catch (err) {
       console.error('Failed to check admin status:', err);
       setIsAdmin(false);
