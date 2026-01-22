@@ -131,10 +131,11 @@ export default function DashboardPage() {
         <div className="hidden lg:block bg-white rounded-lg shadow p-6 mb-6">
           <div className="flex items-center justify-between gap-6">
             <div className="flex-1">
-              <h1 className="text-7xl font-serif font-bold leading-tight" style={{ color: '#274E13' }}>
-                Digital Invitation &<br />Guest Info Suite
+              <h1 className="text-7xl font-serif font-bold leading-none" style={{ color: '#274E13' }}>
+                <div>Digital Invitation &</div>
+                <div>Guest Info Suite</div>
               </h1>
-              <p className="text-sm mt-2" style={{ color: '#666' }}>
+              <p className="text-sm mt-3" style={{ color: '#666' }}>
                 Designed by The Missing Piece Planning and Events
               </p>
             </div>
