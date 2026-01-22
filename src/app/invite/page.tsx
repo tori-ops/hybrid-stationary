@@ -8,6 +8,7 @@ import StationeryDisplay from '@/components/StationeryDisplay';
 import VenueInfo from '@/components/VenueInfo';
 import RSVPDeadline from '@/components/RSVPDeadline';
 import GuestInfoAtAGlance from '@/components/GuestInfoAtAGlance';
+import CouplesFAQ from '@/components/CouplesFAQ';
 import WeatherWidget from '@/components/WeatherWidget';
 import AreaFacts from '@/components/AreaFacts';
 import ContactSection from '@/components/ContactSection';
@@ -324,6 +325,17 @@ justify-center">
         {invitation?.show_area_facts !== false && (
           <section className="mb-16 flex justify-center">
             <AreaFacts config={{...config, backgroundImageUrl: invitation?.background_image_url}} />
+          </section>
+        )}
+
+        {/* Couples FAQ Section - Conditional */}
+        {invitation?.show_faq !== false && invitation?.faq_items && invitation.faq_items.length > 0 && (
+          <section className="mb-16 flex justify-center">
+            <CouplesFAQ
+              faqItems={invitation.faq_items}
+              secondaryColor={invitation?.secondary_color || '#274E13'}
+              accentColor={invitation?.accent_color || '#db2777'}
+            />
           </section>
         )}
 

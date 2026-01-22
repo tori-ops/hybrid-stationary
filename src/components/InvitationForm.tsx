@@ -72,6 +72,8 @@ interface Invitation {
   reception_venue_name?: string;
   reception_venue_address?: string;
   ceremony_indoor_outdoor?: string;
+  show_faq: boolean;
+  faq_items: Array<{ question: string; answer: string }> | null;
   is_published: boolean;
   approval_status?: string;
   approval_token?: string;
@@ -151,6 +153,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       reception_venue_name: '',
       reception_venue_address: '',
       ceremony_indoor_outdoor: 'Indoor',
+      show_faq: true,
+      faq_items: [],
       is_published: false,
     }
   );
@@ -165,6 +169,9 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [activitiesList, setActivitiesList] = useState<any[]>(invitation?.activities_list || []);
   const [accommodationsList, setAccommodationsList] = useState<any[]>(invitation?.accommodations_list || []);
   const [stationeryItems, setStationeryItems] = useState<any[]>(invitation?.stationery_items || []);
+  const [faqItems, setFaqItems] = useState<Array<{ question: string; answer: string }>>(
+    invitation?.faq_items || Array(7).fill(null).map(() => ({ question: '', answer: '' }))
+  );
   const [timelineEvents, setTimelineEvents] = useState<any[]>(
     invitation?.timeline_events || [
       { time: '4:30 PM', name: 'Ceremony' },
@@ -271,6 +278,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         accommodations_list: accommodationsList,
         stationery_items: stationeryItems,
         timeline_events: timelineEvents,
+        faq_items: faqItems,
       };
 
       if (invitation?.id) {
@@ -913,6 +921,65 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               <span className="text-xs text-gray-700">Indoor and Outdoor (Weather Permitting)</span>
             </label>
           </div>
+        </div>
+      </section>
+
+      {/* Couples FAQ */}
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
+          Couples FAQ
+        </h2>
+        
+        <div className="flex items-center gap-3 mb-6 pb-6 border-b">
+          <input
+            type="checkbox"
+            name="show_faq"
+            checked={formData.show_faq}
+            onChange={handleChange}
+            className="w-4 h-4 rounded"
+          />
+          <span className="text-xs font-medium text-gray-700">Show to Guests</span>
+        </div>
+
+        <div className="space-y-4">
+          {faqItems.map((item, index) => (
+            <div key={index} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+              <div className="mb-3">
+                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                  Question {index + 1}
+                </label>
+                <input
+                  type="text"
+                  value={item.question}
+                  onChange={(e) => {
+                    const updated = [...faqItems];
+                    updated[index].question = e.target.value;
+                    setFaqItems(updated);
+                  }}
+                  placeholder="Enter question"
+                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                  style={{ color: '#000' }}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                  Answer {index + 1}
+                </label>
+                <textarea
+                  value={item.answer}
+                  onChange={(e) => {
+                    const updated = [...faqItems];
+                    updated[index].answer = e.target.value;
+                    setFaqItems(updated);
+                  }}
+                  placeholder="Enter answer"
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                  style={{ color: '#000' }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

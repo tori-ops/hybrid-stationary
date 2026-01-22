@@ -52,6 +52,8 @@ interface Invitation {
   reception_venue_name: string;
   reception_venue_address: string;
   ceremony_indoor_outdoor: string;
+  show_faq: boolean;
+  faq_items: Array<{ question: string; answer: string }> | null;
   is_published: boolean;
 }
 
