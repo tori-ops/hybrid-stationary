@@ -149,7 +149,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto -mt-6">
+        <div className="max-w-5xl mx-auto -mt-12">
           {loading ? (
             <p className="text-sm text-gray-600">Loading invitation...</p>
           ) : !selectedInvite ? (
