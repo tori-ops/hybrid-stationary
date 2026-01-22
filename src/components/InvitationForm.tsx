@@ -445,7 +445,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
             {expandedSections.coupleInfo ? '−' : '+'}
           </span>
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+          <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
             Couple Information
           </h2>
         </button>
@@ -535,7 +535,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
             {expandedSections.weddingDetails ? '−' : '+'}
           </span>
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+          <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
             Wedding Details
           </h2>
         </button>
@@ -676,7 +676,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
               {expandedSections.eventTimeline ? '−' : '+'}
             </span>
-            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
               'Day-of' Itinerary
             </h2>
           </button>
@@ -779,7 +779,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
               {expandedSections.venueInfo ? '−' : '+'}
             </span>
-            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
               Venue Information
             </h2>
           </button>
@@ -936,7 +936,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
               {expandedSections.guestInfo ? '−' : '+'}
             </span>
-            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
               Guest Info At a Glance
             </h2>
           </button>
@@ -1106,7 +1106,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
               {expandedSections.couplesFAQ ? '−' : '+'}
             </span>
-            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
               Couples FAQ
             </h2>
           </button>
@@ -1203,7 +1203,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
               {expandedSections.plannerInfo ? '−' : '+'}
             </span>
-            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
               Planner Information
             </h2>
           </button>
@@ -1350,7 +1350,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
               {expandedSections.areaFacts ? '−' : '+'}
             </span>
-            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
               Area Facts & Attractions
             </h2>
           </button>
@@ -1474,7 +1474,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
             {expandedSections.stationery ? '−' : '+'}
           </span>
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+          <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
             Stationery Images
           </h2>
         </button>
@@ -1597,7 +1597,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           <span style={{ color: '#274E13', fontSize: '1.25rem', marginRight: '0.5rem' }}>
             {expandedSections.styling ? '−' : '+'}
           </span>
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+          <h2 className="text-lg font-serif" style={{ color: '#274E13' }}>
             Styling
           </h2>
         </button>
