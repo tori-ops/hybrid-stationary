@@ -71,8 +71,10 @@ export interface Invitation {
   show_attractions: boolean;
   show_contact_section: boolean;
   show_venue_info: boolean;
+  show_event_timeline: boolean;
   show_rsvp_deadline: boolean;
   show_guest_info: boolean;
+  show_planner_info: boolean;
   guest_arrival_time: string | null;
   parking_info: string | null;
   same_location: boolean;

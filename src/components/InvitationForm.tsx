@@ -64,8 +64,10 @@ interface Invitation {
   show_attractions: boolean;
   show_contact_section: boolean;
   show_venue_info: boolean;
+  show_event_timeline: boolean;
   show_rsvp_deadline: boolean;
   show_guest_info: boolean;
+  show_planner_info: boolean;
   guest_arrival_time?: string;
   parking_info?: string;
   same_location?: boolean;
@@ -145,8 +147,10 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       show_attractions: true,
       show_contact_section: true,
       show_venue_info: true,
+      show_event_timeline: true,
       show_rsvp_deadline: true,
       show_guest_info: true,
+      show_planner_info: true,
       guest_arrival_time: '',
       parking_info: '',
       same_location: true,
@@ -645,18 +649,32 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Timeline Events */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <button
-          type="button"
-          onClick={() => toggleSection('eventTimeline')}
-          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
-        >
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
-            Event Timeline
-          </h2>
-          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
-            {expandedSections.eventTimeline ? '−' : '+'}
-          </span>
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => toggleSection('eventTimeline')}
+            className="flex-1 flex items-center justify-between hover:opacity-75 transition-opacity"
+          >
+            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+              Event Timeline
+            </h2>
+            <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+              {expandedSections.eventTimeline ? '−' : '+'}
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleChange({ target: { name: 'show_event_timeline', value: !formData.show_event_timeline } } as any)}
+            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+            style={{
+              backgroundColor: formData.show_event_timeline ? '#274E13' : '#e5e7eb',
+              color: formData.show_event_timeline ? 'white' : '#274E13',
+              border: `2px solid #274E13`
+            }}
+          >
+            {formData.show_event_timeline ? 'Make Hidden' : 'Make Visible'}
+          </button>
+        </div>
         {expandedSections.eventTimeline && (
         <div className="space-y-2 mt-4">
           {timelineEvents.map((event, index) => (
@@ -722,18 +740,32 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Venue Information */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <button
-          type="button"
-          onClick={() => toggleSection('venueInfo')}
-          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
-        >
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
-            Venue Information
-          </h2>
-          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
-            {expandedSections.venueInfo ? '−' : '+'}
-          </span>
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => toggleSection('venueInfo')}
+            className="flex-1 flex items-center justify-between hover:opacity-75 transition-opacity"
+          >
+            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+              Venue Information
+            </h2>
+            <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+              {expandedSections.venueInfo ? '−' : '+'}
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleChange({ target: { name: 'show_venue_info', value: !formData.show_venue_info } } as any)}
+            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+            style={{
+              backgroundColor: formData.show_venue_info ? '#274E13' : '#e5e7eb',
+              color: formData.show_venue_info ? 'white' : '#274E13',
+              border: `2px solid #274E13`
+            }}
+          >
+            {formData.show_venue_info ? 'Make Hidden' : 'Make Visible'}
+          </button>
+        </div>
         {expandedSections.venueInfo && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
           <div className="md:col-span-2">
@@ -849,18 +881,32 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Guest Info At a Glance */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <button
-          type="button"
-          onClick={() => toggleSection('guestInfo')}
-          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
-        >
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
-            Guest Info At a Glance
-          </h2>
-          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
-            {expandedSections.guestInfo ? '−' : '+'}
-          </span>
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => toggleSection('guestInfo')}
+            className="flex-1 flex items-center justify-between hover:opacity-75 transition-opacity"
+          >
+            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+              Guest Info At a Glance
+            </h2>
+            <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+              {expandedSections.guestInfo ? '−' : '+'}
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleChange({ target: { name: 'show_guest_info', value: !formData.show_guest_info } } as any)}
+            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+            style={{
+              backgroundColor: formData.show_guest_info ? '#274E13' : '#e5e7eb',
+              color: formData.show_guest_info ? 'white' : '#274E13',
+              border: `2px solid #274E13`
+            }}
+          >
+            {formData.show_guest_info ? 'Make Hidden' : 'Make Visible'}
+          </button>
+        </div>
         {expandedSections.guestInfo && (
         <>
           <div className="flex items-center gap-3 mt-4 mb-4">
@@ -993,18 +1039,32 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Couples FAQ */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <button
-          type="button"
-          onClick={() => toggleSection('couplesFAQ')}
-          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
-        >
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
-            Couples FAQ
-          </h2>
-          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
-            {expandedSections.couplesFAQ ? '−' : '+'}
-          </span>
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => toggleSection('couplesFAQ')}
+            className="flex-1 flex items-center justify-between hover:opacity-75 transition-opacity"
+          >
+            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+              Couples FAQ
+            </h2>
+            <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+              {expandedSections.couplesFAQ ? '−' : '+'}
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleChange({ target: { name: 'show_faq', value: !formData.show_faq } } as any)}
+            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+            style={{
+              backgroundColor: formData.show_faq ? '#274E13' : '#e5e7eb',
+              color: formData.show_faq ? 'white' : '#274E13',
+              border: `2px solid #274E13`
+            }}
+          >
+            {formData.show_faq ? 'Make Hidden' : 'Make Visible'}
+          </button>
+        </div>
         {expandedSections.couplesFAQ && (
         <>
           <div className="flex items-center gap-3 mt-4 mb-4">
@@ -1064,18 +1124,32 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Planner Information */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <button
-          type="button"
-          onClick={() => toggleSection('plannerInfo')}
-          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
-        >
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
-            Planner Information
-          </h2>
-          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
-            {expandedSections.plannerInfo ? '−' : '+'}
-          </span>
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => toggleSection('plannerInfo')}
+            className="flex-1 flex items-center justify-between hover:opacity-75 transition-opacity"
+          >
+            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+              Planner Information
+            </h2>
+            <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+              {expandedSections.plannerInfo ? '−' : '+'}
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleChange({ target: { name: 'show_planner_info', value: !formData.show_planner_info } } as any)}
+            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+            style={{
+              backgroundColor: formData.show_planner_info ? '#274E13' : '#e5e7eb',
+              color: formData.show_planner_info ? 'white' : '#274E13',
+              border: `2px solid #274E13`
+            }}
+          >
+            {formData.show_planner_info ? 'Make Hidden' : 'Make Visible'}
+          </button>
+        </div>
         {expandedSections.plannerInfo && (
         <>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-6 border-b mt-4">
@@ -1183,18 +1257,32 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Area Facts */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <button
-          type="button"
-          onClick={() => toggleSection('areaFacts')}
-          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
-        >
-          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
-            Area Facts & Attractions
-          </h2>
-          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
-            {expandedSections.areaFacts ? '−' : '+'}
-          </span>
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => toggleSection('areaFacts')}
+            className="flex-1 flex items-center justify-between hover:opacity-75 transition-opacity"
+          >
+            <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+              Area Facts & Attractions
+            </h2>
+            <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+              {expandedSections.areaFacts ? '−' : '+'}
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleChange({ target: { name: 'show_area_facts', value: !formData.show_area_facts } } as any)}
+            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+            style={{
+              backgroundColor: formData.show_area_facts ? '#274E13' : '#e5e7eb',
+              color: formData.show_area_facts ? 'white' : '#274E13',
+              border: `2px solid #274E13`
+            }}
+          >
+            {formData.show_area_facts ? 'Make Hidden' : 'Make Visible'}
+          </button>
+        </div>
         {expandedSections.areaFacts && (
         <>
         
