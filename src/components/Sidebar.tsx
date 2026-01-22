@@ -167,7 +167,10 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             <button
               onClick={async () => {
                 await signOut();
-                window.location.href = '/';
+                // Add a small delay to ensure signOut completes and clears the session
+                setTimeout(() => {
+                  window.location.href = '/';
+                }, 100);
               }}
               className="flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
               style={{ color: '#274E13' }}
