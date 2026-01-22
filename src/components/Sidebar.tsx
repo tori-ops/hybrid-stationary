@@ -104,7 +104,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
         style={{ backgroundColor: '#D0CEB5', marginTop: 'env(safe-area-inset-top)', top: '56px', height: 'calc(100vh - 56px)' }}
       >
         {/* Header */}
-        <div className="p-3 pt-4 border-b lg:p-4" style={{ borderColor: '#274E13' }}>
+        <div className="p-3 pt-8 border-b lg:p-4" style={{ borderColor: '#274E13' }}>
           <h1 className="text-base lg:text-lg font-serif font-bold leading-tight" style={{ color: '#274E13' }}>
             My Invitations
           </h1>
