@@ -49,7 +49,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4" style={{ backgroundColor: '#D0CEB5' }}>
+    <main className="min-h-screen flex flex-col items-center px-4 pt-8" style={{ backgroundColor: '#D0CEB5' }}>
       <style>{`
         input[type="email"],
         input[type="password"] {
@@ -70,7 +70,7 @@ export default function LoginPage() {
         />
       </div>
       
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md flex-1 flex items-center justify-center pb-32">
         
         {/* Logo/Title */}
         <div className="text-center mb-6">
