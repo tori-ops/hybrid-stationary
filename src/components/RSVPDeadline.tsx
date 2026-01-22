@@ -48,7 +48,7 @@ export default function RSVPDeadline({
           </span>
         </p>
       </button>
-      <p className="text-center text-xs text-black mt-2">Click here</p>
+      <p className="text-center text-xs text-black mt-2">Please submit your response here</p>
     </div>
   );
 }
