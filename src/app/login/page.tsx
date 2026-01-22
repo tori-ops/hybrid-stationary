@@ -62,11 +62,11 @@ export default function LoginPage() {
       `}</style>
       
       {/* Logo */}
-      <div className="text-center mb-8 pt-8 md:pt-0">
+      <div className="text-center mb-8 flex-shrink-0">
         <img 
           src="/logo.png" 
           alt="Logo" 
-          className="h-24 md:h-32 mx-auto w-auto object-contain"
+          className="h-32 md:h-48 mx-auto w-auto object-contain"
         />
       </div>
       
