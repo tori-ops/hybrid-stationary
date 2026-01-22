@@ -167,12 +167,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     weddingDetails: true,
     eventTimeline: true,
     venueInfo: true,
-    areaFacts: true,
-    displaySettings: true,
-    colorSettings: true,
-    contactInfo: true,
+    guestInfo: true,
     couplesFAQ: true,
+    plannerInfo: true,
+    areaFacts: true,
     stationery: true,
+    styling: true,
     sectionVisibility: true,
     publish: true,
   });
@@ -849,22 +849,32 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       {/* Guest Info At a Glance */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Guest Info At a Glance
-        </h2>
-        
-        <div className="flex items-center gap-3 mb-6 pb-6 border-b">
-          <input
-            type="checkbox"
-            name="show_guest_info"
-            checked={formData.show_guest_info}
-            onChange={handleChange}
-            className="w-4 h-4 rounded"
-          />
-          <span className="text-xs font-medium text-gray-700">Show to Guests</span>
-        </div>
+        <button
+          type="button"
+          onClick={() => toggleSection('guestInfo')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Guest Info At a Glance
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.guestInfo ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.guestInfo && (
+        <>
+          <div className="flex items-center gap-3 mt-4 mb-4">
+            <input
+              type="checkbox"
+              name="show_guest_info"
+              checked={formData.show_guest_info}
+              onChange={handleChange}
+              className="w-4 h-4 rounded"
+            />
+            <span className="text-xs font-medium text-gray-700">Show to Guests</span>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Guest Arrival Time
@@ -977,18 +987,30 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </label>
           </div>
         </div>
+        </>
+        )}
       </section>
 
       {/* Couples FAQ */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Couples FAQ
-        </h2>
-        
-        <div className="flex items-center gap-3 mb-6 pb-6 border-b">
-          <input
-            type="checkbox"
-            name="show_faq"
+        <button
+          type="button"
+          onClick={() => toggleSection('couplesFAQ')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Couples FAQ
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.couplesFAQ ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.couplesFAQ && (
+        <>
+          <div className="flex items-center gap-3 mt-4 mb-4">
+            <input
+              type="checkbox"
+              name="show_faq"
             checked={formData.show_faq}
             onChange={handleChange}
             className="w-4 h-4 rounded"
@@ -1036,14 +1058,27 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </div>
           ))}
         </div>
+        </>
+        )}
       </section>
 
       {/* Planner Information */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Planner Information
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-6 border-b">
+        <button
+          type="button"
+          onClick={() => toggleSection('plannerInfo')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Planner Information
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.plannerInfo ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.plannerInfo && (
+        <>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-6 border-b mt-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Planner Name
@@ -1142,13 +1177,26 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             )}
           </div>
         </div>
+        </>
+        )}
       </section>
 
       {/* Area Facts */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Area Facts & Attractions
-        </h2>
+        <button
+          type="button"
+          onClick={() => toggleSection('areaFacts')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Area Facts & Attractions
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.areaFacts ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.areaFacts && (
+        <>
         
         {/* Toggles for each category */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mb-6 pb-6 border-b">
@@ -1228,13 +1276,26 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             venueLongitude={formData.venue_longitude}
           />
         </div>
+        </>
+        )}
       </section>
 
       {/* Stationery Items */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Stationery Images
-        </h2>
+        <button
+          type="button"
+          onClick={() => toggleSection('stationery')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Stationery Images
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.stationery ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.stationery && (
+        <div className="mt-4">
         <StationeryEditor
           items={stationeryItems}
           onItemsChange={setStationeryItems}
@@ -1338,14 +1399,26 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </div>
           </div>
         </div>
+        </div>
+        )}
       </section>
 
       {/* Styling */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Styling
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
+        <button
+          type="button"
+          onClick={() => toggleSection('styling')}
+          className="w-full flex items-center justify-between hover:opacity-75 transition-opacity"
+        >
+          <h2 className="text-xl font-serif" style={{ color: '#274E13' }}>
+            Styling
+          </h2>
+          <span style={{ color: '#274E13', fontSize: '1.25rem' }}>
+            {expandedSections.styling ? '−' : '+'}
+          </span>
+        </button>
+        {expandedSections.styling && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mt-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Primary Color
@@ -1401,6 +1474,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </select>
           </div>
         </div>
+        )}
       </section>
 
       {/* Section Visibility */}
