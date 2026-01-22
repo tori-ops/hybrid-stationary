@@ -166,6 +166,18 @@ function InvitePageContent() {
         backgroundPosition: 'center'
       }}
     >
+      {/* Page Header */}
+      <div className="bg-white bg-opacity-95 border-b border-gray-200 py-6 md:py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <h1 className="text-3xl md:text-4xl font-serif mb-2" style={{ color: '#274E13' }}>
+            Digital Invitation Suite & Guest Info
+          </h1>
+          <p className="text-base md:text-lg" style={{ color: '#666' }}>
+            Created and Coordinated by The Missing Piece Planning and Events
+          </p>
+        </div>
+      </div>
+
       {/* Content Sections */}
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Proof Watermark - Show in proof mode */}
