@@ -25,18 +25,18 @@ export default function AuthCallbackContent() {
 
           if (error) {
             setMessage('❌ Verification failed: ' + error.message);
-            setTimeout(() => router.push('/login'), 3000);
+            setTimeout(() => router.push('/'), 3000);
           } else {
             setMessage('✅ Email verified! Redirecting to dashboard...');
             setTimeout(() => router.push('/dashboard'), 2000);
           }
         } else {
           setMessage('❌ Invalid verification link');
-          setTimeout(() => router.push('/login'), 3000);
+          setTimeout(() => router.push('/'), 3000);
         }
       } catch (err) {
         setMessage('❌ An error occurred: ' + (err instanceof Error ? err.message : 'Unknown error'));
-        setTimeout(() => router.push('/login'), 3000);
+        setTimeout(() => router.push('/'), 3000);
       }
     };
 

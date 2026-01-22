@@ -122,7 +122,7 @@ export default function Home() {
           </form>
 
           <button
-            onClick={() => router.push('/login')}
+            onClick={() => router.push('/')}
             className="w-full mt-4 text-sm font-medium transition-opacity hover:opacity-75"
             style={{ color: '#274E13' }}
           >
