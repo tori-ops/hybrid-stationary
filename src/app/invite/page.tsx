@@ -279,7 +279,7 @@ justify-center">
         {/* Event Timeline Section */}
         <section className="mb-12 flex justify-center relative px-4">
           <div className="rounded-lg shadow-lg p-4 md:p-8 max-w-4xl w-full flex flex-row" style={{
-            background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`,
+            background: `linear-gradient(135deg, white, ${invitation?.secondary_color}15)`,
             borderLeft: `4px solid ${invitation?.secondary_color || '#274E13'}`
           }}>
             <div className="flex flex-row gap-4 md:gap-8 items-center flex-1">
