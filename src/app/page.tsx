@@ -6,7 +6,7 @@ import { useAuth } from '@/lib/auth-context';
 import Link from 'next/link';
 
 export default function Home() {
-  const { signIn, user } = useAuth();
+  const { signIn, user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +27,15 @@ export default function Home() {
       router.push('/dashboard');
     }
   };
+
+  // If auth is still loading, show loading state
+  if (authLoading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <p className="text-lg text-gray-600">Loading...</p>
+      </main>
+    );
+  }
 
   // If logged in, redirect to dashboard
   if (user) {
