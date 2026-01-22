@@ -573,6 +573,21 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+              Ceremony Time *
+            </label>
+            <input
+              type="time"
+              name="ceremony_time"
+              value={formData.ceremony_time}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
               Timezone
             </label>
             <select
