@@ -121,7 +121,7 @@ export default function InviteCard({ config }: { config?: any }) {
       background: `linear-gradient(to bottom right, ${secondaryColor}10, ${accentColor}10)`
     }}>
       <div className="mb-8">
-        <h1 className="text-4xl font-serif mb-2" style={{ color: secondaryColor }}>Your Wedding Invitation</h1>
+        <h1 className="text-2xl md:text-3xl font-serif mb-2" style={{ color: secondaryColor }}>Your Wedding Invitation</h1>
         <p className="text-gray-600 text-center">Click the card below to reveal both sides</p>
       </div>
 
@@ -156,9 +156,9 @@ export default function InviteCard({ config }: { config?: any }) {
                 {inviteText.front.subtitle}
               </p>
               <div className="py-6 border-y" style={{ borderColor: accentColor }}>
-                <h2 className="text-3xl font-serif" style={{ color: secondaryColor }}>{couple.brideName}</h2>
-                <p className="text-sm text-gray-600 my-2">and</p>
-                <h2 className="text-3xl font-serif" style={{ color: secondaryColor }}>{couple.groomName}</h2>
+                <h2 className="text-xl md:text-2xl font-serif" style={{ color: secondaryColor }}>{couple.brideName}</h2>
+                <p className="text-xs text-gray-600 my-2">and</p>
+                <h2 className="text-xl md:text-2xl font-serif" style={{ color: secondaryColor }}>{couple.groomName}</h2>
               </div>
               <p className="text-xs text-gray-600 italic">Together with their parents</p>
               <p className="text-sm text-gray-600">
@@ -180,7 +180,7 @@ export default function InviteCard({ config }: { config?: any }) {
           >
             <div className="space-y-4 text-sm">
               <div>
-                <p className="font-serif text-2xl mb-2" style={{ color: secondaryColor }}>{couple.date}</p>
+                <p className="font-serif text-lg md:text-xl mb-2" style={{ color: secondaryColor }}>{couple.date}</p>
                 <p className="text-gray-700">{couple.time} {couple.timezone}</p>
               </div>
 

@@ -20,7 +20,7 @@ export default function ContactSection({ config }: { config?: any }) {
 
   return (
     <div className="rounded-lg shadow-lg p-8 max-w-2xl" style={{ background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`, borderLeft: `4px solid ${secondaryColor}` }}>
-      <h2 className="text-xl md:text-2xl font-serif mb-6 text-center" style={{ color: accentColor }}>Questions?</h2>
+      <h2 className="text-base md:text-lg font-serif mb-6 text-center" style={{ color: accentColor }}>Questions?</h2>
 
       {/* Toggle Buttons */}
       <div className="flex gap-4 mb-8 justify-center">

@@ -63,10 +63,10 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo/Title */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-serif mb-4" style={{ color: '#274E13' }}>
+          <h1 className="text-3xl md:text-4xl font-serif mb-4" style={{ color: '#274E13' }}>
             Digital Invitation & Guest Info Suite
           </h1>
-          <p className="text-base md:text-lg max-w-md mx-auto" style={{ color: '#274E13' }}>
+          <p className="text-sm md:text-base max-w-md mx-auto" style={{ color: '#274E13' }}>
             Bridging the gap between elegant print and digital innovation. Send beautiful physical invitations paired with an interactive digital experience.
           </p>
         </div>
@@ -143,7 +143,7 @@ export default function LoginPage() {
             </>
           ) : (
             <>
-              <h2 className="text-2xl font-serif text-center mb-6" style={{ color: '#274E13' }}>
+              <h2 className="text-lg font-serif text-center mb-6" style={{ color: '#274E13' }}>
                 Reset Password
               </h2>
 

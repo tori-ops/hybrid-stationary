@@ -41,17 +41,17 @@ export default function Home() {
         <div className="max-w-4xl w-full">
           {/* Title */}
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-serif mb-6" style={{ color: '#274E13' }}>
+            <h1 className="text-3xl md:text-4xl font-serif mb-6" style={{ color: '#274E13' }}>
               Digital Invitation & Guest Info Suite
             </h1>
-            <p className="text-xl md:text-2xl max-w-2xl mx-auto" style={{ color: '#274E13' }}>
+            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: '#274E13' }}>
               Bridging the gap between elegant print and digital innovation. Send beautiful physical invitations paired with an interactive digital experience.
             </p>
           </div>
 
           {/* Login Form */}
           <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md mx-auto">
-            <h2 className="text-2xl font-serif text-center mb-6" style={{ color: '#274E13' }}>
+            <h2 className="text-xl font-serif text-center mb-6" style={{ color: '#274E13' }}>
               Planner Login
             </h2>
 

@@ -102,7 +102,7 @@ export default function WeatherWidget({
         background: `linear-gradient(135deg, white, ${secondaryColor}15)`,
         borderLeft: `4px solid ${secondaryColor}`
       }}>
-        <h3 className="text-xl md:text-2xl font-serif mb-2" style={{ color: accentColor }}>{city} Weather Forecast</h3>
+        <h3 className="text-base md:text-lg font-serif mb-2" style={{ color: accentColor }}>{city} Weather Forecast</h3>
         <p style={{ color: accentColor, opacity: 0.9 }}>7-Day Outlook</p>
       </div>
 
@@ -120,7 +120,7 @@ export default function WeatherWidget({
               })}
             </p>
 
-            <div className="text-2xl md:text-3xl my-2">
+            <div className="text-lg md:text-2xl my-2">
               {getWeatherIcon(dailyData.weathercode[index])}
             </div>
 

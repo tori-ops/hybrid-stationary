@@ -85,7 +85,7 @@ export default function AreaFacts({ config }: { config?: any }) {
   return (
     <div className="rounded-lg shadow-lg p-8 max-w-4xl" style={{ background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`, borderLeft: `4px solid ${secondaryColor}` }}>
       <div className="mb-8">
-        <h2 className="text-xl md:text-2xl font-serif mb-2" style={{ color: accentColor }}>
+        <h2 className="text-base md:text-lg font-serif mb-2" style={{ color: accentColor }}>
           Discover {venue.city}
         </h2>
         <p className="text-gray-600">
@@ -134,7 +134,7 @@ export default function AreaFacts({ config }: { config?: any }) {
                   borderColor: accentColor,
                 }}
               >
-                <h3 className="text-xl md:text-2xl font-serif mb-3" style={{ color: accentColor }}>
+                <h3 className="text-base md:text-lg font-serif mb-3" style={{ color: accentColor }}>
                   {fact.title}
                 </h3>
                 <p className="text-sm md:text-base text-gray-700">{fact.description}</p>
@@ -162,7 +162,7 @@ export default function AreaFacts({ config }: { config?: any }) {
         >
           <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
-              <h2 className="text-2xl font-serif" style={{ color: accentColor }}>
+              <h2 className="text-base md:text-lg font-serif" style={{ color: accentColor }}>
                 {selectedCategory === 'attractions'
                   ? 'Local Attractions'
                   : selectedCategory === 'dining'
@@ -176,7 +176,7 @@ export default function AreaFacts({ config }: { config?: any }) {
                   setIsModalOpen(false);
                   setSelectedCategory(null);
                 }}
-                className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+                className="text-gray-500 hover:text-gray-700 text-lg font-bold"
               >
                 ✕
               </button>

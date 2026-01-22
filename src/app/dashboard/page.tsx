@@ -131,7 +131,7 @@ export default function DashboardPage() {
         <div className="hidden lg:block bg-white rounded-lg shadow p-6 mb-6">
           <div className="flex items-start justify-between gap-6">
             <div className="flex-1">
-              <div className="text-7xl font-serif font-bold mb-1" style={{ color: '#274E13', lineHeight: '1.1' }}>
+              <div className="text-4xl md:text-5xl font-serif font-bold mb-1" style={{ color: '#274E13', lineHeight: '1.1' }}>
                 Digital Invitation &<br />Guest Info Suite
               </div>
               <p className="text-sm mt-3" style={{ color: '#666' }}>
@@ -153,7 +153,7 @@ export default function DashboardPage() {
             <p className="text-sm text-gray-600">Loading invitation...</p>
           ) : !selectedInvite ? (
             <>
-              <h1 className="text-2xl lg:text-3xl font-serif mb-2" style={{ color: '#274E13' }}>
+              <h1 className="text-lg md:text-xl font-serif mb-2" style={{ color: '#274E13' }}>
                 Create New Invitation
               </h1>
               <p className="text-xs lg:text-sm text-gray-600 mb-6">
@@ -172,7 +172,7 @@ export default function DashboardPage() {
             <>
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mb-6">
                 <div>
-                  <h1 className="text-2xl lg:text-3xl font-serif mb-1" style={{ color: '#274E13' }}>
+                  <h1 className="text-lg md:text-xl font-serif mb-1" style={{ color: '#274E13' }}>
                     {selectedInvite.bride_name} & {selectedInvite.groom_name}
                   </h1>
                   <p className="text-xs lg:text-sm text-gray-600">

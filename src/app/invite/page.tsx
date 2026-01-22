@@ -285,7 +285,7 @@ justify-center">
             <div className="flex flex-row gap-4 md:gap-8 items-center flex-1">
               {/* Left column: Heading and Timeline content */}
               <div className="flex-1 w-full">
-                <h2 className="text-xl md:text-2xl font-serif mb-4 md:mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
+                <h2 className="text-base md:text-lg font-serif mb-4 md:mb-8" style={{ color: invitation?.accent_color || '#FF6B6B' }}>
                   'Day-of' Itinerary
                 </h2>
                 <div className="space-y-4">

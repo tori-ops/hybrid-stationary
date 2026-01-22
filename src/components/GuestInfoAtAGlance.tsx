@@ -69,7 +69,7 @@ export default function GuestInfoAtAGlance({
           borderColor: accentColor,
         }}
       >
-        <h2 className="text-xl md:text-2xl font-serif mb-6" style={{ color: accentColor }}>
+        <h2 className="text-base md:text-lg font-serif mb-6" style={{ color: accentColor }}>
           Guest Info At a Glance
         </h2>
 
