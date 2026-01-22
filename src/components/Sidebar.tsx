@@ -58,7 +58,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
     <>
       {/* Mobile Hamburger Menu with Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 p-4 z-50" style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-3">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg transition-opacity hover:opacity-75 flex-shrink-0"
@@ -69,9 +69,12 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             </svg>
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-lg font-serif font-bold truncate" style={{ color: '#274E13' }}>
+            <h1 className="text-base font-serif font-bold truncate" style={{ color: '#274E13' }}>
               Digital Invitation & Guest Info Suite
             </h1>
+            <p className="text-xs truncate" style={{ color: '#666' }}>
+              The Missing Piece Planning and Events
+            </p>
           </div>
         </div>
       </div>
