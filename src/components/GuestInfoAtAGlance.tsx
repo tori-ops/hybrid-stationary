@@ -32,7 +32,7 @@ export default function GuestInfoAtAGlance({
   };
 
   const infoItems = [
-    { label: 'Arrival Time', value: guestArrivalTime ? formatTime(guestArrivalTime) : null },
+    { label: 'Suggested Arrival Time', value: guestArrivalTime ? formatTime(guestArrivalTime) : null },
     { label: 'Parking', value: parkingInfo },
     {
       label: 'Ceremony & Reception',
