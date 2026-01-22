@@ -156,8 +156,8 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
         {/* Logout */}
         <div className="p-3 border-t" style={{ borderColor: '#274E13' }}>
           <button
-            onClick={() => {
-              signOut();
+            onClick={async () => {
+              await signOut();
               window.location.href = '/';
             }}
             className="w-full py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
