@@ -168,8 +168,17 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             </button>
             <button
               onClick={async () => {
-                await signOut();
-                router.push('/');
+                try {
+                  console.log('Logout button clicked');
+                  await signOut();
+                  console.log('Sign out completed');
+                  // Close the mobile menu if open
+                  setMobileMenuOpen(false);
+                  console.log('Redirecting to /');
+                  router.push('/');
+                } catch (error) {
+                  console.error('Logout error:', error);
+                }
               }}
               className="flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
               style={{ color: '#274E13' }}
