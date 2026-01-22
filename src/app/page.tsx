@@ -135,13 +135,6 @@ export default function Home() {
           >
             Forgot password?
           </button>
-
-          <div className="text-center mt-6 text-sm text-gray-600">
-            Don't have an account?{' '}
-            <Link href="/signup" style={{ color: '#274E13' }} className="font-semibold hover:underline">
-              Sign up
-            </Link>
-          </div>
         </div>
       </div>
 
