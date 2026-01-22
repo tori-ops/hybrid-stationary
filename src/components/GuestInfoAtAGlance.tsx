@@ -55,25 +55,34 @@ export default function GuestInfoAtAGlance({
 
   return (
     <div
-      className="rounded-lg shadow-lg p-8 max-w-4xl"
+      className="rounded-lg shadow-lg p-8 max-w-4xl relative"
       style={{
+        zIndex: 10,
         background: `linear-gradient(135deg, white, rgba(39, 78, 19, 0.05))`,
         borderLeft: `4px solid ${secondaryColor}`,
       }}
     >
-      <h2 className="text-xl md:text-2xl font-serif mb-6" style={{ color: accentColor }}>
-        Guest Info At a Glance
-      </h2>
+      <div
+        className="p-6 rounded-lg border-2"
+        style={{
+          background: `linear-gradient(to right, ${secondaryColor}15, ${accentColor}15)`,
+          borderColor: accentColor,
+        }}
+      >
+        <h2 className="text-xl md:text-2xl font-serif mb-6" style={{ color: accentColor }}>
+          Guest Info At a Glance
+        </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {displayItems.map((item, index) => (
-          <div key={index} className="flex flex-col">
-            <p className="text-xs font-semibold mb-1" style={{ color: '#000' }}>
-              {item.label}
-            </p>
-            <p className="text-base text-gray-700">{item.value}</p>
-          </div>
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {displayItems.map((item, index) => (
+            <div key={index} className="flex flex-col">
+              <p className="text-xs font-semibold mb-1" style={{ color: '#000' }}>
+                {item.label}
+              </p>
+              <p className="text-base text-gray-700">{item.value}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
