@@ -56,17 +56,24 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
 
   return (
     <>
-      {/* Mobile Hamburger Menu */}
+      {/* Mobile Hamburger Menu with Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 p-4 z-50" style={{ backgroundColor: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="p-2 rounded-lg transition-opacity hover:opacity-75"
-          style={{ color: '#274E13' }}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        <div className="flex items-center justify-between gap-4">
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-lg transition-opacity hover:opacity-75 flex-shrink-0"
+            style={{ color: '#274E13' }}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-lg font-serif font-bold truncate" style={{ color: '#274E13' }}>
+              Digital Invitation & Guest Info Suite
+            </h1>
+          </div>
+        </div>
       </div>
 
       {/* Mobile Menu Overlay */}
