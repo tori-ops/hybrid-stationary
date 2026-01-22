@@ -203,7 +203,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             <div className="space-y-4">
               <div>
                 <p className="text-sm text-gray-600">Version</p>
-                <p className="text-lg font-semibold" style={{ color: '#274E13' }}>1.0.0</p>
+                <p className="text-lg font-semibold" style={{ color: '#274E13' }}>1.4.2</p>
               </div>
 
               <div>
