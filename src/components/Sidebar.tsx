@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
+import CreatePlannerModal from './CreatePlannerModal';
 
 interface Invitation {
   id: string;
@@ -27,12 +28,29 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showAboutModal, setShowAboutModal] = useState(false);
+  const [showCreatePlannerModal, setShowCreatePlannerModal] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (user?.id) {
       loadInvitations();
+      checkIfAdmin();
     }
   }, [user?.id, refreshTrigger]);
+
+  const checkIfAdmin = async () => {
+    try {
+      const { data } = await supabase
+        .from('planners')
+        .select('is_admin')
+        .eq('id', user?.id)
+        .single();
+
+      setIsAdmin(data?.is_admin || false);
+    } catch (err) {
+      console.error('Failed to check admin status:', err);
+    }
+  };
 
   const loadInvitations = async () => {
     try {
@@ -156,6 +174,19 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
           )}
         </div>
 
+        {/* Create Planner Profile (Tori only) */}
+        {isAdmin && (
+          <div className="p-3 border-t" style={{ borderColor: '#274E13' }}>
+            <button
+              onClick={() => setShowCreatePlannerModal(true)}
+              className="w-full py-2 px-3 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: '#274E13' }}
+            >
+              Create Planner Profile
+            </button>
+          </div>
+        )}
+
         {/* Logout & About */}
         <div className="p-3 border-t" style={{ borderColor: '#274E13' }}>
           <div className="flex gap-2">
@@ -246,6 +277,17 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
           </div>
         </div>
       )}
+
+      {/* Create Planner Modal */}
+      <CreatePlannerModal
+        isOpen={showCreatePlannerModal}
+        onClose={() => setShowCreatePlannerModal(false)}
+        plannerUserId={user?.id}
+        onSuccess={() => {
+          setShowCreatePlannerModal(false);
+          loadInvitations();
+        }}
+      />
     </>
   );
 }
