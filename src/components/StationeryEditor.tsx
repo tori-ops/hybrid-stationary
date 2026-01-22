@@ -124,9 +124,12 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                   disabled={!canAdd}
                   className={`px-3 py-1 rounded text-sm font-medium transition ${
                     canAdd
-                      ? 'bg-blue-500 text-white hover:bg-blue-600'
-                      : 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                  }`}
+                        ? 'text-white hover:opacity-90'
+                        : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                    }`}
+                    style={{
+                      backgroundColor: canAdd ? '#274E13' : undefined
+                    }}
                 >
                   + Add {label}
                 </button>
