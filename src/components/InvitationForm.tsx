@@ -1565,55 +1565,6 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         )}
       </section>
 
-      {/* Section Visibility */}
-      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
-        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
-          Section Visibility
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="show_weather"
-              checked={formData.show_weather}
-              onChange={handleChange}
-              className="mr-3"
-            />
-            <span style={{ color: '#274E13' }}>Show Weather Widget</span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="show_area_facts"
-              checked={formData.show_area_facts}
-              onChange={handleChange}
-              className="mr-3"
-            />
-            <span style={{ color: '#274E13' }}>Show Area Facts</span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="show_contact_section"
-              checked={formData.show_contact_section}
-              onChange={handleChange}
-              className="mr-3"
-            />
-            <span style={{ color: '#274E13' }}>Show Contact Section</span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="show_venue_info"
-              checked={formData.show_venue_info}
-              onChange={handleChange}
-              className="mr-3"
-            />
-            <span style={{ color: '#274E13' }}>Show Venue Info</span>
-          </label>
-        </div>
-      </section>
-
       {/* Publish */}
       <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <label className="flex items-center">
