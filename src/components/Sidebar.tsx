@@ -42,14 +42,34 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
     try {
       const { data } = await supabase
         .from('planners')
-        .select('is_admin')
+        .select('is_admin, email')
         .eq('id', userId)
         .single();
 
-      setIsAdmin(data?.is_admin === true);
+      if (data?.is_admin === true) {
+        setIsAdmin(true);
+        console.log('✅ Admin status: TRUE');
+        return;
+      }
+
+      // Fallback: check if this is Tori's email
+      if (data?.email === 'tori@missingpieceplanning.com' || user?.email === 'tori@missingpieceplanning.com') {
+        setIsAdmin(true);
+        console.log('✅ Admin status: TRUE (via email fallback)');
+        return;
+      }
+
+      setIsAdmin(false);
+      console.log('❌ Admin status: FALSE', data);
     } catch (err) {
       console.error('Failed to check admin status:', err);
-      setIsAdmin(false);
+      // Fallback: check user email directly
+      if (user?.email === 'tori@missingpieceplanning.com') {
+        setIsAdmin(true);
+        console.log('✅ Admin status: TRUE (via email fallback after error)');
+      } else {
+        setIsAdmin(false);
+      }
     }
   };
 
