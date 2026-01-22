@@ -901,6 +901,17 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               />
               <span className="text-xs text-gray-700">Outdoor</span>
             </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="ceremony_indoor_outdoor"
+                value="Indoor and Outdoor (Weather Permitting)"
+                checked={formData.ceremony_indoor_outdoor === 'Indoor and Outdoor (Weather Permitting)'}
+                onChange={handleChange}
+                className="w-4 h-4"
+              />
+              <span className="text-xs text-gray-700">Indoor and Outdoor (Weather Permitting)</span>
+            </label>
           </div>
         </div>
       </section>

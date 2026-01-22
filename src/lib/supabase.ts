@@ -78,7 +78,7 @@ export interface Invitation {
   same_location: boolean;
   reception_venue_name: string | null;
   reception_venue_address: string | null;
-  ceremony_indoor_outdoor: 'Indoor' | 'Outdoor' | null;
+  ceremony_indoor_outdoor: 'Indoor' | 'Outdoor' | 'Indoor and Outdoor (Weather Permitting)' | null;
   is_published: boolean;
   approval_status: string | null;
   approval_token: string | null;
