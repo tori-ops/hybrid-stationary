@@ -58,6 +58,15 @@ export default function ContactSection({ config }: { config?: any }) {
 
       {/* Contact Information */}
       <div className="space-y-6">
+        {/* Additional Info - MOVED TO TOP */}
+        <div className="bg-gray-50 rounded-lg p-4 border-l-4" style={{ borderColor: accentColor }}>
+          <p className="text-sm text-gray-700">
+            {contactType === 'planner'
+              ? 'For planning questions, RSVP details, or logistics, please contact the wedding planner listed below. This helps keep the couple focused on enjoying their day'
+              : 'For personal messages or non-urgent notes, you may reach out to the couple directly; please note they may have limited availability as the wedding day approaches.'}
+          </p>
+        </div>
+
         <div className="text-center">
           <p className="text-sm md:text-base font-semibold text-gray-800 mb-4">{selectedContact.name}</p>
 
@@ -96,15 +105,6 @@ export default function ContactSection({ config }: { config?: any }) {
               </div>
             </a>
           </div>
-        </div>
-
-        {/* Additional Info */}
-        <div className="bg-gray-50 rounded-lg p-4 border-l-4" style={{ borderColor: accentColor }}>
-          <p className="text-sm text-gray-700">
-            {contactType === 'planner'
-              ? 'For planning questions, RSVP details, or logistics - reach out to the wedding planner. This helps keep the couple stress-free!'
-              : 'For personal messages or special requests for the couple, feel free to reach out directly.'}
-          </p>
         </div>
       </div>
     </div>
