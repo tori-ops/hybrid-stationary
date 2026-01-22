@@ -98,10 +98,10 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
 
       {/* Sidebar */}
       <div
-        className={`w-64 min-h-screen flex flex-col shadow-lg fixed left-0 top-0 bottom-0 z-50 transition-transform duration-300 lg:transition-none lg:relative lg:z-auto ${
+        className={`w-64 min-h-screen flex flex-col shadow-lg fixed left-0 bottom-0 z-40 transition-transform duration-300 lg:transition-none lg:relative lg:z-auto lg:top-0 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
-        style={{ backgroundColor: '#D0CEB5', marginTop: 'env(safe-area-inset-top)' }}
+        style={{ backgroundColor: '#D0CEB5', marginTop: 'env(safe-area-inset-top)', top: '56px', height: 'calc(100vh - 56px)' }}
       >
         {/* Header */}
         <div className="p-3 border-b mt-0 lg:mt-0 lg:p-4" style={{ borderColor: '#274E13' }}>
