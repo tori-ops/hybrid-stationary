@@ -63,11 +63,11 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo/Title */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-serif mb-2" style={{ color: '#274E13' }}>
-            Missing Piece Planning
+          <h1 className="text-4xl md:text-5xl font-serif mb-4" style={{ color: '#274E13' }}>
+            Digital Invitation & Guest Info Suite
           </h1>
-          <p className="text-lg" style={{ color: '#274E13' }}>
-            Hybrid Invitation System
+          <p className="text-base md:text-lg max-w-md mx-auto" style={{ color: '#274E13' }}>
+            Bridging the gap between elegant print and digital innovation. Send beautiful physical invitations paired with an interactive digital experience.
           </p>
         </div>
 
@@ -195,6 +195,13 @@ export default function LoginPage() {
             </>
           )}
         </div>
+      </div>
+
+      {/* Footer */}
+      <div className="fixed bottom-0 left-0 right-0 border-t py-6 text-center" style={{ borderColor: '#274E13', color: '#274E13', backgroundColor: '#D0CEB5' }}>
+        <p className="text-sm">
+          Created by The Missing Piece Planning and Events
+        </p>
       </div>
     </main>
   );
