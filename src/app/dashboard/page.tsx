@@ -45,6 +45,13 @@ interface Invitation {
   show_contact_section: boolean;
   show_venue_info: boolean;
   show_rsvp_deadline: boolean;
+  show_guest_info: boolean;
+  guest_arrival_time: string;
+  parking_info: string;
+  same_location: boolean;
+  reception_venue_name: string;
+  reception_venue_address: string;
+  ceremony_indoor_outdoor: string;
   is_published: boolean;
 }
 

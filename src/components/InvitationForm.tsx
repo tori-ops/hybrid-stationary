@@ -65,6 +65,13 @@ interface Invitation {
   show_contact_section: boolean;
   show_venue_info: boolean;
   show_rsvp_deadline: boolean;
+  show_guest_info: boolean;
+  guest_arrival_time?: string;
+  parking_info?: string;
+  same_location?: boolean;
+  reception_venue_name?: string;
+  reception_venue_address?: string;
+  ceremony_indoor_outdoor?: string;
   is_published: boolean;
   approval_status?: string;
   approval_token?: string;
@@ -137,6 +144,13 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       show_contact_section: true,
       show_venue_info: true,
       show_rsvp_deadline: true,
+      show_guest_info: true,
+      guest_arrival_time: '',
+      parking_info: '',
+      same_location: true,
+      reception_venue_name: '',
+      reception_venue_address: '',
+      ceremony_indoor_outdoor: 'Indoor',
       is_published: false,
     }
   );
@@ -766,6 +780,127 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Guest Info At a Glance */}
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
+        <h2 className="text-xl font-serif mb-4" style={{ color: '#274E13' }}>
+          Guest Info At a Glance
+        </h2>
+        
+        <div className="flex items-center gap-3 mb-6 pb-6 border-b">
+          <input
+            type="checkbox"
+            name="show_guest_info"
+            checked={formData.show_guest_info}
+            onChange={handleChange}
+            className="w-4 h-4 rounded"
+          />
+          <span className="text-xs font-medium text-gray-700">Show to Guests</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+              Guest Arrival Time
+            </label>
+            <input
+              type="time"
+              name="guest_arrival_time"
+              value={formData.guest_arrival_time}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+              Where Should I Park?
+            </label>
+            <input
+              type="text"
+              name="parking_info"
+              value={formData.parking_info}
+              onChange={handleChange}
+              placeholder="e.g., Lot A on Main Street"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+          </div>
+        </div>
+
+        <div className="mb-6 pb-6 border-b">
+          <label className="flex items-center gap-3 text-xs font-medium" style={{ color: '#274E13' }}>
+            <input
+              type="checkbox"
+              name="same_location"
+              checked={formData.same_location}
+              onChange={handleChange}
+              className="w-4 h-4 rounded"
+            />
+            Ceremony & Reception at Same Location
+          </label>
+          {!formData.same_location && (
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                  Reception Venue Name
+                </label>
+                <input
+                  type="text"
+                  name="reception_venue_name"
+                  value={formData.reception_venue_name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+                  style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+                  Reception Venue Address
+                </label>
+                <input
+                  type="text"
+                  name="reception_venue_address"
+                  value={formData.reception_venue_address}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+                  style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+            Ceremony Location
+          </label>
+          <div className="flex gap-4">
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="ceremony_indoor_outdoor"
+                value="Indoor"
+                checked={formData.ceremony_indoor_outdoor === 'Indoor'}
+                onChange={handleChange}
+                className="w-4 h-4"
+              />
+              <span className="text-xs text-gray-700">Indoor</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="ceremony_indoor_outdoor"
+                value="Outdoor"
+                checked={formData.ceremony_indoor_outdoor === 'Outdoor'}
+                onChange={handleChange}
+                className="w-4 h-4"
+              />
+              <span className="text-xs text-gray-700">Outdoor</span>
+            </label>
           </div>
         </div>
       </section>

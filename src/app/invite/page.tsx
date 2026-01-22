@@ -7,6 +7,7 @@ import { invitationToConfig } from '@/lib/invitationConfig';
 import StationeryDisplay from '@/components/StationeryDisplay';
 import VenueInfo from '@/components/VenueInfo';
 import RSVPDeadline from '@/components/RSVPDeadline';
+import GuestInfoAtAGlance from '@/components/GuestInfoAtAGlance';
 import WeatherWidget from '@/components/WeatherWidget';
 import AreaFacts from '@/components/AreaFacts';
 import ContactSection from '@/components/ContactSection';
@@ -242,6 +243,22 @@ justify-center">
         <section className="mb-12 flex justify-center">
           <VenueInfo config={config} />
         </section>
+
+        {/* Guest Info At a Glance Section - Conditional */}
+        {invitation?.show_guest_info !== false && (
+          <section className="mb-12 flex justify-center">
+            <GuestInfoAtAGlance
+              guestArrivalTime={invitation?.guest_arrival_time || undefined}
+              parkingInfo={invitation?.parking_info || undefined}
+              sameLocation={invitation?.same_location !== false}
+              receptionVenueName={invitation?.reception_venue_name || undefined}
+              receptionVenueAddress={invitation?.reception_venue_address || undefined}
+              ceremonyIndoorOutdoor={invitation?.ceremony_indoor_outdoor || undefined}
+              secondaryColor={invitation?.secondary_color || '#274E13'}
+              accentColor={invitation?.accent_color || '#db2777'}
+            />
+          </section>
+        )}
 
         {/* Weather Widget Section - Conditional */}
         {invitation?.show_weather !== false && (

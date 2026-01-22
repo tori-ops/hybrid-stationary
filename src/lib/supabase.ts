@@ -72,6 +72,13 @@ export interface Invitation {
   show_contact_section: boolean;
   show_venue_info: boolean;
   show_rsvp_deadline: boolean;
+  show_guest_info: boolean;
+  guest_arrival_time: string | null;
+  parking_info: string | null;
+  same_location: boolean;
+  reception_venue_name: string | null;
+  reception_venue_address: string | null;
+  ceremony_indoor_outdoor: 'Indoor' | 'Outdoor' | null;
   is_published: boolean;
   approval_status: string | null;
   approval_token: string | null;
