@@ -69,7 +69,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             </svg>
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-base font-serif font-bold leading-tight" style={{ color: '#274E13', lineHeight: '1.2' }}>
+            <h1 className="text-2xl font-serif font-bold leading-tight" style={{ color: '#274E13', lineHeight: '1.2' }}>
               Digital Invitation &<br />Guest Info Suite
             </h1>
             <p className="text-xs truncate leading-tight" style={{ color: '#666' }}>
