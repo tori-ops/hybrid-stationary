@@ -680,22 +680,24 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               'Day-of' Itinerary
             </h2>
           </button>
-          <button
-            type="button"
-            onClick={() => handleChange({ target: { name: 'show_event_timeline', value: !formData.show_event_timeline } } as any)}
-            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2"
-            style={{
-              backgroundColor: formData.show_event_timeline ? '#274E13' : '#e5e7eb',
-              color: formData.show_event_timeline ? 'white' : '#274E13',
-              border: `2px solid #274E13`
-            }}
-          >
-            {formData.show_event_timeline ? 'Exclude' : 'Include'}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'show_event_timeline', value: !formData.show_event_timeline } } as any)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+              style={{
+                backgroundColor: formData.show_event_timeline ? '#274E13' : '#e5e7eb',
+                color: formData.show_event_timeline ? 'white' : '#274E13',
+                border: `2px solid #274E13`
+              }}
+            >
+              {formData.show_event_timeline ? 'Exclude' : 'Include'}
+            </button>
             <div className="relative group">
               <button
                 type="button"
-                className="ml-2 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
-                style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
+                style={{ backgroundColor: '#274E13', color: 'white' }}
               >
                 ?
               </button>
@@ -703,7 +705,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 Controls whether guests can see this section on the invitation. Click 'Include' to show it, or 'Exclude' to hide it.
               </div>
             </div>
-          </button>
+          </div>
         </div>
         {expandedSections.eventTimeline && (
         <div className="space-y-2 mt-4">
@@ -783,22 +785,24 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               Venue Information
             </h2>
           </button>
-          <button
-            type="button"
-            onClick={() => handleChange({ target: { name: 'show_venue_info', value: !formData.show_venue_info } } as any)}
-            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2"
-            style={{
-              backgroundColor: formData.show_venue_info ? '#274E13' : '#e5e7eb',
-              color: formData.show_venue_info ? 'white' : '#274E13',
-              border: `2px solid #274E13`
-            }}
-          >
-            {formData.show_venue_info ? 'Exclude' : 'Include'}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'show_venue_info', value: !formData.show_venue_info } } as any)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+              style={{
+                backgroundColor: formData.show_venue_info ? '#274E13' : '#e5e7eb',
+                color: formData.show_venue_info ? 'white' : '#274E13',
+                border: `2px solid #274E13`
+              }}
+            >
+              {formData.show_venue_info ? 'Exclude' : 'Include'}
+            </button>
             <div className="relative group">
               <button
                 type="button"
-                className="ml-2 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
-                style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
+                style={{ backgroundColor: '#274E13', color: 'white' }}
               >
                 ?
               </button>
@@ -806,7 +810,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 Controls whether guests can see this section on the invitation. Click 'Include' to show it, or 'Exclude' to hide it.
               </div>
             </div>
-          </button>
+          </div>
         </div>
         {expandedSections.venueInfo && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4">
@@ -940,22 +944,24 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               Guest Info At a Glance
             </h2>
           </button>
-          <button
-            type="button"
-            onClick={() => handleChange({ target: { name: 'show_guest_info', value: !formData.show_guest_info } } as any)}
-            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2"
-            style={{
-              backgroundColor: formData.show_guest_info ? '#274E13' : '#e5e7eb',
-              color: formData.show_guest_info ? 'white' : '#274E13',
-              border: `2px solid #274E13`
-            }}
-          >
-            {formData.show_guest_info ? 'Exclude' : 'Include'}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'show_guest_info', value: !formData.show_guest_info } } as any)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+              style={{
+                backgroundColor: formData.show_guest_info ? '#274E13' : '#e5e7eb',
+                color: formData.show_guest_info ? 'white' : '#274E13',
+                border: `2px solid #274E13`
+              }}
+            >
+              {formData.show_guest_info ? 'Exclude' : 'Include'}
+            </button>
             <div className="relative group">
               <button
                 type="button"
-                className="ml-2 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
-                style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
+                style={{ backgroundColor: '#274E13', color: 'white' }}
               >
                 ?
               </button>
@@ -963,7 +969,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 Controls whether guests can see this section on the invitation. Click 'Include' to show it, or 'Exclude' to hide it.
               </div>
             </div>
-          </button>
+          </div>
         </div>
         {expandedSections.guestInfo && (
         <>
@@ -1110,22 +1116,24 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               Couples FAQ
             </h2>
           </button>
-          <button
-            type="button"
-            onClick={() => handleChange({ target: { name: 'show_faq', value: !formData.show_faq } } as any)}
-            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2"
-            style={{
-              backgroundColor: formData.show_faq ? '#274E13' : '#e5e7eb',
-              color: formData.show_faq ? 'white' : '#274E13',
-              border: `2px solid #274E13`
-            }}
-          >
-            {formData.show_faq ? 'Exclude' : 'Include'}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'show_faq', value: !formData.show_faq } } as any)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+              style={{
+                backgroundColor: formData.show_faq ? '#274E13' : '#e5e7eb',
+                color: formData.show_faq ? 'white' : '#274E13',
+                border: `2px solid #274E13`
+              }}
+            >
+              {formData.show_faq ? 'Exclude' : 'Include'}
+            </button>
             <div className="relative group">
               <button
                 type="button"
-                className="ml-2 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
-                style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
+                style={{ backgroundColor: '#274E13', color: 'white' }}
               >
                 ?
               </button>
@@ -1133,7 +1141,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 Controls whether guests can see this section on the invitation. Click 'Include' to show it, or 'Exclude' to hide it.
               </div>
             </div>
-          </button>
+          </div>
         </div>
         {expandedSections.couplesFAQ && (
         <>
@@ -1207,22 +1215,24 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               Planner Information
             </h2>
           </button>
-          <button
-            type="button"
-            onClick={() => handleChange({ target: { name: 'show_planner_info', value: !formData.show_planner_info } } as any)}
-            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2"
-            style={{
-              backgroundColor: formData.show_planner_info ? '#274E13' : '#e5e7eb',
-              color: formData.show_planner_info ? 'white' : '#274E13',
-              border: `2px solid #274E13`
-            }}
-          >
-            {formData.show_planner_info ? 'Exclude' : 'Include'}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'show_planner_info', value: !formData.show_planner_info } } as any)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+              style={{
+                backgroundColor: formData.show_planner_info ? '#274E13' : '#e5e7eb',
+                color: formData.show_planner_info ? 'white' : '#274E13',
+                border: `2px solid #274E13`
+              }}
+            >
+              {formData.show_planner_info ? 'Exclude' : 'Include'}
+            </button>
             <div className="relative group">
               <button
                 type="button"
-                className="ml-2 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
-                style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
+                style={{ backgroundColor: '#274E13', color: 'white' }}
               >
                 ?
               </button>
@@ -1230,7 +1240,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 Controls whether guests can see this section on the invitation. Click 'Include' to show it, or 'Exclude' to hide it.
               </div>
             </div>
-          </button>
+          </div>
         </div>
         {expandedSections.plannerInfo && (
         <>
@@ -1354,22 +1364,24 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               Area Facts & Attractions
             </h2>
           </button>
-          <button
-            type="button"
-            onClick={() => handleChange({ target: { name: 'show_area_facts', value: !formData.show_area_facts } } as any)}
-            className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center gap-2"
-            style={{
-              backgroundColor: formData.show_area_facts ? '#274E13' : '#e5e7eb',
-              color: formData.show_area_facts ? 'white' : '#274E13',
-              border: `2px solid #274E13`
-            }}
-          >
-            {formData.show_area_facts ? 'Exclude' : 'Include'}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleChange({ target: { name: 'show_area_facts', value: !formData.show_area_facts } } as any)}
+              className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
+              style={{
+                backgroundColor: formData.show_area_facts ? '#274E13' : '#e5e7eb',
+                color: formData.show_area_facts ? 'white' : '#274E13',
+                border: `2px solid #274E13`
+              }}
+            >
+              {formData.show_area_facts ? 'Exclude' : 'Include'}
+            </button>
             <div className="relative group">
               <button
                 type="button"
-                className="ml-2 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
-                style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold hover:opacity-75"
+                style={{ backgroundColor: '#274E13', color: 'white' }}
               >
                 ?
               </button>
@@ -1377,7 +1389,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 Controls whether guests can see this section on the invitation. Click 'Include' to show it, or 'Exclude' to hide it.
               </div>
             </div>
-          </button>
+          </div>
         </div>
         {expandedSections.areaFacts && (
         <>
