@@ -103,6 +103,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    // Wait a bit to ensure the session listener fires and updates state
+    await new Promise(resolve => setTimeout(resolve, 100));
   };
 
   const resetPassword = async (email: string) => {

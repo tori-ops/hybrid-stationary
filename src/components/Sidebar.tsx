@@ -169,8 +169,6 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             <button
               onClick={async () => {
                 await signOut();
-                // Add delay to ensure session is cleared before redirecting
-                await new Promise(resolve => setTimeout(resolve, 200));
                 router.push('/');
               }}
               className="flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
