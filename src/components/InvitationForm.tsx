@@ -163,18 +163,18 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [sendingApproval, setSendingApproval] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    coupleInfo: true,
-    weddingDetails: true,
-    eventTimeline: true,
-    venueInfo: true,
-    guestInfo: true,
-    couplesFAQ: true,
-    plannerInfo: true,
-    areaFacts: true,
-    stationery: true,
-    styling: true,
-    sectionVisibility: true,
-    publish: true,
+    coupleInfo: false,
+    weddingDetails: false,
+    eventTimeline: false,
+    venueInfo: false,
+    guestInfo: false,
+    couplesFAQ: false,
+    plannerInfo: false,
+    areaFacts: false,
+    stationery: false,
+    styling: false,
+    sectionVisibility: false,
+    publish: false,
   });
 
   // Area facts list states - initialize from database
