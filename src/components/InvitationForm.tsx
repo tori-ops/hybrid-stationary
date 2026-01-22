@@ -453,7 +453,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 lg:gap-4 mt-4">
             <div>
               <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-                Bride's Name
+                Bride's Name *
               </label>
               <input
                 type="text"
@@ -467,7 +467,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </div>
             <div>
               <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-                Groom's Name
+                Groom's Name *
               </label>
               <input
                 type="text"
@@ -481,7 +481,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </div>
             <div>
               <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-                Couple Contact Name
+                Couple Contact Name *
               </label>
               <input
                 type="text"
@@ -495,7 +495,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </div>
             <div>
               <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-                Couple Email
+                Couple Email *
               </label>
               <input
                 type="email"
@@ -509,7 +509,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </div>
             <div>
               <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-                Couple Phone
+                Couple Phone *
               </label>
               <input
                 type="tel"
@@ -802,7 +802,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div className="md:col-span-2">
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Address
+              Address *
             </label>
             <input
               type="text"
@@ -816,7 +816,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              City
+              City *
             </label>
             <input
               type="text"
@@ -830,7 +830,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              State/Province
+              State/Province *
             </label>
             <input
               type="text"
@@ -857,7 +857,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Website
+              Website *
             </label>
             <input
               type="url"
@@ -1177,7 +1177,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pb-6 border-b mt-4">
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Planner Name
+              Planner Name *
             </label>
             <input
               type="text"
@@ -1191,7 +1191,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           </div>
           <div>
             <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
-              Planner Phone
+              Planner Phone *
             </label>
             <input
               type="tel"
