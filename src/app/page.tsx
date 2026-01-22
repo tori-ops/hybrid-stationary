@@ -122,6 +122,9 @@ export default function Home() {
             <p className="text-sm">
               Created by The Missing Piece Planning and Events
             </p>
+            <p className="text-xs mt-2">
+              Version 1.4.2 © 2026
+            </p>
           </div>
         </div>
       </div>

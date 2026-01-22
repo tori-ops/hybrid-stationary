@@ -202,6 +202,9 @@ export default function LoginPage() {
         <p className="text-sm">
           Created by The Missing Piece Planning and Events
         </p>
+        <p className="text-xs mt-1">
+          Version 1.4.2 © 2026
+        </p>
       </div>
     </main>
   );
