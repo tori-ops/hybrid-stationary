@@ -109,9 +109,13 @@ export default function StationeryEditor({ items, onItemsChange, userId }: Stati
                       setExpandedType(expandedType === value ? null : value);
                     }}
                     type="button"
-                    className="text-xxs font-normal text-gray-700 hover:text-gray-900"
+                    className="px-3 py-1 rounded font-semibold text-sm transition"
+                    style={{ 
+                      backgroundColor: expandedType === value ? '#274E13' : '#e5e7eb',
+                      color: expandedType === value ? '#ffffff' : '#274E13'
+                    }}
                   >
-                    {expandedType === value ? '▼' : '▶'} {label}
+                    {expandedType === value ? '−' : '+'} {label}
                   </button>
                   <span className="text-sm text-gray-500">({itemCount}/1)</span>
                 </div>
