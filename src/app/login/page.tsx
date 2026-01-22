@@ -49,7 +49,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#D0CEB5' }}>
+    <main className="min-h-screen flex flex-col items-center justify-center px-4" style={{ backgroundColor: '#D0CEB5' }}>
       <style>{`
         input[type="email"],
         input[type="password"] {
@@ -60,15 +60,17 @@ export default function LoginPage() {
           color: #999 !important;
         }
       `}</style>
+      
+      {/* Logo */}
+      <div className="text-center mb-8 pt-8 md:pt-0">
+        <img 
+          src="/logo.png" 
+          alt="Logo" 
+          className="h-24 md:h-32 mx-auto w-auto object-contain"
+        />
+      </div>
+      
       <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-6">
-          <img 
-            src="/logo.png" 
-            alt="Logo" 
-            className="h-24 md:h-32 mx-auto mb-6 w-auto object-contain"
-          />
-        </div>
         
         {/* Logo/Title */}
         <div className="text-center mb-6">
