@@ -44,7 +44,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-4 pt-8 pb-8" style={{ backgroundColor: '#D0CEB5' }}>
+    <main className="min-h-screen flex flex-col items-center px-4 pt-8" style={{ backgroundColor: '#D0CEB5' }}>
       <style>{`
         input[type="email"],
         input[type="password"] {
@@ -75,7 +75,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md mb-12">
         <div className="bg-white rounded-lg shadow-xl p-6">
           <h2 className="text-lg font-serif text-center mb-4" style={{ color: '#274E13' }}>
             Planner Login
@@ -146,7 +146,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <div className="fixed bottom-0 left-0 right-0 border-t py-6 text-center" style={{ borderColor: '#274E13', color: '#274E13', backgroundColor: '#D0CEB5' }}>
+      <div className="w-full border-t py-6 text-center mt-8" style={{ borderColor: '#274E13', color: '#274E13' }}>
         <p className="text-sm">
           Created by The Missing Piece Planning and Events
         </p>
