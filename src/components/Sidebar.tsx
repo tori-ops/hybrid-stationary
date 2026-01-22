@@ -125,7 +125,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
         </div>
 
         {/* Client List */}
-        <div className="flex-1 overflow-y-auto px-3 py-2">
+        <div className="flex-1 overflow-y-auto px-3 py-2 pb-20">
           {loading ? (
             <p className="text-xs text-gray-600 p-2">Loading...</p>
           ) : invitations.length === 0 ? (
