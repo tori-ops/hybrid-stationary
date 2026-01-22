@@ -129,11 +129,10 @@ export default function DashboardPage() {
       <div className="flex-1 p-4 lg:p-6 overflow-y-auto pt-20 lg:pt-0 lg:mt-0">
         {/* Page Header - Hidden on mobile since it's in the nav bar */}
         <div className="hidden lg:block bg-white rounded-lg shadow p-6 mb-6">
-          <div className="flex items-center justify-between gap-6">
+          <div className="flex items-start justify-between gap-6">
             <div className="flex-1">
-              <div className="text-7xl font-serif font-bold" style={{ color: '#274E13', lineHeight: '1' }}>
-                <div className="block">Digital Invitation &</div>
-                <div className="block">Guest Info Suite</div>
+              <div className="text-7xl font-serif font-bold mb-1" style={{ color: '#274E13', lineHeight: '1.1' }}>
+                Digital Invitation &<br />Guest Info Suite
               </div>
               <p className="text-sm mt-3" style={{ color: '#666' }}>
                 Designed by The Missing Piece Planning and Events
