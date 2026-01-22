@@ -44,7 +44,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-4 pt-8" style={{ backgroundColor: '#D0CEB5' }}>
+    <main className="min-h-screen flex flex-col items-center px-4 pt-8 pb-8" style={{ backgroundColor: '#D0CEB5' }}>
       <style>{`
         input[type="email"],
         input[type="password"] {
@@ -65,19 +65,17 @@ export default function Home() {
         />
       </div>
       
-      <div className="w-full max-w-md md:flex-1 md:flex md:items-center md:justify-center md:pb-32">
-        
-        {/* Title */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl md:text-4xl font-serif mb-4" style={{ color: '#274E13' }}>
-            Digital Invitation & Guest Info Suite
-          </h1>
-          <p className="text-sm md:text-base max-w-md mx-auto" style={{ color: '#274E13' }}>
-            Bridging the gap between elegant print and digital innovation. Send beautiful physical invitations paired with an interactive digital experience.
-          </p>
-        </div>
+      {/* Title and Tagline */}
+      <div className="text-center mb-8 w-full max-w-md">
+        <h1 className="text-3xl md:text-4xl font-serif mb-4" style={{ color: '#274E13' }}>
+          Digital Invitation & Guest Info Suite
+        </h1>
+        <p className="text-sm md:text-base max-w-md mx-auto" style={{ color: '#274E13' }}>
+          Bridging the gap between elegant print and digital innovation. Send beautiful physical invitations paired with an interactive digital experience.
+        </p>
+      </div>
 
-        {/* Login Form */}
+      <div className="w-full max-w-md">
         <div className="bg-white rounded-lg shadow-xl p-6">
           <h2 className="text-lg font-serif text-center mb-4" style={{ color: '#274E13' }}>
             Planner Login
