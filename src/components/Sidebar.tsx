@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
@@ -20,6 +21,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigger }: SidebarProps) {
+  const router = useRouter();
   const { user, signOut } = useAuth();
   const [invitations, setInvitations] = useState<Invitation[]>([]);
   const [loading, setLoading] = useState(true);
@@ -167,10 +169,9 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
             <button
               onClick={async () => {
                 await signOut();
-                // Add a small delay to ensure signOut completes and clears the session
-                setTimeout(() => {
-                  window.location.href = '/';
-                }, 100);
+                // Add delay to ensure session is cleared before redirecting
+                await new Promise(resolve => setTimeout(resolve, 200));
+                router.push('/');
               }}
               className="flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-opacity hover:opacity-75"
               style={{ color: '#274E13' }}
