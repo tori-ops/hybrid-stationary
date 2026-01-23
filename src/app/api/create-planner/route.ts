@@ -182,10 +182,10 @@ export async function POST(request: Request) {
       message: 'Planner profile created and welcome email sent',
       userId,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating planner:', error);
     return Response.json(
-      { error: 'Internal server error' },
+      { error: `Internal server error: ${error?.message || error}` },
       { status: 500 }
     );
   }
