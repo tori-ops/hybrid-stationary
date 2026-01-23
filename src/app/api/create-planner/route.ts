@@ -36,23 +36,23 @@ export async function POST(request: Request) {
     let errorDetails = '';
 
     try {
-      const { data: requesterData, error: requesterError } = await supabase
-        .from('planners')
-        .select('id, email, is_admin')
-        .eq('id', createdBy)
-        .single();
+      // First, check auth.users table to get the requester's actual email
+      const { data: authUser, error: authError } = await supabase.auth.admin.getUserById(
+        createdBy
+      );
 
-      if (requesterError) {
-        errorDetails = `Requester lookup failed: ${requesterError.message}`;
-      } else if (requesterData) {
-        // Check if is_admin is true OR if email is tori@missingpieceplanning.com
-        if (requesterData.is_admin === true || requesterData.email === 'tori@missingpieceplanning.com') {
+      if (authError || !authUser) {
+        errorDetails = `Could not find auth user: ${authError?.message || 'User not found'}`;
+      } else {
+        const requesterEmail = authUser.user.email;
+        console.log(`Requester email from auth.users: ${requesterEmail}`);
+
+        // Only Tori can create planner profiles
+        if (requesterEmail === 'tori@missingpieceplanning.com') {
           isAuthorized = true;
         } else {
-          errorDetails = `User ${requesterData.email} is not an admin (is_admin: ${requesterData.is_admin})`;
+          errorDetails = `Email ${requesterEmail} is not authorized to create planner profiles`;
         }
-      } else {
-        errorDetails = 'Requester not found in planners table';
       }
     } catch (err: any) {
       errorDetails = `Error checking admin: ${err.message}`;
