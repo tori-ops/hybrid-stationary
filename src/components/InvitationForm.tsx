@@ -1201,16 +1201,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       </section>
 
       {/* Planner Information */}
-      <section 
-        className="bg-white rounded-lg p-3 lg:p-6 shadow"
-        style={{
-          backgroundImage: formData.background_image_url ? `url('${formData.background_image_url}')` : 'none',
-          backgroundAttachment: 'fixed',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        } as any}
-      >
+      <section className="bg-white rounded-lg p-3 lg:p-6 shadow">
         <div className="flex items-center justify-between">
           <button
             type="button"
