@@ -38,6 +38,7 @@ function InvitePageContent() {
   console.log('Approval Token:', approvalToken);
   console.log('Is Proof Mode:', isProofMode);
   console.log('Invitation loaded:', !!invitation);
+  console.log('Background Image URL:', invitation?.background_image_url);
   
   // Convert invitation data to config format, fall back to default
   const config = invitationToConfig(invitation);
@@ -168,7 +169,7 @@ function InvitePageContent() {
       } as any}
     >
       {/* Semi-transparent overlay */}
-      <div className="min-h-screen" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }}>
+      <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)', minHeight: '100vh' }}>
         {/* Content Sections */}
         <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Proof Watermark - Show in proof mode */}
