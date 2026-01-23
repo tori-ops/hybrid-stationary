@@ -99,7 +99,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
             const backgroundWidth = isSmallScreen ? 560 : 680;
             const backgroundHeight = isSmallScreen ? 680 : 760;
           return (
-            <div key={key} className="flex flex-col items-center justify-center relative">              
+            <div key={key} className="flex flex-col items-center justify-center relative w-full">              
             {/* Background Image Container - presents the stationery */}
             {backgroundImage && (
               <div
