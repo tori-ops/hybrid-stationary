@@ -31,17 +31,37 @@ export async function POST(request: Request) {
 
     const { firstName, lastName, businessName, address, email, logoUrl, createdBy } = await request.json();
 
-    // Verify that the request is from Tori
-    const { data: toriData } = await supabase
-      .from('planners')
-      .select('id')
-      .eq('email', 'tori@missingpieceplanning.com')
-      .eq('is_admin', true)
-      .single();
+    // Verify that the request is from Tori (admin user)
+    let isAuthorized = false;
+    let errorDetails = '';
 
-    if (!toriData || createdBy !== toriData.id) {
+    try {
+      const { data: requesterData, error: requesterError } = await supabase
+        .from('planners')
+        .select('id, email, is_admin')
+        .eq('id', createdBy)
+        .single();
+
+      if (requesterError) {
+        errorDetails = `Requester lookup failed: ${requesterError.message}`;
+      } else if (requesterData) {
+        // Check if is_admin is true OR if email is tori@missingpieceplanning.com
+        if (requesterData.is_admin === true || requesterData.email === 'tori@missingpieceplanning.com') {
+          isAuthorized = true;
+        } else {
+          errorDetails = `User ${requesterData.email} is not an admin (is_admin: ${requesterData.is_admin})`;
+        }
+      } else {
+        errorDetails = 'Requester not found in planners table';
+      }
+    } catch (err: any) {
+      errorDetails = `Error checking admin: ${err.message}`;
+    }
+
+    if (!isAuthorized) {
+      console.error('Unauthorized planner creation attempt:', { createdBy, errorDetails });
       return Response.json(
-        { error: 'Unauthorized: Only admin can create planner profiles' },
+        { error: `Unauthorized: Only admin can create planner profiles. ${errorDetails}` },
         { status: 403 }
       );
     }
