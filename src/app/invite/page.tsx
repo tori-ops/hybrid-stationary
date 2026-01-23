@@ -157,25 +157,18 @@ function InvitePageContent() {
   };
 
   return (
-    <>
-      {/* Fixed Background */}
-      {invitation?.background_image_url && (
-        <div
-          className="fixed top-0 left-0 w-full h-full pointer-events-none"
-          style={{
-            backgroundImage: `url('${invitation.background_image_url}')`,
-            backgroundSize: 'contain',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'repeat',
-            zIndex: 0
-          }}
-        />
-      )}
-      
-      <main
-        className="min-h-screen overflow-x-hidden relative"
-        style={{ zIndex: 1, backgroundColor: 'rgba(255, 255, 255, 0.85)' }}
-      >
+    <main
+      className="min-h-screen overflow-x-hidden"
+      style={{
+        backgroundImage: invitation?.background_image_url ? `url('${invitation.background_image_url}')` : 'none',
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
+        backgroundAttachment: 'fixed'
+      } as any}
+    >
+      {/* Semi-transparent overlay */}
+      <div className="min-h-screen" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }}>
         {/* Content Sections */}
         <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Proof Watermark - Show in proof mode */}
@@ -399,8 +392,8 @@ justify-center">
         onCancel={() => setShowEditCommentsModal(false)}
         isLoading={isSubmittingEdits}
       />
+      </div>
     </main>
-    </>
   );
 }
 
