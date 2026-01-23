@@ -157,18 +157,27 @@ function InvitePageContent() {
   };
 
   return (
-    <main
-      className="min-h-screen bg-gray-50 overflow-x-hidden"
-      style={{
-        backgroundImage: invitation?.background_image_url ? `url('${invitation.background_image_url}')` : 'none',
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'contain',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'repeat'
-      } as any}
-    >
-      {/* Content Sections */}
-      <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
+    <>
+      {/* Fixed Background */}
+      {invitation?.background_image_url && (
+        <div
+          className="fixed top-0 left-0 w-full h-full pointer-events-none"
+          style={{
+            backgroundImage: `url('${invitation.background_image_url}')`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'repeat',
+            zIndex: 0
+          }}
+        />
+      )}
+      
+      <main
+        className="min-h-screen bg-gray-50 bg-opacity-95 overflow-x-hidden relative"
+        style={{ zIndex: 1 }}
+      >
+        {/* Content Sections */}
+        <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Proof Watermark - Show in proof mode */}
         {isProofMode && <ProofWatermark />}
 
@@ -391,6 +400,7 @@ justify-center">
         isLoading={isSubmittingEdits}
       />
     </main>
+    </>
   );
 }
 
