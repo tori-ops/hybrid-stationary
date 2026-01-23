@@ -169,7 +169,7 @@ function InvitePageContent() {
       } as any}
     >
       {/* Semi-transparent overlay */}
-      <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)', minHeight: '100vh' }}>
+      <div style={{ backgroundColor: 'transparent', minHeight: '100vh' }}>
         {/* Content Sections */}
         <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Proof Watermark - Show in proof mode */}
