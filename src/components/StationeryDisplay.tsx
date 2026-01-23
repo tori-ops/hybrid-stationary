@@ -96,8 +96,8 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
           // Calculate background size based on card dimensions
           const cardSize = cardSizes[key];
             // Responsive background size: 850px width on desktop, 700px mobile; 950px tall on desktop, 850px mobile
-            const backgroundWidth = isSmallScreen ? 700 : 850;
-            const backgroundHeight = isSmallScreen ? 850 : 950;
+            const backgroundWidth = isSmallScreen ? 560 : 680;
+            const backgroundHeight = isSmallScreen ? 680 : 760;
           return (
             <div key={key} className="flex flex-col items-center justify-center relative">              
             {/* Background Image Container - presents the stationery */}
