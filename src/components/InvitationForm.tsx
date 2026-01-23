@@ -1333,12 +1333,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />
             {formData.timeline_image_url && (
-              <div className="mt-2">
+              <div className="mt-2 flex justify-center">
                 <p className="text-xs text-gray-600 mb-2">Uploaded:</p>
                 <img 
                   src={formData.timeline_image_url} 
                   alt="Timeline image preview" 
-                  className="h-24 w-24 rounded-full border-4 object-cover"
+                  className="h-24 w-24 rounded-full border-4 object-contain"
                   style={{ borderColor: '#FF6B6B' }}
                 />
               </div>
