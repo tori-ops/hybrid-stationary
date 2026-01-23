@@ -166,20 +166,30 @@ export async function POST(request: Request) {
       </html>
     `;
 
-    // Send email via your email service
-    await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/send-email`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        to: email,
-        subject: 'Your Digital Invitation Platform Account Created',
-        html: emailHtml,
-      }),
-    });
+    // Send email via your email service (non-blocking)
+    try {
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mp-hybrid-stationary.vercel.app';
+      const response = await fetch(`${siteUrl}/api/send-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: email,
+          subject: 'Your Digital Invitation Platform Account Created',
+          html: emailHtml,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error('Email send failed:', await response.text());
+      }
+    } catch (emailError) {
+      console.error('Error sending welcome email:', emailError);
+      // Don't fail the request if email fails - account is already created
+    }
 
     return Response.json({
       success: true,
-      message: 'Planner profile created and welcome email sent',
+      message: 'Planner profile created successfully',
       userId,
     });
   } catch (error: any) {
