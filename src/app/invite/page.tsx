@@ -162,8 +162,9 @@ function InvitePageContent() {
       style={{
         backgroundImage: invitation?.background_image_url ? `url('${invitation.background_image_url}')` : 'none',
         backgroundAttachment: 'fixed',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundSize: window.innerWidth < 768 ? 'contain' : 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat'
       } as any}
     >
       {/* Content Sections */}
