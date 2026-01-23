@@ -173,8 +173,8 @@ function InvitePageContent() {
       )}
       
       <main
-        className="min-h-screen bg-gray-50 bg-opacity-95 overflow-x-hidden relative"
-        style={{ zIndex: 1 }}
+        className="min-h-screen overflow-x-hidden relative"
+        style={{ zIndex: 1, backgroundColor: 'rgba(255, 255, 255, 0.85)' }}
       >
         {/* Content Sections */}
         <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
