@@ -7,19 +7,39 @@ const supabase = supabaseServiceKey
   ? createClient(supabaseUrl, supabaseServiceKey)
   : null;
 
+// Handle CORS
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
+}
+
 export async function POST(request: Request) {
   try {
     if (!supabase) {
       return Response.json(
         { error: 'Server not properly configured. Missing SUPABASE_SERVICE_ROLE_KEY' },
-        { status: 500 }
+        { status: 500,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
       );
     }
 
     const { email } = await request.json();
 
     if (!email) {
-      return Response.json({ error: 'Email is required' }, { status: 400 });
+      return Response.json({ error: 'Email is required' }, { status: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
     }
 
     console.log(`Debugging user: ${email}`);
@@ -60,7 +80,7 @@ export async function POST(request: Request) {
       console.error('Error checking planners table:', err);
     }
 
-    return Response.json({
+    const response = {
       email,
       auth_user_exists: authUserExists,
       auth_user_data: authUserData,
@@ -75,12 +95,22 @@ export async function POST(request: Request) {
           ? 'Planner record exists but NO auth user - orphaned planner record'
           : 'User does not exist anywhere',
       },
+    };
+
+    return Response.json(response, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
     });
   } catch (error: any) {
     console.error('Debug error:', error);
     return Response.json(
       { error: `Debug error: ${error?.message || error}` },
-      { status: 500 }
+      { status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
     );
   }
 }
