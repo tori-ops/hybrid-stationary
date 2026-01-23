@@ -312,11 +312,11 @@ justify-center">
               {/* Timeline image on right in circle - aligned to top */}
               {invitation?.timeline_image_url && (
                 <div className="flex-shrink-0 ml-auto">
-                  <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-96 md:h-96 rounded-full overflow-hidden flex-shrink-0">
+                  <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-96 md:h-96 rounded-full overflow-hidden flex-shrink-0 flex items-center justify-center">
                     <img 
                       src={invitation.timeline_image_url}
                       alt="Timeline decoration"
-                      className="w-56 h-56 sm:w-64 sm:h-64 md:w-96 md:h-96 object-contain object-center"
+                      className="w-full h-full object-contain"
                     />
                   </div>
                 </div>
