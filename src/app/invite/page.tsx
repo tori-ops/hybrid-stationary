@@ -245,9 +245,11 @@ justify-center">
           )}
 
           {/* Venue Information Section */}
+        {invitation?.show_venue_info !== false && (
         <section className="mb-12 flex justify-center">
           <VenueInfo config={config} />
         </section>
+        )}
 
         {/* Guest Info At a Glance Section - Conditional */}
         {invitation?.show_guest_info !== false && (
@@ -281,6 +283,7 @@ justify-center">
         )}
 
         {/* Event Timeline Section */}
+        {invitation?.show_event_timeline !== false && (
         <section className="mb-12 flex justify-center relative px-4">
           <div className="rounded-lg shadow-lg p-4 md:p-8 max-w-4xl w-full flex flex-row" style={{
             background: `linear-gradient(135deg, white, ${invitation?.secondary_color}15)`,
@@ -324,6 +327,7 @@ justify-center">
             </div>
           </div>
         </section>
+        )}
 
         {/* Couples FAQ Section - Conditional */}
         {invitation?.show_faq !== false && invitation?.faq_items && invitation.faq_items.length > 0 && (

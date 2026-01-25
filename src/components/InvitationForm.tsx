@@ -1216,18 +1216,6 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </h2>
           </button>
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => handleChange({ target: { name: 'show_planner_info', value: !formData.show_planner_info } } as any)}
-              className="px-4 py-2 rounded-lg text-xs font-semibold transition-colors"
-              style={{
-                backgroundColor: formData.show_planner_info ? '#274E13' : '#e5e7eb',
-                color: formData.show_planner_info ? 'white' : '#274E13',
-                border: `2px solid #274E13`
-              }}
-            >
-              {formData.show_planner_info ? 'Exclude' : 'Include'}
-            </button>
             <div className="relative group">
               <button
                 type="button"
@@ -1237,7 +1225,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                 ?
               </button>
               <div className="invisible group-hover:visible absolute bottom-full right-0 mb-2 w-48 bg-black text-white text-xs p-2 rounded z-50 whitespace-normal">
-                Controls whether guests can see this section on the invitation. Click 'Include' to show it, or 'Exclude' to hide it.
+                Your planner information appears on all invitations.
               </div>
             </div>
           </div>
