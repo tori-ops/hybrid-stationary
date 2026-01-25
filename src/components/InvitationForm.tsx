@@ -229,6 +229,41 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [formData, attractionsList, diningList, activitiesList, accommodationsList, stationeryItems, timelineEvents, invitation?.id]);
 
+  // Auto-fetch coordinates from Nominatim when venue address/city/state changes
+  useEffect(() => {
+    const geocodeVenue = async () => {
+      const { venue_address, venue_city, venue_state } = formData;
+      
+      // Only geocode if all fields are filled
+      if (!venue_address || !venue_city || !venue_state) return;
+      
+      try {
+        const query = `${venue_address}, ${venue_city}, ${venue_state}`;
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
+        );
+        
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+          const result = data[0];
+          setFormData((prev) => ({
+            ...prev,
+            venue_latitude: parseFloat(result.lat),
+            venue_longitude: parseFloat(result.lon),
+          }));
+          console.log(`Geocoded: ${result.lat}, ${result.lon}`);
+        }
+      } catch (error) {
+        console.error('Geocoding error:', error);
+      }
+    };
+
+    // Debounce the geocoding to avoid too many requests
+    const timer = setTimeout(geocodeVenue, 1000);
+    return () => clearTimeout(timer);
+  }, [formData.venue_address, formData.venue_city, formData.venue_state]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
 

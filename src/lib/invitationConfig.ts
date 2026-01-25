@@ -24,8 +24,11 @@ export function invitationToConfig(invitation: Invitation | null) {
       name: invitation.venue_name || weddingConfig.venue.name,
       address: invitation.venue_address || weddingConfig.venue.address,
       city: invitation.venue_city || weddingConfig.venue.city,
+      state: invitation.venue_state || '',
       phone: invitation.venue_phone || weddingConfig.venue.phone,
       website: invitation.venue_website || weddingConfig.venue.website,
+      latitude: invitation.venue_latitude || 0,
+      longitude: invitation.venue_longitude || 0,
     },
     areaFacts: invitation.area_facts || [
       {
