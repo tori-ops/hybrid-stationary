@@ -235,24 +235,41 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       const { venue_address, venue_city, venue_state } = formData;
       
       // Only geocode if all fields are filled
-      if (!venue_address || !venue_city || !venue_state) return;
+      if (!venue_address || !venue_city || !venue_state) {
+        console.log('Skipping geocode - missing fields');
+        return;
+      }
       
       try {
         const query = `${venue_address}, ${venue_city}, ${venue_state}`;
+        console.log('Geocoding query:', query);
+        
         const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`,
+          {
+            headers: {
+              'User-Agent': 'HybridWeddingInvite/1.0'
+            }
+          }
         );
         
         const data = await response.json();
+        console.log('Nominatim response:', data);
         
         if (data && data.length > 0) {
           const result = data[0];
+          const lat = parseFloat(result.lat);
+          const lon = parseFloat(result.lon);
+          
+          console.log(`Geocoded successfully: ${lat}, ${lon}`);
+          
           setFormData((prev) => ({
             ...prev,
-            venue_latitude: parseFloat(result.lat),
-            venue_longitude: parseFloat(result.lon),
+            venue_latitude: lat,
+            venue_longitude: lon,
           }));
-          console.log(`Geocoded: ${result.lat}, ${result.lon}`);
+        } else {
+          console.warn('No results from Nominatim');
         }
       } catch (error) {
         console.error('Geocoding error:', error);
