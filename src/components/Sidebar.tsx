@@ -187,7 +187,11 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
                     {invite.bride_name} & {invite.groom_name}
                   </p>
                   <p className="text-xs text-gray-600 mt-0.5">
-                    {new Date(invite.wedding_date + 'T00:00:00').toLocaleDateString()}
+                    {(() => {
+                      const [year, month, day] = invite.wedding_date.split('-');
+                      const weddingDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+                      return weddingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    })()}
                   </p>
                 </button>
               ))}
