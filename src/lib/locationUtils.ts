@@ -22,6 +22,60 @@ export function calculateDistance(
 }
 
 /**
+ * Reverse geocode coordinates to get full address using Nominatim
+ */
+export async function reverseGeocodeAddress(
+  latitude: number,
+  longitude: number
+): Promise<string> {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
+      {
+        headers: {
+          'User-Agent': 'HybridWeddingInvite/1.0'
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Nominatim error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    // Build address from available parts
+    const address = data.address;
+    const addressParts = [];
+    
+    if (address.house_number && address.road) {
+      addressParts.push(`${address.house_number} ${address.road}`);
+    } else if (address.road) {
+      addressParts.push(address.road);
+    } else if (data.name) {
+      addressParts.push(data.name);
+    }
+    
+    if (address.city || address.town) {
+      addressParts.push(address.city || address.town);
+    }
+    
+    if (address.state) {
+      addressParts.push(address.state);
+    }
+    
+    if (address.postcode) {
+      addressParts.push(address.postcode);
+    }
+    
+    return addressParts.length > 0 ? addressParts.join(', ') : 'Address not found';
+  } catch (error) {
+    console.error('Reverse geocoding error:', error);
+    return '';
+  }
+}
+
+/**
  * Overpass API query for nearby locations
  * Categories: attractions, dining, shopping, accommodations
  */
@@ -169,10 +223,11 @@ export async function getLocationSuggestions(
 
     // Process results
     const suggestions: LocationSuggestion[] = [];
+    const reverseGeocodeCache: { [key: string]: string } = {};
 
-    data.elements.forEach((element) => {
+    for (const element of data.elements) {
       const name = element.tags.name;
-      if (!name) return; // Skip unnamed places
+      if (!name) continue; // Skip unnamed places
 
       let lat = 0;
       let lon = 0;
@@ -186,13 +241,21 @@ export async function getLocationSuggestions(
         lat = element.center.lat;
         lon = element.center.lon;
       } else {
-        return; // Skip if no coordinates
+        continue; // Skip if no coordinates
       }
 
       const distance = calculateDistance(venueLat, venueLon, lat, lon);
 
       // Only include if within max distance
       if (distance <= maxDistance) {
+        // Get full address via reverse geocoding
+        const cacheKey = `${lat},${lon}`;
+        let fullAddress = reverseGeocodeCache[cacheKey];
+        if (!fullAddress) {
+          fullAddress = await reverseGeocodeAddress(lat, lon);
+          reverseGeocodeCache[cacheKey] = fullAddress;
+        }
+
         suggestions.push({
           id: `${element.id}`,
           name,
@@ -200,12 +263,12 @@ export async function getLocationSuggestions(
           latitude: lat,
           longitude: lon,
           distance,
-          address: element.tags['addr:full'] || element.tags['addr:street'] || undefined,
+          address: fullAddress || undefined,
           phone: element.tags.phone || undefined,
           email: element.tags.email || element.tags.contact_email || undefined,
         });
       }
-    });
+    }
 
     // Sort by distance and limit to 15
     return suggestions.sort((a, b) => a.distance - b.distance).slice(0, 15);
