@@ -274,172 +274,198 @@ export async function getLocationSuggestions(
   venueLon: number,
   maxDistance: number = 15 // miles
 ): Promise<LocationSuggestion[]> {
-  try {
-    const radiusKm = (maxDistance / 0.621371) * 1.1; // Convert miles to km with 10% buffer
-    const query = buildOverpassQuery(category, venueLat, venueLon, radiusKm);
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY_MS = 1000;
 
-    console.log(`[${category}] Querying Overpass API with radius ${radiusKm.toFixed(2)}km around ${venueLat.toFixed(4)}, ${venueLon.toFixed(4)}`);
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      let radiusKm = (maxDistance / 0.621371) * 1.1; // Convert miles to km with 10% buffer
+      
+      // On retry, reduce radius progressively
+      if (attempt > 1) {
+        radiusKm = radiusKm / attempt;
+        console.log(`[${category}] Retry ${attempt}: reducing radius to ${radiusKm.toFixed(2)}km`);
+      }
 
-    const response = await fetch('https://overpass-api.de/api/interpreter', {
-      method: 'POST',
-      body: query,
-      headers: { 'Content-Type': 'application/osm3s+xml' },
-    });
+      const query = buildOverpassQuery(category, venueLat, venueLon, radiusKm);
 
-    if (!response.ok) {
-      throw new Error(`Overpass API error: ${response.statusText}`);
-    }
+      console.log(`[${category}] Querying Overpass API (attempt ${attempt}/${MAX_RETRIES}) with radius ${radiusKm.toFixed(2)}km around ${venueLat.toFixed(4)}, ${venueLon.toFixed(4)}`);
 
-    const data: OverpassResponse = await response.json();
-    console.log(`[${category}] Overpass returned ${data.elements.length} elements`);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
-    // Process results - first pass, collect all items that meet distance criteria
-    const suggestionsWithoutAddresses: Array<{
-      element: any;
-      lat: number;
-      lon: number;
-      distance: number;
-    }> = [];
+      const response = await fetch('https://overpass-api.de/api/interpreter', {
+        method: 'POST',
+        body: query,
+        headers: { 'Content-Type': 'application/osm3s+xml' },
+        signal: controller.signal,
+      });
 
-    data.elements.forEach((element) => {
-      const name = element.tags.name;
-      if (!name) return; // Skip unnamed places
+      clearTimeout(timeoutId);
 
-      let lat = 0;
-      let lon = 0;
+      if (!response.ok) {
+        throw new Error(`Overpass API error: ${response.status} ${response.statusText}`);
+      }
 
-      if ('lat' in element && 'lon' in element) {
-        lat = element.lat;
-        lon = element.lon;
-      } else if ('center' in element && element.center) {
-        lat = element.center.lat;
-        lon = element.center.lon;
+      const data: OverpassResponse = await response.json();
+      console.log(`[${category}] Overpass returned ${data.elements.length} elements`);
+
+      // Process results - first pass, collect all items that meet distance criteria
+      const suggestionsWithoutAddresses: Array<{
+        element: any;
+        lat: number;
+        lon: number;
+        distance: number;
+      }> = [];
+
+      data.elements.forEach((element) => {
+        const name = element.tags.name;
+        if (!name) return; // Skip unnamed places
+
+        let lat = 0;
+        let lon = 0;
+
+        if ('lat' in element && 'lon' in element) {
+          lat = element.lat;
+          lon = element.lon;
+        } else if ('center' in element && element.center) {
+          lat = element.center.lat;
+          lon = element.center.lon;
+        } else {
+          return; // Skip if no coordinates
+        }
+
+        const distance = calculateDistance(venueLat, venueLon, lat, lon);
+
+        // Only include if within max distance
+        if (distance <= maxDistance) {
+          suggestionsWithoutAddresses.push({
+            element,
+            lat,
+            lon,
+            distance,
+          });
+        }
+      });
+
+      // Sort by distance and take top 15
+      const topSuggestions = suggestionsWithoutAddresses
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 15);
+
+      console.log(`[${category}] Found ${suggestionsWithoutAddresses.length} named places within ${maxDistance} miles, using top ${topSuggestions.length}`);
+
+      // Parallel reverse geocoding for all results
+      const reverseGeocodePromises = topSuggestions.map((s) =>
+        reverseGeocodeAddress(s.lat, s.lon)
+          .then((addr) => {
+            console.log(`Geocoded ${s.element.tags.name}: ${addr}`);
+            return addr;
+          })
+          .catch((err) => {
+            console.error(`Failed to geocode ${s.element.tags.name}:`, err);
+            return `${s.lat.toFixed(4)}, ${s.lon.toFixed(4)}`;
+          })
+      );
+
+      const addresses = await Promise.all(reverseGeocodePromises);
+
+      // Parallel Google Places lookups for phone/website
+      const googlePlacesPromises = topSuggestions.map((s) =>
+        getBusinessDetailsFromGoogle(s.element.tags.name, s.lat, s.lon)
+          .then((details) => {
+            console.log(`Google Places for ${s.element.tags.name}:`, details);
+            return details;
+          })
+          .catch((err) => {
+            console.error(`Google Places lookup failed for ${s.element.tags.name}:`, err);
+            return {};
+          })
+      );
+
+      const googleDetails = await Promise.all(googlePlacesPromises);
+
+      // Build final suggestions with addresses and phone/website
+      const suggestions: LocationSuggestion[] = topSuggestions.map((s, index) => {
+        // Use reversed address, or build from OSM address parts
+        let finalAddress = addresses[index];
+        
+        if (!finalAddress) {
+          // Fallback: build address from OSM tags in proper format
+          // Format: number street, city state zip
+          const streetParts = [];
+          if (s.element.tags['addr:housenumber']) {
+            streetParts.push(s.element.tags['addr:housenumber']);
+          }
+          if (s.element.tags['addr:street']) {
+            streetParts.push(s.element.tags['addr:street']);
+          }
+          
+          const streetAddress = streetParts.length > 0 ? streetParts.join(' ') : '';
+          
+          const cityStateParts = [];
+          if (s.element.tags['addr:city']) {
+            cityStateParts.push(s.element.tags['addr:city']);
+          }
+          if (s.element.tags['addr:state']) {
+            cityStateParts.push(s.element.tags['addr:state']);
+          }
+          if (s.element.tags['addr:postcode']) {
+            cityStateParts.push(s.element.tags['addr:postcode']);
+          }
+          
+          const cityStateZip = cityStateParts.length > 0 ? cityStateParts.join(' ') : '';
+          
+          finalAddress = [streetAddress, cityStateZip].filter(p => p).join(', ');
+        }
+        
+        // Get phone from OSM first, fallback to Google Places
+        const phone = 
+          s.element.tags.phone || 
+          s.element.tags.contact_landline || 
+          (googleDetails[index] as any)?.phone || 
+          undefined;
+        
+        // Get website from OSM first, fallback to Google Places
+        const website = 
+          s.element.tags.website || 
+          s.element.tags.contact_website || 
+          s.element.tags.url ||
+          (googleDetails[index] as any)?.website || 
+          undefined;
+        
+        console.log(`Suggestion: ${s.element.tags.name}, Address: ${finalAddress}, Phone: ${phone}, Website: ${website}`);
+        
+        return {
+          id: `${s.element.id}`,
+          name: s.element.tags.name,
+          type:
+            s.element.tags.amenity ||
+            s.element.tags.tourism ||
+            s.element.tags.shop ||
+            'location',
+          latitude: s.lat,
+          longitude: s.lon,
+          distance: s.distance,
+          address: finalAddress || undefined,
+          phone: phone,
+          website: website,
+        };
+      });
+
+      console.log(`Final suggestions: ${suggestions.length}`, suggestions);
+      return suggestions;
+    } catch (error) {
+      if (attempt < MAX_RETRIES) {
+        console.warn(`[${category}] Attempt ${attempt} failed:`, error instanceof Error ? error.message : error);
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
+        continue;
       } else {
-        return; // Skip if no coordinates
+        console.error(`Error fetching ${category} suggestions after ${MAX_RETRIES} attempts:`, error);
+        return [];
       }
-
-      const distance = calculateDistance(venueLat, venueLon, lat, lon);
-
-      // Only include if within max distance
-      if (distance <= maxDistance) {
-        suggestionsWithoutAddresses.push({
-          element,
-          lat,
-          lon,
-          distance,
-        });
-      }
-    });
-
-    // Sort by distance and take top 15
-    const topSuggestions = suggestionsWithoutAddresses
-      .sort((a, b) => a.distance - b.distance)
-      .slice(0, 15);
-
-    console.log(`[${category}] Found ${suggestionsWithoutAddresses.length} named places within ${maxDistance} miles, using top ${topSuggestions.length}`);
-
-    // Parallel reverse geocoding for all results
-    const reverseGeocodePromises = topSuggestions.map((s) =>
-      reverseGeocodeAddress(s.lat, s.lon)
-        .then((addr) => {
-          console.log(`Geocoded ${s.element.tags.name}: ${addr}`);
-          return addr;
-        })
-        .catch((err) => {
-          console.error(`Failed to geocode ${s.element.tags.name}:`, err);
-          return `${s.lat.toFixed(4)}, ${s.lon.toFixed(4)}`;
-        })
-    );
-
-    const addresses = await Promise.all(reverseGeocodePromises);
-
-    // Parallel Google Places lookups for phone/website
-    const googlePlacesPromises = topSuggestions.map((s) =>
-      getBusinessDetailsFromGoogle(s.element.tags.name, s.lat, s.lon)
-        .then((details) => {
-          console.log(`Google Places for ${s.element.tags.name}:`, details);
-          return details;
-        })
-        .catch((err) => {
-          console.error(`Google Places lookup failed for ${s.element.tags.name}:`, err);
-          return {};
-        })
-    );
-
-    const googleDetails = await Promise.all(googlePlacesPromises);
-
-    // Build final suggestions with addresses and phone/website
-    const suggestions: LocationSuggestion[] = topSuggestions.map((s, index) => {
-      // Use reversed address, or build from OSM address parts
-      let finalAddress = addresses[index];
-      
-      if (!finalAddress) {
-        // Fallback: build address from OSM tags in proper format
-        // Format: number street, city state zip
-        const streetParts = [];
-        if (s.element.tags['addr:housenumber']) {
-          streetParts.push(s.element.tags['addr:housenumber']);
-        }
-        if (s.element.tags['addr:street']) {
-          streetParts.push(s.element.tags['addr:street']);
-        }
-        
-        const streetAddress = streetParts.length > 0 ? streetParts.join(' ') : '';
-        
-        const cityStateParts = [];
-        if (s.element.tags['addr:city']) {
-          cityStateParts.push(s.element.tags['addr:city']);
-        }
-        if (s.element.tags['addr:state']) {
-          cityStateParts.push(s.element.tags['addr:state']);
-        }
-        if (s.element.tags['addr:postcode']) {
-          cityStateParts.push(s.element.tags['addr:postcode']);
-        }
-        
-        const cityStateZip = cityStateParts.length > 0 ? cityStateParts.join(' ') : '';
-        
-        finalAddress = [streetAddress, cityStateZip].filter(p => p).join(', ');
-      }
-      
-      // Get phone from OSM first, fallback to Google Places
-      const phone = 
-        s.element.tags.phone || 
-        s.element.tags.contact_landline || 
-        (googleDetails[index] as any)?.phone || 
-        undefined;
-      
-      // Get website from OSM first, fallback to Google Places
-      const website = 
-        s.element.tags.website || 
-        s.element.tags.contact_website || 
-        s.element.tags.url ||
-        (googleDetails[index] as any)?.website || 
-        undefined;
-      
-      console.log(`Suggestion: ${s.element.tags.name}, Address: ${finalAddress}, Phone: ${phone}, Website: ${website}`);
-      
-      return {
-        id: `${s.element.id}`,
-        name: s.element.tags.name,
-        type:
-          s.element.tags.amenity ||
-          s.element.tags.tourism ||
-          s.element.tags.shop ||
-          'location',
-        latitude: s.lat,
-        longitude: s.lon,
-        distance: s.distance,
-        address: finalAddress || undefined,
-        phone: phone,
-        website: website,
-      };
-    });
-
-    console.log(`Final suggestions: ${suggestions.length}`, suggestions);
-    return suggestions;
-  } catch (error) {
-    console.error(`Error fetching ${category} suggestions:`, error);
-    return [];
+    }
   }
+  
+  return [];
 }
