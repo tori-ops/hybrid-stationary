@@ -33,11 +33,17 @@ export default function VenueInfo({ config }: { config?: any }) {
           </div>
           <div>
             <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
-              Coordinates
+              Latitude
             </p>
             <p className="text-sm md:text-base text-gray-800 font-mono">
               {venue.latitude ? `${venue.latitude.toFixed(6)}` : 'N/A'}
-              <br />
+            </p>
+          </div>
+          <div>
+            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
+              Longitude
+            </p>
+            <p className="text-sm md:text-base text-gray-800 font-mono">
               {venue.longitude ? `${venue.longitude.toFixed(6)}` : 'N/A'}
             </p>
           </div>
