@@ -14,6 +14,7 @@ interface Attraction {
   address: string;
   phone: string;
   email?: string;
+  website?: string;
   distance: string;
   is_18_plus: boolean;
   is_21_plus: boolean;
@@ -322,6 +323,34 @@ export default function AreaFactsEditor({
                       title="Send email"
                     >
                       ✉️ Email
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="text-xs font-medium block mb-1" style={{ color: '#274E13' }}>
+                  Website
+                </label>
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="url"
+                    value={item.website || ''}
+                    onChange={(e) => handleItemChange(item.id, 'website', e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm"
+                    style={{ color: '#000' }}
+                    placeholder="https://example.com"
+                  />
+                  {item.website && (
+                    <a
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2 py-2 text-white rounded text-xs font-semibold whitespace-nowrap"
+                      style={{ backgroundColor: '#274E13' }}
+                      title="Visit website"
+                    >
+                      🌐 Visit
                     </a>
                   )}
                 </div>

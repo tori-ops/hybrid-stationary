@@ -393,6 +393,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       is_21_plus: false,
       cuisine: category === 'dining' ? '' : undefined,
       email: item.email || '',
+      website: item.website || '',
     }));
 
     // Add to appropriate list based on category

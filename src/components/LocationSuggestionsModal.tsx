@@ -81,6 +81,7 @@ export default function LocationSuggestionsModal({
         address: s.address || '',
         phone: s.phone || '',
         email: s.email || '',
+        website: s.website || '',
         distance: `${s.distance.toFixed(1)} miles`,
       }));
 

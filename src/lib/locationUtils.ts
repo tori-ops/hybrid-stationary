@@ -30,7 +30,7 @@ export async function reverseGeocodeAddress(
 ): Promise<string> {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
 
     const response = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
@@ -74,12 +74,11 @@ export async function reverseGeocodeAddress(
       addressParts.push(address.postcode);
     }
     
-    const fullAddress = addressParts.length > 0 ? addressParts.join(', ') : '';
-    return fullAddress;
+    return addressParts.length > 0 ? addressParts.join(', ') : '';
   } catch (error) {
     console.error('Reverse geocoding error:', error);
-    // Fallback: return coordinates as a simple fallback
-    return `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+    // Return empty string - caller will use OSM data as fallback
+    return '';
   }
 }
 
@@ -97,6 +96,7 @@ export interface LocationSuggestion {
   address?: string;
   phone?: string;
   email?: string;
+  website?: string;
 }
 
 interface OverpassNode {
@@ -289,11 +289,34 @@ export async function getLocationSuggestions(
 
     // Build final suggestions with addresses
     const suggestions: LocationSuggestion[] = topSuggestions.map((s, index) => {
-      const address = addresses[index];
+      // Use reversed address, or build from OSM address parts
+      let finalAddress = addresses[index];
+      
+      if (!finalAddress) {
+        // Fallback: build address from OSM tags
+        const addrParts = [];
+        if (s.element.tags['addr:housenumber'] && s.element.tags['addr:street']) {
+          addrParts.push(`${s.element.tags['addr:housenumber']} ${s.element.tags['addr:street']}`);
+        } else if (s.element.tags['addr:street']) {
+          addrParts.push(s.element.tags['addr:street']);
+        }
+        if (s.element.tags['addr:city']) {
+          addrParts.push(s.element.tags['addr:city']);
+        }
+        if (s.element.tags['addr:state']) {
+          addrParts.push(s.element.tags['addr:state']);
+        }
+        if (s.element.tags['addr:postcode']) {
+          addrParts.push(s.element.tags['addr:postcode']);
+        }
+        finalAddress = addrParts.length > 0 ? addrParts.join(', ') : '';
+      }
+      
       const phone = s.element.tags.phone || s.element.tags.contact_landline || undefined;
       const email = s.element.tags.email || s.element.tags.contact_email || undefined;
+      const website = s.element.tags.website || s.element.tags.contact_website || s.element.tags.url || undefined;
       
-      console.log(`Suggestion: ${s.element.tags.name}, Address: ${address}, Phone: ${phone}, Email: ${email}`);
+      console.log(`Suggestion: ${s.element.tags.name}, Address: ${finalAddress}, Phone: ${phone}, Email: ${email}, Website: ${website}`);
       
       return {
         id: `${s.element.id}`,
@@ -306,9 +329,10 @@ export async function getLocationSuggestions(
         latitude: s.lat,
         longitude: s.lon,
         distance: s.distance,
-        address: address || undefined,
+        address: finalAddress || undefined,
         phone: phone,
         email: email,
+        website: website,
       };
     });
 
