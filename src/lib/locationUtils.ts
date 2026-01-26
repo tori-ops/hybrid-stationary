@@ -245,12 +245,14 @@ function buildOverpassQuery(
       filters = `
         (
           node["tourism"="hotel"](around:${radiusKm * 1000},${lat},${lon});
-          node["tourism"="guest_house"](around:${radiusKm * 1000},${lat},${lon});
           node["tourism"="bed_and_breakfast"](around:${radiusKm * 1000},${lat},${lon});
+          node["tourism"="guest_house"](around:${radiusKm * 1000},${lat},${lon});
           node["tourism"="hostel"](around:${radiusKm * 1000},${lat},${lon});
+          node["tourism"="apartment"](around:${radiusKm * 1000},${lat},${lon});
           way["tourism"="hotel"](around:${radiusKm * 1000},${lat},${lon});
-          way["tourism"="guest_house"](around:${radiusKm * 1000},${lat},${lon});
           way["tourism"="bed_and_breakfast"](around:${radiusKm * 1000},${lat},${lon});
+          way["tourism"="guest_house"](around:${radiusKm * 1000},${lat},${lon});
+          way["tourism"="apartment"](around:${radiusKm * 1000},${lat},${lon});
         );
       `;
       break;
