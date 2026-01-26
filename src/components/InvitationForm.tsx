@@ -28,6 +28,7 @@ interface Invitation {
   planner_name: string;
   planner_email: string;
   planner_phone: string;
+  planner_website?: string;
   couple_contact_name: string;
   couple_contact_email: string;
   couple_contact_phone: string;
@@ -111,6 +112,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       planner_name: '',
       planner_email: user?.email || '',
       planner_phone: '',
+      planner_website: '',
       couple_contact_name: '',
       couple_contact_email: '',
       couple_contact_phone: '',
@@ -1346,6 +1348,20 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               value={formData.planner_phone}
               onChange={handleChange}
               required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
+              style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium mb-2" style={{ color: '#274E13' }}>
+              Planner Website
+            </label>
+            <input
+              type="url"
+              name="planner_website"
+              value={formData.planner_website || ''}
+              onChange={handleChange}
+              placeholder="https://www.yourwebsite.com"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 text-xs"
               style={{ '--tw-ring-color': '#274E13' } as React.CSSProperties}
             />

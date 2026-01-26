@@ -38,6 +38,7 @@ export const weddingConfig = {
       name: "Tori - Wedding Planner",
       email: "tori@missingpieceplanning.com",
       phone: "269-213-5290",
+      website: "https://www.missingpieceplanning.com",
     },
     couple: {
       name: "Bride & Groom",

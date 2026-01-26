@@ -89,7 +89,7 @@ export default function ContactSection({ config }: { config?: any }) {
           </div>
 
           {/* Phone Option */}
-          <div>
+          <div className="mb-4">
             <a
               href={`tel:${selectedContact.phone}`}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg hover:shadow-lg transition-all"
@@ -105,6 +105,28 @@ export default function ContactSection({ config }: { config?: any }) {
               </div>
             </a>
           </div>
+
+          {/* Website Option - For Planner Only */}
+          {contactType === 'planner' && selectedContact.website && (
+            <div>
+              <a
+                href={selectedContact.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg hover:shadow-lg transition-all"
+                style={{
+                  background: `linear-gradient(to right, ${secondaryColor}, ${secondaryColor}dd)`,
+                  color: accentColor
+                }}
+              >
+                <span>🌐</span>
+                <div className="text-left">
+                  <p className="text-xs md:text-sm" style={{ color: accentColor }}>Website</p>
+                  <p className="font-semibold text-sm md:text-base" style={{ color: accentColor }}>Visit Website →</p>
+                </div>
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>

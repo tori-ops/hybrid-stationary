@@ -57,6 +57,7 @@ export function invitationToConfig(invitation: Invitation | null) {
         name: invitation.planner_name || weddingConfig.contacts.planner.name,
         email: invitation.planner_email || weddingConfig.contacts.planner.email,
         phone: invitation.planner_phone || weddingConfig.contacts.planner.phone,
+        website: invitation.planner_website || weddingConfig.contacts.planner.website,
       },
       couple: {
         name: invitation.couple_contact_name || weddingConfig.contacts.couple.name,

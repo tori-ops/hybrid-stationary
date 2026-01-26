@@ -33,6 +33,7 @@ export interface Invitation {
   planner_name: string | null;
   planner_email: string | null;
   planner_phone: string | null;
+  planner_website: string | null;
   couple_contact_name: string | null;
   couple_contact_email: string | null;
   couple_contact_phone: string | null;
