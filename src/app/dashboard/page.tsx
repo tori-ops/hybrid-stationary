@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/auth-context';
 import Sidebar from '@/components/Sidebar';
 import InvitationForm from '@/components/InvitationForm';
 import InvitationPreview from '@/components/InvitationPreview';
+import { formatWeddingDate } from '@/lib/dateUtils';
 import { supabase } from '@/lib/supabase';
 
 interface Invitation {
@@ -176,7 +177,7 @@ export default function DashboardPage() {
                     {selectedInvite.bride_name} & {selectedInvite.groom_name}
                   </h1>
                   <p className="text-xs lg:text-sm text-gray-600">
-                    {new Date(selectedInvite.wedding_date).toLocaleDateString()}
+                    {formatWeddingDate(selectedInvite.wedding_date)}
                   </p>
                 </div>
                 <button

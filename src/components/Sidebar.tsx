@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
+import { formatWeddingDate } from '@/lib/dateUtils';
 import Link from 'next/link';
 import CreatePlannerModal from './CreatePlannerModal';
 
@@ -187,11 +188,7 @@ export default function Sidebar({ selectedInviteId, onSelectInvite, refreshTrigg
                     {invite.bride_name} & {invite.groom_name}
                   </p>
                   <p className="text-xs text-gray-600 mt-0.5">
-                    {(() => {
-                      const [year, month, day] = invite.wedding_date.split('-');
-                      const weddingDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-                      return weddingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                    })()}
+                    {formatWeddingDate(invite.wedding_date)}
                   </p>
                 </button>
               ))}
