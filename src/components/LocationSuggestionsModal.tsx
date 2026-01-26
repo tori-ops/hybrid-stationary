@@ -101,17 +101,18 @@ export default function LocationSuggestionsModal({
           style={{ backgroundColor: secondaryColor }}
         >
           <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-lg font-semibold" style={{ color: accentColor }}>
               {categoryLabels[category] || category}
             </h2>
             <button
               onClick={onClose}
-              className="text-white hover:opacity-75 transition-opacity text-2xl leading-none"
+              className="hover:opacity-75 transition-opacity text-2xl leading-none"
+              style={{ color: accentColor }}
             >
               ×
             </button>
           </div>
-          <p className="text-xs mt-1 opacity-90">
+          <p className="text-xs mt-1" style={{ color: accentColor, opacity: 0.9 }}>
             {suggestions.length} results within 15 miles
           </p>
         </div>
@@ -121,19 +122,19 @@ export default function LocationSuggestionsModal({
           {loading && (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
-                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: secondaryColor }}></div>
-                <p className="text-sm text-gray-600 mt-2">Loading suggestions...</p>
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: accentColor }}></div>
+                <p className="text-sm mt-2" style={{ color: accentColor }}>Loading suggestions...</p>
               </div>
             </div>
           )}
 
           {error && (
             <div className="text-center py-8">
-              <p className="text-sm text-red-600">{error}</p>
+              <p className="text-sm" style={{ color: accentColor }}>{error}</p>
               <button
                 onClick={fetchSuggestions}
                 className="mt-3 px-4 py-2 rounded text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                style={{ backgroundColor: secondaryColor }}
+                style={{ backgroundColor: accentColor }}
               >
                 Try Again
               </button>
@@ -154,8 +155,8 @@ export default function LocationSuggestionsModal({
                     className="mt-1 cursor-pointer"
                   />
                   <div className="flex-1">
-                    <p className="font-semibold text-sm">{suggestion.name}</p>
-                    <p className="text-xs text-gray-600">
+                    <p className="font-semibold text-sm" style={{ color: accentColor }}>{suggestion.name}</p>
+                    <p className="text-xs" style={{ color: accentColor }}>
                       {suggestion.type} • {suggestion.distance.toFixed(1)} miles
                     </p>
                   </div>
@@ -171,7 +172,7 @@ export default function LocationSuggestionsModal({
             <button
               onClick={onClose}
               className="px-4 py-2 rounded text-sm font-semibold border-2"
-              style={{ color: secondaryColor, borderColor: secondaryColor }}
+              style={{ color: accentColor, borderColor: accentColor }}
             >
               Cancel
             </button>
