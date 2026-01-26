@@ -26,6 +26,7 @@ interface AreaFactsEditorProps {
   onItemsChange: (items: Attraction[]) => void;
   venueLatitude?: number;
   venueLongitude?: number;
+  onRequestSuggestions?: (type: string) => void;
 }
 
 const CUISINES = [
@@ -55,6 +56,7 @@ export default function AreaFactsEditor({
   onItemsChange,
   venueLatitude,
   venueLongitude,
+  onRequestSuggestions,
 }: AreaFactsEditorProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [addressSuggestions, setAddressSuggestions] = useState<any[]>([]);
@@ -181,15 +183,29 @@ export default function AreaFactsEditor({
           <span>{isExpanded ? '▼' : '▶'}</span>
           {title} ({items.length}/10)
         </button>
-        {isExpanded && items.length < 10 && (
-          <button
-            type="button"
-            onClick={handleAddItem}
-            className="px-3 py-1 rounded-lg text-white font-semibold"
-            style={{ backgroundColor: '#274E13' }}
-          >
-            + Add
-          </button>
+        {isExpanded && (
+          <div className="flex gap-2">
+            {items.length < 10 && (
+              <button
+                type="button"
+                onClick={handleAddItem}
+                className="px-3 py-1 rounded-lg text-white font-semibold text-xs"
+                style={{ backgroundColor: '#274E13' }}
+              >
+                + Add
+              </button>
+            )}
+            {venueLatitude && venueLongitude && onRequestSuggestions && (
+              <button
+                type="button"
+                onClick={() => onRequestSuggestions(type)}
+                className="px-3 py-1 rounded-lg text-white font-semibold text-xs"
+                style={{ backgroundColor: '#db2777' }}
+              >
+                💡 Get Suggestions
+              </button>
+            )}
+          </div>
         )}
       </div>
 

@@ -5,6 +5,7 @@ import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
 import AreaFactsEditor from './AreaFactsEditor';
 import StationeryEditor from './StationeryEditor';
+import LocationSuggestionsModal from './LocationSuggestionsModal';
 
 interface Invitation {
   id?: string;
@@ -168,6 +169,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   const [saving, setSaving] = useState(false);
   const [sendingApproval, setSendingApproval] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [suggestionsModalOpen, setSuggestionsModalOpen] = useState(false);
+  const [suggestionsCategory, setSuggestionsCategory] = useState<string>('attractions');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     coupleInfo: false,
     weddingDetails: false,
@@ -371,6 +374,34 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         text: err instanceof Error ? err.message : 'Failed to upload image',
       });
     }
+  };
+
+  const handleOpenSuggestions = (category: string) => {
+    setSuggestionsCategory(category);
+    setSuggestionsModalOpen(true);
+  };
+
+  const handleAddSuggestedLocations = (items: any[], category: string) => {
+    // Create new items with required fields
+    const newItems = items.map(item => ({
+      id: Date.now().toString() + Math.random(),
+      name: item.name || '',
+      description: item.description || '',
+    }));
+
+    // Add to appropriate list based on category
+    if (category === 'attractions') {
+      setAttractionsList((prev) => [...prev, ...newItems]);
+    } else if (category === 'dining') {
+      setDiningList((prev) => [...prev, ...newItems]);
+    } else if (category === 'shopping') {
+      setActivitiesList((prev) => [...prev, ...newItems]);
+    } else if (category === 'accommodations') {
+      setAccommodationsList((prev) => [...prev, ...newItems]);
+    }
+
+    // Close modal
+    setSuggestionsModalOpen(false);
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -1539,6 +1570,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             onItemsChange={setAttractionsList}
             venueLatitude={formData.venue_latitude}
             venueLongitude={formData.venue_longitude}
+            onRequestSuggestions={() => handleOpenSuggestions('attractions')}
           />
           <AreaFactsEditor
             type="dining"
@@ -1547,6 +1579,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             onItemsChange={setDiningList}
             venueLatitude={formData.venue_latitude}
             venueLongitude={formData.venue_longitude}
+            onRequestSuggestions={() => handleOpenSuggestions('dining')}
           />
           <AreaFactsEditor
             type="activities"
@@ -1555,6 +1588,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             onItemsChange={setActivitiesList}
             venueLatitude={formData.venue_latitude}
             venueLongitude={formData.venue_longitude}
+            onRequestSuggestions={() => handleOpenSuggestions('shopping')}
           />
           <AreaFactsEditor
             type="accommodations"
@@ -1563,6 +1597,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             onItemsChange={setAccommodationsList}
             venueLatitude={formData.venue_latitude}
             venueLongitude={formData.venue_longitude}
+            onRequestSuggestions={() => handleOpenSuggestions('accommodations')}
           />
         </div>
         </>
@@ -1840,6 +1875,18 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             </a>
           </>
         )}
+
+        {/* Location Suggestions Modal */}
+        <LocationSuggestionsModal
+          isOpen={suggestionsModalOpen}
+          onClose={() => setSuggestionsModalOpen(false)}
+          category={suggestionsCategory}
+          venueLat={formData.venue_latitude}
+          venueLon={formData.venue_longitude}
+          onAddItems={(items) => handleAddSuggestedLocations(items, suggestionsCategory)}
+          accentColor={formData.accent_color}
+          secondaryColor={formData.secondary_color}
+        />
       </div>
     </form>
   );
