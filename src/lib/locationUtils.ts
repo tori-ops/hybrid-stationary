@@ -95,7 +95,6 @@ export interface LocationSuggestion {
   distance: number; // in miles
   address?: string;
   phone?: string;
-  email?: string;
   website?: string;
 }
 
@@ -293,30 +292,38 @@ export async function getLocationSuggestions(
       let finalAddress = addresses[index];
       
       if (!finalAddress) {
-        // Fallback: build address from OSM tags
-        const addrParts = [];
-        if (s.element.tags['addr:housenumber'] && s.element.tags['addr:street']) {
-          addrParts.push(`${s.element.tags['addr:housenumber']} ${s.element.tags['addr:street']}`);
-        } else if (s.element.tags['addr:street']) {
-          addrParts.push(s.element.tags['addr:street']);
+        // Fallback: build address from OSM tags in proper format
+        // Format: number street, city state zip
+        const streetParts = [];
+        if (s.element.tags['addr:housenumber']) {
+          streetParts.push(s.element.tags['addr:housenumber']);
         }
+        if (s.element.tags['addr:street']) {
+          streetParts.push(s.element.tags['addr:street']);
+        }
+        
+        const streetAddress = streetParts.length > 0 ? streetParts.join(' ') : '';
+        
+        const cityStateParts = [];
         if (s.element.tags['addr:city']) {
-          addrParts.push(s.element.tags['addr:city']);
+          cityStateParts.push(s.element.tags['addr:city']);
         }
         if (s.element.tags['addr:state']) {
-          addrParts.push(s.element.tags['addr:state']);
+          cityStateParts.push(s.element.tags['addr:state']);
         }
         if (s.element.tags['addr:postcode']) {
-          addrParts.push(s.element.tags['addr:postcode']);
+          cityStateParts.push(s.element.tags['addr:postcode']);
         }
-        finalAddress = addrParts.length > 0 ? addrParts.join(', ') : '';
+        
+        const cityStateZip = cityStateParts.length > 0 ? cityStateParts.join(' ') : '';
+        
+        finalAddress = [streetAddress, cityStateZip].filter(p => p).join(', ');
       }
       
       const phone = s.element.tags.phone || s.element.tags.contact_landline || undefined;
-      const email = s.element.tags.email || s.element.tags.contact_email || undefined;
       const website = s.element.tags.website || s.element.tags.contact_website || s.element.tags.url || undefined;
       
-      console.log(`Suggestion: ${s.element.tags.name}, Address: ${finalAddress}, Phone: ${phone}, Email: ${email}, Website: ${website}`);
+      console.log(`Suggestion: ${s.element.tags.name}, Address: ${finalAddress}, Phone: ${phone}, Website: ${website}`);
       
       return {
         id: `${s.element.id}`,
@@ -331,7 +338,6 @@ export async function getLocationSuggestions(
         distance: s.distance,
         address: finalAddress || undefined,
         phone: phone,
-        email: email,
         website: website,
       };
     });

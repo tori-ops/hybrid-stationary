@@ -80,7 +80,6 @@ export default function LocationSuggestionsModal({
         name: s.name,
         address: s.address || '',
         phone: s.phone || '',
-        email: s.email || '',
         website: s.website || '',
         distance: `${s.distance.toFixed(1)} miles`,
       }));
