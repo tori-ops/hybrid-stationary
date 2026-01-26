@@ -83,6 +83,68 @@ export async function reverseGeocodeAddress(
 }
 
 /**
+ * Look up business details (phone, website) from Google Places API
+ */
+export async function getBusinessDetailsFromGoogle(
+  name: string,
+  latitude: number,
+  longitude: number
+): Promise<{ phone?: string; website?: string }> {
+  try {
+    if (!process.env.NEXT_PUBLIC_GOOGLE_API_KEY) {
+      console.warn('Google API key not configured');
+      return {};
+    }
+
+    // First, search for the place by name and location
+    const searchResponse = await fetch(
+      `https://maps.googleapis.com/maps/api/place/nearbysearch/json?` +
+      `location=${latitude},${longitude}&` +
+      `keyword=${encodeURIComponent(name)}&` +
+      `radius=100&` +
+      `key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+      { signal: AbortSignal.timeout(5000) }
+    );
+
+    if (!searchResponse.ok) {
+      throw new Error(`Google Places search error: ${searchResponse.statusText}`);
+    }
+
+    const searchData = await searchResponse.json();
+    
+    if (!searchData.results || searchData.results.length === 0) {
+      console.warn(`No Google Places results for: ${name}`);
+      return {};
+    }
+
+    const placeId = searchData.results[0].place_id;
+
+    // Get place details including phone and website
+    const detailsResponse = await fetch(
+      `https://maps.googleapis.com/maps/api/place/details/json?` +
+      `place_id=${placeId}&` +
+      `fields=formatted_phone_number,website&` +
+      `key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
+      { signal: AbortSignal.timeout(5000) }
+    );
+
+    if (!detailsResponse.ok) {
+      throw new Error(`Google Places details error: ${detailsResponse.statusText}`);
+    }
+
+    const detailsData = await detailsResponse.json();
+    
+    return {
+      phone: detailsData.result?.formatted_phone_number,
+      website: detailsData.result?.website,
+    };
+  } catch (error) {
+    console.error('Google Places lookup error:', error);
+    return {};
+  }
+}
+
+/**
  * Overpass API query for nearby locations
  * Categories: attractions, dining, shopping, accommodations
  */
@@ -286,7 +348,22 @@ export async function getLocationSuggestions(
 
     const addresses = await Promise.all(reverseGeocodePromises);
 
-    // Build final suggestions with addresses
+    // Parallel Google Places lookups for phone/website
+    const googlePlacesPromises = topSuggestions.map((s) =>
+      getBusinessDetailsFromGoogle(s.element.tags.name, s.lat, s.lon)
+        .then((details) => {
+          console.log(`Google Places for ${s.element.tags.name}:`, details);
+          return details;
+        })
+        .catch((err) => {
+          console.error(`Google Places lookup failed for ${s.element.tags.name}:`, err);
+          return {};
+        })
+    );
+
+    const googleDetails = await Promise.all(googlePlacesPromises);
+
+    // Build final suggestions with addresses and phone/website
     const suggestions: LocationSuggestion[] = topSuggestions.map((s, index) => {
       // Use reversed address, or build from OSM address parts
       let finalAddress = addresses[index];
@@ -320,8 +397,20 @@ export async function getLocationSuggestions(
         finalAddress = [streetAddress, cityStateZip].filter(p => p).join(', ');
       }
       
-      const phone = s.element.tags.phone || s.element.tags.contact_landline || undefined;
-      const website = s.element.tags.website || s.element.tags.contact_website || s.element.tags.url || undefined;
+      // Get phone from OSM first, fallback to Google Places
+      const phone = 
+        s.element.tags.phone || 
+        s.element.tags.contact_landline || 
+        (googleDetails[index] as any)?.phone || 
+        undefined;
+      
+      // Get website from OSM first, fallback to Google Places
+      const website = 
+        s.element.tags.website || 
+        s.element.tags.contact_website || 
+        s.element.tags.url ||
+        (googleDetails[index] as any)?.website || 
+        undefined;
       
       console.log(`Suggestion: ${s.element.tags.name}, Address: ${finalAddress}, Phone: ${phone}, Website: ${website}`);
       
