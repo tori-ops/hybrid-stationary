@@ -29,14 +29,20 @@ export async function reverseGeocodeAddress(
   longitude: number
 ): Promise<string> {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
     const response = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
       {
         headers: {
           'User-Agent': 'HybridWeddingInvite/1.0'
-        }
+        },
+        signal: controller.signal
       }
     );
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`Nominatim error: ${response.statusText}`);
@@ -68,10 +74,12 @@ export async function reverseGeocodeAddress(
       addressParts.push(address.postcode);
     }
     
-    return addressParts.length > 0 ? addressParts.join(', ') : 'Address not found';
+    const fullAddress = addressParts.length > 0 ? addressParts.join(', ') : '';
+    return fullAddress;
   } catch (error) {
     console.error('Reverse geocoding error:', error);
-    return '';
+    // Fallback: return coordinates as a simple fallback
+    return `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
   }
 }
 
@@ -267,31 +275,44 @@ export async function getLocationSuggestions(
     // Parallel reverse geocoding for all results
     const reverseGeocodePromises = topSuggestions.map((s) =>
       reverseGeocodeAddress(s.lat, s.lon)
+        .then((addr) => {
+          console.log(`Geocoded ${s.element.tags.name}: ${addr}`);
+          return addr;
+        })
         .catch((err) => {
-          console.error('Failed to geocode:', err);
-          return '';
+          console.error(`Failed to geocode ${s.element.tags.name}:`, err);
+          return `${s.lat.toFixed(4)}, ${s.lon.toFixed(4)}`;
         })
     );
 
     const addresses = await Promise.all(reverseGeocodePromises);
 
     // Build final suggestions with addresses
-    const suggestions: LocationSuggestion[] = topSuggestions.map((s, index) => ({
-      id: `${s.element.id}`,
-      name: s.element.tags.name,
-      type:
-        s.element.tags.amenity ||
-        s.element.tags.tourism ||
-        s.element.tags.shop ||
-        'location',
-      latitude: s.lat,
-      longitude: s.lon,
-      distance: s.distance,
-      address: addresses[index] || undefined,
-      phone: s.element.tags.phone || undefined,
-      email: s.element.tags.email || s.element.tags.contact_email || undefined,
-    }));
+    const suggestions: LocationSuggestion[] = topSuggestions.map((s, index) => {
+      const address = addresses[index];
+      const phone = s.element.tags.phone || s.element.tags.contact_landline || undefined;
+      const email = s.element.tags.email || s.element.tags.contact_email || undefined;
+      
+      console.log(`Suggestion: ${s.element.tags.name}, Address: ${address}, Phone: ${phone}, Email: ${email}`);
+      
+      return {
+        id: `${s.element.id}`,
+        name: s.element.tags.name,
+        type:
+          s.element.tags.amenity ||
+          s.element.tags.tourism ||
+          s.element.tags.shop ||
+          'location',
+        latitude: s.lat,
+        longitude: s.lon,
+        distance: s.distance,
+        address: address || undefined,
+        phone: phone,
+        email: email,
+      };
+    });
 
+    console.log(`Final suggestions: ${suggestions.length}`, suggestions);
     return suggestions;
   } catch (error) {
     console.error(`Error fetching ${category} suggestions:`, error);
