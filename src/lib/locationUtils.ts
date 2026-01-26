@@ -221,57 +221,78 @@ export async function getLocationSuggestions(
 
     const data: OverpassResponse = await response.json();
 
-    // Process results
-    const suggestions: LocationSuggestion[] = [];
-    const reverseGeocodeCache: { [key: string]: string } = {};
+    // Process results - first pass, collect all items that meet distance criteria
+    const suggestionsWithoutAddresses: Array<{
+      element: any;
+      lat: number;
+      lon: number;
+      distance: number;
+    }> = [];
 
-    for (const element of data.elements) {
+    data.elements.forEach((element) => {
       const name = element.tags.name;
-      if (!name) continue; // Skip unnamed places
+      if (!name) return; // Skip unnamed places
 
       let lat = 0;
       let lon = 0;
 
       if ('lat' in element && 'lon' in element) {
-        // Node
         lat = element.lat;
         lon = element.lon;
       } else if ('center' in element && element.center) {
-        // Way with center
         lat = element.center.lat;
         lon = element.center.lon;
       } else {
-        continue; // Skip if no coordinates
+        return; // Skip if no coordinates
       }
 
       const distance = calculateDistance(venueLat, venueLon, lat, lon);
 
       // Only include if within max distance
       if (distance <= maxDistance) {
-        // Get full address via reverse geocoding
-        const cacheKey = `${lat},${lon}`;
-        let fullAddress = reverseGeocodeCache[cacheKey];
-        if (!fullAddress) {
-          fullAddress = await reverseGeocodeAddress(lat, lon);
-          reverseGeocodeCache[cacheKey] = fullAddress;
-        }
-
-        suggestions.push({
-          id: `${element.id}`,
-          name,
-          type: element.tags.amenity || element.tags.tourism || element.tags.shop || 'location',
-          latitude: lat,
-          longitude: lon,
+        suggestionsWithoutAddresses.push({
+          element,
+          lat,
+          lon,
           distance,
-          address: fullAddress || undefined,
-          phone: element.tags.phone || undefined,
-          email: element.tags.email || element.tags.contact_email || undefined,
         });
       }
-    }
+    });
 
-    // Sort by distance and limit to 15
-    return suggestions.sort((a, b) => a.distance - b.distance).slice(0, 15);
+    // Sort by distance and take top 15
+    const topSuggestions = suggestionsWithoutAddresses
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 15);
+
+    // Parallel reverse geocoding for all results
+    const reverseGeocodePromises = topSuggestions.map((s) =>
+      reverseGeocodeAddress(s.lat, s.lon)
+        .catch((err) => {
+          console.error('Failed to geocode:', err);
+          return '';
+        })
+    );
+
+    const addresses = await Promise.all(reverseGeocodePromises);
+
+    // Build final suggestions with addresses
+    const suggestions: LocationSuggestion[] = topSuggestions.map((s, index) => ({
+      id: `${s.element.id}`,
+      name: s.element.tags.name,
+      type:
+        s.element.tags.amenity ||
+        s.element.tags.tourism ||
+        s.element.tags.shop ||
+        'location',
+      latitude: s.lat,
+      longitude: s.lon,
+      distance: s.distance,
+      address: addresses[index] || undefined,
+      phone: s.element.tags.phone || undefined,
+      email: s.element.tags.email || s.element.tags.contact_email || undefined,
+    }));
+
+    return suggestions;
   } catch (error) {
     console.error(`Error fetching ${category} suggestions:`, error);
     return [];
