@@ -383,27 +383,47 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
   const handleAddSuggestedLocations = (items: any[], category: string) => {
     // Create new items with all required fields
-    const newItems = items.map(item => ({
-      id: item.id || (Date.now().toString() + Math.random()),
-      name: item.name || '',
-      address: item.address || '',
-      phone: item.phone || '',
-      distance: item.distance || '',
-      is_18_plus: false,
-      is_21_plus: false,
-      cuisine: category === 'dining' ? '' : undefined,
-      website: item.website || '',
-    }));
+    const newItems = items.map(item => {
+      const mappedItem = {
+        id: item.id || (Date.now().toString() + Math.random()),
+        name: item.name || '',
+        address: item.address || '',
+        phone: item.phone || '',
+        distance: item.distance || '',
+        is_18_plus: false,
+        is_21_plus: false,
+        cuisine: category === 'dining' ? '' : undefined,
+        website: item.website || '',
+      };
+      console.log(`Adding suggested item to ${category}:`, mappedItem);
+      return mappedItem;
+    });
 
     // Add to appropriate list based on category
     if (category === 'attractions') {
-      setAttractionsList((prev) => [...prev, ...newItems]);
+      setAttractionsList((prev) => {
+        const updated = [...prev, ...newItems];
+        console.log('Updated attractions list:', updated);
+        return updated;
+      });
     } else if (category === 'dining') {
-      setDiningList((prev) => [...prev, ...newItems]);
+      setDiningList((prev) => {
+        const updated = [...prev, ...newItems];
+        console.log('Updated dining list:', updated);
+        return updated;
+      });
     } else if (category === 'shopping') {
-      setActivitiesList((prev) => [...prev, ...newItems]);
+      setActivitiesList((prev) => {
+        const updated = [...prev, ...newItems];
+        console.log('Updated activities list:', updated);
+        return updated;
+      });
     } else if (category === 'accommodations') {
-      setAccommodationsList((prev) => [...prev, ...newItems]);
+      setAccommodationsList((prev) => {
+        const updated = [...prev, ...newItems];
+        console.log('Updated accommodations list:', updated);
+        return updated;
+      });
     }
 
     // Close modal

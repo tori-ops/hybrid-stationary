@@ -80,6 +80,7 @@ export default function AreaFactsEditor({
       name: '',
       address: '',
       phone: '',
+      website: '',
       distance: '',
       is_18_plus: false,
       is_21_plus: false,
