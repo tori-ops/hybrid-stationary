@@ -234,18 +234,37 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
     const geocodeVenue = async () => {
       const { venue_address, venue_city, venue_state } = formData;
       
-      // Only geocode if all fields are filled
-      if (!venue_address || !venue_city || !venue_state) {
-        console.log('Skipping geocode - missing fields');
+      // Only geocode if city and state are filled
+      if (!venue_city || !venue_state) {
+        console.log('Skipping geocode - missing city or state');
         return;
       }
       
       try {
-        const query = `${venue_address}, ${venue_city}, ${venue_state}`;
-        console.log('Geocoding query:', query);
+        const stateNames: { [key: string]: string } = {
+          'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas', 'CA': 'California',
+          'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware', 'FL': 'Florida', 'GA': 'Georgia',
+          'HI': 'Hawaii', 'ID': 'Idaho', 'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa',
+          'KS': 'Kansas', 'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+          'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi', 'MO': 'Missouri',
+          'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada', 'NH': 'New Hampshire', 'NJ': 'New Jersey',
+          'NM': 'New Mexico', 'NY': 'New York', 'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio',
+          'OK': 'Oklahoma', 'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+          'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah', 'VT': 'Vermont',
+          'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia', 'WI': 'Wisconsin', 'WY': 'Wyoming'
+        };
         
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`,
+        const fullStateName = stateNames[venue_state.toUpperCase()] || venue_state;
+        
+        // Strategy: Try full address first (if available), then fallback to city+state
+        let query = venue_address && venue_address.trim() 
+          ? `${venue_address}, ${venue_city}, ${fullStateName}`
+          : `${venue_city}, ${fullStateName}`;
+        
+        console.log('Geocoding query (first attempt):', query);
+        
+        let response = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=us&limit=1`,
           {
             headers: {
               'User-Agent': 'HybridWeddingInvite/1.0'
@@ -253,8 +272,26 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           }
         );
         
-        const data = await response.json();
+        let data = await response.json();
         console.log('Nominatim response:', data);
+        
+        // If full address didn't work and we had one, fallback to city+state
+        if ((!data || data.length === 0) && venue_address && venue_address.trim()) {
+          console.log('Full address query failed, trying fallback: city + state');
+          const fallbackQuery = `${venue_city}, ${fullStateName}`;
+          
+          response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fallbackQuery)}&countrycodes=us&limit=1`,
+            {
+              headers: {
+                'User-Agent': 'HybridWeddingInvite/1.0'
+              }
+            }
+          );
+          
+          data = await response.json();
+          console.log('Fallback Nominatim response:', data);
+        }
         
         if (data && data.length > 0) {
           const result = data[0];
@@ -269,7 +306,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
             venue_longitude: lon,
           }));
         } else {
-          console.warn('No results from Nominatim');
+          console.warn('No results from Nominatim for this location');
         }
       } catch (error) {
         console.error('Geocoding error:', error);
