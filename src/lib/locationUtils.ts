@@ -249,10 +249,16 @@ function buildOverpassQuery(
           node["tourism"="guest_house"](around:${radiusKm * 1000},${lat},${lon});
           node["tourism"="hostel"](around:${radiusKm * 1000},${lat},${lon});
           node["tourism"="apartment"](around:${radiusKm * 1000},${lat},${lon});
+          node["tourism"="motel"](around:${radiusKm * 1000},${lat},${lon});
+          node["tourism"="resort"](around:${radiusKm * 1000},${lat},${lon});
+          node["tourism"="vacation_rental"](around:${radiusKm * 1000},${lat},${lon});
           way["tourism"="hotel"](around:${radiusKm * 1000},${lat},${lon});
           way["tourism"="bed_and_breakfast"](around:${radiusKm * 1000},${lat},${lon});
           way["tourism"="guest_house"](around:${radiusKm * 1000},${lat},${lon});
+          way["tourism"="hostel"](around:${radiusKm * 1000},${lat},${lon});
           way["tourism"="apartment"](around:${radiusKm * 1000},${lat},${lon});
+          way["tourism"="motel"](around:${radiusKm * 1000},${lat},${lon});
+          way["tourism"="resort"](around:${radiusKm * 1000},${lat},${lon});
         );
       `;
       break;
@@ -263,6 +269,24 @@ function buildOverpassQuery(
   return `
     [out:json];
     ${filters}
+    out geom;
+  `;
+}
+
+/**
+ * Build a simpler fallback Overpass query for accommodations
+ */
+function buildAccommodationsFallbackQuery(
+  lat: number,
+  lon: number,
+  radiusKm: number
+): string {
+  return `
+    [out:json];
+    (
+      node["tourism"](around:${radiusKm * 1000},${lat},${lon});
+      way["tourism"](around:${radiusKm * 1000},${lat},${lon});
+    );
     out geom;
   `;
 }
@@ -311,6 +335,34 @@ export async function getLocationSuggestions(
 
       const data: OverpassResponse = await response.json();
       console.log(`[${category}] Overpass returned ${data.elements.length} elements`);
+
+      // For accommodations, if we get no results, try fallback query
+      if (category === 'accommodations' && data.elements.length === 0 && attempt === 1) {
+        console.log(`[${category}] No specific results, trying fallback broad query...`);
+        const fallbackQuery = buildAccommodationsFallbackQuery(venueLat, venueLon, radiusKm);
+        
+        const fallbackController = new AbortController();
+        const fallbackTimeoutId = setTimeout(() => fallbackController.abort(), 30000);
+
+        const fallbackResponse = await fetch('https://overpass-api.de/api/interpreter', {
+          method: 'POST',
+          body: fallbackQuery,
+          headers: { 'Content-Type': 'application/osm3s+xml' },
+          signal: fallbackController.signal,
+        });
+
+        clearTimeout(fallbackTimeoutId);
+
+        if (fallbackResponse.ok) {
+          const fallbackData: OverpassResponse = await fallbackResponse.json();
+          console.log(`[${category}] Fallback query returned ${fallbackData.elements.length} elements`);
+          
+          // Use fallback data if it has results
+          if (fallbackData.elements.length > 0) {
+            Object.assign(data, fallbackData);
+          }
+        }
+      }
 
       // Process results - first pass, collect all items that meet distance criteria
       const suggestionsWithoutAddresses: Array<{
