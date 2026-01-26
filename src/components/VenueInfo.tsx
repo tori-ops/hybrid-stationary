@@ -31,21 +31,25 @@ export default function VenueInfo({ config }: { config?: any }) {
               {venue.city}, {venue.state || 'State'}
             </p>
           </div>
-          <div>
-            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
-              Latitude
-            </p>
-            <p className="text-sm md:text-base text-gray-800 font-mono">
-              {venue.latitude ? `${venue.latitude.toFixed(6)}` : 'N/A'}
-            </p>
-          </div>
-          <div>
-            <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
-              Longitude
-            </p>
-            <p className="text-sm md:text-base text-gray-800 font-mono">
-              {venue.longitude ? `${venue.longitude.toFixed(6)}` : 'N/A'}
-            </p>
+          <div className="md:col-span-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
+                  Latitude
+                </p>
+                <p className="text-sm md:text-base text-gray-800 font-mono">
+                  {venue.latitude ? `${venue.latitude.toFixed(6)}` : 'N/A'}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
+                  Longitude
+                </p>
+                <p className="text-sm md:text-base text-gray-800 font-mono">
+                  {venue.longitude ? `${venue.longitude.toFixed(6)}` : 'N/A'}
+                </p>
+              </div>
+            </div>
           </div>
           <div>
             <p className="text-xs md:text-sm text-gray-600 uppercase tracking-wide mb-1">
