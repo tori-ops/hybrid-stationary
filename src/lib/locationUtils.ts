@@ -278,6 +278,8 @@ export async function getLocationSuggestions(
     const radiusKm = (maxDistance / 0.621371) * 1.1; // Convert miles to km with 10% buffer
     const query = buildOverpassQuery(category, venueLat, venueLon, radiusKm);
 
+    console.log(`[${category}] Querying Overpass API with radius ${radiusKm.toFixed(2)}km around ${venueLat.toFixed(4)}, ${venueLon.toFixed(4)}`);
+
     const response = await fetch('https://overpass-api.de/api/interpreter', {
       method: 'POST',
       body: query,
@@ -289,6 +291,7 @@ export async function getLocationSuggestions(
     }
 
     const data: OverpassResponse = await response.json();
+    console.log(`[${category}] Overpass returned ${data.elements.length} elements`);
 
     // Process results - first pass, collect all items that meet distance criteria
     const suggestionsWithoutAddresses: Array<{
@@ -332,6 +335,8 @@ export async function getLocationSuggestions(
     const topSuggestions = suggestionsWithoutAddresses
       .sort((a, b) => a.distance - b.distance)
       .slice(0, 15);
+
+    console.log(`[${category}] Found ${suggestionsWithoutAddresses.length} named places within ${maxDistance} miles, using top ${topSuggestions.length}`);
 
     // Parallel reverse geocoding for all results
     const reverseGeocodePromises = topSuggestions.map((s) =>
