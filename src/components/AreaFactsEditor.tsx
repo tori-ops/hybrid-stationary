@@ -13,6 +13,7 @@ interface Attraction {
   name: string;
   address: string;
   phone: string;
+  email?: string;
   distance: string;
   is_18_plus: boolean;
   is_21_plus: boolean;
@@ -195,7 +196,8 @@ export default function AreaFactsEditor({
                 + Add
               </button>
             )}
-            {venueLatitude && venueLongitude && onRequestSuggestions && (
+            {typeof venueLatitude === 'number' && typeof venueLongitude === 'number' && 
+             venueLatitude !== 0 && venueLongitude !== 0 && onRequestSuggestions && items.length < 10 && (
               <button
                 type="button"
                 onClick={() => onRequestSuggestions(type)}
@@ -294,6 +296,32 @@ export default function AreaFactsEditor({
                       title="Open in Google Maps"
                     >
                       🗺️ Maps
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="text-xs font-medium block mb-1" style={{ color: '#274E13' }}>
+                  Email
+                </label>
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="email"
+                    value={item.email || ''}
+                    onChange={(e) => handleItemChange(item.id, 'email', e.target.value)}
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm"
+                    style={{ color: '#000' }}
+                    placeholder="email@example.com"
+                  />
+                  {item.email && (
+                    <a
+                      href={`mailto:${item.email}`}
+                      className="px-2 py-2 text-white rounded text-xs font-semibold whitespace-nowrap"
+                      style={{ backgroundColor: '#274E13' }}
+                      title="Send email"
+                    >
+                      ✉️ Email
                     </a>
                   )}
                 </div>

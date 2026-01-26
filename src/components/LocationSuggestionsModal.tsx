@@ -76,8 +76,12 @@ export default function LocationSuggestionsModal({
     const selectedItems = suggestions
       .filter((s) => selected.has(s.id))
       .map((s) => ({
+        id: s.id,
         name: s.name,
-        description: `${s.type} - ${s.distance.toFixed(1)} miles away`,
+        address: s.address || '',
+        phone: s.phone || '',
+        email: s.email || '',
+        distance: `${s.distance.toFixed(1)} miles`,
       }));
 
     if (selectedItems.length > 0) {

@@ -32,6 +32,9 @@ export interface LocationSuggestion {
   latitude: number;
   longitude: number;
   distance: number; // in miles
+  address?: string;
+  phone?: string;
+  email?: string;
 }
 
 interface OverpassNode {
@@ -197,6 +200,9 @@ export async function getLocationSuggestions(
           latitude: lat,
           longitude: lon,
           distance,
+          address: element.tags['addr:full'] || element.tags['addr:street'] || undefined,
+          phone: element.tags.phone || undefined,
+          email: element.tags.email || element.tags.contact_email || undefined,
         });
       }
     });

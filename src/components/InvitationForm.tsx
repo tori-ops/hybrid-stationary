@@ -382,11 +382,17 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
   };
 
   const handleAddSuggestedLocations = (items: any[], category: string) => {
-    // Create new items with required fields
+    // Create new items with all required fields
     const newItems = items.map(item => ({
-      id: Date.now().toString() + Math.random(),
+      id: item.id || (Date.now().toString() + Math.random()),
       name: item.name || '',
-      description: item.description || '',
+      address: item.address || '',
+      phone: item.phone || '',
+      distance: item.distance || '',
+      is_18_plus: false,
+      is_21_plus: false,
+      cuisine: category === 'dining' ? '' : undefined,
+      email: item.email || '',
     }));
 
     // Add to appropriate list based on category
