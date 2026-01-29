@@ -125,7 +125,7 @@ The Missing Piece Planning`;
   <style>
     body { 
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.6; 
       color: #333;
       margin: 0;
@@ -146,11 +146,11 @@ The Missing Piece Planning`;
     }
     .content { 
       padding: 40px 30px;
-      font-size: 16px;
+      font-size: 14px;
     }
     p {
       margin: 15px 0;
-      font-size: 16px;
+      font-size: 14px;
     }
     ol {
       margin: 15px 0;
@@ -158,7 +158,7 @@ The Missing Piece Planning`;
     }
     ol li {
       margin: 8px 0;
-      font-size: 16px;
+      font-size: 14px;
     }
     ul {
       margin: 15px 0;
@@ -166,7 +166,7 @@ The Missing Piece Planning`;
     }
     ul li {
       margin: 8px 0;
-      font-size: 16px;
+      font-size: 14px;
     }
     .link-button { 
       display: inline-block; 
@@ -178,7 +178,7 @@ The Missing Piece Planning`;
       margin: 25px 0;
       font-weight: 600;
       text-align: center;
-      font-size: 16px;
+      font-size: 14px;
     }
     .link-button:hover {
       background-color: #1a3009;
@@ -202,7 +202,7 @@ The Missing Piece Planning`;
     .footer {
       background-color: #f5f5f5;
       padding: 20px 30px;
-      font-size: 16px;
+      font-size: 14px;
       color: #666;
       border-top: 1px solid #eee;
     }
