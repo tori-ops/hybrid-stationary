@@ -135,26 +135,8 @@ The Missing Piece Planning`;
     .container { 
       max-width: 600px; 
       margin: 0 auto; 
-      background-color: white;
+      background-color: #faf9f7;
       padding: 0;
-      position: relative;
-    }
-    .background-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('${backgroundImageUrl}');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .content-wrapper {
-      position: relative;
-      z-index: 1;
     }
     .header-image {
       width: 100%;
@@ -228,9 +210,7 @@ The Missing Piece Planning`;
 </head>
 <body>
   <div class="container">
-    <div class="background-overlay"></div>
-    <div class="content-wrapper">
-      <img src="${headerImageUrl}" alt="Suite Header" class="header-image">
+    <img src="${headerImageUrl}" alt="Suite Header" class="header-image">
     
     <div class="content">
       <p>Hi there ${coupleName}</p>
@@ -273,7 +253,6 @@ The Missing Piece Planning`;
         <img src="${toriSignatureUrl}" alt="Tori Walker Signature" class="signature-image">
         <img src="${deanSignatureUrl}" alt="Dean Walker Signature" class="signature-image">
       </div>
-    </div>
     </div>
 
     <div class="footer">
