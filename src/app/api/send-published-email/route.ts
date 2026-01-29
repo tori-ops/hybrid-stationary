@@ -145,20 +145,8 @@ The search for your perfect day ends here.`;
     
     <div class="footer">
       <p>This is an automated message from The Missing Piece Planning. Please do not reply to this email.</p>
-    
-    <div class="signatures">
-      <img src="${baseUrl}/Tori-Walker.png" alt="Tori Walker" />
-      <img src="${baseUrl}/Dean-Walker.png" alt="Dean Walker" />
     </div>
 
-    <div class="footer">
-      <p style="margin: 0; line-height: 1.4;">
-        The Missing Piece Planning and Events, LLC<br>
-        The search for your perfect day ends here.
-      </p>
-    </div>
-
-</div>
   </div>
 </body>
 </html>`;
