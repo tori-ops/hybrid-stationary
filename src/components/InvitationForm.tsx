@@ -1678,7 +1678,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               />
               {formData.invitation_background_image_url && (
                 <div className="mt-2 flex gap-2">
-                  <img src={formData.invitation_background_image_url} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                  <img src={formData.invitation_background_image_url} alt="Preview" className="w-64 h-64 object-cover rounded" />
                   <button
                     type="button"
                     onClick={() => handleChange({ target: { name: 'invitation_background_image_url', value: '' } } as any)}
@@ -1707,7 +1707,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               />
               {formData.rsvp_background_image_url && (
                 <div className="mt-2 flex gap-2">
-                  <img src={formData.rsvp_background_image_url} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                  <img src={formData.rsvp_background_image_url} alt="Preview" className="w-64 h-64 object-cover rounded" />
                   <button
                     type="button"
                     onClick={() => handleChange({ target: { name: 'rsvp_background_image_url', value: '' } } as any)}
@@ -1736,7 +1736,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               />
               {formData.save_the_date_background_image_url && (
                 <div className="mt-2 flex gap-2">
-                  <img src={formData.save_the_date_background_image_url} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                  <img src={formData.save_the_date_background_image_url} alt="Preview" className="w-64 h-64 object-cover rounded" />
                   <button
                     type="button"
                     onClick={() => handleChange({ target: { name: 'save_the_date_background_image_url', value: '' } } as any)}
