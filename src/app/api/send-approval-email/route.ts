@@ -74,31 +74,47 @@ export async function POST(request: NextRequest) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mp-hybrid-stationery.vercel.app';
     const approvalLink = `${baseUrl}/invite?event=${invitation.event_slug}&proof=${approvalToken}`;
 
+    // Get couple name
+    const coupleName = invitation.bride_name && invitation.groom_name 
+      ? `${invitation.bride_name} & ${invitation.groom_name}`
+      : 'there';
+
     // Email content
-    const textContent = `Hi there!
+    const textContent = `Hi there ${coupleName}!
 
-We've finished setting up the next portion of your wedding details and it's ready for your review.
+We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚
 
-Before anything goes live, we want your eyes on it. This preview is a proof-only version, giving you the chance to read through what's been entered, confirm accuracy, and make sure everything feels like you.
+Before anything goes live, we always pause here and invite you in. This version is a proof-only preview, created just for you to review, tweak, and make sure everything feels right.
 
-A few important notes as you review:
+Here's how to review your stationery:
+1. Click "Review Your Stationery" below
+2. Take a look at the page that opens and read through everything - check details, wording, and overall vibe
+3. If you'd like to make changes, click "Edit & Update"
+4. You can type directly into the fields or copy/paste notes
+5. Add, remove, or adjust anything you'd like
+6. When you're done, click "Send Edits"
 
-• This version is clearly marked PROOF and will not be published or shared publicly yet
-• Nothing moves forward without your approval
-• This step ensures everything is intentional, accurate, and aligned with your vision
+A few things to know as you review:
+• This version is clearly marked PROOF and is not public
+• Nothing is published or shared without your approval
+• This step helps ensure everything is intentional, accurate, and aligned with your vision
 
-Please take a moment to review the page using the link below. If you have edits, questions, or approvals to share, you can reply directly or let us know through your planning workspace.
+Once we receive your edits, we'll make the updates and within 2–3 days you'll receive another email asking you to approve your stationery. 💚
+
+If everything looks perfect, you'll simply click Approve & Publish
+Once approved, you'll receive a link to your finalized stationery suite, ready to share with your loved ones and esteemed guests 💚
 
 ${approvalLink}
 
-Once you give the green light, we'll take care of the rest and move it into its final, published form.
-
-We're excited to keep things moving forward with you! Thank you for taking a moment to review!
+We're so excited to keep things moving forward with you and truly appreciate you taking a moment to review. As always, if questions pop up along the way, just let us know — we're here. 🧩✨
 
 Warmly,
 Tori & Dean
-The Missing Piece Planning
-The search for your perfect day ends here.`;
+The Missing Piece Planning`;
+
+    const headerImageUrl = `${baseUrl}/suite-header.png`;
+    const toriSignatureUrl = `${baseUrl}/tori-walker.png`;
+    const deanSignatureUrl = `${baseUrl}/dean-walker.png`;
 
     const htmlContent = `
 <!DOCTYPE html>
@@ -106,47 +122,155 @@ The search for your perfect day ends here.`;
 <head>
   <meta charset="UTF-8">
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; background-color: white; padding: 40px 20px; }
-    .header { background: linear-gradient(135deg, #274E13 0%, #1a3009 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 5px; }
-    .content { padding: 20px 0; }
-    .link-button { display: inline-block; background-color: #274E13; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
-    .footer { color: #666; font-size: 12px; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      line-height: 1.6; 
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    .container { 
+      max-width: 600px; 
+      margin: 0 auto; 
+      background-color: white;
+      padding: 0;
+    }
+    .header-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .content { 
+      padding: 40px 30px; 
+    }
+    p {
+      margin: 15px 0;
+      color: #333;
+    }
+    .greeting {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .highlight {
+      color: #274E13;
+      font-weight: 600;
+    }
+    ol {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    ol li {
+      margin: 8px 0;
+    }
+    ul {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    ul li {
+      margin: 8px 0;
+    }
+    .section-title {
+      color: #274E13;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .link-button { 
+      display: inline-block; 
+      background-color: #274E13; 
+      color: white; 
+      padding: 14px 40px; 
+      text-decoration: none; 
+      border-radius: 4px; 
+      margin: 25px 0;
+      font-weight: 600;
+      text-align: center;
+    }
+    .link-button:hover {
+      background-color: #1a3009;
+    }
+    .closing {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .signatures {
+      text-align: left;
+      margin-top: 30px;
+      padding-top: 20px;
+    }
+    .signature-image {
+      width: 120px;
+      height: auto;
+      display: inline-block;
+      margin-right: 40px;
+      margin-bottom: 20px;
+    }
+    .signature-image:last-child {
+      margin-right: 0;
+    }
+    .footer {
+      background-color: #f5f5f5;
+      padding: 20px 30px;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #eee;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1 style="margin: 0;">Your Wedding Details Are Ready!</h1>
-      <p style="margin: 10px 0 0 0;">Proof Review</p>
-    </div>
+    <img src="${headerImageUrl}" alt="Suite Header" class="header-image">
+    
     <div class="content">
-      <p>Hi there!</p>
-      <p>We've finished setting up the next portion of your wedding details and it's ready for your review.</p>
-      <p>Before anything goes live, we want your eyes on it. This preview is a proof-only version, giving you the chance to read through what's been entered, confirm accuracy, and make sure everything feels like you.</p>
+      <p class="greeting">Hi there ${coupleName}</p>
       
-      <h3 style="color: #274E13;">A few important notes as you review:</h3>
-      <ul>
-        <li>This version is clearly marked <strong>PROOF</strong> and will not be published or shared publicly yet</li>
-        <li>Nothing moves forward without your approval</li>
-        <li>This step ensures everything is intentional, accurate, and aligned with your vision</li>
-      </ul>
+      <p>We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚</p>
+      
+      <p>Before anything goes live, we always pause here and invite you in. This version is a proof-only preview, created just for you to review, tweak, and make sure everything feels right.</p>
 
-      <p>Please take a moment to review the page using the button below. If you have edits, questions, or approvals to share, you can reply directly or let us know through your planning workspace.</p>
+      <p class="section-title">Here's how to review your stationery:</p>
+      <ol>
+        <li>Click "Review Your Stationery" below (button currently labeled 'Review Your Stationery')</li>
+        <li>Take a look at the page that opens and read through everything and check details, wording, and overall vibe - everything</li>
+        <li>If you'd like to make changes, click "Edit & Update"</li>
+        <li>You can type directly into the fields or copy/paste notes</li>
+        <li>Add, remove, or adjust anything you'd like</li>
+        <li>When you're done, click "Send Edits"</li>
+      </ol>
 
       <p style="text-align: center;">
-        <a href="${approvalLink}" class="link-button">Review Your Invitation</a>
+        <a href="${approvalLink}" class="link-button">Review Your Stationery</a>
       </p>
 
-      <p>Once you give the green light, we'll take care of the rest and move it into its final, published form.</p>
-      <p>We're excited to keep things moving forward with you! Thank you for taking a moment to review!</p>
+      <p class="section-title">A few things to know as you review:</p>
+      <ul>
+        <li>This version is clearly marked <strong>PROOF</strong> and is not public</li>
+        <li>Nothing is published or shared without your approval</li>
+        <li>This step helps ensure everything is intentional, accurate, and aligned with your vision</li>
+      </ul>
 
-      <div class="footer">
-        <p style="margin: 0;">Warmly,<br>
-        Tori & Dean<br>
-        The Missing Piece Planning<br>
-        The search for your perfect day ends here.</p>
+      <p>Once we receive your edits, we'll make the updates and within 2–3 days you'll receive another email asking you to approve your stationery. 💚</p>
+
+      <p>
+        <span style="margin-right: 15px;">👉 If everything looks perfect, you'll simply click <strong>Approve & Publish</strong></span><br>
+        <span style="margin-right: 15px;">👉 Once approved, you'll receive a link to your finalized stationery suite, ready to share with your loved ones and esteemed guests 💚</span>
+      </p>
+
+      <p class="closing">We're so excited to keep things moving forward with you and truly appreciate you taking a moment to review. As always, if questions pop up along the way, just let us know — we're here. 🧩✨</p>
+
+      <div class="signatures">
+        <img src="${toriSignatureUrl}" alt="Tori Walker Signature" class="signature-image">
+        <img src="${deanSignatureUrl}" alt="Dean Walker Signature" class="signature-image">
       </div>
+    </div>
+
+    <div class="footer">
+      <p style="margin: 0; line-height: 1.4;">
+        The Missing Piece Planning<br>
+        The search for your perfect day ends here.
+      </p>
     </div>
   </div>
 </body>
