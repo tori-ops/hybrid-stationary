@@ -83,6 +83,8 @@ interface Invitation {
   approval_token?: string;
   approval_requested_at?: string;
   approval_approved_at?: string;
+  has_pending_updates?: boolean;
+  updates_acknowledged_by_guests?: boolean;
 }
 
 interface InvitationFormProps {
@@ -163,6 +165,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       show_faq: true,
       faq_items: [],
       is_published: false,
+      has_pending_updates: false,
+      updates_acknowledged_by_guests: false,
     }
   );
 
@@ -458,12 +462,18 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           }),
         };
 
+        console.log('Update data:', updateData);
+        console.log('Is published:', invitation.is_published);
+
         const { error } = await supabase
           .from('invitations')
           .update(updateData)
           .eq('id', invitation.id);
 
-        if (error) throw error;
+        if (error) {
+          console.error('Supabase update error:', error);
+          throw error;
+        }
         setMessage({ type: 'success', text: 'Invitation updated successfully!' });
       } else {
         // Create new
