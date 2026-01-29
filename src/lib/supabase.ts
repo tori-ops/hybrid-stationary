@@ -89,6 +89,8 @@ export interface Invitation {
   approval_token: string | null;
   approval_requested_at: string | null;
   approval_approved_at: string | null;
+  has_pending_updates: boolean;
+  updates_acknowledged_by_guests: boolean;
   created_at: string;
   updated_at: string;
 }

@@ -448,10 +448,19 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       };
 
       if (invitation?.id) {
-        // Update existing
+        // Update existing - if already published, set to pending for re-approval
+        const updateData = {
+          ...saveData,
+          ...(invitation.is_published && {
+            approval_status: 'pending',
+            has_pending_updates: true,
+            updates_acknowledged_by_guests: false,
+          }),
+        };
+
         const { error } = await supabase
           .from('invitations')
-          .update(saveData)
+          .update(updateData)
           .eq('id', invitation.id);
 
         if (error) throw error;
@@ -1855,6 +1864,8 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                   color:
                     invitation.approval_status === 'published'
                       ? '#16a34a'
+                      : invitation.approval_status === 'pending'
+                      ? '#16a34a'
                       : invitation.approval_status === 'approved'
                       ? '#3b82f6'
                       : invitation.approval_status === 'sent_for_approval'
@@ -1885,7 +1896,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onClick={handleSendForApproval}
               disabled={sendingApproval || invitation.approval_status === 'published'}
               className="px-8 py-3 rounded-lg font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-              style={{ backgroundColor: '#f59e0b' }}
+              style={{ backgroundColor: invitation.approval_status === 'pending' ? '#16a34a' : '#f59e0b' }}
             >
               {sendingApproval ? 'Sending...' : 'Send for Approval'}
             </button>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useInvitation } from '@/hooks/useInvitation';
 import { invitationToConfig } from '@/lib/invitationConfig';
@@ -29,6 +29,7 @@ function InvitePageContent() {
   const [showEditConfirmModal, setShowEditConfirmModal] = useState(false);
   const [showEditCommentsModal, setShowEditCommentsModal] = useState(false);
   const [isSubmittingEdits, setIsSubmittingEdits] = useState(false);
+  const [showUpdateBanner, setShowUpdateBanner] = useState(false);
   
   const isProofMode = !!approvalToken;
 
@@ -43,6 +44,31 @@ function InvitePageContent() {
   // Convert invitation data to config format, fall back to default
   const config = invitationToConfig(invitation);
   const { weatherLocation, couple } = config;
+
+  // Show update banner if there are pending updates that haven't been acknowledged
+  useEffect(() => {
+    if (invitation?.has_pending_updates && !invitation?.updates_acknowledged_by_guests && !isProofMode) {
+      setShowUpdateBanner(true);
+    } else {
+      setShowUpdateBanner(false);
+    }
+  }, [invitation?.has_pending_updates, invitation?.updates_acknowledged_by_guests, isProofMode]);
+
+  const handleAcknowledgeUpdates = async () => {
+    try {
+      const response = await fetch('/api/acknowledge-updates', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ eventSlug }),
+      });
+
+      if (response.ok) {
+        setShowUpdateBanner(false);
+      }
+    } catch (error) {
+      console.error('Error acknowledging updates:', error);
+    }
+  };
 
   if (loading) {
     return (
@@ -171,7 +197,25 @@ function InvitePageContent() {
     >
       {/* Semi-transparent overlay */}
       <div style={{ backgroundColor: 'transparent', minHeight: '100vh' }}>
-        {/* Content Sections */}
+        {/* Update Banner - Show when there are pending updates */}
+        {showUpdateBanner && (
+          <div className="fixed top-0 left-0 right-0 z-40 bg-blue-50 border-b-2 border-blue-400 px-4 py-4">
+            <div className="max-w-6xl mx-auto flex items-center justify-between">
+              <div className="flex items-center gap-3 flex-1">
+                <div className="text-lg font-semibold text-blue-900">✨ Updates have been made! Please select OK to clear</div>
+              </div>
+              <button
+                onClick={handleAcknowledgeUpdates}
+                className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        )}
+        
+        {/* Content Sections - Add padding top if banner is showing */}
+        <div style={{ paddingTop: showUpdateBanner ? '80px' : '0' }}>
         <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         {/* Proof Watermark - Show in proof mode */}
         {isProofMode && <ProofWatermark />}
@@ -373,6 +417,7 @@ justify-center">
             </div>
           )}
         </footer>
+        </div>
       </div>
 
       {/* Approval Modal */}

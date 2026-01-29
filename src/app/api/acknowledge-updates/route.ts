@@ -3,11 +3,11 @@ import { createClient } from '@supabase/supabase-js';
 
 export async function POST(request: NextRequest) {
   try {
-    const { approvalToken } = await request.json();
+    const { eventSlug } = await request.json();
 
-    if (!approvalToken) {
+    if (!eventSlug) {
       return NextResponse.json(
-        { error: 'Missing approval token' },
+        { error: 'Missing eventSlug' },
         { status: 400 }
       );
     }
@@ -24,54 +24,45 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    console.log('Looking up approval token:', approvalToken.substring(0, 20) + '...');
-
-    // Find invitation by approval token
+    // Find invitation by event slug
     const { data: invitation, error: fetchError } = await supabase
       .from('invitations')
-      .select('*')
-      .eq('approval_token', approvalToken)
+      .select('id')
+      .eq('event_slug', eventSlug)
       .single();
 
-    console.log('Fetch error:', fetchError);
-    console.log('Invitation found:', !!invitation);
-
     if (fetchError || !invitation) {
-      console.error('Token lookup failed:', fetchError?.message || 'No invitation found');
+      console.error('Invitation fetch error:', fetchError);
       return NextResponse.json(
-        { error: 'Invalid or expired approval token' },
+        { error: 'Invitation not found' },
         { status: 404 }
       );
     }
 
-    // Update invitation to approved/published and reset update tracking
+    // Mark updates as acknowledged by guests
     const { error: updateError } = await supabase
       .from('invitations')
       .update({
-        approval_status: 'published',
-        is_published: true,
-        approval_approved_at: new Date().toISOString(),
-        has_pending_updates: false,
-        updates_acknowledged_by_guests: false,
+        updates_acknowledged_by_guests: true,
       })
       .eq('id', invitation.id);
 
     if (updateError) {
       console.error('Update error:', updateError);
       return NextResponse.json(
-        { error: 'Failed to approve invitation' },
+        { error: 'Failed to acknowledge updates' },
         { status: 500 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Invitation approved and published successfully',
+      message: 'Updates acknowledged by guests',
     });
   } catch (error) {
-    console.error('Error approving invitation:', error);
+    console.error('Error acknowledging updates:', error);
     return NextResponse.json(
-      { error: 'Failed to approve invitation' },
+      { error: 'Failed to acknowledge updates: ' + (error instanceof Error ? error.message : 'Unknown error') },
       { status: 500 }
     );
   }
