@@ -46,7 +46,7 @@ export default function StationeryDisplay({
   useEffect(() => {
     const resizeObservers = new Map<string, ResizeObserver>();
     items.forEach((item, idx) => {
-      const key = $-{idx};
+      const key = ${idx};
       const element = cardRefs.current[key];
       if (element) {
         const observer = new ResizeObserver(() => {
@@ -78,7 +78,7 @@ export default function StationeryDisplay({
   return (
     <div className="w-full space-y-8">
       {items.map((item, idx) => {
-        const key = $-{idx};
+        const key = ${idx};
         const isFlipped = flipped[key] || false;
         const dims = dimensions[key];
         const aspectRatio = dims ? dims.width / dims.height : 3 / 4;
