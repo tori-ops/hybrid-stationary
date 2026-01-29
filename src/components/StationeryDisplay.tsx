@@ -20,12 +20,7 @@ interface ImageDimensions {
   height: number;
 }
 
-export default function StationeryDisplay({
-  items,
-  secondaryColor = '#274E13',
-  accentColor = '#FF6B6B',
-  backgroundImages = {}
-}: StationeryDisplayProps) {
+export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B', backgroundImages = {} }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
   const [dimensions, setDimensions] = useState<{ [key: string]: ImageDimensions }>({});
   const [cardSizes, setCardSizes] = useState<{ [key: string]: { width: number; height: number } }>({});
@@ -37,17 +32,25 @@ export default function StationeryDisplay({
   }
 
   useEffect(() => {
+    // Set initial screen size
     setIsSmallScreen(window.innerWidth < 768);
-    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+
+    // Handle window resize
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     const resizeObservers = new Map<string, ResizeObserver>();
+
     items.forEach((item, idx) => {
-      const key = $-{idx};
+      const key = `${item.type}-${idx}`;
       const element = cardRefs.current[key];
+      
       if (element) {
         const observer = new ResizeObserver(() => {
           const rect = element.getBoundingClientRect();
@@ -56,20 +59,27 @@ export default function StationeryDisplay({
             [key]: { width: rect.width, height: rect.height }
           }));
         });
+
         observer.observe(element);
         resizeObservers.set(key, observer);
       }
     });
-    return () => resizeObservers.forEach((observer) => observer.disconnect());
+
+    return () => {
+      resizeObservers.forEach((observer) => observer.disconnect());
+    };
   }, [items]);
 
   const toggleFlip = (key: string) => {
-    setFlipped((prev) => ({ ...prev, [key]: !prev[key] }));
+    setFlipped(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
   };
 
   const handleImageLoad = (key: string, event: React.SyntheticEvent<HTMLImageElement>) => {
     const img = event.currentTarget;
-    setDimensions((prev) => ({
+    setDimensions(prev => ({
       ...prev,
       [key]: { width: img.naturalWidth, height: img.naturalHeight }
     }));
@@ -78,17 +88,19 @@ export default function StationeryDisplay({
   return (
     <div className="w-full space-y-8">
       {items.map((item, idx) => {
-        const key = $-{idx};
+        const key = `${item.type}-${idx}`;
         const isFlipped = flipped[key] || false;
         const dims = dimensions[key];
-        const aspectRatio = dims ? dims.width / dims.height : 3 / 4;
+        const aspectRatio = dims ? (dims.width / dims.height) : (3 / 4);
         const backgroundImage = backgroundImages[item.type];
-        const cardSize = cardSizes[key];
-        const backgroundWidth = cardSize?.width ? cardSize.width * 1.5 : 600;
+          // Calculate background size based on card dimensions
+          const cardSize = cardSizes[key];
+            // Responsive background size: 850px width on desktop, 700px mobile; 950px tall on desktop, 850px mobile
+            const backgroundWidth = cardSize?.width ? cardSize.width * 1.5 : 600;
         const backgroundHeight = cardSize?.height ? cardSize.height * 1.5 : 800;
-
-        return (
-          <div key={key} className="flex flex-col items-center justify-center relative w-full">
+          return (
+            <div key={key} className="flex flex-col items-center justify-center relative w-full">              
+            {/* Background Image Container - presents the stationery */}
             {backgroundImage && (
               <div
                 className="absolute pointer-events-none"
@@ -97,8 +109,8 @@ export default function StationeryDisplay({
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  width: $px,
-                  height: $px,
+                    width: `${backgroundWidth}px`,
+                    height: `${backgroundHeight}px`,
                   maxWidth: 'none'
                 }}
               >
@@ -110,6 +122,7 @@ export default function StationeryDisplay({
               </div>
             )}
 
+            {/* Flip Card Container */}
             <div
               ref={(el) => {
                 if (el) cardRefs.current[key] = el;
@@ -132,9 +145,12 @@ export default function StationeryDisplay({
                   zIndex: 2
                 }}
               >
+                {/* Front Image */}
                 <div
                   className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
-                  style={{ backfaceVisibility: 'hidden' }}
+                  style={{
+                    backfaceVisibility: 'hidden',
+                  }}
                 >
                   <img
                     src={item.front_image_url}
@@ -145,11 +161,12 @@ export default function StationeryDisplay({
                   />
                 </div>
 
+                {/* Back Image */}
                 <div
                   className="absolute w-full h-full rounded-lg shadow-2xl overflow-hidden"
                   style={{
                     backfaceVisibility: 'hidden',
-                    transform: 'rotateY(180deg)'
+                    transform: 'rotateY(180deg)',
                   }}
                 >
                   <img
@@ -157,14 +174,19 @@ export default function StationeryDisplay({
                     alt="Card Back"
                     className="w-full h-full object-cover"
                     style={{ display: 'block' }}
-                    onLoad={(e) => handleImageLoad($-back, e)}
+                    onLoad={(e) => handleImageLoad(`${key}-back`, e)}
                   />
                 </div>
               </div>
             </div>
+
           </div>
         );
       })}
     </div>
   );
 }
+
+
+
+
