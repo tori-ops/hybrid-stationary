@@ -113,8 +113,8 @@ Tori & Dean
 The Missing Piece Planning`;
 
     const headerImageUrl = `${baseUrl}/suite-header.png`;
-    const toriSignatureUrl = `${baseUrl}/tori-walker.png`;
-    const deanSignatureUrl = `${baseUrl}/dean-walker.png`;
+    const toriSignatureUrl = `${baseUrl}/Tori-Walker.png`;
+    const deanSignatureUrl = `${baseUrl}/Dean-Walker.png`;
 
     const htmlContent = `
 <!DOCTYPE html>
@@ -180,7 +180,7 @@ The Missing Piece Planning`;
     .link-button { 
       display: inline-block; 
       background-color: #274E13; 
-      color: white; 
+      color: #D0CEB5; 
       padding: 14px 40px; 
       text-decoration: none; 
       border-radius: 4px; 
