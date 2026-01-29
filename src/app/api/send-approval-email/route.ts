@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       : 'there';
 
     // Email content
-    const textContent = `Hi there ${coupleName}!
+    const textContent = `hey there ${coupleName}!
 
 We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚
 
@@ -213,7 +213,7 @@ The Missing Piece Planning`;
     <img src="${headerImageUrl}" alt="Suite Header" class="header-image">
     
     <div class="content">
-      <p>Hi there ${coupleName}</p>
+<p>hey there ${coupleName}!</p>
       
       <p>We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚</p>
       
@@ -257,7 +257,7 @@ The Missing Piece Planning`;
 
     <div class="footer">
       <p style="margin: 0; line-height: 1.4;">
-        The Missing Piece Planning<br>
+        The Missing Piece Planning and Events, LLC<br>
         The search for your perfect day ends here.
       </p>
     </div>
@@ -268,7 +268,7 @@ The Missing Piece Planning`;
     // Send email using the email library
     const result = await sendEmail({
       to: coupleEmail,
-      subject: 'Your Wedding Details Are Ready for Review',
+      subject: 'Your Hybrid Stationery and Guest Suite is available for review',
       textContent,
       htmlContent,
     });
