@@ -452,14 +452,14 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
       };
 
       if (invitation?.id) {
-        // Update existing - if already published, set to pending for re-approval
+        // Update existing - if already published, set to sent_for_approval for re-review
         const updateData: any = {
           ...saveData,
         };
 
         // Only add these fields if the invitation is published
         if (invitation.is_published) {
-          updateData.approval_status = 'pending';
+          updateData.approval_status = 'sent_for_approval';
           updateData.has_pending_updates = true;
           updateData.updates_acknowledged_by_guests = false;
         }
@@ -1880,12 +1880,12 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
                   color:
                     invitation.approval_status === 'published'
                       ? '#16a34a'
-                      : invitation.approval_status === 'pending'
+                      : invitation.approval_status === 'sent_for_approval' && invitation.has_pending_updates
                       ? '#16a34a'
-                      : invitation.approval_status === 'approved'
-                      ? '#3b82f6'
                       : invitation.approval_status === 'sent_for_approval'
                       ? '#f59e0b'
+                      : invitation.approval_status === 'approved'
+                      ? '#3b82f6'
                       : '#6b7280',
                 }}
               >
@@ -1912,7 +1912,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
               onClick={handleSendForApproval}
               disabled={sendingApproval || invitation.approval_status === 'published'}
               className="px-8 py-3 rounded-lg font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-              style={{ backgroundColor: invitation.approval_status === 'pending' ? '#16a34a' : '#f59e0b' }}
+              style={{ backgroundColor: invitation.approval_status === 'sent_for_approval' ? '#16a34a' : '#f59e0b' }}
             >
               {sendingApproval ? 'Sending...' : 'Send for Approval'}
             </button>
