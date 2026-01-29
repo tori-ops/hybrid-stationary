@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     const coupleName = invitation.couple_name || 'there';
 
     // Email content
-    const textContent = `Hey ${coupleName}!
+    const textContent = `We're so glad you loved it- thank you for taking the time to review everything. We've received your approval, and your stationery is now officially published and live. ?
 
 Thank you for reviewing everything! We've received your approval and your page is now officially published and ready to share.
 
@@ -65,13 +65,13 @@ You can use the link below for distribution with your guests moving forward. Thi
 ${publicLink}
 
 From here:
-- This version is safe to share publicly
-- Any updates going forward can be requested as needed
-- We'll continue managing changes on our end so everything stays polished and intentional
+- This version is fully live and safe to share publicly
+- You're all set to distribute it to your loved ones and guests
+- If anything needs adjusting down the road, just let us know- we'll take care of it on our end so everything stays polished and intentional. We can edit these at any time.
 
-If you think of anything you'd like adjusted down the road, just let us know; we're happy to help. Otherwise, you're good to go!
+No action needed right now unless inspiration strikes later. Otherwise, you're good to go.
 
-We're excited to see this out in the world and can't wait to keep building alongside you.
+We're so excited to see this out in the world and can't wait to keep building alongside you. ????
 
 Warmly,
 Tori & Dean
@@ -82,18 +82,19 @@ The search for your perfect day ends here.`;
 <html>
 <head>
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #faf9f7; }
     .header { text-align: center; margin-bottom: 30px; }
     .content { margin-bottom: 30px; }
     .cta-button { 
       display: inline-block; 
       background-color: #274E13; 
-      color: white; 
+      color: #D0CEB5 !important; 
       padding: 12px 30px; 
       text-decoration: none; 
       border-radius: 5px; 
       margin: 20px 0;
+    font-weight: bold;
     }
     .footer { 
       border-top: 1px solid #eee; 
@@ -112,9 +113,9 @@ The search for your perfect day ends here.`;
     </div>
     
     <div class="content">
-      <p>Hey ${coupleName}!</p>
+      <p>We're so glad you loved it- thank you for taking the time to review everything. We've received your approval, and your stationery is now officially published and live. ?</p>
       
-      <p>Thank you for reviewing everything! We've received your approval and your page is now officially <span class="highlight">published and ready to share.</span></p>
+      <p>You can use the link below to share with your guests moving forward. This is the final version and is no longer marked as a proof.</p>
       
       <p>You can use the link below for distribution with your guests moving forward. This is the final, live version and no longer marked as a proof.</p>
       
@@ -122,16 +123,16 @@ The search for your perfect day ends here.`;
         <a href="${publicLink}" class="cta-button">View Your Live Page</a>
       </center>
       
-      <p><strong>From here:</strong></p>
+      <p><strong>Here's what that means from here:</strong></p>
       <ul>
-        <li>This version is safe to share publicly</li>
-        <li>Any updates going forward can be requested as needed</li>
-        <li>We'll continue managing changes on our end so everything stays polished and intentional</li>
+        <li>This version is fully live and safe to share publicly</li>
+        <li>You're all set to distribute it to your loved ones and guests</li>
+        <li>If anything needs adjusting down the road, just let us know- we'll take care of it on our end so everything stays polished and intentional. We can edit these at any time.</li>
       </ul>
       
-      <p>If you think of anything you'd like adjusted down the road, just let us know; we're happy to help. Otherwise, you're good to go!</p>
+      <p>No action needed right now unless inspiration strikes later. Otherwise, you're good to go.</p>
       
-      <p>We're excited to see this out in the world and can't wait to keep building alongside you.</p>
+      <p>We're so excited to see this out in the world and can't wait to keep building alongside you. ????</p>
       
       <p>Warmly,<br>
       <strong>Tori & Dean</strong><br>
@@ -141,7 +142,20 @@ The search for your perfect day ends here.`;
     
     <div class="footer">
       <p>This is an automated message from The Missing Piece Planning. Please do not reply to this email.</p>
+    
+    <div class="signatures">
+      <img src="${baseUrl}/Tori-Walker.png" alt="Tori Walker" />
+      <img src="${baseUrl}/Dean-Walker.png" alt="Dean Walker" />
     </div>
+
+    <div class="footer">
+      <p style="margin: 0; line-height: 1.4;">
+        The Missing Piece Planning and Events, LLC<br>
+        The search for your perfect day ends here.
+      </p>
+    </div>
+
+</div>
   </div>
 </body>
 </html>`;
@@ -149,7 +163,7 @@ The search for your perfect day ends here.`;
     // Send email
     await sendEmail({
       to: coupleEmail,
-      subject: `Your Wedding Page is Live!`,
+      subject: 'Your hybrid stationery and guest suite is live!',
       textContent: textContent,
       htmlContent: htmlContent,
     });
@@ -166,3 +180,5 @@ The search for your perfect day ends here.`;
     );
   }
 }
+
+
