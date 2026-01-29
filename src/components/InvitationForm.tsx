@@ -453,17 +453,20 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
       if (invitation?.id) {
         // Update existing - if already published, set to pending for re-approval
-        const updateData = {
+        const updateData: any = {
           ...saveData,
-          ...(invitation.is_published && {
-            approval_status: 'pending',
-            has_pending_updates: true,
-            updates_acknowledged_by_guests: false,
-          }),
         };
+
+        // Only add these fields if the invitation is published
+        if (invitation.is_published) {
+          updateData.approval_status = 'pending';
+          updateData.has_pending_updates = true;
+          updateData.updates_acknowledged_by_guests = false;
+        }
 
         console.log('Update data:', updateData);
         console.log('Is published:', invitation.is_published);
+        console.log('Invitation ID:', invitation.id);
 
         const { error } = await supabase
           .from('invitations')
@@ -472,7 +475,9 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
         if (error) {
           console.error('Supabase update error:', error);
-          throw error;
+          console.error('Error code:', error.code);
+          console.error('Error message:', error.message);
+          throw new Error(`Database error: ${error.message}`);
         }
         setMessage({ type: 'success', text: 'Invitation updated successfully!' });
       } else {
@@ -496,6 +501,7 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         setMessage(null);
       }, 1500);
     } catch (err) {
+      console.error('Full error details:', err);
       setMessage({
         type: 'error',
         text: err instanceof Error ? err.message : 'Failed to save invitation',
