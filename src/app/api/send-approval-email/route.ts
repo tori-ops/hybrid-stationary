@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
       : 'there';
 
     // Email content
-    const textContent = `hey there ${coupleName}!
+    const textContent = `Hey there ${coupleName}!
 
 We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚
 
@@ -213,7 +213,7 @@ The Missing Piece Planning`;
     <img src="${headerImageUrl}" alt="Suite Header" class="header-image">
     
     <div class="content">
-<p>hey there ${coupleName}!</p>
+<p>Hey there ${coupleName}!</p>
       
       <p>We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚</p>
       
