@@ -109,7 +109,7 @@ The search for your perfect day ends here.`;
 <body>
   <div class="container">
     <div class="header">
-      <h2>Your Page is Live! 🎉</h2>
+      <img src="${baseUrl}/live-suite-header.png" alt="Live Suite Header" />
     </div>
     
     <div class="content">
@@ -134,10 +134,12 @@ The search for your perfect day ends here.`;
       
       <p>We're so excited to see this out in the world and can't wait to keep building alongside you. ????</p>
       
-      <p>Warmly,<br>
-      <strong>Tori & Dean</strong><br>
-      <em>The Missing Piece Planning</em><br>
-      <em>The search for your perfect day ends here.</em></p>
+      <p>Warmly,</p>
+    </div>
+
+    <div class="signatures">
+      <img src="${baseUrl}/Tori-Walker.png" alt="Tori Walker" style="max-width: 140px; margin: 0 10px;" />
+      <img src="${baseUrl}/Dean-Walker.png" alt="Dean Walker" style="max-width: 140px; margin: 0 10px;" />
     </div>
     
     <div class="footer">
@@ -180,5 +182,6 @@ The search for your perfect day ends here.`;
     );
   }
 }
+
 
 
