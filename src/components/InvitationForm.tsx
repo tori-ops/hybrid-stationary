@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
+import { generateInvitationDiff } from '@/lib/diffUtils';
 import AreaFactsEditor from './AreaFactsEditor';
 import StationeryEditor from './StationeryEditor';
 import LocationSuggestionsModal from './LocationSuggestionsModal';
@@ -479,6 +480,39 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
           console.error('Error message:', error.message);
           throw new Error(`Database error: ${error.message}`);
         }
+
+        // If this is a published invitation that was updated, send the updates-ready email
+        if (invitation.is_published) {
+          try {
+            console.log('Generating diff and sending updates email...');
+            const changeSummary = generateInvitationDiff(invitation, saveData);
+            
+            // Only send email if there are actual changes
+            if (changeSummary.textChanges.length > 0 || changeSummary.arrayChanges.length > 0 || changeSummary.toggleChanges.length > 0) {
+              const emailResponse = await fetch('/api/send-updates-ready-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                  invitationId: invitation.id,
+                  changeSummary 
+                }),
+              });
+
+              const emailData = await emailResponse.json();
+              console.log('Updates ready email response:', emailData);
+              
+              if (!emailResponse.ok) {
+                console.error('Failed to send updates email:', emailData);
+              }
+            } else {
+              console.log('No changes detected, skipping updates email');
+            }
+          } catch (emailError) {
+            console.error('Error sending updates email:', emailError);
+            // Don't fail the update if email fails
+          }
+        }
+
         setMessage({ type: 'success', text: 'Invitation updated successfully!' });
       } else {
         // Create new
