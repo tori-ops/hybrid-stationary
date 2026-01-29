@@ -85,6 +85,7 @@ The search for your perfect day ends here.`;
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #faf9f7; }
     .header { text-align: center; margin-bottom: 30px; }
+    .header img { max-width: 100%; width: 400px; height: auto; }
     .content { margin-bottom: 30px; }
     .cta-button { 
       display: inline-block; 
@@ -182,6 +183,7 @@ The search for your perfect day ends here.`;
     );
   }
 }
+
 
 
 
