@@ -124,6 +124,7 @@ The Missing Piece Planning`;
   <style>
     body { 
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      font-size: 16px;
       line-height: 1.6; 
       color: #333;
       margin: 0;
@@ -143,19 +144,12 @@ The Missing Piece Planning`;
       display: block;
     }
     .content { 
-      padding: 40px 30px; 
+      padding: 40px 30px;
+      font-size: 16px;
     }
     p {
       margin: 15px 0;
-      color: #333;
-    }
-    .greeting {
       font-size: 16px;
-      margin-bottom: 20px;
-    }
-    .highlight {
-      color: #274E13;
-      font-weight: 600;
     }
     ol {
       margin: 15px 0;
@@ -163,6 +157,7 @@ The Missing Piece Planning`;
     }
     ol li {
       margin: 8px 0;
+      font-size: 16px;
     }
     ul {
       margin: 15px 0;
@@ -170,30 +165,23 @@ The Missing Piece Planning`;
     }
     ul li {
       margin: 8px 0;
-    }
-    .section-title {
-      color: #274E13;
-      font-weight: 600;
-      margin-top: 20px;
-      margin-bottom: 10px;
+      font-size: 16px;
     }
     .link-button { 
       display: inline-block; 
       background-color: #274E13; 
-      color: #D0CEB5; 
+      color: #D0CEB5 !important;
       padding: 14px 40px; 
       text-decoration: none; 
       border-radius: 4px; 
       margin: 25px 0;
       font-weight: 600;
       text-align: center;
+      font-size: 16px;
     }
     .link-button:hover {
       background-color: #1a3009;
-    }
-    .closing {
-      margin-top: 30px;
-      margin-bottom: 30px;
+      color: #D0CEB5 !important;
     }
     .signatures {
       text-align: left;
@@ -201,10 +189,10 @@ The Missing Piece Planning`;
       padding-top: 20px;
     }
     .signature-image {
-      width: 120px;
+      width: 180px;
       height: auto;
       display: inline-block;
-      margin-right: 40px;
+      margin-right: 50px;
       margin-bottom: 20px;
     }
     .signature-image:last-child {
@@ -213,7 +201,7 @@ The Missing Piece Planning`;
     .footer {
       background-color: #f5f5f5;
       padding: 20px 30px;
-      font-size: 12px;
+      font-size: 16px;
       color: #666;
       border-top: 1px solid #eee;
     }
@@ -224,13 +212,13 @@ The Missing Piece Planning`;
     <img src="${headerImageUrl}" alt="Suite Header" class="header-image">
     
     <div class="content">
-      <p class="greeting">Hi there ${coupleName}</p>
+      <p>Hi there ${coupleName}</p>
       
       <p>We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚</p>
       
       <p>Before anything goes live, we always pause here and invite you in. This version is a proof-only preview, created just for you to review, tweak, and make sure everything feels right.</p>
 
-      <p class="section-title">Here's how to review your stationery:</p>
+      <p><strong>Here's how to review your stationery:</strong></p>
       <ol>
         <li>Click "Review Your Stationery" below (button currently labeled 'Review Your Stationery')</li>
         <li>Take a look at the page that opens and read through everything and check details, wording, and overall vibe - everything</li>
@@ -244,7 +232,7 @@ The Missing Piece Planning`;
         <a href="${approvalLink}" class="link-button">Review Your Stationery</a>
       </p>
 
-      <p class="section-title">A few things to know as you review:</p>
+      <p><strong>A few things to know as you review:</strong></p>
       <ul>
         <li>This version is clearly marked <strong>PROOF</strong> and is not public</li>
         <li>Nothing is published or shared without your approval</li>
@@ -258,7 +246,7 @@ The Missing Piece Planning`;
         <span style="margin-right: 15px;">👉 Once approved, you'll receive a link to your finalized stationery suite, ready to share with your loved ones and esteemed guests 💚</span>
       </p>
 
-      <p class="closing">We're so excited to keep things moving forward with you and truly appreciate you taking a moment to review. As always, if questions pop up along the way, just let us know — we're here. 🧩✨</p>
+      <p>We're so excited to keep things moving forward with you and truly appreciate you taking a moment to review. As always, if questions pop up along the way, just let us know — we're here. 🧩✨</p>
 
       <div class="signatures">
         <img src="${toriSignatureUrl}" alt="Tori Walker Signature" class="signature-image">
