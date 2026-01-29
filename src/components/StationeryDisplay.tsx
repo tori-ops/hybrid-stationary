@@ -131,7 +131,7 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
               onClick={() => toggleFlip(key)}
               style={{
                 perspective: '1000px',
-                maxWidth: '400px',
+                maxWidth: '550px',
                 aspectRatio: aspectRatio.toString(),
                 margin: '0 auto',
                 zIndex: 2
