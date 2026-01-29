@@ -100,9 +100,10 @@ function InvitePageContent() {
           // Don't fail the approval if email fails, but log it
         }
 
-        // Show success message and remove proof mode
+        // Show success message and redirect to dashboard to see updated status
         setShowApprovalModal(false);
-        window.location.href = `/invite?event=${eventSlug}`;
+        // Redirect to dashboard where they can see the green "Published" status
+        window.location.href = '/dashboard';
       } else {
         console.error('Approval failed:', data.error);
         alert('Failed to approve invitation: ' + (data.error || 'Unknown error'));
