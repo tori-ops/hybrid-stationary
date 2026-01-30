@@ -79,10 +79,14 @@ export function generateInvitationDiff(oldData: any, newData: any): ChangeSummar
     const oldArray = oldData?.[field] || [];
     const newArray = newData?.[field] || [];
 
-    if (JSON.stringify(oldArray) !== JSON.stringify(newArray)) {
+    // Normalize arrays - ensure they're actual arrays
+    const normalizedOld = Array.isArray(oldArray) ? oldArray : [];
+    const normalizedNew = Array.isArray(newArray) ? newArray : [];
+
+    if (JSON.stringify(normalizedOld) !== JSON.stringify(normalizedNew)) {
       // Simple diff: check for additions/removals
-      const added = newArray.filter((item: any) => !oldArray.some((oldItem: any) => JSON.stringify(oldItem) === JSON.stringify(item)));
-      const removed = oldArray.filter((item: any) => !newArray.some((newItem: any) => JSON.stringify(newItem) === JSON.stringify(item)));
+      const added = normalizedNew.filter((item: any) => !normalizedOld.some((oldItem: any) => JSON.stringify(oldItem) === JSON.stringify(item)));
+      const removed = normalizedOld.filter((item: any) => !normalizedNew.some((newItem: any) => JSON.stringify(newItem) === JSON.stringify(item)));
 
       if (added.length > 0 || removed.length > 0) {
         summary.arrayChanges.push({

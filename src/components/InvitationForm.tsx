@@ -485,7 +485,10 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
         if (invitation.is_published) {
           try {
             console.log('Generating diff and sending updates email...');
+            console.log('Old data:', invitation);
+            console.log('New data:', saveData);
             const changeSummary = generateInvitationDiff(invitation, saveData);
+            console.log('Change summary:', changeSummary);
             
             // Only send email if there are actual changes
             if (changeSummary.textChanges.length > 0 || changeSummary.arrayChanges.length > 0 || changeSummary.toggleChanges.length > 0) {
