@@ -215,39 +215,39 @@ The Missing Piece Planning`;
     <div class="content">
 <p>Hey there ${coupleName}!</p>
       
-      <p>We've finished setting up the next portion of your wedding stationery, and it's ready for your eyes. 💚</p>
+      <p>We've finished setting up the next portion of your wedding stationery and it's ready for your review. 💚</p>
       
-      <p>Before anything goes live, we always pause here and invite you in. This version is a proof-only preview, created just for you to review, tweak, and make sure everything feels right.</p>
+      <p>Before anything goes live, we always pause here and invite you in. This is a proof-only preview, created just for you to review, refine, and make sure everything feels exactly right.</p>
 
-      <p><strong>Here's how to review your stationery:</strong></p>
+      <p><strong>✨ How to review your stationery: ✨</strong></p>
       <ol>
-        <li>Click "Review Your Stationery" below (button currently labeled 'Review Your Stationery')</li>
-        <li>Take a look at the page that opens and read through everything and check details, wording, and overall vibe - everything</li>
-        <li>If you'd like to make changes, click "Edit & Update"</li>
-        <li>You can type directly into the fields or copy/paste notes</li>
+        <li>Click Review Your Stationery below</li>
+        <li>Read through the page carefully — details, wording, and overall vibe</li>
+        <li>If you'd like changes, click Edit & Update</li>
+        <li>Type directly into the fields or paste in notes</li>
         <li>Add, remove, or adjust anything you'd like</li>
-        <li>When you're done, click "Send Edits"</li>
+        <li>When you're finished, click Send Edits</li>
       </ol>
 
       <p style="text-align: center;">
         <a href="${approvalLink}" class="link-button">Review Your Stationery</a>
       </p>
 
-      <p><strong>A few things to know as you review:</strong></p>
+      <p><strong>A few things to know:</strong></p>
       <ul>
-        <li>This version is clearly marked <strong>PROOF</strong> and is not public</li>
+        <li>This version is clearly marked PROOF and is not public</li>
         <li>Nothing is published or shared without your approval</li>
-        <li>This step helps ensure everything is intentional, accurate, and aligned with your vision</li>
+        <li>This step ensures everything is intentional, accurate, and aligned with your vision</li>
       </ul>
 
-      <p>Once we receive your edits, we'll make the updates and within 2–3 days you'll receive another email asking you to approve your stationery. 💚</p>
+      <p>Once we receive your edits, we'll make the updates and, within 2–3 days, you'll receive another email inviting you to approve your stationery. 💚</p>
 
       <p>
-        <span style="margin-right: 15px;">👉 If everything looks perfect, you'll simply click <strong>Approve & Publish</strong></span><br>
-        <span style="margin-right: 15px;">👉 Once approved, you'll receive a link to your finalized stationery suite, ready to share with your loved ones and esteemed guests 💚</span>
+        <span style="display: block; margin: 10px 0;">👉  If everything looks perfect, you'll simply click Approve & Publish</span>
+        <span style="display: block; margin: 10px 0;">👉  Once approved, you'll receive a link to your finalized stationery suite, ready to share with your loved ones and guests</span>
       </p>
 
-      <p>We're so excited to keep things moving forward with you and truly appreciate you taking a moment to review. As always, if questions pop up along the way, just let us know — we're here. 🧩✨</p>
+      <p>We're so excited to keep things moving forward with you and truly appreciate you taking the time to review. As always, if questions pop up along the way, just let us know- we're here. 🧩✨</p>
 
       <div class="signatures">
         <img src="${toriSignatureUrl}" alt="Tori Walker Signature" class="signature-image">
