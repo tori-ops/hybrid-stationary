@@ -249,6 +249,9 @@ function InvitePageContent() {
                 'rsvp': invitation.rsvp_background_image_url || null,
                 'save_the_date': invitation.save_the_date_background_image_url || null
               }}
+              isPublished={invitation.is_published}
+              renderVersion={invitation.stationery_render_version}
+              }}
             />
           </section>
         )}

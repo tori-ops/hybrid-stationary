@@ -13,6 +13,8 @@ interface StationeryDisplayProps {
   secondaryColor?: string;
   accentColor?: string;
   backgroundImages?: { [key: string]: string | null };
+  isPublished?: boolean;
+  renderVersion?: string | null;
 }
 
 interface ImageDimensions {
@@ -20,7 +22,7 @@ interface ImageDimensions {
   height: number;
 }
 
-export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B', backgroundImages = {} }: StationeryDisplayProps) {
+export default function StationeryDisplay({ items, secondaryColor = '#274E13', accentColor = '#FF6B6B', backgroundImages = {}, isPublished = false, renderVersion }: StationeryDisplayProps) {
   const [flipped, setFlipped] = useState<{ [key: string]: boolean }>({});
   const [dimensions, setDimensions] = useState<{ [key: string]: ImageDimensions }>({});
   const [cardSizes, setCardSizes] = useState<{ [key: string]: { width: number; height: number } }>({});
@@ -30,6 +32,10 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
   if (!items || items.length === 0) {
     return null;
   }
+
+  // Add a data attribute to indicate frozen render state for styling purposes
+  const frozenStateClass = isPublished && renderVersion ? 'stationery-frozen-render' : '';
+  const dataVersion = renderVersion ? `data-render-version="${renderVersion}"` : '';
 
   useEffect(() => {
     // Set initial screen size
@@ -86,7 +92,14 @@ export default function StationeryDisplay({ items, secondaryColor = '#274E13', a
   };
 
   return (
-    <div className="w-full space-y-8">
+    <div className={`w-full space-y-8 ${frozenStateClass}`} {...(dataVersion && { 'data-render-version': renderVersion })}>
+      {isPublished && renderVersion && (
+        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded mb-4">
+          <p className="text-sm text-blue-700">
+            <span className="font-semibold">Published stationery</span> - Locked to render version {renderVersion}
+          </p>
+        </div>
+      )}
       {items.map((item, idx) => {
         const key = `${item.type}-${idx}`;
         const isFlipped = flipped[key] || false;

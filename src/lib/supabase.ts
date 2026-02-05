@@ -64,6 +64,8 @@ export interface Invitation {
   accommodations_list: any[] | null;
   invite_text: any | null;
   stationery_items: any[] | null;
+  stationery_render_version: string | null;
+  stationery_published_at: string | null;
   show_weather: boolean;
   show_area_facts: boolean;
   show_dining: boolean;

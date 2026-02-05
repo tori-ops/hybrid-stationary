@@ -80,6 +80,8 @@ interface Invitation {
   show_faq: boolean;
   faq_items: Array<{ question: string; answer: string }> | null;
   is_published: boolean;
+  stationery_render_version?: string | null;
+  stationery_published_at?: string | null;
   approval_status?: string;
   approval_token?: string;
   approval_requested_at?: string;
@@ -333,10 +335,21 @@ export default function InvitationForm({ invitation, onSave }: InvitationFormPro
 
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: checked,
-      }));
+      setFormData((prev) => {
+        const updated = {
+          ...prev,
+          [name]: checked,
+        };
+        
+        // When marking as published, capture the current render version
+        if (name === 'is_published' && checked && !prev.stationery_render_version) {
+          const appVersion = process.env.NEXT_PUBLIC_APP_VERSION || new Date().toISOString().split('T')[0];
+          updated.stationery_render_version = appVersion;
+          updated.stationery_published_at = new Date().toISOString();
+        }
+        
+        return updated;
+      });
     } else {
       setFormData((prev) => ({
         ...prev,
