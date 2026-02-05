@@ -251,7 +251,6 @@ function InvitePageContent() {
               }}
               isPublished={invitation.is_published}
               renderVersion={invitation.stationery_render_version}
-              }}
             />
           </section>
         )}
